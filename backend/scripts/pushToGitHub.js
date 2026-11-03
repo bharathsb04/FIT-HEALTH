@@ -55,9 +55,9 @@ function collectFiles(dir, baseDir = dir) {
   let results = [];
   const list = fs.readdirSync(dir);
   for (const item of list) {
-    if (['node_modules', '.git', '.gemini', 'dist', 'logs', '_staging', '.vscode', '.idea'].includes(item)) continue;
+    if (['_backup_pre_migration', 'node_modules', '.git', '.gemini', 'dist', 'logs', '_staging', '.vscode', '.idea', 'scratch'].includes(item)) continue;
     if (item.endsWith('.zip') || item.endsWith('.tmp') || item.endsWith('.log')) continue;
-    if (item === '.env' || item === 'backend/.env' || item === 'frontend/.env') continue;
+    if (item === '.env' || item === 'backend/.env' || item === 'frontend/.env' || item.endsWith('.env.local')) continue;
 
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
@@ -145,13 +145,34 @@ async function main() {
   console.log(`Commit created: ${commit.sha}`);
 
   console.log('Updating branch "main"...');
-  await githubRequest(token, 'PATCH', `/repos/${OWNER}/${REPO}/git/refs/heads/main`, {
-    sha: commit.sha,
-    force: true
-  });
+  try {
+    await githubRequest(token, 'PATCH', `/repos/${OWNER}/${REPO}/git/refs/heads/main`, {
+      sha: commit.sha,
+      force: true
+    });
+  } catch (err) {
+    await githubRequest(token, 'POST', `/repos/${OWNER}/${REPO}/git/refs`, {
+      ref: 'refs/heads/main',
+      sha: commit.sha
+    });
+  }
   console.log('Branch "main" updated successfully!');
 
-  console.log(`\nSUCCESS: Pushed all project code to https://github.com/${OWNER}/${REPO} on branch main!`);
+  console.log('Updating branch "master"...');
+  try {
+    await githubRequest(token, 'PATCH', `/repos/${OWNER}/${REPO}/git/refs/heads/master`, {
+      sha: commit.sha,
+      force: true
+    });
+  } catch (err) {
+    await githubRequest(token, 'POST', `/repos/${OWNER}/${REPO}/git/refs`, {
+      ref: 'refs/heads/master',
+      sha: commit.sha
+    });
+  }
+  console.log('Branch "master" updated successfully!');
+
+  console.log(`\nSUCCESS: Pushed all project code to https://github.com/${OWNER}/${REPO} on branches main & master!`);
 }
 
 main().catch((err) => {

@@ -127,22 +127,10 @@ exports.getMemberReceiptPdf = async (req, res) => {
   try {
     const { id } = req.params;
     const txns = db.getCollection('membershipTransactions') || [];
-    const targetTxn = txns.find(t => t.id === id || t.receiptNumber === id) || txns[0] || {
-      id: "txn_101",
-      receiptNumber: "REC-2026-7829",
-      memberName: "Alex Mercer",
-      memberEmail: "alex@fithealth.io",
-      gymName: "rsv gym and sports club",
-      planName: "Elite Gold Annual All-Access",
-      durationLabel: "12 Months",
-      totalAmount: 11999,
-      amountPaid: 11999,
-      amountDue: 0,
-      paymentMode: "Online UPI",
-      paymentStatus: "Paid",
-      transactionDate: new Date().toISOString(),
-      expiryDate: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0]
-    };
+    const targetTxn = txns.find(t => t.id === id || t.receiptNumber === id);
+    if (!targetTxn) {
+      return res.status(404).json({ success: false, message: 'Receipt not found.' });
+    }
 
     return res.status(200).json({
       success: true,

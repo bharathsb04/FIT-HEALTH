@@ -281,18 +281,6 @@ export const LoginPage = ({
     }
   };
 
-  const handleFillDemo = () => {
-    if (role === 'admin') {
-      setEmail('admin@fithealth.io');
-      setPassword('admin123');
-      showToast('Gym Admin credentials ready', 'success');
-    } else {
-      setEmail('alex@fithealth.io');
-      setPassword('password123');
-      showToast('Gym Member credentials ready', 'success');
-    }
-  };
-
   /* ──────────────────────────────────────────────────────────
      Step 2 → connect selected app then enter app
      ────────────────────────────────────────────────────────── */

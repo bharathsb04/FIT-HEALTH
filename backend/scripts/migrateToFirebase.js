@@ -56,6 +56,12 @@ async function runMigration() {
 
       for (let i = 0; i < colValue.length; i++) {
         const item = colValue[i];
+
+        // Ensure demo accounts are never migrated to Firestore
+        if (colName === 'users' && (item.email === 'admin@fithealth.io' || item.email === 'alex@fithealth.io')) {
+          continue;
+        }
+
         const docId = String(item.id || item._id || `${colName}_${i + 1}`);
         const docRef = firestore.collection(colName).doc(docId);
 

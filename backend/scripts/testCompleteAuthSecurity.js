@@ -137,11 +137,23 @@ async function runSecurityTestSuite() {
     record('RBAC: Member Blocked from Admin Endpoint', memberAccessAdmin.status === 403, `HTTP 403 Forbidden: "${memberAccessAdmin.data.message}"`);
 
     // 14. Admin Authorization: Admin Access to Admin-Only Endpoint
-    const adminLogin = await request('/api/auth/login', {
+    const testAdminEmail = `test_admin_${Date.now()}@fithealth.io`;
+    const adminOtpRes = await request('/api/auth/send-otp', {
       method: 'POST',
-      body: { email: 'admin@fithealth.io', password: 'admin123' }
+      body: { email: testAdminEmail, purpose: 'registration', role: 'admin' }
     });
-    const adminToken = adminLogin.data.token;
+    const adminOtpCode = adminOtpRes.data.verificationCode;
+    const adminRegRes = await request('/api/auth/register', {
+      method: 'POST',
+      body: {
+        name: 'Test Admin Coach',
+        email: testAdminEmail,
+        password: 'AdminPassword123!',
+        role: 'admin',
+        code: adminOtpCode
+      }
+    });
+    const adminToken = adminRegRes.data.token;
     const adminAccess = await request('/api/admin/notes', {
       method: 'GET',
       headers: { Authorization: `Bearer ${adminToken}` }

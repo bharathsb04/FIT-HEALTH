@@ -126,75 +126,6 @@ class JSONDatabase {
       });
     }
 
-    // Ensure admin user Marcus Vance exists
-    let admin = this.data.users.find(u => u.email === 'admin@fithealth.io');
-    const adminHashedPassword = bcrypt.hashSync('admin123', 10);
-    if (!admin) {
-      admin = {
-        id: "user_admin_201",
-        name: "Coach Marcus Vance",
-        email: "admin@fithealth.io",
-        password: adminHashedPassword,
-        phone: "+1 (555) 777-8899",
-        role: "admin",
-        gymName: activeGym.name,
-        gymBranch: activeGym.address,
-        adminBadge: "Head Gym Director & Administrator",
-        membershipPlan: "Director All-Access Pass",
-        membershipStatus: "Active",
-        streak: 120,
-        createdAt: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000).toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-      this.data.users.push(admin);
-    } else {
-      admin.role = 'admin';
-      admin.gymName = admin.gymName || activeGym.name;
-      admin.adminBadge = 'Head Gym Director & Administrator';
-      admin.password = adminHashedPassword; // ensure admin123 is valid
-    }
-
-    // Ensure standard demo member athlete (alex@fithealth.io / password123) exists
-    let demoAthlete = this.data.users.find(u => u.email === 'alex@fithealth.io');
-    const athleteHashedPassword = bcrypt.hashSync('password123', 10);
-    if (!demoAthlete) {
-      demoAthlete = {
-        id: "user_demo_101",
-        name: "Alex Mercer",
-        email: "alex@fithealth.io",
-        password: athleteHashedPassword,
-        phone: "+1 (555) 987-6543",
-        role: "member",
-        age: 24,
-        gender: "Male",
-        height: 178,
-        weight: 78.5,
-        targetWeight: 83.0,
-        fitnessLevel: "Intermediate",
-        primaryGoal: "Bulking",
-        activityLevel: "Moderately Active (3-5 days/week)",
-        dietaryPreference: "High Protein",
-        workoutExperience: "2-3 Years",
-        targetCalories: 2850,
-        targetProtein: 165,
-        targetCarbs: 340,
-        targetFat: 75,
-        waterTargetLiters: 3.5,
-        sleepTargetHours: 8.0,
-        streak: 14,
-        membershipId: "FH-MEM-7829",
-        membershipStatus: "Active",
-        membershipPlan: "Elite Gold Annual",
-        emailVerified: true,
-        createdAt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-      this.data.users.push(demoAthlete);
-    } else {
-      demoAthlete.role = 'member';
-      demoAthlete.password = athleteHashedPassword;
-    }
-
     // Always keep supplements synced with enriched INR catalog
     this.data.supplements = [...supplementCatalog];
 
@@ -235,10 +166,10 @@ class JSONDatabase {
         {
           id: "txn_101",
           receiptNumber: "REC-2026-7829",
-          userId: "user_demo_101",
+          userId: "member_initial",
           memberId: "mem_101",
-          memberName: "Alex Mercer",
-          memberEmail: "alex@fithealth.io",
+          memberName: "Member Athlete",
+          memberEmail: "member@example.com",
           gymId: "gym_1",
           gymName: activeGym.name,
           planId: "plan_annual_gym_1",
@@ -269,8 +200,8 @@ class JSONDatabase {
         {
           id: "token_101",
           tokenCode: "CASH-DESK-7829",
-          userId: "user_demo_101",
-          memberName: "Alex Mercer",
+          userId: "member_initial",
+          memberName: "Member Athlete",
           planId: "plan_quarterly_gym_1",
           planName: "Quarterly Pro Athlete (3 Months)",
           amount: 3999,
@@ -290,8 +221,8 @@ class JSONDatabase {
       this.data.gymMembers = [
         {
           id: "mem_101",
-          name: "Alex Mercer",
-          email: "alex@fithealth.io",
+          name: "Member Athlete",
+          email: "member@example.com",
           phone: "+1 (555) 987-6543",
           membershipId: "FH-MEM-7829",
           plan: "Elite Gold Annual",
@@ -384,7 +315,7 @@ class JSONDatabase {
     // Ensure gymCheckIns collection exists
     if (!this.data.gymCheckIns || this.data.gymCheckIns.length === 0) {
       this.data.gymCheckIns = [
-        { id: "chk_1", memberName: "Alex Mercer", membershipId: "FH-MEM-7829", time: "07:15 AM", type: "Member Check-in", status: "Approved" },
+        { id: "chk_1", memberName: "Member Athlete", membershipId: "FH-MEM-7829", time: "07:15 AM", type: "Member Check-in", status: "Approved" },
         { id: "chk_2", memberName: "Sarah Connor", membershipId: "FH-MEM-8104", time: "08:30 AM", type: "Member Check-in", status: "Approved" },
         { id: "chk_3", memberName: "Elena Rostova", membershipId: "FH-MEM-5321", time: "09:00 AM", type: "Member Check-in", status: "Approved" },
         { id: "chk_4", memberName: "Liam Vance", membershipId: "PASS-9021", time: "10:15 AM", type: "Day Pass (₹299)", status: "Paid & Verified" },
@@ -514,7 +445,7 @@ class JSONDatabase {
       this.data.workoutPlans = [
         {
           id: "plan_demo_1",
-          userId: "user_demo_101",
+          userId: "member_initial",
           goal: "Bulking",
           splitName: "6-Day Visual Workout Blueprint: Focus • Train • Transform",
           posterImage: "/images/6_day_workout_plan.jpg",
@@ -554,12 +485,12 @@ class JSONDatabase {
     this.data.supplements = [...supplementCatalog];
     this.data.foodItems = [...foodDatabase];
 
-    // Seed Demo User: Alex Mercer
+    // Seed Demo User: Member Athlete
     const hashedPassword = bcrypt.hashSync('password123', 10);
     const demoUser = {
-      id: "user_demo_101",
-      name: "Alex Mercer",
-      email: "alex@fithealth.io",
+      id: "member_initial",
+      name: "Member Athlete",
+      email: "member@example.com",
       password: hashedPassword,
       phone: "+1 (555) 987-6543",
       age: 24,
@@ -588,7 +519,7 @@ class JSONDatabase {
     this.data.workoutPlans = [
       {
         id: "plan_demo_1",
-        userId: "user_demo_101",
+        userId: "member_initial",
         goal: "Bulking",
         splitName: "6-Day Hypertrophy Push-Pull-Legs Split",
         activeDayIndex: 0, // Day 1
@@ -617,7 +548,7 @@ class JSONDatabase {
     this.data.dietPlans = [
       {
         id: "diet_demo_1",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: todayStr,
         meals: [
           {
@@ -661,7 +592,7 @@ class JSONDatabase {
     this.data.hydrationLogs = [
       {
         id: "hyd_demo_1",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: todayStr,
         consumedLiters: 2.25,
         targetLiters: 3.5,
@@ -678,7 +609,7 @@ class JSONDatabase {
     this.data.vitalsLogs = [
       {
         id: "vit_demo_1",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: todayStr,
         heartRateBpm: 68,
         restingHeartRate: 58,
@@ -706,7 +637,7 @@ class JSONDatabase {
     this.data.progressRecords = [
       {
         id: "prog_demo_1",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         weightKg: 76.8,
         chestCm: 101,
@@ -720,7 +651,7 @@ class JSONDatabase {
       },
       {
         id: "prog_demo_2",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         weightKg: 77.4,
         chestCm: 102,
@@ -734,7 +665,7 @@ class JSONDatabase {
       },
       {
         id: "prog_demo_3",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         weightKg: 78.0,
         chestCm: 103,
@@ -748,7 +679,7 @@ class JSONDatabase {
       },
       {
         id: "prog_demo_4",
-        userId: "user_demo_101",
+        userId: "member_initial",
         date: todayStr,
         weightKg: 78.5,
         chestCm: 103.5,
@@ -764,7 +695,7 @@ class JSONDatabase {
 
     // Seed Stretching Guide state
     this.data.stretchingState = {
-      userId: "user_demo_101",
+      userId: "member_initial",
       stretches: [...stretchingGuide],
       lastCompletedAt: todayStr
     };

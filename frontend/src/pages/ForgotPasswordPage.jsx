@@ -202,7 +202,7 @@ export const ForgotPasswordPage = ({
               <input
                 type="email"
                 className="form-input"
-                placeholder={isAdmin ? "admin@fithealth.io" : "athlete@fithealth.io"}
+                placeholder={isAdmin ? "admin@example.com" : "member@example.com"}
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

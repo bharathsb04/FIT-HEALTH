@@ -491,7 +491,7 @@ exports.confirmCashToken = async (req, res) => {
     });
 
     // Update member status
-    db.update('gymMembers', m => m.email === 'alex@fithealth.io' || m.membershipId === 'FH-MEM-7829', {
+    db.update('gymMembers', m => (token.memberEmail && m.email === token.memberEmail) || (token.memberId && m.id === token.memberId), {
       status: 'Active',
       plan: token.planName,
       expiryDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
@@ -822,9 +822,9 @@ const logAdminAction = (action, entityType, entityId, req, details = {}) => {
       action,
       entityType,
       entityId,
-      adminId: adminUser.id || adminUser._id || 'user_admin_001',
-      adminName: adminUser.name || 'Coach Marcus Vance',
-      adminEmail: adminUser.email || 'admin@fithealth.io',
+      adminId: adminUser.id || adminUser._id || 'admin',
+      adminName: adminUser.name || 'Administrator',
+      adminEmail: adminUser.email || '',
       details,
       timestamp: new Date().toISOString()
     };
@@ -1157,8 +1157,8 @@ exports.exportDirectoryCsv = async (req, res) => {
 exports.getAdminNotes = async (req, res) => {
   try {
     const { category, search, colorLabel, pinnedOnly } = req.query;
-    const currentAdminId = req.user?.id || req.user?._id || 'user_admin_001';
-    const currentAdminEmail = req.user?.email || 'admin@fithealth.io';
+    const currentAdminId = req.user?.id || req.user?._id || req.userId || '';
+    const currentAdminEmail = req.user?.email || '';
 
     let notes = db.getCollection('adminNotes') || [];
 
@@ -1286,7 +1286,7 @@ exports.createAdminNote = async (req, res) => {
     const safeColor = validColors.includes(colorLabel) ? colorLabel : 'amber';
 
     const nowIso = new Date().toISOString();
-    const adminUser = req.user || { id: 'user_admin_001', name: 'Coach Marcus Vance', email: 'admin@fithealth.io', role: 'admin' };
+    const adminUser = req.user || { id: req.userId, name: 'Administrator', email: '', role: 'admin' };
 
     const newNote = {
       id: `note_${Date.now()}`,
@@ -1298,9 +1298,9 @@ exports.createAdminNote = async (req, res) => {
       reminderDate: reminderDate ? reminderDate.trim() : '',
       isPrivateToMe: Boolean(isPrivateToMe),
       createdBy: {
-        id: adminUser.id || adminUser._id || 'user_admin_001',
-        name: adminUser.name || 'Coach Marcus Vance',
-        email: adminUser.email || 'admin@fithealth.io',
+        id: adminUser.id || adminUser._id || req.userId,
+        name: adminUser.name || 'Administrator',
+        email: adminUser.email || '',
         role: adminUser.role || 'admin'
       },
       linkedDirectoryId: (linkedDirectoryId || '').trim(),
@@ -1586,22 +1586,21 @@ exports.getPendingMembers = async (req, res) => {
 exports.removeAllLoginUsers = async (req, res) => {
   try {
     let users = db.getCollection('users') || [];
-    const removedCount = users.filter(u => u.email !== 'admin@fithealth.io' && u.email !== 'alex@fithealth.io').length;
-    db.data.users = users.filter(u => u.email === 'admin@fithealth.io' || u.email === 'alex@fithealth.io');
+    const currentAdminId = req.user?.id || req.userId;
+    const removedCount = users.filter(u => u.id !== currentAdminId && u.role !== 'admin').length;
+    db.data.users = users.filter(u => u.id === currentAdminId || u.role === 'admin');
     db.data.pendingMembers = [];
-    db.ensureAdminAndGymData();
-    db.save();
     if (db.data.workoutPlans) {
-      db.data.workoutPlans = db.data.workoutPlans.filter(w => w.userId === 'user_admin_201');
+      db.data.workoutPlans = db.data.workoutPlans.filter(w => w.userId === currentAdminId);
     }
     if (db.data.dietPlans) {
-      db.data.dietPlans = db.data.dietPlans.filter(d => d.userId === 'user_admin_201');
+      db.data.dietPlans = db.data.dietPlans.filter(d => d.userId === currentAdminId);
     }
     if (db.data.hydrationLogs) {
-      db.data.hydrationLogs = db.data.hydrationLogs.filter(h => h.userId === 'user_admin_201');
+      db.data.hydrationLogs = db.data.hydrationLogs.filter(h => h.userId === currentAdminId);
     }
     if (db.data.vitalsLogs) {
-      db.data.vitalsLogs = db.data.vitalsLogs.filter(v => v.userId === 'user_admin_201');
+      db.data.vitalsLogs = db.data.vitalsLogs.filter(v => v.userId === currentAdminId);
     }
     db.save();
 

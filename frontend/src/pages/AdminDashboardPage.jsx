@@ -1612,42 +1612,6 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
                 </span>
               </div>
             </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Quick Demo PINs:</span>
-              <button
-                type="button"
-                onClick={() => setCheckInInput('7829')}
-                className="chip"
-                style={{ fontSize: '10px', padding: '3px 8px', background: 'rgba(16, 185, 129, 0.15)', color: 'var(--primary)', borderColor: 'rgba(16, 185, 129, 0.3)' }}
-              >
-                Alex: <b>7829</b>
-              </button>
-              <button
-                type="button"
-                onClick={() => setCheckInInput('8104')}
-                className="chip"
-                style={{ fontSize: '10px', padding: '3px 8px', background: 'rgba(6, 182, 212, 0.15)', color: 'var(--cyan)', borderColor: 'rgba(6, 182, 212, 0.3)' }}
-              >
-                Sarah: <b>8104</b>
-              </button>
-              <button
-                type="button"
-                onClick={() => setCheckInInput('6492')}
-                className="chip"
-                style={{ fontSize: '10px', padding: '3px 8px', background: 'rgba(245, 158, 11, 0.15)', color: 'var(--amber)', borderColor: 'rgba(245, 158, 11, 0.3)' }}
-              >
-                David: <b>6492</b>
-              </button>
-              <button
-                type="button"
-                onClick={() => setCheckInInput('5321')}
-                className="chip"
-                style={{ fontSize: '10px', padding: '3px 8px', background: 'rgba(168, 85, 247, 0.15)', color: '#c084fc', borderColor: 'rgba(168, 85, 247, 0.3)' }}
-              >
-                Elena: <b>5321</b>
-              </button>
-            </div>
           </div>
 
           <form onSubmit={handleQuickCheckIn} style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -2464,19 +2428,7 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
 
               {/* Tokens List */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {(dashboardData?.cashTokens || [
-                  {
-                    id: 'cash_1',
-                    tokenCode: 'CASH-PASS-8392',
-                    memberName: 'Alex Morgan',
-                    memberEmail: 'alex@fithealth.io',
-                    planName: 'Monthly Pro Access',
-                    amount: 1499,
-                    currency: 'INR',
-                    status: 'Pending Front Desk Payment',
-                    createdAt: '2026-10-07T14:10:00Z'
-                  }
-                ]).map((token) => {
+                {(dashboardData?.cashTokens || []).map((token) => {
                   const isPending = token.status?.includes('Pending');
                   return (
                     <div

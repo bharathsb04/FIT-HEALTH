@@ -1560,7 +1560,7 @@ const defaultAdminNotes = [
     createdBy: {
       id: "user_admin_001",
       name: "Coach Marcus Vance",
-      email: "admin@fithealth.io",
+      email: "admin@example.com",
       role: "admin"
     },
     linkedDirectoryId: "dir_1",
@@ -1582,7 +1582,7 @@ const defaultAdminNotes = [
     createdBy: {
       id: "user_admin_001",
       name: "Coach Marcus Vance",
-      email: "admin@fithealth.io",
+      email: "admin@example.com",
       role: "admin"
     },
     linkedDirectoryId: "",
@@ -1604,7 +1604,7 @@ const defaultAdminNotes = [
     createdBy: {
       id: "user_admin_001",
       name: "Coach Marcus Vance",
-      email: "admin@fithealth.io",
+      email: "admin@example.com",
       role: "admin"
     },
     linkedDirectoryId: "dir_4",
@@ -1616,8 +1616,8 @@ const defaultAdminNotes = [
   },
   {
     id: "note_4",
-    title: "Confidential VIP Athlete Remarks: Alex Mercer",
-    body: "Member Alex Mercer (FH-MEM-7829) is prepping for national Olympic powerlifting trials in December. Coach Elena is overseeing squat depth and recovery sauna sessions. Ensure chalk bowl is fully topped up at Platform #2 and reserve 20kg calibrated Eleiko bumper pairs.",
+    title: "Confidential VIP Athlete Remarks: Member Athlete",
+    body: "Member Member Athlete (FH-MEM-7829) is prepping for national Olympic powerlifting trials in December. Coach Elena is overseeing squat depth and recovery sauna sessions. Ensure chalk bowl is fully topped up at Platform #2 and reserve 20kg calibrated Eleiko bumper pairs.",
     category: "Members",
     isPinned: false,
     colorLabel: "violet",
@@ -1626,7 +1626,7 @@ const defaultAdminNotes = [
     createdBy: {
       id: "user_admin_001",
       name: "Coach Marcus Vance",
-      email: "admin@fithealth.io",
+      email: "admin@example.com",
       role: "admin"
     },
     linkedDirectoryId: "",
@@ -1648,7 +1648,7 @@ const defaultAdminNotes = [
     createdBy: {
       id: "user_admin_001",
       name: "Coach Marcus Vance",
-      email: "admin@fithealth.io",
+      email: "admin@example.com",
       role: "admin"
     },
     linkedDirectoryId: "dir_7",

@@ -1,9 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../data/dbStorage');
-const { getDBStatus } = require('../config/db');
 const { JWT_SECRET, revokeToken } = require('../middleware/authMiddleware');
-const User = require('../models/User');
 const { defaultSplitWorkouts } = require('../data/seedData');
 const { sendOTPEmail } = require('../services/emailService');
 const { createAndStoreOTP, verifyOTP, isEmailVerified, consumeVerifiedOTP } = require('../services/otpService');

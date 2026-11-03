@@ -56,29 +56,43 @@ async function runAllTests() {
     assert(healthRes.status === 200, 'Health check returns 200 OK');
     assert(healthData.status === 'online', 'Health status is online');
 
-    // 2. Member JWT Login
-    console.log('\n[2/7] Testing Member Authentication & JWT Generation...');
-    const loginRes = await fetch(`${baseUrl}/api/auth/login`, {
+    // 2. Member JWT Registration & Login
+    console.log('\n[2/7] Testing Member Registration & JWT Generation...');
+    const testMemberEmail = `member_qa_${Date.now()}@fithealth.io`;
+    const otpRes = await fetch(`${baseUrl}/api/auth/send-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'alex@fithealth.io', password: 'password123' })
+      body: JSON.stringify({ email: testMemberEmail, purpose: 'registration', role: 'member' })
+    });
+    const otpData = await otpRes.json();
+    const loginRes = await fetch(`${baseUrl}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'QA Athlete', email: testMemberEmail, password: 'SecurePassword123!', role: 'member', code: otpData.verificationCode })
     });
     const loginData = await loginRes.json();
-    assert(loginRes.status === 200, 'Member login returns 200 OK');
+    assert(loginRes.status === 201, 'Member registration returns 201 Created');
     assert(Boolean(loginData.token), 'JWT access token is returned');
     assert(loginData.user?.role === 'member', 'User role is member');
 
     const memberToken = loginData.token;
 
-    // 3. Admin JWT Login
-    console.log('\n[3/7] Testing Admin Authentication & Role Enforcement...');
-    const adminLoginRes = await fetch(`${baseUrl}/api/auth/login`, {
+    // 3. Admin JWT Registration & Role Enforcement
+    console.log('\n[3/7] Testing Admin Registration & Role Enforcement...');
+    const testAdminEmail = `admin_qa_${Date.now()}@fithealth.io`;
+    const adminOtpRes = await fetch(`${baseUrl}/api/auth/send-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'admin@fithealth.io', password: 'admin123' })
+      body: JSON.stringify({ email: testAdminEmail, purpose: 'registration', role: 'admin' })
+    });
+    const adminOtpData = await adminOtpRes.json();
+    const adminLoginRes = await fetch(`${baseUrl}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'QA Admin Coach', email: testAdminEmail, password: 'AdminPassword123!', role: 'admin', code: adminOtpData.verificationCode })
     });
     const adminLoginData = await adminLoginRes.json();
-    assert(adminLoginRes.status === 200, 'Admin login returns 200 OK');
+    assert(adminLoginRes.status === 201, 'Admin registration returns 201 Created');
     assert(adminLoginData.user?.role === 'admin', 'User role is admin');
 
     const adminToken = adminLoginData.token;
@@ -90,7 +104,7 @@ async function runAllTests() {
     });
     const meData = await meRes.json();
     assert(meRes.status === 200, 'Authenticated profile returned');
-    assert(meData.user?.email === 'alex@fithealth.io', 'Profile email matches authenticated user');
+    assert(meData.user?.email === testMemberEmail, 'Profile email matches authenticated user');
     assert(!meData.user?.password, 'Password hash is strictly excluded from response');
 
     // 5. SMTP Email OTP Dispatch & Verification

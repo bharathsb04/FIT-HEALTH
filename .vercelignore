@@ -19,3 +19,5 @@ backend/tests
 backend/scripts
 backend/logs
 
+
+_backup_pre_migration/

@@ -306,7 +306,7 @@ export const OnboardingPage = ({ onSwitchToLogin, onSwitchToAdminLogin, onBackTo
             <input
               type="email"
               className="form-input"
-              placeholder="e.g. alex@fithealth.io"
+              placeholder="e.g. member@example.com"
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
             />

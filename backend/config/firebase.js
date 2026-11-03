@@ -1,3 +1,8 @@
+/**
+ * Firebase Cloud Firestore Admin SDK Module
+ * Exclusive application database initialization and singleton provider.
+ */
+
 const admin = require('firebase-admin');
 const path = require('path');
 const fs = require('fs');
@@ -6,8 +11,11 @@ let firestoreInstance = null;
 let isConfigured = false;
 
 const initFirebase = () => {
+  // Return cached instance if already initialized (serverless-friendly)
   if (admin && admin.apps && Array.isArray(admin.apps) && admin.apps.length > 0) {
-    firestoreInstance = admin.firestore();
+    if (!firestoreInstance) {
+      firestoreInstance = admin.firestore();
+    }
     isConfigured = true;
     return firestoreInstance;
   }
@@ -42,7 +50,6 @@ const initFirebase = () => {
 
   if (projectId && clientEmail && privateKey) {
     try {
-      // Handle escaped multiline private key from .env
       if (privateKey.includes('\\n')) {
         privateKey = privateKey.replace(/\\n/g, '\n');
       }
@@ -56,7 +63,7 @@ const initFirebase = () => {
       });
       firestoreInstance = admin.firestore();
       isConfigured = true;
-      console.log(`[Firebase] Initialized with Cloud Project: ${projectId}`);
+      console.log(`[Firebase] Initialized with Cloud Firestore Project: ${projectId}`);
       return firestoreInstance;
     } catch (err) {
       console.warn('[Firebase] Initialization error with env credentials:', err.message);
@@ -76,7 +83,30 @@ const initFirebase = () => {
     }
   }
 
-  console.log('[Firebase] No Cloud Firestore credentials provided. Active: Zero-Config Local Persistent Database Engine.');
+  // 4. Firestore Local Emulator (if FIRESTORE_EMULATOR_HOST is set)
+  if (process.env.FIRESTORE_EMULATOR_HOST) {
+    try {
+      admin.initializeApp({ projectId: projectId || 'fit-health-emulator' });
+      firestoreInstance = admin.firestore();
+      isConfigured = true;
+      console.log(`[Firebase] Connected to local Firestore Emulator: ${process.env.FIRESTORE_EMULATOR_HOST}`);
+      return firestoreInstance;
+    } catch (err) {
+      console.warn('[Firebase] Emulator connection failed:', err.message);
+    }
+  }
+
+  // In production, Firebase is mandatory per Phase 4 requirements
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'FATAL CONFIGURATION ERROR: Firebase Cloud Firestore is not configured!\n' +
+      'Fit Health requires Firebase Cloud Firestore as the exclusive application database.\n' +
+      'Please configure FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in your environment.'
+    );
+  }
+
+  console.log('[Firebase] Notice: Live Cloud Firestore credentials not yet supplied in backend/.env.');
+  console.log('           To connect live Cloud Firestore, add FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, & FIREBASE_PRIVATE_KEY.');
   isConfigured = false;
   return null;
 };

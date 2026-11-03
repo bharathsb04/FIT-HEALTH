@@ -7,7 +7,6 @@ const fs = require('fs');
 // Load environment variables before any application modules are evaluated
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-const { connectDB } = require('./config/db');
 const { initFirebase } = require('./config/firebase');
 const { notFoundHandler, errorHandler } = require('./middleware/errorMiddleware');
 
@@ -30,33 +29,44 @@ const healthRoutes = require('./routes/healthRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Configurable CORS Allowlist
-const rawCorsOrigins = process.env.CORS_ORIGINS || '';
-const allowedOrigins = rawCorsOrigins
-  .split(',')
-  .map(o => o.trim())
+// Strict Production & Development CORS Configuration
+const rawAllowedOrigins = [
+  process.env.FRONTEND_URL,
+  ...(process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [])
+]
+  .map(o => o ? o.trim().replace(/\/$/, '') : '')
   .filter(Boolean);
 
-// Enable CORS with support for Localhost, 127.0.0.1, Vite, and Cloudflare Tunnels
+const allowedOrigins = [...new Set(rawAllowedOrigins)];
+
+// Always ensure standard local dev origins in development
+if (process.env.NODE_ENV !== 'production') {
+  ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5000', 'http://127.0.0.1:5000'].forEach(o => {
+    if (!allowedOrigins.includes(o)) allowedOrigins.push(o);
+  });
+}
+
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow non-browser requests (mobile apps, companion apps, server-to-server)
     if (!origin) return callback(null, true);
-    if (
-      allowedOrigins.length === 0 ||
-      allowedOrigins.includes('*') ||
-      allowedOrigins.includes(origin) ||
-      origin.includes('localhost') ||
-      origin.includes('127.0.0.1') ||
-      origin.endsWith('.trycloudflare.com') ||
-      origin.endsWith('.cloudflarestream.com')
-    ) {
+
+    const normalizedOrigin = origin.trim().replace(/\/$/, '');
+
+    const isAllowed = allowedOrigins.includes(normalizedOrigin) ||
+      (normalizedOrigin.endsWith('.vercel.app') && allowedOrigins.some(o => o.endsWith('.vercel.app'))) ||
+      (process.env.NODE_ENV !== 'production' && (normalizedOrigin.includes('localhost') || normalizedOrigin.includes('127.0.0.1')));
+
+    if (isAllowed) {
       return callback(null, true);
     }
-    return callback(null, true);
+
+    return callback(new Error(`CORS blocked request from unauthorized origin: ${origin}`));
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  maxAge: 86400 // Cache preflight for 24 hours
 }));
 
 // Body parsing
@@ -146,7 +156,6 @@ const validateEnvironment = async () => {
 
 // Start Server
 const startServer = async () => {
-  await connectDB();
   initFirebase();
   await validateEnvironment();
   app.listen(PORT, '0.0.0.0', () => {

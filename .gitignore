@@ -35,3 +35,5 @@ Thumbs.db
 *.tmp
 *.zip
 
+
+_backup_pre_migration/

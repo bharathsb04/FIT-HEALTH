@@ -179,8 +179,8 @@ export const ProfilePage = () => {
                 {getInitials(user?.name)}
               </div>
 
-              <h3 style={{ fontSize: '20px', fontWeight: 800 }}>{user?.name || 'Alex Mercer'}</h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>{user?.email || 'alex@fithealth.io'}</p>
+              <h3 style={{ fontSize: '20px', fontWeight: 800 }}>{user?.name || 'Gym Member'}</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>{user?.email || ''}</p>
 
               <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginTop: '12px' }}>
                 <span className={`badge badge-${(user?.primaryGoal || 'Bulking').toLowerCase()}`}>

@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 const db = require('../data/dbStorage');
-const { getDBStatus } = require('../config/db');
-const User = require('../models/User');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fit_health_secret_jwt_bca_2026_key';
 
@@ -61,21 +59,10 @@ const authMiddleware = async (req, res, next) => {
     }
 
     let user = null;
-    if (getDBStatus()) {
-      try {
-        user = await User.findById(decoded.id).select('-password');
-      } catch (e) {
-        user = null;
-      }
-    }
-
-    if (!user) {
-      const stored = db.findById('users', decoded.id);
-      if (stored) {
-        // Strip password
-        const { password, ...safeUser } = stored;
-        user = safeUser;
-      }
+    const stored = db.findById('users', decoded.id);
+    if (stored) {
+      const { password, ...safeUser } = stored;
+      user = safeUser;
     }
 
     if (!user) {

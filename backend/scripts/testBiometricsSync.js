@@ -27,36 +27,54 @@ async function runTests() {
   console.log('======================================================================\n');
 
   try {
-    // 1. Member Login
-    const memberLogin = await request({
+    // 1. Dynamic Member Registration & Login
+    const testMemberEmail = `bio_test_${Date.now()}@fithealth.io`;
+    const memberOtp = await request({
       hostname: 'localhost',
       port: 5000,
-      path: '/api/auth/login',
+      path: '/api/auth/send-otp',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
-    }, { email: 'alex@fithealth.io', password: 'password123', role: 'member' });
+    }, { email: testMemberEmail, purpose: 'registration', role: 'member' });
 
-    if (memberLogin.status !== 200 || !memberLogin.data?.token) {
-      throw new Error(`Member login failed: ${JSON.stringify(memberLogin.data)}`);
-    }
-    const memberToken = memberLogin.data.token;
-    const memberId = memberLogin.data.user.id;
-    console.log(`✅ 1. Member Authenticated: ${memberLogin.data.user.name} (${memberId})`);
-
-    // 2. Admin Login
-    const adminLogin = await request({
+    const memberReg = await request({
       hostname: 'localhost',
       port: 5000,
-      path: '/api/auth/login',
+      path: '/api/auth/register',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
-    }, { email: 'admin@fithealth.io', password: 'admin123', role: 'admin' });
+    }, { name: 'Test Biometrics Athlete', email: testMemberEmail, password: 'SecurePassword123!', role: 'member', code: memberOtp.data?.verificationCode });
 
-    if (adminLogin.status !== 200 || !adminLogin.data?.token) {
-      throw new Error(`Admin login failed: ${JSON.stringify(adminLogin.data)}`);
+    if (memberReg.status !== 201 || !memberReg.data?.token) {
+      throw new Error(`Member registration failed: ${JSON.stringify(memberReg.data)}`);
     }
-    const adminToken = adminLogin.data.token;
-    console.log(`✅ 2. Admin Authenticated: ${adminLogin.data.user.name}`);
+    const memberToken = memberReg.data.token;
+    const memberId = memberReg.data.user.id;
+    console.log(`✅ 1. Member Authenticated: ${memberReg.data.user.name} (${memberId})`);
+
+    // 2. Dynamic Admin Registration & Login
+    const testAdminEmail = `bio_admin_${Date.now()}@fithealth.io`;
+    const adminOtp = await request({
+      hostname: 'localhost',
+      port: 5000,
+      path: '/api/auth/send-otp',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }, { email: testAdminEmail, purpose: 'registration', role: 'admin' });
+
+    const adminReg = await request({
+      hostname: 'localhost',
+      port: 5000,
+      path: '/api/auth/register',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }, { name: 'Test Biometrics Coach', email: testAdminEmail, password: 'SecureAdmin123!', role: 'admin', code: adminOtp.data?.verificationCode });
+
+    if (adminReg.status !== 201 || !adminReg.data?.token) {
+      throw new Error(`Admin registration failed: ${JSON.stringify(adminReg.data)}`);
+    }
+    const adminToken = adminReg.data.token;
+    console.log(`✅ 2. Admin Authenticated: ${adminReg.data.user.name}`);
 
     // Ensure consent is initially false to test privacy enforcement
     await request({
