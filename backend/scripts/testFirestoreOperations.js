@@ -136,3 +136,4 @@ runFirestoreVerification()
     console.error('\n[FIRESTORE VERIFICATION FAILED]:', err.message);
     process.exit(1);
   });
+
