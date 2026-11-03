@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fit Health Companion</string>
+    <string name="health_connect_rationale">Fit Health Companion accesses your Samsung Health metrics (steps, heart rate, sleep, body composition, blood pressure) via Health Connect to synchronize live telemetry with your gym dashboard.</string>
+</resources>
+

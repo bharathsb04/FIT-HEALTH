@@ -1,0 +1,31 @@
+{
+  "name": "fit-health-backend",
+  "version": "1.0.0",
+  "description": "Production-ready backend REST API for Fit Health - Ultimate Gym Fitness Companion",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node data/seedData.js"
+  },
+  "keywords": [
+    "fitness",
+    "gym",
+    "health",
+    "rest-api",
+    "express",
+    "mongodb"
+  ],
+  "author": "Fit Health Team",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase-admin": "^14.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^10.2.1"
+  }
+}

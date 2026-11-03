@@ -1,0 +1,9 @@
+{
+  "appId": "com.fithealth.app",
+  "appName": "Fit Health",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

@@ -1,0 +1,5376 @@
+{
+  "users": [
+    {
+      "id": "user_demo_101",
+      "name": "Alex Mercer",
+      "email": "alex@fithealth.io",
+      "password": "$2a$10$IaV0JD0uaDpAqhOZau03t.zFf79QMShyaPPQDYmEgdYiw.Jkr2TEK",
+      "phone": "+1 (555) 987-6543",
+      "age": 20,
+      "gender": "Male",
+      "height": 180,
+      "weight": 78.5,
+      "targetWeight": 84,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "General fitness",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein Non-Veg",
+      "workoutExperience": "2-3 Years",
+      "targetCalories": 2632,
+      "targetProtein": 157,
+      "targetCarbs": 337,
+      "targetFat": 73,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 19,
+      "createdAt": "2026-09-05T07:44:59.720Z",
+      "updatedAt": "2026-10-22T05:25:23.342Z",
+      "role": "member",
+      "membershipId": "FH-MEM-7829",
+      "membershipStatus": "Active",
+      "membershipPlan": "Elite Gold Annual Access",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "442 Fitness Boulevard, Downtown Metro",
+      "gymId": "gym_1",
+      "gymInstructions": "1. Personal sweat towel is mandatory on all workout floors.\n2. Re-rack all barbell plates, dumbbells, and accessories immediately after sets.\n3. Chalk stations are strictly for Olympic platforms and power cages.\n4. Wipe down cardio screens and bench pads with provided sanitizing spray after use.",
+      "checkInPin": "7829"
+    },
+    {
+      "id": "user_1791207097005",
+      "createdAt": "2026-10-05T13:31:37.005Z",
+      "updatedAt": "2026-10-05T13:32:07.721Z",
+      "name": "Bharath",
+      "email": "sbabubharath1976@gmail.com",
+      "password": "$2a$10$tlQOF6gQp9XzPrljBe/.p.7UdHDuratdcTV1xUgCnJaeTdx6FgGLW",
+      "age": 20,
+      "gender": "Male",
+      "height": 168,
+      "weight": 57.5,
+      "targetWeight": 65,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Cutting",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 1719,
+      "targetProtein": 138,
+      "targetCarbs": 197,
+      "targetFat": 42,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1
+    },
+    {
+      "id": "user_admin_201",
+      "name": "Coach Marcus Vance",
+      "email": "admin@fithealth.io",
+      "password": "$2a$10$xxrQ6I24hZ0Cqg7mRLtYvOl4WFlllt/CqVjFSsWSdXFVpNQvL.QHy",
+      "phone": "+1 (555) 777-8899",
+      "role": "admin",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "442 Fitness Boulevard, Downtown Metro",
+      "adminBadge": "Head Gym Director & Administrator",
+      "membershipPlan": "Director All-Access Pass",
+      "membershipStatus": "Active",
+      "streak": 120,
+      "createdAt": "2026-04-08T14:37:49.591Z",
+      "updatedAt": "2026-10-05T14:37:49.595Z",
+      "gymId": "gym_1",
+      "gymInstructions": "1. Personal sweat towel is mandatory on all workout floors.\n2. Re-rack all barbell plates, dumbbells, and accessories immediately after sets.\n3. Chalk stations are strictly for Olympic platforms and power cages.\n4. Wipe down cardio screens and bench pads with provided sanitizing spray after use."
+    },
+    {
+      "id": "user_1792675522611",
+      "createdAt": "2026-10-22T13:25:22.611Z",
+      "updatedAt": "2026-10-22T13:25:22.612Z",
+      "name": "Dhruvanth",
+      "email": "dhruvanthmr2011@gmail.com",
+      "password": "$2a$10$1JDrEtGOR4BUBX4f2D4R1e2wLgRxp3aDxbOMWbrqaxulDoIdRCYIu",
+      "age": 15,
+      "gender": "Male",
+      "height": 5.1,
+      "weight": 40,
+      "targetWeight": 0,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Bulking",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 925,
+      "targetProtein": 88,
+      "targetCarbs": 85,
+      "targetFat": 26,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1
+    }
+  ],
+  "gyms": [
+    {
+      "id": "gym_1",
+      "name": "rsv gym and sports club",
+      "address": "442 Fitness Boulevard, Downtown Metro",
+      "latitude": 28.6139,
+      "longitude": 77.209,
+      "rating": 4.9,
+      "reviewsCount": 384,
+      "openingHours": "05:00 AM - 11:30 PM",
+      "equipment": [
+        "Eleiko Olympic Barbells & Plates",
+        "8 Power Cages & Squat Racks",
+        "Dumbbells 2.5kg to 65kg",
+        "Dual Adjustable Cable Crossover",
+        "GHD & Reverse Hyper",
+        "Heavy Duty Leg Press & Hack Squat",
+        "Deadlift Platforms with Band Pegs"
+      ],
+      "vibe": "Hardcore Bodybuilding & Strength",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Sauna",
+        "Chilled Cold Plunge",
+        "Locker Rooms with Showers",
+        "Protein Shake Bar",
+        "Certified Strength Coaches"
+      ],
+      "dayPassPrice": 299,
+      "currency": "INR",
+      "phone": "+91 98765 43210",
+      "website": "https://ironfortress.example.com",
+      "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+      "instructions": "1. Personal sweat towel is mandatory on all workout floors.\n2. Re-rack all barbell plates, dumbbells, and accessories immediately after sets.\n3. Chalk stations are strictly for Olympic platforms and power cages.\n4. Wipe down cardio screens and bench pads with provided sanitizing spray after use.",
+      "notice": "Official Gym Notice: Peak floor hours are 06:00 PM - 08:30 PM. Group classes start on the hour.",
+      "tagLine": "Premier Strength, Hypertrophy & Performance Facility",
+      "updatedAt": "2026-10-07T15:26:03.576Z"
+    },
+    {
+      "id": "gym_2",
+      "name": "Aura Peak Wellness & Athletic Club",
+      "address": "108 Horizon Heights, Financial District",
+      "latitude": 28.625,
+      "longitude": 77.218,
+      "rating": 4.8,
+      "reviewsCount": 512,
+      "openingHours": "24/7 (Access Keycard)",
+      "equipment": [
+        "Technogym Biostrength Series",
+        "Woodway Curve Treadmills",
+        "Peloton Bikes & Concept2 Rowers",
+        "Free Weights 1kg to 45kg",
+        "Pilates Reformers Zone",
+        "Functional Turf Lane (30m)",
+        "Assault Air Bikes"
+      ],
+      "vibe": "Clean, Modern & High-Tech",
+      "crowdLevel": "Low",
+      "peakHours": "07:00 AM - 08:30 AM",
+      "facilities": [
+        "Infrared Sauna",
+        "Cryotherapy Chamber",
+        "Smoothie & Espresso Lounge",
+        "Valet Parking",
+        "Towel Service"
+      ],
+      "dayPassPrice": 499,
+      "currency": "INR",
+      "phone": "+91 98123 45678",
+      "website": "https://aurapeak.example.com",
+      "image": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_3",
+      "name": "Apex Cross & Functional Arena",
+      "address": "22 Industrial Park Road, Westside",
+      "latitude": 28.6015,
+      "longitude": 77.195,
+      "rating": 4.7,
+      "reviewsCount": 290,
+      "openingHours": "05:30 AM - 10:00 PM",
+      "equipment": [
+        "Rogue Infinity Rig (12 Stations)",
+        "Bumper Plates & Competition Barbells",
+        "Gymnastic Rings & Climbing Ropes",
+        "Concept2 SkiErgs & Echo Bikes",
+        "Sleds, Prowlers & Farmer Walk Handles",
+        "Kettlebells up to 40kg",
+        "Plyo Boxes & Medicine Balls"
+      ],
+      "vibe": "High Energy & Community Driven",
+      "crowdLevel": "High",
+      "peakHours": "05:30 PM - 07:30 PM",
+      "facilities": [
+        "Open Air Training Turf",
+        "Physiotherapy Clinic",
+        "Locker Rooms",
+        "Community Event Space"
+      ],
+      "dayPassPrice": 349,
+      "currency": "INR",
+      "phone": "+91 98234 56789",
+      "website": "https://apexcross.example.com",
+      "image": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_4",
+      "name": "Titan Powerhouse Gym",
+      "address": "89 Northway Sector 14",
+      "latitude": 28.638,
+      "longitude": 77.225,
+      "rating": 4.9,
+      "reviewsCount": 420,
+      "openingHours": "06:00 AM - 11:00 PM",
+      "equipment": [
+        "Prime Fitness Plate Loaded Machines",
+        "Arsenal Strength Hack Squat & Pendulum",
+        "Cybex Eagle Selectorized Range",
+        "Heavy Dumbbells up to 80kg",
+        "Deadlift Jacks & Chalk Stations",
+        "Multiple Flat & Incline Olympic Benches"
+      ],
+      "vibe": "Old-School Bodybuilding Mecca",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:00 PM - 08:30 PM",
+      "facilities": [
+        "Steam Bath",
+        "Recovery Massage Lounge",
+        "Meal Prep Fridge & Microwave",
+        "Pro Shop"
+      ],
+      "dayPassPrice": 279,
+      "currency": "INR",
+      "phone": "+91 98345 67890",
+      "website": "https://titanpowerhouse.example.com",
+      "image": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_5",
+      "name": "PurePulse 24/7 Express",
+      "address": "51 Central Market Galleria, Level 2",
+      "latitude": 28.618,
+      "longitude": 77.235,
+      "rating": 4.6,
+      "reviewsCount": 650,
+      "openingHours": "Open 24 Hours Daily",
+      "equipment": [
+        "Matrix Matrix Versa Selectorized System",
+        "Free Weights & Smith Machines",
+        "Rowers, Stairclimbers, Ellipticals",
+        "Stretching & Core Mats Area",
+        "TRX Suspension Trainers"
+      ],
+      "vibe": "Casual, Friendly & Accessible",
+      "crowdLevel": "Low",
+      "peakHours": "05:00 PM - 07:00 PM",
+      "facilities": [
+        "Private Changing Cabins",
+        "Filtered Water Stations",
+        "Free High-Speed Wi-Fi",
+        "Automated Vending"
+      ],
+      "dayPassPrice": 199,
+      "currency": "INR",
+      "phone": "+91 98456 78901",
+      "website": "https://purepulse.example.com",
+      "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_6",
+      "name": "Zenith Kinetic Performance Lab",
+      "address": "330 Riverside Boulevard, Tech Hub",
+      "latitude": 28.595,
+      "longitude": 77.215,
+      "rating": 4.9,
+      "reviewsCount": 310,
+      "openingHours": "06:00 AM - 10:00 PM",
+      "equipment": [
+        "Keiser Pneumatic Air Resistance Units",
+        "Force Plates & Motion Capture",
+        "Olympic Lifting Platforms",
+        "Wattbikes & Woodway Curve",
+        "Specialty Barbells (Safety Squat, Trap Bar, Swiss Bar)"
+      ],
+      "vibe": "Scientific & Athletic Performance",
+      "crowdLevel": "Low",
+      "peakHours": "06:00 PM - 08:00 PM",
+      "facilities": [
+        "Hyperbaric Chamber",
+        "DEXA Body Composition Scan",
+        "Physical Therapist on Site",
+        "Contrast Hydrotherapy"
+      ],
+      "dayPassPrice": 599,
+      "currency": "INR",
+      "phone": "+91 98567 89012",
+      "website": "https://zenithkinetic.example.com",
+      "image": "https://images.unsplash.com/photo-1593079831268-3381b0db4a77?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1297_7759_1",
+      "createdAt": "2026-10-12T07:12:31.077Z",
+      "updatedAt": "2026-10-12T07:12:31.077Z",
+      "name": "Iron Fortress Fitness Club",
+      "address": "Within 5km of Your Current Location • Zone 1",
+      "latitude": 12.9768,
+      "longitude": 77.5991,
+      "rating": 4.9,
+      "reviewsCount": 412,
+      "openingHours": "05:30 AM - 11:00 PM",
+      "equipment": [
+        "Olympic Barbells",
+        "Power Racks",
+        "Dumbbells up to 60kg",
+        "Cable Stations",
+        "Deadlift Platforms"
+      ],
+      "vibe": "Hardcore Bodybuilding & Strength",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 299,
+      "currency": "INR",
+      "distanceKm": 0.8,
+      "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1297_7759_2",
+      "createdAt": "2026-10-12T07:12:31.078Z",
+      "updatedAt": "2026-10-12T07:12:31.078Z",
+      "name": "Aura Peak Athletic & Wellness",
+      "address": "Within 5km of Your Current Location • Zone 2",
+      "latitude": 12.9618,
+      "longitude": 77.6017,
+      "rating": 4.8,
+      "reviewsCount": 328,
+      "openingHours": "24/7 Keycard Access",
+      "equipment": [
+        "Biostrength Circuit",
+        "Curved Treadmills",
+        "Rowers",
+        "Functional Turf",
+        "Sauna & Cold Plunge"
+      ],
+      "vibe": "Clean, Modern & High-Tech",
+      "crowdLevel": "Low",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 499,
+      "currency": "INR",
+      "distanceKm": 1.3,
+      "image": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1297_7759_3",
+      "createdAt": "2026-10-12T07:12:31.080Z",
+      "updatedAt": "2026-10-12T07:12:31.080Z",
+      "name": "Apex Cross & Functional Arena",
+      "address": "Within 5km of Your Current Location • Zone 3",
+      "latitude": 12.9881,
+      "longitude": 77.5834,
+      "rating": 4.7,
+      "reviewsCount": 245,
+      "openingHours": "06:00 AM - 10:00 PM",
+      "equipment": [
+        "Rogue Rig",
+        "Kettlebells",
+        "Plyo Boxes",
+        "Assault Bikes",
+        "SkiErgs"
+      ],
+      "vibe": "High Energy & Community",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 349,
+      "currency": "INR",
+      "distanceKm": 2.2,
+      "image": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1297_7759_4",
+      "createdAt": "2026-10-12T07:12:31.082Z",
+      "updatedAt": "2026-10-12T07:12:31.082Z",
+      "name": "Titan Powerhouse Gym",
+      "address": "Within 5km of Your Current Location • Zone 4",
+      "latitude": 12.9471,
+      "longitude": 77.5761,
+      "rating": 4.8,
+      "reviewsCount": 512,
+      "openingHours": "05:00 AM - 11:30 PM",
+      "equipment": [
+        "Hammer Strength Machines",
+        "Squat Stations",
+        "Dumbbells up to 70kg",
+        "Hack Squat",
+        "Leg Press"
+      ],
+      "vibe": "Heavy Lifting & Strength",
+      "crowdLevel": "High",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 279,
+      "currency": "INR",
+      "distanceKm": 3.4,
+      "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1297_7759_5",
+      "createdAt": "2026-10-12T07:12:31.085Z",
+      "updatedAt": "2026-10-12T07:12:31.085Z",
+      "name": "Pulse 360 Fitness & Combat",
+      "address": "Within 5km of Your Current Location • Zone 5",
+      "latitude": 13.0026,
+      "longitude": 77.6166,
+      "rating": 4.7,
+      "reviewsCount": 189,
+      "openingHours": "06:00 AM - 10:30 PM",
+      "equipment": [
+        "Boxing Ring & Heavy Bags",
+        "Treadmills",
+        "Free Weights",
+        "TRX Suspension",
+        "Spin Bikes"
+      ],
+      "vibe": "Athletic & Cardio Conditioning",
+      "crowdLevel": "Low",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 399,
+      "currency": "INR",
+      "distanceKm": 4.2,
+      "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1314_7752_1",
+      "createdAt": "2026-10-18T10:13:59.758Z",
+      "updatedAt": "2026-10-18T10:13:59.758Z",
+      "name": "Iron Fortress Fitness Club",
+      "address": "Within 5km of Your Current Location • Zone 1",
+      "latitude": 13.14511,
+      "longitude": 77.52732,
+      "rating": 4.9,
+      "reviewsCount": 412,
+      "openingHours": "05:30 AM - 11:00 PM",
+      "equipment": [
+        "Olympic Barbells",
+        "Power Racks",
+        "Dumbbells up to 60kg",
+        "Cable Stations",
+        "Deadlift Platforms"
+      ],
+      "vibe": "Hardcore Bodybuilding & Strength",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 299,
+      "currency": "INR",
+      "distanceKm": 0.8,
+      "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1314_7752_2",
+      "createdAt": "2026-10-18T10:13:59.783Z",
+      "updatedAt": "2026-10-18T10:13:59.783Z",
+      "name": "Aura Peak Athletic & Wellness",
+      "address": "Within 5km of Your Current Location • Zone 2",
+      "latitude": 13.13011,
+      "longitude": 77.52992,
+      "rating": 4.8,
+      "reviewsCount": 328,
+      "openingHours": "24/7 Keycard Access",
+      "equipment": [
+        "Biostrength Circuit",
+        "Curved Treadmills",
+        "Rowers",
+        "Functional Turf",
+        "Sauna & Cold Plunge"
+      ],
+      "vibe": "Clean, Modern & High-Tech",
+      "crowdLevel": "Low",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 499,
+      "currency": "INR",
+      "distanceKm": 1.3,
+      "image": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1314_7752_3",
+      "createdAt": "2026-10-18T10:13:59.788Z",
+      "updatedAt": "2026-10-18T10:13:59.788Z",
+      "name": "Apex Cross & Functional Arena",
+      "address": "Within 5km of Your Current Location • Zone 3",
+      "latitude": 13.15641,
+      "longitude": 77.51162,
+      "rating": 4.7,
+      "reviewsCount": 245,
+      "openingHours": "06:00 AM - 10:00 PM",
+      "equipment": [
+        "Rogue Rig",
+        "Kettlebells",
+        "Plyo Boxes",
+        "Assault Bikes",
+        "SkiErgs"
+      ],
+      "vibe": "High Energy & Community",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 349,
+      "currency": "INR",
+      "distanceKm": 2.2,
+      "image": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1314_7752_4",
+      "createdAt": "2026-10-18T10:13:59.861Z",
+      "updatedAt": "2026-10-18T10:13:59.861Z",
+      "name": "Titan Powerhouse Gym",
+      "address": "Within 5km of Your Current Location • Zone 4",
+      "latitude": 13.11541,
+      "longitude": 77.50432,
+      "rating": 4.8,
+      "reviewsCount": 512,
+      "openingHours": "05:00 AM - 11:30 PM",
+      "equipment": [
+        "Hammer Strength Machines",
+        "Squat Stations",
+        "Dumbbells up to 70kg",
+        "Hack Squat",
+        "Leg Press"
+      ],
+      "vibe": "Heavy Lifting & Strength",
+      "crowdLevel": "High",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 279,
+      "currency": "INR",
+      "distanceKm": 3.4,
+      "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1314_7752_5",
+      "createdAt": "2026-10-18T10:13:59.877Z",
+      "updatedAt": "2026-10-18T10:13:59.877Z",
+      "name": "Pulse 360 Fitness & Combat",
+      "address": "Within 5km of Your Current Location • Zone 5",
+      "latitude": 13.17091,
+      "longitude": 77.54482,
+      "rating": 4.7,
+      "reviewsCount": 189,
+      "openingHours": "06:00 AM - 10:30 PM",
+      "equipment": [
+        "Boxing Ring & Heavy Bags",
+        "Treadmills",
+        "Free Weights",
+        "TRX Suspension",
+        "Spin Bikes"
+      ],
+      "vibe": "Athletic & Cardio Conditioning",
+      "crowdLevel": "Low",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 399,
+      "currency": "INR",
+      "distanceKm": 4.2,
+      "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1298_7736_1",
+      "createdAt": "2026-10-18T10:52:13.604Z",
+      "updatedAt": "2026-10-18T10:52:13.604Z",
+      "name": "Iron Fortress Fitness Club",
+      "address": "Within 5km of Your Current Location • Zone 1",
+      "latitude": 12.9838,
+      "longitude": 77.3685,
+      "rating": 4.9,
+      "reviewsCount": 412,
+      "openingHours": "05:30 AM - 11:00 PM",
+      "equipment": [
+        "Olympic Barbells",
+        "Power Racks",
+        "Dumbbells up to 60kg",
+        "Cable Stations",
+        "Deadlift Platforms"
+      ],
+      "vibe": "Hardcore Bodybuilding & Strength",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 299,
+      "currency": "INR",
+      "distanceKm": 0.8,
+      "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1298_7736_2",
+      "createdAt": "2026-10-18T10:52:13.609Z",
+      "updatedAt": "2026-10-18T10:52:13.609Z",
+      "name": "Aura Peak Athletic & Wellness",
+      "address": "Within 5km of Your Current Location • Zone 2",
+      "latitude": 12.9688,
+      "longitude": 77.3711,
+      "rating": 4.8,
+      "reviewsCount": 328,
+      "openingHours": "24/7 Keycard Access",
+      "equipment": [
+        "Biostrength Circuit",
+        "Curved Treadmills",
+        "Rowers",
+        "Functional Turf",
+        "Sauna & Cold Plunge"
+      ],
+      "vibe": "Clean, Modern & High-Tech",
+      "crowdLevel": "Low",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 499,
+      "currency": "INR",
+      "distanceKm": 1.3,
+      "image": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1298_7736_3",
+      "createdAt": "2026-10-18T10:52:13.613Z",
+      "updatedAt": "2026-10-18T10:52:13.613Z",
+      "name": "Apex Cross & Functional Arena",
+      "address": "Within 5km of Your Current Location • Zone 3",
+      "latitude": 12.9951,
+      "longitude": 77.3528,
+      "rating": 4.7,
+      "reviewsCount": 245,
+      "openingHours": "06:00 AM - 10:00 PM",
+      "equipment": [
+        "Rogue Rig",
+        "Kettlebells",
+        "Plyo Boxes",
+        "Assault Bikes",
+        "SkiErgs"
+      ],
+      "vibe": "High Energy & Community",
+      "crowdLevel": "Moderate",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 349,
+      "currency": "INR",
+      "distanceKm": 2.2,
+      "image": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1298_7736_4",
+      "createdAt": "2026-10-18T10:52:13.618Z",
+      "updatedAt": "2026-10-18T10:52:13.618Z",
+      "name": "Titan Powerhouse Gym",
+      "address": "Within 5km of Your Current Location • Zone 4",
+      "latitude": 12.9541,
+      "longitude": 77.3455,
+      "rating": 4.8,
+      "reviewsCount": 512,
+      "openingHours": "05:00 AM - 11:30 PM",
+      "equipment": [
+        "Hammer Strength Machines",
+        "Squat Stations",
+        "Dumbbells up to 70kg",
+        "Hack Squat",
+        "Leg Press"
+      ],
+      "vibe": "Heavy Lifting & Strength",
+      "crowdLevel": "High",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 279,
+      "currency": "INR",
+      "distanceKm": 3.4,
+      "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gym_loc_1298_7736_5",
+      "createdAt": "2026-10-18T10:52:13.622Z",
+      "updatedAt": "2026-10-18T10:52:13.622Z",
+      "name": "Pulse 360 Fitness & Combat",
+      "address": "Within 5km of Your Current Location • Zone 5",
+      "latitude": 13.0096,
+      "longitude": 77.386,
+      "rating": 4.7,
+      "reviewsCount": 189,
+      "openingHours": "06:00 AM - 10:30 PM",
+      "equipment": [
+        "Boxing Ring & Heavy Bags",
+        "Treadmills",
+        "Free Weights",
+        "TRX Suspension",
+        "Spin Bikes"
+      ],
+      "vibe": "Athletic & Cardio Conditioning",
+      "crowdLevel": "Low",
+      "peakHours": "06:30 PM - 08:30 PM",
+      "facilities": [
+        "Locker Rooms",
+        "Showers",
+        "Air Conditioned",
+        "Water Cooler"
+      ],
+      "dayPassPrice": 399,
+      "currency": "INR",
+      "distanceKm": 4.2,
+      "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "workoutPlans": [
+    {
+      "id": "plan_demo_1",
+      "userId": "user_demo_101",
+      "goal": "General fitness",
+      "splitName": "6-Day General fitness Split",
+      "posterImage": "/images/6_day_workout_plan.jpg",
+      "motto": "DISCIPLINE TODAY, RESULTS TOMORROW.",
+      "disciplines": [
+        {
+          "icon": "Arm",
+          "title": "STAY CONSISTENT",
+          "desc": "Consistency is the key to see results."
+        },
+        {
+          "icon": "Utensils",
+          "title": "EAT CLEAN",
+          "desc": "Eat enough protein & healthy foods to fuel your body."
+        },
+        {
+          "icon": "Droplets",
+          "title": "STAY HYDRATED",
+          "desc": "Drink plenty of water throughout the day."
+        },
+        {
+          "icon": "Bed",
+          "title": "GET ENOUGH SLEEP",
+          "desc": "7-8 hours of sleep is essential for muscle recovery."
+        }
+      ],
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Focus. Train. Transform. Pectoral Power & Volume",
+          "targetGroup": "Chest",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Bench Press",
+              "targetMuscle": "Pectoralis Major (Mid & Lower)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "80 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Arch lower back slightly, retract scapulae, lower bar under control to mid-chest, drive up explosively."
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Chest",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "28 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Set bench at 30 degrees. Keep elbows at 45 degrees, deep stretch at bottom and squeeze at peak."
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Chest Adduction",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "15 kg/side",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Slight bend in elbows. Bring arms together in a hugging motion, squeeze pecs hard at center."
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest & Serratus Anterior",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie perpendicular across bench. Lower dumbbell behind head with deep ribcage stretch, pull over to chest."
+            },
+            {
+              "id": "e5",
+              "name": "Push Ups",
+              "targetMuscle": "Chest & Triceps Finisher",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Maintain strong core plank. Lower chest to floor and push up with full range of motion."
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDER",
+          "focus": "3D Deltoid Mass, Overhead Power & Traps",
+          "targetGroup": "Shoulder",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Brace glutes and abs, press bar in straight vertical path clearing chin, lock out overhead."
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoids (Cap Width)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lead with elbows, slight forward lean, pause at parallel for maximum delt tension."
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Raise dumbbells to eye level with controlled tempo. Avoid swinging torso."
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Hinge forward at 45 degrees or use incline bench. Pull arms wide to isolate rear delts."
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg/hand",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Elevate shoulders straight up towards ears, squeeze traps for 1 second, lower under control."
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Peak Hypertrophy & Forearms",
+          "targetGroup": "Biceps",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Overall Mass)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Keep elbows pinned to ribs. Curl barbell upward with strong contraction and controlled 3-second eccentric."
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Long & Short Heads",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Supinate wrists as you curl upward to maximize bicep contraction at peak."
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearms",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "14 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Palms facing each other throughout. Great for arm thickness and grip strength."
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Short Head (Peak)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Rest upper arms firmly against angled pad to eliminate momentum and isolate the bicep peak."
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "12 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Sit and brace elbow against inner thigh. Curl dumbbell smoothly with intense focus."
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps & Inner Chest",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Grip shoulder-width apart. Keep elbows tucked close to body while pressing to overload triceps."
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "25 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Spread rope apart at bottom of motion. Lock out triceps hard for 1 second."
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Ext.",
+              "targetMuscle": "Triceps Long Head",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Keep elbows high and stationary. Lower weight behind head for a deep long head stretch."
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Chest Overload",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Stay upright on parallel bars to emphasize triceps. Lower until elbows reach 90 degrees."
+            },
+            {
+              "id": "e20",
+              "name": "Kick Back",
+              "targetMuscle": "Triceps Peak Contraction",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Torso parallel to floor, upper arm parallel to torso. Extend forearm back and squeeze."
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Power",
+          "targetGroup": "Back",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Dead hang at bottom, drive elbows down to ribs, pull chest up toward bar."
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Hinge at 45 degrees, pull bar towards belly button, pinch shoulder blades together tightly."
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Upper Lats & Teres Major",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Pull bar smoothly down to upper chest while leaning back slightly. Control the ascent."
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Mid-Back & Lower Lats",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Sit upright with neutral spine. Pull attachment into lower abdomen and squeeze back."
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Full Posterior Chain & Traps",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "120 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Bar over midfoot, chest proud, brace core, drive through heels to full standing lockout."
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop, Hamstring Sweep & Calf Power",
+          "targetGroup": "Legs",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps & Glutes",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "100 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Feet shoulder-width, brace abdominal wall, descend below parallel, drive up through midfoot."
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Adductors",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "200 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Position feet mid-platform. Lower sled with control without lifting pelvis, press without knee lockout."
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quad Teardrop (VMO)",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "55 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Extend legs fully, hold peak contraction at top for 1 full second, lower with 3-second negative."
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings & Knee Flexors",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie flat on machine pad. Curl heels up toward glutes with strong hamstring squeeze."
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Full stretch at bottom, explode up onto toes and hold at top for 2 seconds."
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — RECOVERY & MOBILITY",
+          "focus": "Active Recovery, Muscle Repair & CNS Restoration",
+          "targetGroup": "Recovery",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Light 30-min Zone 2 Walk",
+              "targetMuscle": "Cardiovascular & Recovery",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Gentle brisk walk to stimulate lymphatic drainage, blood circulation, and active recovery."
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Dynamic Stretching",
+              "targetMuscle": "Joint Mobility & Fascia",
+              "sets": 1,
+              "reps": "15 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Perform guided hip openers, shoulder dislocations, and thoracic spine rotations."
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-10-22",
+          "dayName": "Day 1 — CHEST",
+          "durationMinutes": 1,
+          "exercisesCompleted": 2,
+          "totalVolumeKg": 4526
+        },
+        {
+          "date": "2026-10-08",
+          "dayName": "Day 6 — LEGS",
+          "durationMinutes": 52,
+          "exercisesCompleted": 5,
+          "totalVolumeKg": 8420
+        },
+        {
+          "date": "2026-10-07",
+          "dayName": "Day 5 — BACK",
+          "durationMinutes": 58,
+          "exercisesCompleted": 5,
+          "totalVolumeKg": 7850
+        }
+      ],
+      "updatedAt": "2026-10-22T05:25:02.573Z"
+    },
+    {
+      "id": "wor_1791558463875_vkpzv",
+      "createdAt": "2026-10-09T15:07:43.875Z",
+      "updatedAt": "2026-10-09T15:07:43.875Z",
+      "userId": "user_1791207097005",
+      "goal": "Cutting",
+      "splitName": "6-Day Cutting Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Focus. Train. Transform. Pectoral Power & Volume",
+          "targetGroup": "Chest",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Bench Press",
+              "targetMuscle": "Pectoralis Major (Mid & Lower)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "80 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Arch lower back slightly, retract scapulae, lower bar under control to mid-chest, drive up explosively."
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Chest",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "28 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Set bench at 30 degrees. Keep elbows at 45 degrees, deep stretch at bottom and squeeze at peak."
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Chest Adduction",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "15 kg/side",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Slight bend in elbows. Bring arms together in a hugging motion, squeeze pecs hard at center."
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest & Serratus Anterior",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie perpendicular across bench. Lower dumbbell behind head with deep ribcage stretch, pull over to chest."
+            },
+            {
+              "id": "e5",
+              "name": "Push Ups",
+              "targetMuscle": "Chest & Triceps Finisher",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Maintain strong core plank. Lower chest to floor and push up with full range of motion."
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDER",
+          "focus": "3D Deltoid Mass, Overhead Power & Traps",
+          "targetGroup": "Shoulder",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Brace glutes and abs, press bar in straight vertical path clearing chin, lock out overhead."
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoids (Cap Width)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lead with elbows, slight forward lean, pause at parallel for maximum delt tension."
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Raise dumbbells to eye level with controlled tempo. Avoid swinging torso."
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Hinge forward at 45 degrees or use incline bench. Pull arms wide to isolate rear delts."
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg/hand",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Elevate shoulders straight up towards ears, squeeze traps for 1 second, lower under control."
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Peak Hypertrophy & Forearms",
+          "targetGroup": "Biceps",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Overall Mass)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Keep elbows pinned to ribs. Curl barbell upward with strong contraction and controlled 3-second eccentric."
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Long & Short Heads",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Supinate wrists as you curl upward to maximize bicep contraction at peak."
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearms",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "14 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Palms facing each other throughout. Great for arm thickness and grip strength."
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Short Head (Peak)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Rest upper arms firmly against angled pad to eliminate momentum and isolate the bicep peak."
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "12 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Sit and brace elbow against inner thigh. Curl dumbbell smoothly with intense focus."
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps & Inner Chest",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Grip shoulder-width apart. Keep elbows tucked close to body while pressing to overload triceps."
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "25 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Spread rope apart at bottom of motion. Lock out triceps hard for 1 second."
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Ext.",
+              "targetMuscle": "Triceps Long Head",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Keep elbows high and stationary. Lower weight behind head for a deep long head stretch."
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Chest Overload",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Stay upright on parallel bars to emphasize triceps. Lower until elbows reach 90 degrees."
+            },
+            {
+              "id": "e20",
+              "name": "Kick Back",
+              "targetMuscle": "Triceps Peak Contraction",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Torso parallel to floor, upper arm parallel to torso. Extend forearm back and squeeze."
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Power",
+          "targetGroup": "Back",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Dead hang at bottom, drive elbows down to ribs, pull chest up toward bar."
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Hinge at 45 degrees, pull bar towards belly button, pinch shoulder blades together tightly."
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Upper Lats & Teres Major",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Pull bar smoothly down to upper chest while leaning back slightly. Control the ascent."
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Mid-Back & Lower Lats",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Sit upright with neutral spine. Pull attachment into lower abdomen and squeeze back."
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Full Posterior Chain & Traps",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "120 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Bar over midfoot, chest proud, brace core, drive through heels to full standing lockout."
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop, Hamstring Sweep & Calf Power",
+          "targetGroup": "Legs",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps & Glutes",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "100 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Feet shoulder-width, brace abdominal wall, descend below parallel, drive up through midfoot."
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Adductors",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "200 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Position feet mid-platform. Lower sled with control without lifting pelvis, press without knee lockout."
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quad Teardrop (VMO)",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "55 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Extend legs fully, hold peak contraction at top for 1 full second, lower with 3-second negative."
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings & Knee Flexors",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie flat on machine pad. Curl heels up toward glutes with strong hamstring squeeze."
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Full stretch at bottom, explode up onto toes and hold at top for 2 seconds."
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — RECOVERY & MOBILITY",
+          "focus": "Active Recovery, Muscle Repair & CNS Restoration",
+          "targetGroup": "Recovery",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Light 30-min Zone 2 Walk",
+              "targetMuscle": "Cardiovascular & Recovery",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Gentle brisk walk to stimulate lymphatic drainage, blood circulation, and active recovery."
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Dynamic Stretching",
+              "targetMuscle": "Joint Mobility & Fascia",
+              "sets": 1,
+              "reps": "15 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Perform guided hip openers, shoulder dislocations, and thoracic spine rotations."
+            }
+          ]
+        }
+      ],
+      "history": []
+    },
+    {
+      "id": "wor_1792675522622_4t3ng",
+      "createdAt": "2026-10-22T13:25:22.622Z",
+      "updatedAt": "2026-10-22T13:25:22.622Z",
+      "userId": "user_1792675522611",
+      "goal": "Bulking",
+      "splitName": "6-Day Bulking Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Focus. Train. Transform. Pectoral Power & Volume",
+          "targetGroup": "Chest",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Bench Press",
+              "targetMuscle": "Pectoralis Major (Mid & Lower)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "80 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Arch lower back slightly, retract scapulae, lower bar under control to mid-chest, drive up explosively."
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Chest",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "28 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Set bench at 30 degrees. Keep elbows at 45 degrees, deep stretch at bottom and squeeze at peak."
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Chest Adduction",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "15 kg/side",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Slight bend in elbows. Bring arms together in a hugging motion, squeeze pecs hard at center."
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest & Serratus Anterior",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie perpendicular across bench. Lower dumbbell behind head with deep ribcage stretch, pull over to chest."
+            },
+            {
+              "id": "e5",
+              "name": "Push Ups",
+              "targetMuscle": "Chest & Triceps Finisher",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Maintain strong core plank. Lower chest to floor and push up with full range of motion."
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDER",
+          "focus": "3D Deltoid Mass, Overhead Power & Traps",
+          "targetGroup": "Shoulder",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Brace glutes and abs, press bar in straight vertical path clearing chin, lock out overhead."
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoids (Cap Width)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lead with elbows, slight forward lean, pause at parallel for maximum delt tension."
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Raise dumbbells to eye level with controlled tempo. Avoid swinging torso."
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Hinge forward at 45 degrees or use incline bench. Pull arms wide to isolate rear delts."
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg/hand",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Elevate shoulders straight up towards ears, squeeze traps for 1 second, lower under control."
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Peak Hypertrophy & Forearms",
+          "targetGroup": "Biceps",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Overall Mass)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Keep elbows pinned to ribs. Curl barbell upward with strong contraction and controlled 3-second eccentric."
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Long & Short Heads",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Supinate wrists as you curl upward to maximize bicep contraction at peak."
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearms",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "14 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Palms facing each other throughout. Great for arm thickness and grip strength."
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Short Head (Peak)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Rest upper arms firmly against angled pad to eliminate momentum and isolate the bicep peak."
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "12 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Sit and brace elbow against inner thigh. Curl dumbbell smoothly with intense focus."
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps & Inner Chest",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Grip shoulder-width apart. Keep elbows tucked close to body while pressing to overload triceps."
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "25 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Spread rope apart at bottom of motion. Lock out triceps hard for 1 second."
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Ext.",
+              "targetMuscle": "Triceps Long Head",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Keep elbows high and stationary. Lower weight behind head for a deep long head stretch."
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Chest Overload",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Stay upright on parallel bars to emphasize triceps. Lower until elbows reach 90 degrees."
+            },
+            {
+              "id": "e20",
+              "name": "Kick Back",
+              "targetMuscle": "Triceps Peak Contraction",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Torso parallel to floor, upper arm parallel to torso. Extend forearm back and squeeze."
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Power",
+          "targetGroup": "Back",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Dead hang at bottom, drive elbows down to ribs, pull chest up toward bar."
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Hinge at 45 degrees, pull bar towards belly button, pinch shoulder blades together tightly."
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Upper Lats & Teres Major",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Pull bar smoothly down to upper chest while leaning back slightly. Control the ascent."
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Mid-Back & Lower Lats",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Sit upright with neutral spine. Pull attachment into lower abdomen and squeeze back."
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Full Posterior Chain & Traps",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "120 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Bar over midfoot, chest proud, brace core, drive through heels to full standing lockout."
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop, Hamstring Sweep & Calf Power",
+          "targetGroup": "Legs",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps & Glutes",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "100 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Feet shoulder-width, brace abdominal wall, descend below parallel, drive up through midfoot."
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Adductors",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "200 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Position feet mid-platform. Lower sled with control without lifting pelvis, press without knee lockout."
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quad Teardrop (VMO)",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "55 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Extend legs fully, hold peak contraction at top for 1 full second, lower with 3-second negative."
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings & Knee Flexors",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie flat on machine pad. Curl heels up toward glutes with strong hamstring squeeze."
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Full stretch at bottom, explode up onto toes and hold at top for 2 seconds."
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — RECOVERY & MOBILITY",
+          "focus": "Active Recovery, Muscle Repair & CNS Restoration",
+          "targetGroup": "Recovery",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Light 30-min Zone 2 Walk",
+              "targetMuscle": "Cardiovascular & Recovery",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Gentle brisk walk to stimulate lymphatic drainage, blood circulation, and active recovery."
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Dynamic Stretching",
+              "targetMuscle": "Joint Mobility & Fascia",
+              "sets": 1,
+              "reps": "15 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Perform guided hip openers, shoulder dislocations, and thoracic spine rotations."
+            }
+          ]
+        }
+      ],
+      "history": []
+    }
+  ],
+  "dietPlans": [
+    {
+      "id": "diet_demo_1",
+      "userId": "user_demo_101",
+      "date": "2026-10-05",
+      "meals": [
+        {
+          "id": "meal_1",
+          "category": "Breakfast",
+          "name": "Oatmeal with Whey & Peanut Butter",
+          "calories": 540,
+          "protein": 36,
+          "carbs": 58,
+          "fat": 18,
+          "fiber": 8,
+          "loggedAt": "08:15 AM"
+        },
+        {
+          "id": "meal_2",
+          "category": "Lunch",
+          "name": "Grilled Chicken Breast with Brown Rice & Broccoli",
+          "calories": 620,
+          "protein": 52,
+          "carbs": 65,
+          "fat": 14,
+          "fiber": 7,
+          "loggedAt": "01:30 PM"
+        },
+        {
+          "id": "meal_3",
+          "category": "Snacks",
+          "name": "Greek Yogurt with Blueberries & Almonds",
+          "calories": 330,
+          "protein": 24,
+          "carbs": 22,
+          "fat": 16,
+          "fiber": 5,
+          "loggedAt": "04:45 PM"
+        }
+      ]
+    },
+    {
+      "id": "die_1791207097008_zqfsa",
+      "createdAt": "2026-10-05T13:31:37.008Z",
+      "updatedAt": "2026-10-05T13:31:37.008Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-05",
+      "meals": []
+    },
+    {
+      "id": "die_1791287111026_onevp",
+      "createdAt": "2026-10-06T11:45:11.026Z",
+      "updatedAt": "2026-10-06T11:45:11.026Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-06",
+      "meals": []
+    },
+    {
+      "id": "die_1791381432568_2jukp",
+      "createdAt": "2026-10-07T13:57:12.568Z",
+      "updatedAt": "2026-10-07T13:57:12.568Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-07",
+      "meals": []
+    },
+    {
+      "id": "die_1791385853390_8abt5",
+      "createdAt": "2026-10-07T15:10:53.390Z",
+      "updatedAt": "2026-10-07T15:10:53.390Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-07",
+      "meals": []
+    },
+    {
+      "id": "die_1791389259164_nelbc",
+      "createdAt": "2026-10-07T16:07:39.164Z",
+      "updatedAt": "2026-10-07T16:07:39.164Z",
+      "userId": "user_admin_201",
+      "date": "2026-10-07",
+      "meals": []
+    },
+    {
+      "id": "die_1791470828542_n6kz0",
+      "createdAt": "2026-10-08T14:47:08.542Z",
+      "updatedAt": "2026-10-08T15:06:30.707Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-08",
+      "meals": [
+        {
+          "id": "meal_1791471395845",
+          "category": "Lunch",
+          "name": "Grilled Chicken Breast & Quinoa Bowl",
+          "calories": 620,
+          "protein": 55,
+          "carbs": 60,
+          "fat": 12,
+          "fiber": 0,
+          "loggedAt": "08:26 pm"
+        },
+        {
+          "id": "meal_1791471727064",
+          "category": "Lunch",
+          "name": "Grilled Chicken Breast & Quinoa Bowl",
+          "calories": 620,
+          "protein": 55,
+          "carbs": 60,
+          "fat": 12,
+          "fiber": 0,
+          "loggedAt": "08:32 pm"
+        },
+        {
+          "id": "meal_1791471990707",
+          "category": "Lunch",
+          "name": "Grilled Chicken Breast & Quinoa Bowl",
+          "calories": 620,
+          "protein": 55,
+          "carbs": 60,
+          "fat": 12,
+          "fiber": 0,
+          "loggedAt": "08:36 pm"
+        }
+      ]
+    },
+    {
+      "id": "die_1791556828264_qeu3p",
+      "createdAt": "2026-10-09T14:40:28.264Z",
+      "updatedAt": "2026-10-09T14:40:28.264Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-09",
+      "meals": []
+    },
+    {
+      "id": "die_1791720951486_jmtvy",
+      "createdAt": "2026-10-11T12:15:51.486Z",
+      "updatedAt": "2026-10-11T12:15:51.486Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-11",
+      "meals": []
+    },
+    {
+      "id": "die_1791785489864_r73oq",
+      "createdAt": "2026-10-12T06:11:29.864Z",
+      "updatedAt": "2026-10-12T06:11:29.864Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-12",
+      "meals": []
+    },
+    {
+      "id": "die_1792318422543_r4imx",
+      "createdAt": "2026-10-18T10:13:42.543Z",
+      "updatedAt": "2026-10-18T10:13:42.543Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-18",
+      "meals": []
+    },
+    {
+      "id": "die_1792507618363_8ub80",
+      "createdAt": "2026-10-20T14:46:58.363Z",
+      "updatedAt": "2026-10-20T14:46:58.363Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-20",
+      "meals": []
+    },
+    {
+      "id": "die_1792644843189_ph4z7",
+      "createdAt": "2026-10-22T04:54:03.189Z",
+      "updatedAt": "2026-10-22T04:54:03.189Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-22",
+      "meals": []
+    },
+    {
+      "id": "die_1792675522629_3wre6",
+      "createdAt": "2026-10-22T13:25:22.629Z",
+      "updatedAt": "2026-10-22T13:25:22.629Z",
+      "userId": "user_1792675522611",
+      "date": "2026-10-22",
+      "meals": []
+    },
+    {
+      "id": "die_1793082254067_ciblv",
+      "createdAt": "2026-10-27T06:24:14.067Z",
+      "updatedAt": "2026-10-27T06:24:14.067Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-27",
+      "meals": []
+    },
+    {
+      "id": "die_1793197145533_4rp0i",
+      "createdAt": "2026-10-28T14:19:05.533Z",
+      "updatedAt": "2026-10-28T14:19:05.533Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-28",
+      "meals": []
+    }
+  ],
+  "vitalsLogs": [
+    {
+      "id": "vit_demo_1",
+      "userId": "user_demo_101",
+      "date": "2026-10-05",
+      "heartRateBpm": 68,
+      "restingHeartRate": 58,
+      "maxHeartRate": 154,
+      "steps": 8420,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 520,
+      "sleepHours": 7.6,
+      "sleepTargetHours": 8,
+      "recoveryScore": 88,
+      "syncSource": "Google Fit Sync",
+      "isWearableConnected": true,
+      "wearableDevice": "Fitbit Sense 2 / Google Fit",
+      "lastSyncTimestamp": "2026-10-05T07:44:59.721Z",
+      "cardioZones": {
+        "warmUpMinutes": 20,
+        "fatBurnMinutes": 35,
+        "cardioMinutes": 25,
+        "peakMinutes": 12
+      }
+    },
+    {
+      "id": "vit_1791207097045_796ez",
+      "createdAt": "2026-10-05T13:31:37.045Z",
+      "updatedAt": "2026-10-05T13:31:37.045Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-05",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-10-05T13:31:37.045Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1791287111000_mt804",
+      "createdAt": "2026-10-06T11:45:11.000Z",
+      "updatedAt": "2026-10-06T11:48:21.392Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-06",
+      "heartRateBpm": 65,
+      "restingHeartRate": 59,
+      "maxHeartRate": 158,
+      "steps": 9643,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 536,
+      "sleepHours": 8,
+      "sleepTargetHours": 8,
+      "recoveryScore": 85,
+      "syncSource": "Google Fit",
+      "isWearableConnected": true,
+      "wearableDevice": "Google Fit",
+      "lastSyncTimestamp": "2026-10-06T11:48:21.392Z",
+      "cardioZones": {
+        "warmUpMinutes": 22,
+        "fatBurnMinutes": 38,
+        "cardioMinutes": 28,
+        "peakMinutes": 14
+      }
+    },
+    {
+      "id": "vit_1791381432581_5f5r1",
+      "createdAt": "2026-10-07T13:57:12.581Z",
+      "updatedAt": "2026-10-07T13:57:12.581Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-07",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-07T13:57:12.581Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1791385853406_uy31c",
+      "createdAt": "2026-10-07T15:10:53.406Z",
+      "updatedAt": "2026-10-07T15:10:53.406Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-07",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-07T15:10:53.406Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1791470828575_dd5ru",
+      "createdAt": "2026-10-08T14:47:08.575Z",
+      "updatedAt": "2026-10-08T15:06:30.730Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-08",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-08T15:06:30.730Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1791556828223_20oli",
+      "createdAt": "2026-10-09T14:40:28.223Z",
+      "updatedAt": "2026-10-09T14:40:28.223Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-09",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-09T14:40:28.223Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1791720951480_y7jge",
+      "createdAt": "2026-10-11T12:15:51.480Z",
+      "updatedAt": "2026-10-11T12:15:51.480Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-11",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-11T12:15:51.480Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1791785489894_02xoz",
+      "createdAt": "2026-10-12T06:11:29.894Z",
+      "updatedAt": "2026-10-12T06:11:29.894Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-12",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-12T06:11:29.894Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1792318422755_0loh0",
+      "createdAt": "2026-10-18T10:13:42.755Z",
+      "updatedAt": "2026-10-18T10:15:33.799Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-18",
+      "heartRateBpm": 74,
+      "restingHeartRate": 59,
+      "maxHeartRate": 158,
+      "steps": 9676,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 634,
+      "sleepHours": 7.3,
+      "sleepTargetHours": 8,
+      "recoveryScore": 78,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Disconnected",
+      "lastSyncTimestamp": "2026-10-18T10:15:33.799Z",
+      "cardioZones": {
+        "warmUpMinutes": 22,
+        "fatBurnMinutes": 38,
+        "cardioMinutes": 28,
+        "peakMinutes": 14
+      }
+    },
+    {
+      "id": "vit_1792507618324_dh82z",
+      "createdAt": "2026-10-20T14:46:58.324Z",
+      "updatedAt": "2026-10-20T14:46:58.324Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-20",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-20T14:46:58.324Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1792644843148_0txa3",
+      "createdAt": "2026-10-22T04:54:03.148Z",
+      "updatedAt": "2026-10-22T05:18:17.963Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-22",
+      "heartRateBpm": 73,
+      "restingHeartRate": 59,
+      "maxHeartRate": 158,
+      "steps": 9633,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 464,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 80,
+      "syncSource": "Google Fit",
+      "isWearableConnected": true,
+      "wearableDevice": "Google Fit",
+      "lastSyncTimestamp": "2026-10-22T05:18:17.963Z",
+      "cardioZones": {
+        "warmUpMinutes": 22,
+        "fatBurnMinutes": 38,
+        "cardioMinutes": 28,
+        "peakMinutes": 14
+      }
+    },
+    {
+      "id": "vit_1792675522734_iihbt",
+      "createdAt": "2026-10-22T13:25:22.735Z",
+      "updatedAt": "2026-10-22T13:25:22.735Z",
+      "userId": "user_1792675522611",
+      "date": "2026-10-22",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-10-22T13:25:22.734Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1793082254103_94ukh",
+      "createdAt": "2026-10-27T06:24:14.103Z",
+      "updatedAt": "2026-10-27T06:24:14.103Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-27",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-27T06:24:14.103Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    },
+    {
+      "id": "vit_1793197145554_x640f",
+      "createdAt": "2026-10-28T14:19:05.554Z",
+      "updatedAt": "2026-10-28T14:19:05.554Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-28",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 156,
+      "steps": 3200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 240,
+      "sleepHours": 7.2,
+      "sleepTargetHours": 8,
+      "recoveryScore": 82,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "None",
+      "lastSyncTimestamp": "2026-10-28T14:19:05.554Z",
+      "cardioZones": {
+        "warmUpMinutes": 15,
+        "fatBurnMinutes": 20,
+        "cardioMinutes": 10,
+        "peakMinutes": 5
+      }
+    }
+  ],
+  "supplements": [
+    {
+      "id": "sup_1",
+      "name": "Whey Protein Isolate & Concentrate",
+      "brand": "Optimum Nutrition / MuscleBlaze Biozyme",
+      "category": "Protein",
+      "tagline": "Ultra-pure fast-absorbing protein delivering 25g protein and 5.5g BCAAs per scoop.",
+      "image": "/images/supplements/whey-protein-isolate.jpg",
+      "imageUrl": "/images/supplements/whey-protein-isolate.jpg",
+      "fallbackImage": "/images/supplements/whey-protein-isolate.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 14850,
+      "price": 54.99,
+      "originalPrice": 69.99,
+      "currency": "USD",
+      "inrPrice": "₹4,299",
+      "originalInrPrice": "₹5,499",
+      "discount": "22% OFF",
+      "certifications": [
+        "Informed-Choice Tested",
+        "Labdoor Certified",
+        "GMP Quality"
+      ],
+      "flavorOptions": [
+        "Double Rich Chocolate",
+        "Vanilla Ice Cream",
+        "Mocha Cappuccino"
+      ],
+      "purpose": "Supports rapid muscle protein synthesis (MPS), repairs micro-tears from heavy resistance training, and helps meet daily macronutrient goals cleanly.",
+      "commonUsage": "1 to 2 scoops (30g-60g) mixed with 250ml water, almond milk, or blended in oat smoothies.",
+      "timing": "Post-workout within 45 minutes, or between meals as a high-protein anabolic bridge.",
+      "considerations": "If lactose-sensitive, choose 100% Whey Isolate or Plant Pea-Rice blend for zero bloating.",
+      "safetyDisclaimer": "Supplements complement whole foods. Drink plenty of water and consult your physician if you have kidney conditions.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Fast Prime Delivery",
+          "price": "$54.99",
+          "inrPrice": "₹4,299",
+          "url": "https://www.amazon.in/s?k=optimum+nutrition+whey+protein+gold+standard",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult.fit Official",
+          "price": "$51.99",
+          "inrPrice": "₹3,999",
+          "url": "https://www.cult.fit/store/nutrition/proteins",
+          "color": "#f97316"
+        },
+        {
+          "store": "MyProtein",
+          "badge": "Direct Factory",
+          "price": "$49.99",
+          "inrPrice": "₹3,899",
+          "url": "https://www.myprotein.co.in/nutrition/protein.list",
+          "color": "#0284c7"
+        },
+        {
+          "store": "iHerb",
+          "badge": "Global Verified",
+          "price": "$56.00",
+          "inrPrice": "₹4,350",
+          "url": "https://www.iherb.com/c/whey-protein",
+          "color": "#16a34a"
+        }
+      ]
+    },
+    {
+      "id": "sup_2",
+      "name": "Micronized Creatine Monohydrate (Creapure)",
+      "brand": "Creapure / MuscleBlaze / Thorne",
+      "category": "Strength",
+      "tagline": "Gold standard 99.99% pure micronized creatine for explosive power and muscle volume.",
+      "image": "/images/supplements/creapure-creatine-monohydrate.jpg",
+      "imageUrl": "/images/supplements/creapure-creatine-monohydrate.jpg",
+      "fallbackImage": "/images/supplements/creapure-creatine-monohydrate.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 22400,
+      "price": 24.99,
+      "originalPrice": 32.99,
+      "currency": "USD",
+      "inrPrice": "₹1,299",
+      "originalInrPrice": "₹1,799",
+      "discount": "28% OFF",
+      "certifications": [
+        "Creapure Germany",
+        "NSF Certified for Sport",
+        "Zero Sugar"
+      ],
+      "flavorOptions": [
+        "Unflavored",
+        "Fruit Punch",
+        "Tangy Orange"
+      ],
+      "purpose": "Increases phosphocreatine cellular reserves to rapidly re-synthesize ATP during heavy lifting, boosting max strength, power output, and intracellular cell volumization.",
+      "commonUsage": "3 to 5 grams daily continuously. No mandatory loading phase needed.",
+      "timing": "Daily with 300ml water, fruit juice, or your post-workout protein shake.",
+      "considerations": "Draws intracellular water into muscle cells, boosting muscle fullness. Maintain hydration at 3.5L+ water daily.",
+      "safetyDisclaimer": "One of the most scientifically studied sports supplements in history. Safe for long-term daily use.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Best Seller",
+          "price": "$24.99",
+          "inrPrice": "₹1,299",
+          "url": "https://www.amazon.in/s?k=creatine+monohydrate+creapure",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult.fit Verified",
+          "price": "$22.99",
+          "inrPrice": "₹1,199",
+          "url": "https://www.cult.fit/store/nutrition/creatine",
+          "color": "#f97316"
+        },
+        {
+          "store": "Nutrabay",
+          "badge": "Authenticity Guaranteed",
+          "price": "$23.50",
+          "inrPrice": "₹1,249",
+          "url": "https://nutrabay.com/product-category/creatine",
+          "color": "#8b5cf6"
+        }
+      ]
+    },
+    {
+      "id": "sup_3",
+      "name": "C4 Explosive Pre-Workout & Beta-Alanine",
+      "brand": "Cellucor / Gorilla Mind / Fast&Up",
+      "category": "Endurance",
+      "tagline": "High-intensity energy matrix with 200mg Caffeine, Beta-Alanine, and Nitric Oxide pump boosters.",
+      "image": "/images/supplements/c4-explosive-preworkout.jpg",
+      "imageUrl": "/images/supplements/c4-explosive-preworkout.jpg",
+      "fallbackImage": "/images/supplements/c4-explosive-preworkout.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 9600,
+      "price": 34.99,
+      "originalPrice": 44.99,
+      "currency": "USD",
+      "inrPrice": "₹2,499",
+      "originalInrPrice": "₹3,299",
+      "discount": "24% OFF",
+      "certifications": [
+        "Informed Choice",
+        "cGMP Facility",
+        "Zero Crash Formula"
+      ],
+      "flavorOptions": [
+        "Icy Blue Razz",
+        "Fruit Punch",
+        "Watermelon Rush"
+      ],
+      "purpose": "Heightens mental focus, surges nitric oxide vasodilation for intense muscle pumps, and buffers lactic acid burn during high-rep sets.",
+      "commonUsage": "1 level scoop in 200-250ml chilled water 20 to 30 minutes prior to training.",
+      "timing": "20-30 minutes before workout. Avoid within 5 hours of bedtime.",
+      "considerations": "Beta-Alanine may cause a harmless, transient tingling sensation (paresthesia). Start with half a scoop to assess tolerance.",
+      "safetyDisclaimer": "Contains high caffeine. Not suitable for individuals sensitive to stimulants or with hypertension.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Top Rated",
+          "price": "$34.99",
+          "inrPrice": "₹2,499",
+          "url": "https://www.amazon.in/s?k=cellucor+c4+pre+workout",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Certified",
+          "price": "$32.99",
+          "inrPrice": "₹2,349",
+          "url": "https://www.cult.fit/store/nutrition/pre-workout",
+          "color": "#f97316"
+        },
+        {
+          "store": "iHerb",
+          "badge": "Special Deal",
+          "price": "$33.99",
+          "inrPrice": "₹2,420",
+          "url": "https://www.iherb.com/c/pre-workout-formulas",
+          "color": "#16a34a"
+        }
+      ]
+    },
+    {
+      "id": "sup_4",
+      "name": "BCAAs 2:1:1 + Electrolytes Intra-Workout",
+      "brand": "Scivation XTEND / Fast&Up BCAA",
+      "category": "Endurance",
+      "tagline": "7g BCAAs with L-Glutamine and essential electrolyte matrix for sustained intra-set stamina.",
+      "image": "/images/supplements/xtend-bcaas-electrolytes.jpg",
+      "imageUrl": "/images/supplements/xtend-bcaas-electrolytes.jpg",
+      "fallbackImage": "/images/supplements/xtend-bcaas-electrolytes.jpg",
+      "shoppingLinks": [],
+      "rating": 4.7,
+      "reviewsCount": 8150,
+      "price": 28.99,
+      "originalPrice": 38.99,
+      "currency": "USD",
+      "inrPrice": "₹1,999",
+      "originalInrPrice": "₹2,699",
+      "discount": "26% OFF",
+      "certifications": [
+        "NSF Certified",
+        "Sugar Free",
+        "Zero Calories"
+      ],
+      "flavorOptions": [
+        "Mango Madness",
+        "Blue Raspberry Ice",
+        "Watermelon Explosion"
+      ],
+      "purpose": "Suppresses muscle catabolism during demanding training sessions, curbs central nervous system fatigue, and accelerates intra-workout recovery.",
+      "commonUsage": "1 scoop dissolved in 500-700ml cold water sipped continuously throughout your session.",
+      "timing": "Sipped during training or before fasted morning cardio.",
+      "considerations": "Delicious hydration booster. If daily protein target is already high, primary value is hydration and flavor.",
+      "safetyDisclaimer": "Dietary supplement for athletes. Keep container sealed in a dry environment.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Prime Deal",
+          "price": "$28.99",
+          "inrPrice": "₹1,999",
+          "url": "https://www.amazon.in/s?k=xtend+bcaa+intra+workout",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Store Special",
+          "price": "$26.99",
+          "inrPrice": "₹1,849",
+          "url": "https://www.cult.fit/store/nutrition/bcaa",
+          "color": "#f97316"
+        },
+        {
+          "store": "MyProtein",
+          "badge": "Direct Factory",
+          "price": "$27.50",
+          "inrPrice": "₹1,899",
+          "url": "https://www.myprotein.co.in/sports-nutrition/bcaa.list",
+          "color": "#0284c7"
+        }
+      ]
+    },
+    {
+      "id": "sup_5",
+      "name": "Triple Strength Omega-3 Fish Oil (EPA & DHA)",
+      "brand": "Nordic Naturals / MuscleBlaze / TrueBasics",
+      "category": "Joint",
+      "tagline": "High-concentration molecularly distilled fish oil with 1,000mg active EPA & DHA per softgel.",
+      "image": "/images/supplements/triple-strength-omega3.jpg",
+      "imageUrl": "/images/supplements/triple-strength-omega3.jpg",
+      "fallbackImage": "/images/supplements/triple-strength-omega3.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 16300,
+      "price": 29.99,
+      "originalPrice": 39.99,
+      "currency": "USD",
+      "inrPrice": "₹1,199",
+      "originalInrPrice": "₹1,699",
+      "discount": "29% OFF",
+      "certifications": [
+        "IFOS 5-Star Tested",
+        "Heavy Metal Free",
+        "Burp-Less Enteric Coating"
+      ],
+      "flavorOptions": [
+        "Lemon Fresh Softgels",
+        "Natural Unflavored"
+      ],
+      "purpose": "Lubricates synovial joints, mitigates delayed onset muscle soreness (DOMS), supports heart cardiovascular metrics, and enhances arterial elasticity.",
+      "commonUsage": "1 to 2 softgels daily with a meal containing dietary fats for maximum absorption.",
+      "timing": "With breakfast or dinner.",
+      "considerations": "Enteric coating prevents any fishy aftertaste or burps.",
+      "safetyDisclaimer": "Consult your doctor if taking anticoagulant blood-thinning medications.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Choice Award",
+          "price": "$29.99",
+          "inrPrice": "₹1,199",
+          "url": "https://www.amazon.in/s?k=triple+strength+omega+3+fish+oil",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Verified",
+          "price": "$27.99",
+          "inrPrice": "₹1,099",
+          "url": "https://www.cult.fit/store/nutrition/omega-3",
+          "color": "#f97316"
+        },
+        {
+          "store": "iHerb",
+          "badge": "IFOS Rated",
+          "price": "$31.50",
+          "inrPrice": "₹1,250",
+          "url": "https://www.iherb.com/c/omega-3-fish-oil",
+          "color": "#16a34a"
+        }
+      ]
+    },
+    {
+      "id": "sup_6",
+      "name": "Fast&Up Reload Effervescent Electrolytes",
+      "brand": "Fast&Up / Liquid I.V. / LMNT",
+      "category": "Hydration",
+      "tagline": "Rapid cellular rehydration tabs packed with Sodium, Potassium, Magnesium, and Vitamin C.",
+      "image": "/images/supplements/fastandup-reload-electrolytes.jpg",
+      "imageUrl": "/images/supplements/fastandup-reload-electrolytes.jpg",
+      "fallbackImage": "/images/supplements/fastandup-reload-electrolytes.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 11200,
+      "price": 16.99,
+      "originalPrice": 22.99,
+      "currency": "USD",
+      "inrPrice": "₹699",
+      "originalInrPrice": "₹950",
+      "discount": "26% OFF",
+      "certifications": [
+        "WADA Compliant",
+        "Informed Choice",
+        "Zero Added Sugar"
+      ],
+      "flavorOptions": [
+        "Citrus Blast",
+        "Berry Punch",
+        "Cola",
+        "Orange Zest"
+      ],
+      "purpose": "Eliminates muscular cramps, restores intracellular electrolyte balance lost through heavy perspiration, and sustains blood plasma volume.",
+      "commonUsage": "Drop 1 effervescent tablet into 500ml water, let dissolve for 60 seconds, and drink.",
+      "timing": "During or directly following intense workout and cardio sessions.",
+      "considerations": "Ideal for high-heat training sessions and endurance sports.",
+      "safetyDisclaimer": "Store in a cool dry tube. Do not exceed 3 tablets in 24 hours.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Lightning Fast",
+          "price": "$16.99",
+          "inrPrice": "₹699",
+          "url": "https://www.amazon.in/s?k=fast+and+up+reload+electrolytes",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Official Partner",
+          "price": "$14.99",
+          "inrPrice": "₹599",
+          "url": "https://www.cult.fit/store/nutrition/hydration",
+          "color": "#f97316"
+        },
+        {
+          "store": "Flipkart",
+          "badge": "Super Saver",
+          "price": "$15.50",
+          "inrPrice": "₹649",
+          "url": "https://www.flipkart.com/search?q=fast+and+up+reload",
+          "color": "#2563eb"
+        }
+      ]
+    },
+    {
+      "id": "sup_7",
+      "name": "MuscleTech Platinum Multi-Vitamin & Minerals",
+      "brand": "MuscleTech / Thorne / GNC",
+      "category": "Micro",
+      "tagline": "High-potency 20+ micronutrient matrix fortified with 865mg Amino Support & Herbal extracts.",
+      "image": "/images/supplements/muscletech-platinum-multivitamin.jpg",
+      "imageUrl": "/images/supplements/muscletech-platinum-multivitamin.jpg",
+      "fallbackImage": "/images/supplements/muscletech-platinum-multivitamin.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 7800,
+      "price": 19.99,
+      "originalPrice": 27.99,
+      "currency": "USD",
+      "inrPrice": "₹1,099",
+      "originalInrPrice": "₹1,499",
+      "discount": "27% OFF",
+      "certifications": [
+        "USP Verified Grade",
+        "GMP Manufacturing",
+        "Gluten Free"
+      ],
+      "flavorOptions": [
+        "Coated Easy-Swallow Caplets"
+      ],
+      "purpose": "Fills dietary micro-gaps, optimizes metabolic enzyme synthesis, boosts immune resistance, and supports thyroid hormone conversion.",
+      "commonUsage": "1 serving (2 caplets) once daily with your morning breakfast.",
+      "timing": "With the first solid meal of the day.",
+      "considerations": "Take with food to prevent zinc-induced mild nausea.",
+      "safetyDisclaimer": "Do not exceed stated daily dose. Keep out of reach of children.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Best Value",
+          "price": "$19.99",
+          "inrPrice": "₹1,099",
+          "url": "https://www.amazon.in/s?k=muscletech+platinum+multivitamin",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Approved",
+          "price": "$18.49",
+          "inrPrice": "₹999",
+          "url": "https://www.cult.fit/store/nutrition/vitamins",
+          "color": "#f97316"
+        },
+        {
+          "store": "iHerb",
+          "badge": "Global Verified",
+          "price": "$20.50",
+          "inrPrice": "₹1,150",
+          "url": "https://www.iherb.com/c/multivitamins",
+          "color": "#16a34a"
+        }
+      ]
+    },
+    {
+      "id": "sup_8",
+      "name": "KSM-66 Organic Ashwagandha (5% Withanolides)",
+      "brand": "Himalaya / NutraBio / Organic India",
+      "category": "Joint",
+      "tagline": "Full-spectrum root extract clinically proven to lower cortisol and optimize natural vitality.",
+      "image": "/images/supplements/ksm66-organic-ashwagandha.jpg",
+      "imageUrl": "/images/supplements/ksm66-organic-ashwagandha.jpg",
+      "fallbackImage": "/images/supplements/ksm66-organic-ashwagandha.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 13500,
+      "price": 21.99,
+      "originalPrice": 29.99,
+      "currency": "USD",
+      "inrPrice": "₹899",
+      "originalInrPrice": "₹1,299",
+      "discount": "30% OFF",
+      "certifications": [
+        "KSM-66 Gold Certified",
+        "100% Organic",
+        "Non-GMO"
+      ],
+      "flavorOptions": [
+        "Veg Capsules (600mg)"
+      ],
+      "purpose": "Reduces circulating serum cortisol levels by up to 27%, promotes deep Stage 4 REM sleep, and increases natural free testosterone in strength athletes.",
+      "commonUsage": "1 capsule (600mg) with warm milk or dinner.",
+      "timing": "30-45 minutes before sleep.",
+      "considerations": "Take consistently for 4-6 weeks for full adaptogenic hormone modulation.",
+      "safetyDisclaimer": "Consult a healthcare specialist if pregnant or on thyroid hormone medications.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Top Organic Pick",
+          "price": "$21.99",
+          "inrPrice": "₹899",
+          "url": "https://www.amazon.in/s?k=ksm+66+ashwagandha+organic",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Wellness",
+          "price": "$19.99",
+          "inrPrice": "₹799",
+          "url": "https://www.cult.fit/store/nutrition/ayurveda",
+          "color": "#f97316"
+        },
+        {
+          "store": "Flipkart",
+          "badge": "Fast Delivery",
+          "price": "$20.50",
+          "inrPrice": "₹849",
+          "url": "https://www.flipkart.com/search?q=ksm+66+ashwagandha",
+          "color": "#2563eb"
+        }
+      ]
+    },
+    {
+      "id": "sup_9",
+      "name": "ZMA Night Recovery (Zinc, Magnesium & B6)",
+      "brand": "Universal Nutrition / NOW Sports / MuscleBlaze",
+      "category": "Micro",
+      "tagline": "Bioavailable Zinc L-Monomethionine & Magnesium Aspartate for muscle relaxation and restorative sleep.",
+      "image": "/images/supplements/zma-night-recovery.jpg",
+      "imageUrl": "/images/supplements/zma-night-recovery.jpg",
+      "fallbackImage": "/images/supplements/zma-night-recovery.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 6400,
+      "price": 23.99,
+      "originalPrice": 31.99,
+      "currency": "USD",
+      "inrPrice": "₹999",
+      "originalInrPrice": "₹1,399",
+      "discount": "28% OFF",
+      "certifications": [
+        "SNAC System ZMA",
+        "Lab Tested",
+        "No Dairy/Soy"
+      ],
+      "flavorOptions": [
+        "Standard Capsules"
+      ],
+      "purpose": "Calms central nervous system overstimulation, relaxes tense muscles, promotes deeper sleep quality, and prevents zinc depletion caused by hard gym sessions.",
+      "commonUsage": "3 capsules for men (2 for women) on an empty stomach 30-60 minutes before bedtime.",
+      "timing": "Before bedtime. Avoid taking with calcium/dairy products as calcium blocks zinc absorption.",
+      "considerations": "Take away from dairy for optimal absorption.",
+      "safetyDisclaimer": "Do not exceed recommended dose.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Sleep & Recovery Best",
+          "price": "$23.99",
+          "inrPrice": "₹999",
+          "url": "https://www.amazon.in/s?k=zma+zinc+magnesium+recovery",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "iHerb",
+          "badge": "Official SNAC",
+          "price": "$22.99",
+          "inrPrice": "₹949",
+          "url": "https://www.iherb.com/c/zma",
+          "color": "#16a34a"
+        },
+        {
+          "store": "Nutrabay",
+          "badge": "Verified Seller",
+          "price": "$23.50",
+          "inrPrice": "₹980",
+          "url": "https://nutrabay.com/product-category/zma",
+          "color": "#8b5cf6"
+        }
+      ]
+    },
+    {
+      "id": "sup_10",
+      "name": "Pintola All-Natural Peanut Butter (Crunchy / 100% Roasted Peanuts)",
+      "brand": "Pintola",
+      "category": "Healthy Fats & Nut Butters",
+      "tagline": "100% roasted bold-grade runner peanuts with 30g pure plant protein and zero added sugar or hydrogenated oils.",
+      "image": "/images/supplements/pintola-all-natural-peanut-butter.jpg",
+      "imageUrl": "/images/supplements/pintola-all-natural-peanut-butter.jpg",
+      "fallbackImage": "/images/supplements/pintola-all-natural-peanut-butter.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 28400,
+      "price": 6.49,
+      "originalPrice": 8.99,
+      "currency": "USD",
+      "inrPrice": "₹449",
+      "originalInrPrice": "₹599",
+      "discount": "25% OFF",
+      "certifications": [
+        "100% Pure Peanuts",
+        "Zero Added Sugar",
+        "Non-GMO Verified",
+        "Gluten Free & Vegan"
+      ],
+      "flavorOptions": [
+        "Crunchy Roasted",
+        "Smooth & Creamy",
+        "Extra Dark Roasted"
+      ],
+      "purpose": "Provides slow-digesting healthy monounsaturated fatty acids, dietary fiber, and plant protein to fuel prolonged workouts, support joint integrity, and sustain caloric surplus during clean bulking.",
+      "commonUsage": "32g (2 level tablespoons) spread onto wholegrain toast, stirred into warm morning oatmeal, or blended into post-workout banana protein shakes.",
+      "timing": "Morning breakfast, pre-workout energy fuel (1 hour before), or before bedtime for overnight amino release.",
+      "considerations": "Natural oil separation is normal for 100% natural nut butters with no emulsifiers. Stir thoroughly before use.",
+      "safetyDisclaimer": "Contains peanuts. Not suitable for individuals with tree nut or peanut allergies.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Amazon's Choice",
+          "price": "$6.49",
+          "inrPrice": "₹449",
+          "url": "https://www.amazon.in/s?k=pintola+all+natural+peanut+butter+crunchy",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Official Store",
+          "price": "$5.99",
+          "inrPrice": "₹419",
+          "url": "https://www.cult.fit/store/nutrition/peanut-butter",
+          "color": "#f97316"
+        },
+        {
+          "store": "Flipkart",
+          "badge": "Super Deal",
+          "price": "$6.20",
+          "inrPrice": "₹429",
+          "url": "https://www.flipkart.com/search?q=pintola+peanut+butter",
+          "color": "#2563eb"
+        }
+      ]
+    },
+    {
+      "id": "sup_11",
+      "name": "MyFitness High Protein Dark Chocolate Peanut Butter",
+      "brand": "MyFitness",
+      "category": "Healthy Fats & Nut Butters",
+      "tagline": "India's highest rated athlete chocolate peanut butter infused with Belgian dark cocoa and whey protein isolate.",
+      "image": "/images/supplements/myfitness-chocolate-peanut-butter.jpg",
+      "imageUrl": "/images/supplements/myfitness-chocolate-peanut-butter.jpg",
+      "fallbackImage": "/images/supplements/myfitness-chocolate-peanut-butter.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 34500,
+      "price": 8.99,
+      "originalPrice": 11.99,
+      "currency": "USD",
+      "inrPrice": "₹599",
+      "originalInrPrice": "₹799",
+      "discount": "25% OFF",
+      "certifications": [
+        "US FDA Registered",
+        "Whey Isolate Infused",
+        "Zero Cholesterol & Trans Fat",
+        "100% Vegetarian"
+      ],
+      "flavorOptions": [
+        "Crispy Dark Chocolate",
+        "Smooth Dark Chocolate",
+        "Original American"
+      ],
+      "purpose": "Delivers 26g muscle-building protein per 100g with luxurious Belgian dark chocolate taste, eliminating sweet cravings while maintaining strict bodybuilding macronutrient ratios.",
+      "commonUsage": "32g (2 tablespoons) with high-fiber sliced apples, rice cakes, protein crepes, or directly by the spoon.",
+      "timing": "Ideal healthy snack between meals or 45 minutes prior to heavy leg/back training sessions.",
+      "considerations": "Crispy version contains brown rice crisps for an addictive crunch.",
+      "safetyDisclaimer": "Contains dairy (whey isolate) and roasted peanuts. Keep in a cool, dry place.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Top Seller",
+          "price": "$8.99",
+          "inrPrice": "₹599",
+          "url": "https://www.amazon.in/s?k=myfitness+chocolate+peanut+butter+crunchy",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Verified",
+          "price": "$8.49",
+          "inrPrice": "₹569",
+          "url": "https://www.cult.fit/store/nutrition/peanut-butter",
+          "color": "#f97316"
+        },
+        {
+          "store": "Flipkart",
+          "badge": "Fast Delivery",
+          "price": "$8.75",
+          "inrPrice": "₹580",
+          "url": "https://www.flipkart.com/search?q=myfitness+chocolate+peanut+butter",
+          "color": "#2563eb"
+        }
+      ]
+    },
+    {
+      "id": "sup_12",
+      "name": "MuscleBlaze High Protein Dark Chocolate Oats (with Probiotics)",
+      "brand": "MuscleBlaze",
+      "category": "Breakfast & Super Grains",
+      "tagline": "22g high-grade protein per serving with rolled oats, premium whey isolate, real dark cocoa, and gut-healthy probiotics.",
+      "image": "/images/supplements/muscleblaze-high-protein-oats.jpg",
+      "imageUrl": "/images/supplements/muscleblaze-high-protein-oats.jpg",
+      "fallbackImage": "/images/supplements/muscleblaze-high-protein-oats.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 18900,
+      "price": 9.99,
+      "originalPrice": 13.99,
+      "currency": "USD",
+      "inrPrice": "₹699",
+      "originalInrPrice": "₹999",
+      "discount": "30% OFF",
+      "certifications": [
+        "Labdoor USA Tested",
+        "Added Probiotics",
+        "High Dietary Fiber (10g)",
+        "Zero Added Sugar"
+      ],
+      "flavorOptions": [
+        "Dark Chocolate",
+        "Fruit & Nut Medley",
+        "Classic Masala Kick"
+      ],
+      "purpose": "Supercharges morning energy, provides sustained glycogen replenishment with slow-burning complex beta-glucan carbs, and accelerates post-sleep muscle recovery.",
+      "commonUsage": "Cook 50g-75g in 200ml warm skim milk or water for 3 minutes on low heat, or prepare as overnight oats.",
+      "timing": "Breakfast within 1 hour of waking, or 90 minutes pre-workout for continuous training stamina.",
+      "considerations": "Fortified with LactoSpore probiotics to maximize protein absorption and prevent digestive distress.",
+      "safetyDisclaimer": "Packed in a facility handling milk, nuts, and cereals.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Top Breakfast Pick",
+          "price": "$9.99",
+          "inrPrice": "₹699",
+          "url": "https://www.amazon.in/s?k=muscleblaze+high+protein+dark+chocolate+oats",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Nutrition",
+          "price": "$9.49",
+          "inrPrice": "₹649",
+          "url": "https://www.cult.fit/store/nutrition/oats",
+          "color": "#f97316"
+        },
+        {
+          "store": "Nutrabay",
+          "badge": "Direct Factory",
+          "price": "$9.80",
+          "inrPrice": "₹675",
+          "url": "https://nutrabay.com/product-category/oats",
+          "color": "#8b5cf6"
+        }
+      ]
+    },
+    {
+      "id": "sup_13",
+      "name": "Quaker 100% Wholegrain Rolled Oats",
+      "brand": "Quaker",
+      "category": "Breakfast & Super Grains",
+      "tagline": "World's iconic 100% whole grain oats rich in beta-glucan soluble fiber to lower cholesterol and sustain stamina.",
+      "image": "/images/supplements/quaker-rolled-oats.jpg",
+      "imageUrl": "/images/supplements/quaker-rolled-oats.jpg",
+      "fallbackImage": "/images/supplements/quaker-rolled-oats.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 42000,
+      "price": 3.99,
+      "originalPrice": 4.99,
+      "currency": "USD",
+      "inrPrice": "₹249",
+      "originalInrPrice": "₹320",
+      "discount": "22% OFF",
+      "certifications": [
+        "100% Whole Grain",
+        "Heart Health Mark",
+        "Zero Sodium & Sugar",
+        "Naturally Preservative Free"
+      ],
+      "flavorOptions": [
+        "Traditional Rolled Oats",
+        "Instant Cook (Quick)",
+        "Homestyle Masala"
+      ],
+      "purpose": "Serves as the ultimate clean carbohydrate backbone for bodybuilders and fitness enthusiasts, stabilizing blood glucose spikes and providing continuous steady-state insulin response.",
+      "commonUsage": "Boil 60g in 250ml water/milk for 3 minutes. Top with whey protein, chia seeds, sliced berries, and peanut butter.",
+      "timing": "Ideal morning foundation or 2 hours prior to endurance/weight training.",
+      "considerations": "Naturally low glycemic index (GI ~55).",
+      "safetyDisclaimer": "Store in an airtight container away from moisture.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Pantry Best Seller",
+          "price": "$3.99",
+          "inrPrice": "₹249",
+          "url": "https://www.amazon.in/s?k=quaker+rolled+oats+1kg",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Blinkit",
+          "badge": "10-Min Delivery",
+          "price": "$3.80",
+          "inrPrice": "₹239",
+          "url": "https://blinkit.com/s/?q=quaker+oats",
+          "color": "#eab308"
+        },
+        {
+          "store": "Flipkart",
+          "badge": "Super Value",
+          "price": "$3.95",
+          "inrPrice": "₹245",
+          "url": "https://www.flipkart.com/search?q=quaker+oats+1kg",
+          "color": "#2563eb"
+        }
+      ]
+    },
+    {
+      "id": "sup_14",
+      "name": "MuscleBlaze High Protein Crunchy Dark Chocolate Muesli",
+      "brand": "MuscleBlaze",
+      "category": "Breakfast & Super Grains",
+      "tagline": "Crunchy multigrain muesli loaded with 25g protein, 22% almonds and pumpkin seeds, and rich dark chocolate curls.",
+      "image": "/images/supplements/muscleblaze-protein-muesli.jpg",
+      "imageUrl": "/images/supplements/muscleblaze-protein-muesli.jpg",
+      "fallbackImage": "/images/supplements/muscleblaze-protein-muesli.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 21500,
+      "price": 10.49,
+      "originalPrice": 14.99,
+      "currency": "USD",
+      "inrPrice": "₹749",
+      "originalInrPrice": "₹1,049",
+      "discount": "28% OFF",
+      "certifications": [
+        "25g Protein Per 100g",
+        "22% Premium Nuts & Seeds",
+        "Zero Added Trans Fat",
+        "Labdoor USA Certified"
+      ],
+      "flavorOptions": [
+        "Dark Chocolate & Cranberry",
+        "Almond & Raisin Delight",
+        "High Protein Berry Blast"
+      ],
+      "purpose": "Delivers an instant high-protein, high-crunch breakfast or snack without cooking. Combines fast-acting whey crisps with slow-digesting oats, seeds, and healthy monounsaturated almond fats.",
+      "commonUsage": "Pour 50g-60g into a bowl with chilled milk, Greek yogurt, or enjoy straight from the bag as high-protein trail mix.",
+      "timing": "Quick breakfast on rush mornings, intra-day office protein boost, or post-workout crunch.",
+      "considerations": "Contains natural cocoa and dried fruit sugars. Zero synthetic sweeteners.",
+      "safetyDisclaimer": "Contains nuts, soy, and gluten.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Choice Award",
+          "price": "$10.49",
+          "inrPrice": "₹749",
+          "url": "https://www.amazon.in/s?k=muscleblaze+high+protein+muesli+dark+chocolate",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Verified",
+          "price": "$9.99",
+          "inrPrice": "₹699",
+          "url": "https://www.cult.fit/store/nutrition/muesli",
+          "color": "#f97316"
+        },
+        {
+          "store": "Nutrabay",
+          "badge": "Authenticity Guard",
+          "price": "$10.20",
+          "inrPrice": "₹720",
+          "url": "https://nutrabay.com/product-category/muesli",
+          "color": "#8b5cf6"
+        }
+      ]
+    },
+    {
+      "id": "sup_15",
+      "name": "Dymatize ISO 100 Hydrolyzed 100% Whey Isolate",
+      "brand": "Dymatize",
+      "category": "Protein",
+      "tagline": "World-renowned award-winning hydrolyzed whey isolate for lightning fast absorption and zero gastrointestinal bloat.",
+      "image": "/images/supplements/dymatize-iso100-whey.jpg",
+      "imageUrl": "/images/supplements/dymatize-iso100-whey.jpg",
+      "fallbackImage": "/images/supplements/dymatize-iso100-whey.jpg",
+      "shoppingLinks": [],
+      "rating": 4.9,
+      "reviewsCount": 26800,
+      "price": 89.99,
+      "originalPrice": 109.99,
+      "currency": "USD",
+      "inrPrice": "₹7,499",
+      "originalInrPrice": "₹8,999",
+      "discount": "17% OFF",
+      "certifications": [
+        "Informed Choice Tested",
+        "Hydrolyzed Microfiltration",
+        "Gluten Free (<1g Sugar/Fat)",
+        "Banned Substance Tested"
+      ],
+      "flavorOptions": [
+        "Gourmet Chocolate",
+        "Fudge Brownie",
+        "Cookies & Cream",
+        "Birthday Cake"
+      ],
+      "purpose": "Hydrolyzed whey peptides bypass standard enzymatic breakdown, entering systemic circulation within 20 minutes to trigger maximal mTOR anabolic signaling post-workout.",
+      "commonUsage": "1 scoop (32g) dissolved effortlessly in 200ml cold water.",
+      "timing": "Directly post-workout or first thing upon waking during strict cutting/contest preparation phases.",
+      "considerations": "Virtually zero lactose. Perfect for athletes experiencing digestive sensitivity to regular whey concentrates.",
+      "safetyDisclaimer": "Dietary supplement for high-performance athletes.",
+      "buyLinks": [
+        {
+          "store": "Amazon",
+          "badge": "Global Gold Pick",
+          "price": "$89.99",
+          "inrPrice": "₹7,499",
+          "url": "https://www.amazon.in/s?k=dymatize+iso+100+hydrolyzed+whey",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Verified",
+          "price": "$86.99",
+          "inrPrice": "₹7,199",
+          "url": "https://www.cult.fit/store/nutrition/proteins",
+          "color": "#f97316"
+        },
+        {
+          "store": "iHerb",
+          "badge": "Official USA Import",
+          "price": "$88.50",
+          "inrPrice": "₹7,350",
+          "url": "https://www.iherb.com/c/dymatize",
+          "color": "#16a34a"
+        }
+      ]
+    },
+    {
+      "id": "sup_16",
+      "name": "MyProtein Impact Whey Protein & Flavdrops",
+      "brand": "MyProtein",
+      "category": "Protein",
+      "tagline": "Europe's #1 selling premium whey protein with 21g protein and 4.5g BCAAs sourced from British dairy cows.",
+      "image": "/images/supplements/whey-protein-isolate.jpg",
+      "imageUrl": "/images/supplements/whey-protein-isolate.jpg",
+      "fallbackImage": "/images/supplements/whey-protein-isolate.jpg",
+      "shoppingLinks": [],
+      "rating": 4.8,
+      "reviewsCount": 31200,
+      "price": 49.99,
+      "originalPrice": 64.99,
+      "currency": "USD",
+      "inrPrice": "₹3,499",
+      "originalInrPrice": "₹4,499",
+      "discount": "22% OFF",
+      "certifications": [
+        "Labdoor Grade A Tested",
+        "Informed Sport Certified",
+        "Grass-Fed British Dairy",
+        "Halal & Vegetarian"
+      ],
+      "flavorOptions": [
+        "Chocolate Smooth",
+        "Salted Caramel",
+        "Matcha Green Tea",
+        "Natural Vanilla"
+      ],
+      "purpose": "High biological value (BV) protein providing complete amino acid profile to repair torn microfibrils, increase lean dry muscle mass, and prevent muscular breakdown.",
+      "commonUsage": "1 large scoop (25g) in 250ml water or skim milk 30-60 minutes post-workout.",
+      "timing": "Post-workout or blended into oats smoothies.",
+      "considerations": "Mixes instantly with no clumping even without a shaker ball.",
+      "safetyDisclaimer": "Contains milk and soy lecithin (for effortless solubility).",
+      "buyLinks": [
+        {
+          "store": "MyProtein",
+          "badge": "Direct Factory Deals",
+          "price": "$49.99",
+          "inrPrice": "₹3,499",
+          "url": "https://www.myprotein.co.in/nutrition/protein.list",
+          "color": "#0284c7"
+        },
+        {
+          "store": "Amazon",
+          "badge": "Prime Superfast",
+          "price": "$51.99",
+          "inrPrice": "₹3,649",
+          "url": "https://www.amazon.in/s?k=myprotein+impact+whey",
+          "color": "#f59e0b"
+        },
+        {
+          "store": "Cultstore",
+          "badge": "Cult Official",
+          "price": "$50.50",
+          "inrPrice": "₹3,550",
+          "url": "https://www.cult.fit/store/nutrition/proteins",
+          "color": "#f97316"
+        }
+      ]
+    }
+  ],
+  "progressRecords": [
+    {
+      "id": "prog_demo_1",
+      "userId": "user_demo_101",
+      "date": "2026-09-14",
+      "weightKg": 76.8,
+      "chestCm": 101,
+      "armsCm": 37,
+      "waistCm": 81.5,
+      "thighsCm": 56.5,
+      "benchPressKg": 75,
+      "squatKg": 100,
+      "deadliftKg": 120,
+      "notes": "Starting bulking phase week 1"
+    },
+    {
+      "id": "prog_demo_2",
+      "userId": "user_demo_101",
+      "date": "2026-09-21",
+      "weightKg": 77.4,
+      "chestCm": 102,
+      "armsCm": 37.5,
+      "waistCm": 82,
+      "thighsCm": 57,
+      "benchPressKg": 77.5,
+      "squatKg": 105,
+      "deadliftKg": 125,
+      "notes": "Gaining steadily. Recovery feels great."
+    },
+    {
+      "id": "prog_demo_3",
+      "userId": "user_demo_101",
+      "date": "2026-09-28",
+      "weightKg": 78,
+      "chestCm": 103,
+      "armsCm": 38,
+      "waistCm": 82.2,
+      "thighsCm": 57.8,
+      "benchPressKg": 80,
+      "squatKg": 110,
+      "deadliftKg": 130,
+      "notes": "Hit 80kg bench press for 6 reps!"
+    },
+    {
+      "id": "prog_demo_4",
+      "userId": "user_demo_101",
+      "date": "2026-10-05",
+      "weightKg": 78.5,
+      "chestCm": 103.5,
+      "armsCm": 38.4,
+      "waistCm": 82.5,
+      "thighsCm": 58.2,
+      "benchPressKg": 82.5,
+      "squatKg": 112.5,
+      "deadliftKg": 135,
+      "notes": "Energy peak. Bulking protocol on point."
+    }
+  ],
+  "hydrationLogs": [
+    {
+      "id": "hyd_demo_1",
+      "userId": "user_demo_101",
+      "date": "2026-10-05",
+      "consumedLiters": 2.25,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "08:30 AM",
+          "amountMl": 500
+        },
+        {
+          "time": "11:00 AM",
+          "amountMl": 500
+        },
+        {
+          "time": "01:45 PM",
+          "amountMl": 500
+        },
+        {
+          "time": "04:30 PM",
+          "amountMl": 750
+        }
+      ]
+    },
+    {
+      "id": "hyd_1791207097043_rqdq2",
+      "createdAt": "2026-10-05T13:31:37.043Z",
+      "updatedAt": "2026-10-05T13:31:37.043Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-05",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "07:01 pm",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1791287111012_q4zzv",
+      "createdAt": "2026-10-06T11:45:11.012Z",
+      "updatedAt": "2026-10-06T11:45:11.012Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-06",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1791381432592_yev01",
+      "createdAt": "2026-10-07T13:57:12.592Z",
+      "updatedAt": "2026-10-07T13:57:12.592Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-07",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1791385853415_ho16t",
+      "createdAt": "2026-10-07T15:10:53.415Z",
+      "updatedAt": "2026-10-07T15:10:53.415Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-07",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1791470828583_ci7om",
+      "createdAt": "2026-10-08T14:47:08.583Z",
+      "updatedAt": "2026-10-08T15:06:30.722Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-08",
+      "consumedLiters": 2,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "08:36 pm",
+          "amountMl": 500
+        },
+        {
+          "time": "08:32 pm",
+          "amountMl": 500
+        },
+        {
+          "time": "08:26 pm",
+          "amountMl": 500
+        },
+        {
+          "time": "08:26 pm",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1791556828236_li240",
+      "createdAt": "2026-10-09T14:40:28.236Z",
+      "updatedAt": "2026-10-09T14:40:28.236Z",
+      "userId": "user_1791207097005",
+      "date": "2026-10-09",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1791720951468_lv3s6",
+      "createdAt": "2026-10-11T12:15:51.468Z",
+      "updatedAt": "2026-10-11T12:15:51.468Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-11",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1791785489880_pm9no",
+      "createdAt": "2026-10-12T06:11:29.880Z",
+      "updatedAt": "2026-10-12T06:11:29.880Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-12",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1792318422588_c7r7u",
+      "createdAt": "2026-10-18T10:13:42.588Z",
+      "updatedAt": "2026-10-18T10:13:42.588Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-18",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1792507618347_r4uh6",
+      "createdAt": "2026-10-20T14:46:58.347Z",
+      "updatedAt": "2026-10-20T14:46:58.347Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-20",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1792644843205_v8pxx",
+      "createdAt": "2026-10-22T04:54:03.205Z",
+      "updatedAt": "2026-10-22T04:54:03.205Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-22",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1792675522726_egkzf",
+      "createdAt": "2026-10-22T13:25:22.726Z",
+      "updatedAt": "2026-10-22T13:25:22.726Z",
+      "userId": "user_1792675522611",
+      "date": "2026-10-22",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "06:55 pm",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1793082254085_w0f7z",
+      "createdAt": "2026-10-27T06:24:14.085Z",
+      "updatedAt": "2026-10-27T06:24:14.085Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-27",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    },
+    {
+      "id": "hyd_1793197145649_0zb6z",
+      "createdAt": "2026-10-28T14:19:05.649Z",
+      "updatedAt": "2026-10-28T14:19:05.649Z",
+      "userId": "user_demo_101",
+      "date": "2026-10-28",
+      "consumedLiters": 0,
+      "targetLiters": 3.5,
+      "logs": []
+    }
+  ],
+  "dayPassBookings": [
+    {
+      "id": "pass_1791471362854",
+      "createdAt": "2026-10-08T14:56:02.854Z",
+      "updatedAt": "2026-10-08T14:56:02.854Z",
+      "userId": "user_demo_101",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymAddress": "442 Fitness Boulevard, Downtown Metro",
+      "bookingDate": "2026-10-08",
+      "passType": "Standard Day Pass",
+      "amount": 299,
+      "currency": "INR",
+      "status": "Confirmed",
+      "accessCode": "FH-243560"
+    },
+    {
+      "id": "pass_1791471395906",
+      "createdAt": "2026-10-08T14:56:35.906Z",
+      "updatedAt": "2026-10-08T14:56:35.906Z",
+      "userId": "user_demo_101",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymAddress": "442 Fitness Boulevard, Downtown Metro",
+      "bookingDate": "2026-10-08",
+      "passType": "Standard Day Pass",
+      "amount": 299,
+      "currency": "INR",
+      "status": "Confirmed",
+      "accessCode": "FH-302940"
+    },
+    {
+      "id": "pass_1791471727155",
+      "createdAt": "2026-10-08T15:02:07.155Z",
+      "updatedAt": "2026-10-08T15:02:07.156Z",
+      "userId": "user_demo_101",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymAddress": "442 Fitness Boulevard, Downtown Metro",
+      "bookingDate": "2026-10-08",
+      "passType": "Standard Day Pass",
+      "amount": 299,
+      "currency": "INR",
+      "status": "Confirmed",
+      "accessCode": "FH-626313"
+    },
+    {
+      "id": "pass_1791471990784",
+      "createdAt": "2026-10-08T15:06:30.784Z",
+      "updatedAt": "2026-10-08T15:06:30.784Z",
+      "userId": "user_demo_101",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymAddress": "442 Fitness Boulevard, Downtown Metro",
+      "bookingDate": "2026-10-08",
+      "passType": "Standard Day Pass",
+      "amount": 299,
+      "currency": "INR",
+      "status": "Confirmed",
+      "accessCode": "FH-339896"
+    }
+  ],
+  "foodItems": [
+    {
+      "id": "f1",
+      "name": "Boneless Skinless Chicken Breast",
+      "category": "Protein",
+      "servingSize": "100g",
+      "calories": 165,
+      "protein": 31,
+      "carbs": 0,
+      "fat": 3.6,
+      "fiber": 0
+    },
+    {
+      "id": "f2",
+      "name": "Whole Large Eggs (2 Eggs)",
+      "category": "Protein",
+      "servingSize": "100g (approx 2 eggs)",
+      "calories": 143,
+      "protein": 12.6,
+      "carbs": 0.7,
+      "fat": 9.5,
+      "fiber": 0
+    },
+    {
+      "id": "f3",
+      "name": "Egg Whites",
+      "category": "Protein",
+      "servingSize": "100ml",
+      "calories": 52,
+      "protein": 11,
+      "carbs": 0.7,
+      "fat": 0.2,
+      "fiber": 0
+    },
+    {
+      "id": "f4",
+      "name": "Whey Protein Isolate (1 Scoop)",
+      "category": "Supplements",
+      "servingSize": "30g",
+      "calories": 120,
+      "protein": 26,
+      "carbs": 1.5,
+      "fat": 1,
+      "fiber": 0
+    },
+    {
+      "id": "f5",
+      "name": "Rolled Oats",
+      "category": "Carbs",
+      "servingSize": "60g",
+      "calories": 233,
+      "protein": 8,
+      "carbs": 40,
+      "fat": 4,
+      "fiber": 6
+    },
+    {
+      "id": "f6",
+      "name": "Brown Rice (Cooked)",
+      "category": "Carbs",
+      "servingSize": "150g",
+      "calories": 165,
+      "protein": 3.5,
+      "carbs": 35,
+      "fat": 1.4,
+      "fiber": 2.5
+    },
+    {
+      "id": "f7",
+      "name": "Sweet Potato (Baked)",
+      "category": "Carbs",
+      "servingSize": "150g",
+      "calories": 135,
+      "protein": 3,
+      "carbs": 31,
+      "fat": 0.2,
+      "fiber": 4.5
+    },
+    {
+      "id": "f8",
+      "name": "Atlantic Salmon Fillet",
+      "category": "Protein & Fats",
+      "servingSize": "120g",
+      "calories": 247,
+      "protein": 24,
+      "carbs": 0,
+      "fat": 16,
+      "fiber": 0
+    },
+    {
+      "id": "f9",
+      "name": "Lean Ground Beef (90/10)",
+      "category": "Protein",
+      "servingSize": "120g",
+      "calories": 210,
+      "protein": 24,
+      "carbs": 0,
+      "fat": 12,
+      "fiber": 0
+    },
+    {
+      "id": "f10",
+      "name": "Non-Fat Greek Yogurt",
+      "category": "Dairy & Protein",
+      "servingSize": "170g (3/4 cup)",
+      "calories": 100,
+      "protein": 17,
+      "carbs": 6,
+      "fat": 0.7,
+      "fiber": 0
+    },
+    {
+      "id": "f11",
+      "name": "Cottage Cheese / Low-fat Paneer",
+      "category": "Dairy & Protein",
+      "servingSize": "100g",
+      "calories": 98,
+      "protein": 14,
+      "carbs": 3.4,
+      "fat": 4,
+      "fiber": 0
+    },
+    {
+      "id": "f12",
+      "name": "Natural Peanut Butter",
+      "category": "Healthy Fats",
+      "servingSize": "32g (2 tbsp)",
+      "calories": 188,
+      "protein": 8,
+      "carbs": 6,
+      "fat": 16,
+      "fiber": 2
+    },
+    {
+      "id": "f13",
+      "name": "Fresh Hass Avocado",
+      "category": "Healthy Fats",
+      "servingSize": "100g (1/2 avocado)",
+      "calories": 160,
+      "protein": 2,
+      "carbs": 8.5,
+      "fat": 14.7,
+      "fiber": 6.7
+    },
+    {
+      "id": "f14",
+      "name": "Fresh Raw Almonds",
+      "category": "Healthy Fats",
+      "servingSize": "30g (handful)",
+      "calories": 173,
+      "protein": 6,
+      "carbs": 6,
+      "fat": 15,
+      "fiber": 3.5
+    },
+    {
+      "id": "f15",
+      "name": "Steamed Fresh Broccoli",
+      "category": "Vegetables",
+      "servingSize": "100g",
+      "calories": 35,
+      "protein": 2.8,
+      "carbs": 7,
+      "fat": 0.4,
+      "fiber": 2.6
+    },
+    {
+      "id": "f16",
+      "name": "Medium Ripe Banana",
+      "category": "Carbs & Fruit",
+      "servingSize": "118g (1 banana)",
+      "calories": 105,
+      "protein": 1.3,
+      "carbs": 27,
+      "fat": 0.3,
+      "fiber": 3.1
+    },
+    {
+      "id": "f17",
+      "name": "Fresh Blueberries",
+      "category": "Fruit",
+      "servingSize": "100g",
+      "calories": 57,
+      "protein": 0.7,
+      "carbs": 14.5,
+      "fat": 0.3,
+      "fiber": 2.4
+    },
+    {
+      "id": "f18",
+      "name": "Extra Virgin Olive Oil",
+      "category": "Healthy Fats",
+      "servingSize": "14ml (1 tbsp)",
+      "calories": 119,
+      "protein": 0,
+      "carbs": 0,
+      "fat": 13.5,
+      "fiber": 0
+    },
+    {
+      "id": "f19",
+      "name": "Whole Grain Bread",
+      "category": "Carbs",
+      "servingSize": "2 slices (70g)",
+      "calories": 160,
+      "protein": 8,
+      "carbs": 28,
+      "fat": 2,
+      "fiber": 4
+    },
+    {
+      "id": "f20",
+      "name": "Firm Tofu",
+      "category": "Plant Protein",
+      "servingSize": "120g",
+      "calories": 120,
+      "protein": 14,
+      "carbs": 3,
+      "fat": 6,
+      "fiber": 1.5
+    }
+  ],
+  "stretchingState": {
+    "userId": "user_demo_101",
+    "stretches": [
+      {
+        "id": "str_1",
+        "name": "Standing Hamstring & Calf Sweep",
+        "targetArea": "Hamstrings, Calves & Lower Back",
+        "duration": "45 seconds per side",
+        "instructions": "Extend one leg forward with heel on floor and toes pointed upward. Hinge at hips with straight back, gently sweeping arms down toward foot.",
+        "completed": true
+      },
+      {
+        "id": "str_2",
+        "name": "Deep Pigeon Pose (Glute Opener)",
+        "targetArea": "Gluteus Medius & Piriformis",
+        "duration": "60 seconds per side",
+        "instructions": "Bring one knee forward behind wrist with shin angled across mat. Slide opposite leg straight back. Sink hips down square to floor.",
+        "completed": false
+      },
+      {
+        "id": "str_3",
+        "name": "Doorway Pectoral Stretch",
+        "targetArea": "Chest & Anterior Shoulders",
+        "duration": "40 seconds per side",
+        "instructions": "Place forearm against doorway jamb at 90-degree angle. Step through gently until feeling a stretch across chest and shoulder.",
+        "completed": true
+      },
+      {
+        "id": "str_4",
+        "name": "Cat-Cow Spinal Articulation",
+        "targetArea": "Thoracic & Lumbar Spine",
+        "duration": "10 deliberate cycles",
+        "instructions": "On hands and knees: inhale and arch back, looking upward (cow); exhale and round spine toward ceiling while tucking chin (cat).",
+        "completed": false
+      },
+      {
+        "id": "str_5",
+        "name": "Kneeling Hip Flexor Lunge with Reach",
+        "targetArea": "Psoas & Hip Flexors",
+        "duration": "45 seconds per side",
+        "instructions": "Step one foot forward into lunge, lower back knee to ground. Tuck pelvis and squeeze glute of rear leg, raising arm on same side overhead.",
+        "completed": false
+      },
+      {
+        "id": "str_6",
+        "name": "Dead Hang from Pull-Up Bar",
+        "targetArea": "Latissimus Dorsi & Spinal Decompression",
+        "duration": "30-45 seconds",
+        "instructions": "Grip pull-up bar with overhand grip and let body hang relaxed. Breathe deeply into abdomen allowing gravity to decompress vertebrae.",
+        "completed": false
+      }
+    ],
+    "lastCompletedAt": "2026-10-05"
+  },
+  "gymMembers": [
+    {
+      "id": "mem_101",
+      "name": "Alex Mercer (Titan)",
+      "email": "alex@fithealth.io",
+      "phone": "+91 98888 77777",
+      "membershipId": "FH-MEM-7829",
+      "plan": "Monthly Strength Tier",
+      "status": "Active",
+      "joinedDate": "2026-01-15",
+      "expiryDate": "2027-01-26",
+      "checkInsThisMonth": 19,
+      "lastCheckIn": "Renewed Online (2026-10-18)",
+      "assignedTrainer": "Elena Rostova",
+      "notes": "Olympic powerlifting specialist",
+      "gymName": "rsv gym and sports club",
+      "updatedAt": "2026-10-28T14:25:46.808Z",
+      "isCollaborated": true,
+      "collaborationStatus": "Paid - Ready for Admin Collaboration",
+      "collaborationCode": "FH-COLAB-5552",
+      "verifiedByAdmin": "Coach Marcus Vance (Gym Administrator)",
+      "collaboratedAt": "2026-10-09T14:40:07.790Z",
+      "amountPaid": 1499,
+      "checkInPin": "7829"
+    },
+    {
+      "id": "mem_102",
+      "name": "Sarah Connor",
+      "email": "sarah.c@ironmail.io",
+      "phone": "+1 (555) 432-1098",
+      "membershipId": "FH-MEM-8104",
+      "plan": "Strength & Conditioning Pro",
+      "status": "Active",
+      "joinedDate": "2026-02-01",
+      "expiryDate": "2027-02-01",
+      "checkInsThisMonth": 23,
+      "lastCheckIn": "Today, 09:15 AM",
+      "assignedTrainer": "Elena Rostova",
+      "notes": "Powerlifting prep",
+      "gymName": "rsv gym and sports club",
+      "checkInPin": "8104",
+      "updatedAt": "2026-10-09T14:57:06.657Z"
+    },
+    {
+      "id": "mem_103",
+      "name": "David Chen",
+      "email": "david.chen@finfit.com",
+      "phone": "+1 (555) 321-6547",
+      "membershipId": "FH-MEM-6492",
+      "plan": "Monthly Flex Pass",
+      "status": "Active",
+      "joinedDate": "2026-03-10",
+      "expiryDate": "2026-10-28",
+      "checkInsThisMonth": 12,
+      "lastCheckIn": "Yesterday, 06:45 PM",
+      "assignedTrainer": "None",
+      "notes": "Cardio & functional turf focus",
+      "gymName": "rsv gym and sports club",
+      "checkInPin": "6492"
+    },
+    {
+      "id": "mem_104",
+      "name": "Elena Rostova",
+      "email": "elena.r@athletics.org",
+      "phone": "+1 (555) 654-7890",
+      "membershipId": "FH-MEM-5321",
+      "plan": "VIP Black Tier",
+      "status": "Active",
+      "joinedDate": "2025-11-20",
+      "expiryDate": "2026-11-20",
+      "checkInsThisMonth": 25,
+      "lastCheckIn": "Today, 09:00 AM",
+      "assignedTrainer": "Self (Certified Coach)",
+      "notes": "Olympic weightlifting specialist",
+      "gymName": "rsv gym and sports club",
+      "checkInPin": "5321"
+    },
+    {
+      "id": "mem_105",
+      "name": "Michael Sterling",
+      "email": "m.sterling@businesscorp.com",
+      "phone": "+1 (555) 789-0123",
+      "membershipId": "FH-MEM-9921",
+      "plan": "Corporate Executive Plan",
+      "status": "Frozen",
+      "joinedDate": "2026-01-05",
+      "expiryDate": "2026-12-05",
+      "checkInsThisMonth": 2,
+      "lastCheckIn": "2 weeks ago",
+      "assignedTrainer": "Coach Marcus Vance",
+      "notes": "Requested 1-month travel pause",
+      "gymName": "rsv gym and sports club",
+      "checkInPin": "9921"
+    },
+    {
+      "id": "mem_106",
+      "name": "Jessica Hayes",
+      "email": "jess.hayes@fitlifestyle.io",
+      "phone": "+1 (555) 890-1234",
+      "membershipId": "FH-MEM-4112",
+      "plan": "Standard Monthly",
+      "status": "Expired",
+      "joinedDate": "2026-07-01",
+      "expiryDate": "2026-09-30",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Sep 28, 2026",
+      "assignedTrainer": "None",
+      "notes": "Renewal notice sent via email",
+      "gymName": "rsv gym and sports club",
+      "checkInPin": "4112"
+    },
+    {
+      "id": "mem_1791385368625",
+      "createdAt": "2026-10-07T15:02:48.626Z",
+      "updatedAt": "2026-10-07T15:10:33.019Z",
+      "name": "Bharath .S.B Kumbar",
+      "email": "sbabubharath1976@gmail.com",
+      "phone": "6360735713",
+      "membershipId": "FH-MEM-5081",
+      "plan": "Monthly Pro Access",
+      "status": "Active",
+      "joinedDate": "2026-10-07",
+      "expiryDate": "2027-12-07",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "None",
+      "notes": "",
+      "gymName": "rsv gym and sports club",
+      "checkInPin": "5081"
+    }
+  ],
+  "gymCheckIns": [
+    {
+      "id": "chk_1",
+      "memberName": "Alex Mercer",
+      "membershipId": "FH-MEM-7829",
+      "time": "07:15 AM",
+      "type": "Member Check-in",
+      "status": "Approved"
+    },
+    {
+      "id": "chk_2",
+      "memberName": "Sarah Connor",
+      "membershipId": "FH-MEM-8104",
+      "time": "08:30 AM",
+      "type": "Member Check-in",
+      "status": "Approved"
+    },
+    {
+      "id": "chk_3",
+      "memberName": "Elena Rostova",
+      "membershipId": "FH-MEM-5321",
+      "time": "09:00 AM",
+      "type": "Member Check-in",
+      "status": "Approved"
+    },
+    {
+      "id": "chk_4",
+      "memberName": "Liam Vance",
+      "membershipId": "PASS-9021",
+      "time": "10:15 AM",
+      "type": "Day Pass ($15)",
+      "status": "Paid & Verified"
+    },
+    {
+      "id": "chk_5",
+      "memberName": "Sophia Zhang",
+      "membershipId": "PASS-9022",
+      "time": "11:40 AM",
+      "type": "Day Pass ($15)",
+      "status": "Paid & Verified"
+    },
+    {
+      "id": "chk_1791384250947",
+      "createdAt": "2026-10-07T14:44:10.976Z",
+      "updatedAt": "2026-10-07T14:44:10.976Z",
+      "memberName": "Alex Mercer",
+      "membershipId": "CASH-7775-7829",
+      "time": "08:14 pm",
+      "type": "Cash Payment Verified (₹1499)",
+      "status": "Cash Collected & Verified",
+      "date": "2026-10-07"
+    },
+    {
+      "id": "chk_1791556807730",
+      "createdAt": "2026-10-09T14:40:07.767Z",
+      "updatedAt": "2026-10-09T14:40:07.767Z",
+      "memberName": "Alex Mercer (Titan)",
+      "membershipId": "FH-MEM-7829",
+      "time": "08:10 pm",
+      "type": "Gym Redemption Verified (FH-COLAB-2362)",
+      "status": "Admin Collaborated & Active",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "chk_1791556807792",
+      "createdAt": "2026-10-09T14:40:07.793Z",
+      "updatedAt": "2026-10-09T14:40:07.793Z",
+      "memberName": "Alex Mercer (Titan)",
+      "membershipId": "FH-MEM-7829",
+      "time": "08:10 pm",
+      "type": "Admin Desk Collaboration Verified (FH-COLAB-7829)",
+      "status": "Collaborated & Verified",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "chk_1791557043755",
+      "createdAt": "2026-10-09T14:44:03.839Z",
+      "updatedAt": "2026-10-09T14:44:03.839Z",
+      "memberName": "Alex Mercer",
+      "membershipId": "CASH-DESK-7829",
+      "time": "08:14 pm",
+      "type": "Cash Payment Verified (₹3999)",
+      "status": "Cash Collected & Verified",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "chk_1791557821334",
+      "createdAt": "2026-10-09T14:57:01.334Z",
+      "updatedAt": "2026-10-09T14:57:01.334Z",
+      "memberName": "Alex Mercer (Titan)",
+      "membershipId": "FH-MEM-7829",
+      "checkInPin": "7829",
+      "time": "08:45 AM",
+      "type": "4-Digit PIN (7829)",
+      "status": "Approved & Verified",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "chk_1791557826655",
+      "createdAt": "2026-10-09T14:57:06.655Z",
+      "updatedAt": "2026-10-09T14:57:06.655Z",
+      "memberName": "Sarah Connor",
+      "membershipId": "FH-MEM-8104",
+      "checkInPin": "8104",
+      "time": "09:15 AM",
+      "type": "4-Digit PIN (8104)",
+      "status": "Approved & Verified",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "chk_1791557837313",
+      "createdAt": "2026-10-09T14:57:17.313Z",
+      "updatedAt": "2026-10-09T14:57:17.313Z",
+      "memberName": "Visitor Athlete",
+      "membershipId": "9999",
+      "checkInPin": "9999",
+      "time": "08:27 pm",
+      "type": "Member 4-Digit PIN Check-in",
+      "status": "Approved & Verified",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "chk_1793197546820",
+      "createdAt": "2026-10-28T14:25:46.887Z",
+      "updatedAt": "2026-10-28T14:25:46.887Z",
+      "memberName": "Alex Mercer",
+      "membershipId": "CASH-7775-7829",
+      "time": "07:55 pm",
+      "type": "Cash Payment Verified (₹1499)",
+      "status": "Cash Collected & Verified",
+      "date": "2026-10-28"
+    }
+  ],
+  "gymEquipment": [
+    {
+      "id": "eq_1",
+      "name": "Olympic Flat Bench Press Station (Eleiko 4x)",
+      "zone": "Zone A • Free Weights (East Bay)",
+      "brand": "Eleiko / Hammer Strength",
+      "serialNumber": "ELK-2024-BP08",
+      "condition": "Excellent",
+      "status": "Operational",
+      "lastInspection": "2026-10-05",
+      "nextDue": "2026-11-05",
+      "technicianNotes": "Pads sanitized, J-cups greased, bolts tightened.",
+      "qrAssetTag": "EQ-AST-0101",
+      "serviceLogs": [
+        {
+          "date": "2026-10-05",
+          "technician": "Suresh (Eleiko Certified)",
+          "action": "Full safety torque inspection & pad sanitization"
+        }
+      ]
+    },
+    {
+      "id": "eq_2",
+      "name": "Dual Adjustable Cable Crossover Column",
+      "zone": "Zone C • Cable Station #4",
+      "brand": "Matrix Fitness",
+      "serialNumber": "MTX-CBL-4491",
+      "condition": "Needs Maintenance",
+      "status": "Service Scheduled",
+      "lastInspection": "2026-10-01",
+      "nextDue": "2026-10-12",
+      "technicianNotes": "Left pulley cable showing minor fraying. Replacement aircraft cable ordered from Matrix distributor.",
+      "qrAssetTag": "EQ-AST-0102",
+      "serviceLogs": [
+        {
+          "date": "2026-10-01",
+          "technician": "Ramesh Sharma",
+          "action": "Pulleys lubricated, cable replacement scheduled"
+        }
+      ]
+    },
+    {
+      "id": "eq_3",
+      "name": "45-Degree Heavy Duty Leg Press & Hack Squat",
+      "zone": "Zone D • Plate-Loaded Arena",
+      "brand": "Hammer Strength",
+      "serialNumber": "HS-LP-7782",
+      "condition": "Excellent",
+      "status": "Operational",
+      "lastInspection": "2026-09-28",
+      "nextDue": "2026-10-28",
+      "technicianNotes": "Linear bearings inspected & greased. Safety locks operational.",
+      "qrAssetTag": "EQ-AST-0103",
+      "serviceLogs": [
+        {
+          "date": "2026-09-28",
+          "technician": "Vikram Kumar",
+          "action": "Bearing lubrication and guide rod polish"
+        }
+      ]
+    },
+    {
+      "id": "eq_4",
+      "name": "Eleiko IWF Olympic Platforms & Barbells (8x)",
+      "zone": "Zone A • Olympic Platforms",
+      "brand": "Eleiko Sweden",
+      "serialNumber": "ELK-PLT-9921",
+      "condition": "Excellent",
+      "status": "Operational",
+      "lastInspection": "2026-10-03",
+      "nextDue": "2026-11-03",
+      "technicianNotes": "Chalk cleaned from knurling, needle bearings spin freely, wooden inserts waxed.",
+      "qrAssetTag": "EQ-AST-0104",
+      "serviceLogs": [
+        {
+          "date": "2026-10-03",
+          "technician": "Suresh (Eleiko)",
+          "action": "Sleeve cleaning & bearing oil application"
+        }
+      ]
+    },
+    {
+      "id": "eq_5",
+      "name": "Commercial Treadmills & StairMasters (6x)",
+      "zone": "Zone E • Cardio Loft",
+      "brand": "Life Fitness / Matrix",
+      "serialNumber": "LF-CRD-3309",
+      "condition": "Under Repair",
+      "status": "Under Repair",
+      "lastInspection": "2026-10-08",
+      "nextDue": "2026-10-11",
+      "technicianNotes": "Treadmill #3 motor drive belt alignment required. Technician visiting Saturday.",
+      "qrAssetTag": "EQ-AST-0105",
+      "serviceLogs": [
+        {
+          "date": "2026-10-08",
+          "technician": "Life Fitness Service Rep",
+          "action": "Diagnostic error code E-04 resolved, drive belt on order"
+        }
+      ]
+    },
+    {
+      "id": "eq_6",
+      "name": "Infrared Sauna & Cold Plunge Cryo-Bath (4°C)",
+      "zone": "Zone F • Recovery Suite",
+      "brand": "Nordic Cryo",
+      "serialNumber": "NC-RCV-8812",
+      "condition": "Optimal",
+      "status": "Operational",
+      "lastInspection": "2026-10-09",
+      "nextDue": "2026-10-16",
+      "technicianNotes": "Water ozone filtration active. Temperature maintained @ 4.2°C. Sauna heaters checked.",
+      "qrAssetTag": "EQ-AST-0106",
+      "serviceLogs": [
+        {
+          "date": "2026-10-09",
+          "technician": "Internal Staff (Daily Log)",
+          "action": "Filter backwash & temperature calibration check"
+        }
+      ]
+    },
+    {
+      "id": "eq_1791558949195",
+      "createdAt": "2026-10-09T15:15:49.195Z",
+      "updatedAt": "2026-10-09T15:15:49.195Z",
+      "name": "Rogue Power Cage #2",
+      "zone": "Zone B - Squat Racks",
+      "brand": "Rogue Fitness",
+      "serialNumber": "RG-PWR-9988",
+      "condition": "Excellent",
+      "status": "Operational",
+      "lastInspection": "2026-10-09",
+      "nextDue": "2026-11-15",
+      "technicianNotes": "Installed new J-cups and safety spotter pins.",
+      "qrAssetTag": "EQ-AST-2685",
+      "serviceLogs": [
+        {
+          "date": "2026-10-09",
+          "technician": "Admin Marcus Vance",
+          "action": "Initial equipment intake & safety check"
+        }
+      ]
+    }
+  ],
+  "gymFeePlans": [
+    {
+      "id": "plan_monthly",
+      "gym_id": "gym_1",
+      "name": "Monthly Strength Tier",
+      "duration_days": 30,
+      "billingDuration": "1 Month",
+      "price": 500,
+      "admission_fee": 0,
+      "discount": "25% OFF",
+      "tax_percent": 18,
+      "features": [
+        "Unlimited Floor & Free Weight Access",
+        "Standard Locker Room & Showers",
+        "Free Fitness & Biomechanics Assessment",
+        "Mobile App Barcode Access"
+      ],
+      "is_active": true,
+      "is_popular": false,
+      "badge": "",
+      "sort_order": 1,
+      "updated_at": "2026-10-18T13:18:13.960Z"
+    },
+    {
+      "id": "plan_quarterly",
+      "gym_id": "gym_1",
+      "name": "Quarterly Pro Athlete",
+      "duration_days": 90,
+      "billingDuration": "3 Months",
+      "price": 4000,
+      "admission_fee": 0,
+      "discount": "27% OFF",
+      "tax_percent": 18,
+      "features": [
+        "All Monthly Tier Benefits",
+        "1 Complimentary PT Session / Month",
+        "Infrared Sauna Access (2x / week)",
+        "10% Discount at Nutrition Bar"
+      ],
+      "is_active": true,
+      "is_popular": true,
+      "badge": "Most Popular",
+      "sort_order": 2,
+      "updated_at": "2026-10-11T12:30:34.761Z"
+    },
+    {
+      "id": "plan_half_yearly",
+      "gym_id": "gym_1",
+      "name": "Half-Yearly Hypertrophy",
+      "duration_days": 180,
+      "billingDuration": "6 Months",
+      "price": 6999,
+      "admission_fee": 0,
+      "discount": "30% OFF",
+      "tax_percent": 18,
+      "features": [
+        "All Quarterly Tier Benefits",
+        "Chilled Cold Plunge & Sauna Recovery",
+        "Custom Macro & Diet Protocol",
+        "Free Guest Pass (1 / month)"
+      ],
+      "is_active": true,
+      "is_popular": false,
+      "badge": "",
+      "sort_order": 3,
+      "updated_at": "2026-10-07T16:40:02.303Z"
+    },
+    {
+      "id": "plan_annual",
+      "gym_id": "gym_1",
+      "name": "Elite Gold Annual All-Access",
+      "duration_days": 360,
+      "billingDuration": "12 Months",
+      "price": 11999,
+      "admission_fee": 0,
+      "discount": "33% OFF",
+      "tax_percent": 18,
+      "features": [
+        "VIP Unlimited 24/7 All-Branch Access",
+        "Dedicated Strength Coach Guidance",
+        "Unlimited Sauna & Cold Plunge Suite",
+        "Official Fit Health Shaker & Merch Kit",
+        "Priority Platform Booking"
+      ],
+      "is_active": true,
+      "is_popular": false,
+      "badge": "",
+      "sort_order": 4,
+      "updated_at": "2026-10-07T16:40:02.303Z"
+    }
+  ],
+  "cashPaymentTokens": [
+    {
+      "id": "token_101",
+      "tokenCode": "CASH-DESK-7829",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "planId": "plan_quarterly",
+      "planName": "Quarterly Pro Athlete (3 Months)",
+      "amount": 3999,
+      "gymId": "gym_1",
+      "gymName": "Iron Fortress Barbell Club",
+      "paymentMode": "Cash at Desk",
+      "status": "Cash Collected & Active",
+      "generatedAt": "2026-10-07T12:43:12.935Z",
+      "instructions": "Present this token at Iron Fortress front desk to complete cash payment.",
+      "collectedAt": "2026-10-09T14:44:03.746Z",
+      "collectedBy": "Front Desk Reception",
+      "updatedAt": "2026-10-09T14:44:03.747Z"
+    },
+    {
+      "id": "token_1791384250937",
+      "createdAt": "2026-10-07T14:44:10.937Z",
+      "updatedAt": "2026-10-28T14:25:46.800Z",
+      "tokenId": "CASH-7775-7829",
+      "tokenCode": "CASH-7775-7829",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "memberEmail": "alex@fithealth.io",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_monthly",
+      "planName": "Monthly Strength Tier",
+      "durationMonths": 1,
+      "amount": 1499,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "Iron Fortress Barbell Club",
+      "paymentMode": "Cash at Desk Reception",
+      "status": "Cash Collected & Active",
+      "generatedAt": "2026-10-07T14:44:10.937Z",
+      "instructions": "Please present token #CASH-7775-7829 at Iron Fortress Barbell Club front reception along with cash ₹1499 to activate your membership.",
+      "collectedAt": "2026-10-28T14:25:46.799Z",
+      "collectedBy": "Front Desk Reception"
+    }
+  ],
+  "membershipTransactions": [
+    {
+      "id": "txn_1791384215624",
+      "createdAt": "2026-10-07T14:43:35.624Z",
+      "updatedAt": "2026-10-07T14:43:35.624Z",
+      "txnId": "TXN-UPI-887939",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_monthly",
+      "planName": "Monthly Strength Tier",
+      "amount": 1499,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "Iron Fortress Barbell Club",
+      "paymentMode": "cash",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-07T14:43:35.624Z",
+      "receiptCode": "FH-RCP-53268"
+    },
+    {
+      "id": "txn_1791384215643",
+      "createdAt": "2026-10-07T14:43:35.643Z",
+      "updatedAt": "2026-10-07T14:43:35.643Z",
+      "txnId": "TXN-UPI-225157",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_quarterly",
+      "planName": "Quarterly Pro Athlete",
+      "amount": 3999,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "Iron Fortress Barbell Club",
+      "paymentMode": "online",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-07T14:43:35.643Z",
+      "receiptCode": "FH-RCP-15822"
+    },
+    {
+      "id": "txn_1791384250987",
+      "createdAt": "2026-10-07T14:44:10.987Z",
+      "updatedAt": "2026-10-07T14:44:10.987Z",
+      "txnId": "TXN-UPI-693568",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "memberEmail": "alex@fithealth.io",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_quarterly",
+      "planName": "Quarterly Pro Athlete",
+      "amount": 3999,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "Iron Fortress Barbell Club",
+      "paymentMode": "Online (UPI / Cards)",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-07T14:44:10.987Z",
+      "receiptId": "FH-RCP-89132",
+      "receiptCode": "FH-RCP-89132"
+    },
+    {
+      "id": "txn_1791384322762",
+      "createdAt": "2026-10-07T14:45:22.762Z",
+      "updatedAt": "2026-10-07T14:45:22.762Z",
+      "txnId": "TXN-UPI-446930",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "memberEmail": "alex@fithealth.io",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_monthly",
+      "planName": "Monthly Strength Tier",
+      "amount": 1499,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "Iron Fortress Barbell Club",
+      "paymentMode": "Online (UPI / Cards)",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-07T14:45:22.762Z",
+      "receiptId": "FH-RCP-98109",
+      "receiptCode": "FH-RCP-98109"
+    },
+    {
+      "id": "txn_1791557086616",
+      "createdAt": "2026-10-09T14:44:46.616Z",
+      "updatedAt": "2026-10-09T14:44:46.616Z",
+      "txnId": "TXN-UPI-506077",
+      "userId": "user_1791207097005",
+      "memberName": "Bharath",
+      "memberEmail": "sbabubharath1976@gmail.com",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_monthly",
+      "planName": "Monthly Strength Tier",
+      "amount": 1499,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "paymentMode": "Online (UPI / Cards)",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-09T14:44:46.611Z",
+      "receiptId": "FH-RCP-64773",
+      "receiptCode": "FH-RCP-64773",
+      "collaborationCode": "FH-COLAB-8914",
+      "collaborationStatus": "Paid - Ready for Admin Collaboration"
+    },
+    {
+      "id": "txn_1791557384466",
+      "createdAt": "2026-10-09T14:49:44.466Z",
+      "updatedAt": "2026-10-09T14:49:44.466Z",
+      "txnId": "TXN-UPI-780498",
+      "userId": "user_1791207097005",
+      "memberName": "Bharath",
+      "memberEmail": "sbabubharath1976@gmail.com",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_monthly",
+      "planName": "Monthly Strength Tier",
+      "amount": 1499,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "paymentMode": "Online (UPI / Cards)",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-09T14:49:44.464Z",
+      "receiptId": "FH-RCP-67686",
+      "receiptCode": "FH-RCP-67686",
+      "collaborationCode": "FH-COLAB-5639",
+      "collaborationStatus": "Paid - Ready for Admin Collaboration"
+    },
+    {
+      "id": "txn_1792320902290",
+      "createdAt": "2026-10-18T10:55:02.290Z",
+      "updatedAt": "2026-10-18T10:55:02.290Z",
+      "txnId": "TXN-UPI-734169",
+      "userId": "user_demo_101",
+      "memberName": "Alex Mercer",
+      "memberEmail": "alex@fithealth.io",
+      "memberId": "FH-MEM-7829",
+      "planId": "plan_monthly",
+      "planName": "Monthly Strength Tier",
+      "amount": 1499,
+      "currency": "INR",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "paymentMode": "Online (UPI / Cards)",
+      "status": "Paid & Active",
+      "paidAt": "2026-10-18T10:55:02.285Z",
+      "receiptId": "FH-RCP-68883",
+      "receiptCode": "FH-RCP-68883",
+      "collaborationCode": "FH-COLAB-5552",
+      "collaborationStatus": "Paid - Ready for Admin Collaboration"
+    }
+  ],
+  "gymTerms": {
+    "gym_1": {
+      "gym_id": "gym_1",
+      "is_published": true,
+      "last_published_at": "2026-10-11T12:29:53.809Z",
+      "version": "v2.6",
+      "version_history": [
+        {
+          "version": "v2.6",
+          "timestamp": "2026-10-11T12:29:53.809Z",
+          "updated_by": "Coach Marcus Vance",
+          "note": "Published live update to all member interfaces.",
+          "plan_count": 4
+        },
+        {
+          "version": "v2.5",
+          "timestamp": "2026-10-11T12:29:52.574Z",
+          "updated_by": "Coach Marcus Vance",
+          "note": "Unpublished fee schedule.",
+          "plan_count": 4
+        },
+        {
+          "version": "v2.4",
+          "timestamp": "2026-10-07T16:40:02.223Z",
+          "updated_by": "Gym Administrator",
+          "note": "Published 2026 INR Fee Schedule with GST breakdown and zero admission offer on annual tiers.",
+          "plan_count": 4
+        },
+        {
+          "version": "v2.3",
+          "timestamp": "2026-09-07T16:40:02.223Z",
+          "updated_by": "Gym Administrator",
+          "note": "Added Quarterly Pro Athlete tier with infrared sauna inclusions.",
+          "plan_count": 4
+        }
+      ],
+      "refund_policy": "100% refund is eligible within 7 calendar days of first joining date minus ₹500 administrative setup fee. No refunds are granted after 7 days.",
+      "freeze_policy": "Memberships of 3 months or greater can be frozen for up to 30 continuous days once per subscription year with 48-hour prior written notice at reception.",
+      "late_fee_policy": "A 5-day grace period is granted following expiration date. Late renewals beyond grace period incur a ₹200 slot reactivation fee.",
+      "rules": "1. Personal sweat towel is mandatory on workout floors. 2. Re-rack all plates, dumbbells, and accessories after every set. 3. Lockers are for day-use only. 4. Clean machine touchpoints after use.",
+      "updated_at": "2026-10-11T12:29:53.809Z"
+    }
+  },
+  "adminNotes": [
+    {
+      "id": "note_1",
+      "title": "Q4 Preventive Maintenance & Cable Replacement Cycle",
+      "body": "Technician Ramesh (Matrix Fitness) is arriving Saturday 10:00 AM for Cable Crossover Station left pulley replacement. Ensure Zone C is roped off for 45 minutes and spare aircraft cable is handed over from inventory storage. Confirm tension calibration before opening zone to members.",
+      "category": "Maintenance",
+      "isPinned": true,
+      "colorLabel": "amber",
+      "reminderDate": "2026-10-12T10:00:00.000Z",
+      "isPrivateToMe": false,
+      "createdBy": {
+        "id": "user_admin_001",
+        "name": "Coach Marcus Vance",
+        "email": "admin@fithealth.io",
+        "role": "admin"
+      },
+      "linkedDirectoryId": "dir_1",
+      "linkedEquipmentId": "eq_2",
+      "attachments": [
+        "matrix_cable_diagram.pdf"
+      ],
+      "isActive": true,
+      "createdAt": "2026-10-08T15:00:00.000Z",
+      "updatedAt": "2026-10-08T15:00:00.000Z"
+    },
+    {
+      "id": "note_2",
+      "title": "Front Desk Cash Verification & Due Date Reconciliation Audit",
+      "body": "Audit of all receipt vouchers generated this month shows 100% synchronization with admin collaboration PIN 778899. Cash register reconciles at ₹1,245,000 without any variance. Next quarterly audit scheduled for Nov 1st. Ensure desk staff logs all manual cash overrides.",
+      "category": "Finance",
+      "isPinned": true,
+      "colorLabel": "emerald",
+      "reminderDate": "2026-11-01T09:00:00.000Z",
+      "isPrivateToMe": false,
+      "createdBy": {
+        "id": "user_admin_001",
+        "name": "Coach Marcus Vance",
+        "email": "admin@fithealth.io",
+        "role": "admin"
+      },
+      "linkedDirectoryId": "",
+      "linkedEquipmentId": "",
+      "attachments": [],
+      "isActive": true,
+      "createdAt": "2026-10-09T14:00:00.000Z",
+      "updatedAt": "2026-10-09T14:00:00.000Z"
+    },
+    {
+      "id": "note_3",
+      "title": "Nordic Cryo Chiller Ozone Filter & AMC Renewal",
+      "body": "Nordic Cryo Care AMC contract expires on Nov 5th (within 30 days). Contact Dr. Anya Lindqvist to negotiate multi-facility renewal discount. Also schedule ozone diffuser backwash on Tuesday morning before 6:00 AM opening.",
+      "category": "Reminders",
+      "isPinned": false,
+      "colorLabel": "cyan",
+      "reminderDate": "2026-10-16T06:00:00.000Z",
+      "isPrivateToMe": false,
+      "createdBy": {
+        "id": "user_admin_001",
+        "name": "Coach Marcus Vance",
+        "email": "admin@fithealth.io",
+        "role": "admin"
+      },
+      "linkedDirectoryId": "dir_4",
+      "linkedEquipmentId": "eq_6",
+      "attachments": [],
+      "isActive": true,
+      "createdAt": "2026-10-07T11:00:00.000Z",
+      "updatedAt": "2026-10-07T11:00:00.000Z"
+    },
+    {
+      "id": "note_4",
+      "title": "Confidential VIP Athlete Remarks: Alex Mercer",
+      "body": "Member Alex Mercer (FH-MEM-7829) is prepping for national Olympic powerlifting trials in December. Coach Elena is overseeing squat depth and recovery sauna sessions. Ensure chalk bowl is fully topped up at Platform #2 and reserve 20kg calibrated Eleiko bumper pairs.",
+      "category": "Members",
+      "isPinned": false,
+      "colorLabel": "violet",
+      "reminderDate": "2026-10-20T17:00:00.000Z",
+      "isPrivateToMe": true,
+      "createdBy": {
+        "id": "user_admin_001",
+        "name": "Coach Marcus Vance",
+        "email": "admin@fithealth.io",
+        "role": "admin"
+      },
+      "linkedDirectoryId": "",
+      "linkedEquipmentId": "eq_4",
+      "attachments": [],
+      "isActive": true,
+      "createdAt": "2026-10-06T16:00:00.000Z",
+      "updatedAt": "2026-10-06T16:00:00.000Z"
+    },
+    {
+      "id": "note_5",
+      "title": "Air Conditioning Duct Deep Clean & Locker Steam Boiler Check",
+      "body": "CleanPro hygiene crew will perform nocturnal deep cleaning of locker showers and AC intake vents on Sunday night (11:30 PM - 3:30 AM). RapidFix plumbing team on standby for boiler descaling. Issue temporary facility access passes.",
+      "category": "General",
+      "isPinned": false,
+      "colorLabel": "rose",
+      "reminderDate": "2026-10-11T23:30:00.000Z",
+      "isPrivateToMe": false,
+      "createdBy": {
+        "id": "user_admin_001",
+        "name": "Coach Marcus Vance",
+        "email": "admin@fithealth.io",
+        "role": "admin"
+      },
+      "linkedDirectoryId": "dir_7",
+      "linkedEquipmentId": "",
+      "attachments": [],
+      "isActive": true,
+      "createdAt": "2026-10-05T13:00:00.000Z",
+      "updatedAt": "2026-10-05T13:00:00.000Z"
+    },
+    {
+      "id": "note_1791560238721",
+      "createdAt": "2026-10-09T15:37:18.721Z",
+      "updatedAt": "2026-10-09T15:37:18.721Z",
+      "title": "Floor Inspection Checklist for Monday",
+      "body": "Check dumbbells rack 2.5kg to 50kg, inspect cable crossover pulleys and replenish chalk bowls.",
+      "category": "Maintenance",
+      "isPinned": true,
+      "colorLabel": "emerald",
+      "reminderDate": "2026-10-15",
+      "isPrivateToMe": false,
+      "createdBy": {
+        "id": "user_admin_201",
+        "name": "Coach Marcus Vance",
+        "email": "admin@fithealth.io",
+        "role": "admin"
+      },
+      "linkedDirectoryId": "",
+      "linkedEquipmentId": "",
+      "attachments": [],
+      "isActive": true
+    }
+  ],
+  "maintenanceDirectory": [
+    {
+      "id": "dir_1",
+      "name": "Ramesh Sharma",
+      "category": "Technician",
+      "companyName": "Matrix Fitness Service Division",
+      "phone": "+91 98765 11223",
+      "alternatePhone": "+91 98765 11224",
+      "email": "ramesh.service@matrixfitness.in",
+      "address": "Sector 18, Industrial Area, Metro City",
+      "specialization": "Cable cross-overs, pin-select weight stacks, biomechanical pulley alignment",
+      "linkedEquipment": [
+        "eq_2",
+        "Dual Adjustable Cable Crossover Column"
+      ],
+      "contractStartDate": "2026-01-01",
+      "contractEndDate": "2026-12-31",
+      "serviceFrequency": "Monthly",
+      "lastServiceDate": "2026-10-01",
+      "nextServiceDue": "2026-10-12",
+      "rating": 5,
+      "notes": "Lead engineer for Matrix gear. Carries authentic aircraft cable replacements in vehicle.",
+      "isActive": true,
+      "createdAt": "2026-01-01T09:00:00.000Z",
+      "updatedAt": "2026-10-01T14:30:00.000Z"
+    },
+    {
+      "id": "dir_2",
+      "name": "Suresh Nair",
+      "category": "AMC/Service Contract",
+      "companyName": "Eleiko Nordic Sports AMC",
+      "phone": "+91 98111 22334",
+      "alternatePhone": "+91 98111 22335",
+      "email": "suresh.amc@eleiko.se",
+      "address": "Eleiko Experience Center, Plot 44, Metro North",
+      "specialization": "Olympic barbells knurling & sleeve bearings, calibrated powerlifting plates, rubber impact drop platforms",
+      "linkedEquipment": [
+        "eq_1",
+        "eq_4",
+        "Olympic Flat Bench Press Station (Eleiko 4x)",
+        "Eleiko IWF Olympic Platforms & Barbells (8x)"
+      ],
+      "contractStartDate": "2025-11-05",
+      "contractEndDate": "2026-11-05",
+      "serviceFrequency": "Quarterly",
+      "lastServiceDate": "2026-10-05",
+      "nextServiceDue": "2026-11-05",
+      "rating": 5,
+      "notes": "Annual AMC due for renewal in November (<30 days!). Handles torque inspection and wood insert waxing.",
+      "isActive": true,
+      "createdAt": "2025-11-05T09:00:00.000Z",
+      "updatedAt": "2026-10-05T12:00:00.000Z"
+    },
+    {
+      "id": "dir_3",
+      "name": "Rajiv Malhotra",
+      "category": "Vendor/Supplier",
+      "companyName": "Life Fitness Commercial Equipment Depot",
+      "phone": "+91 98222 33445",
+      "alternatePhone": "+91 98222 33446",
+      "email": "rajiv@lifefitness-india.com",
+      "address": "Warehouse #12, Expressway Logistics Park",
+      "specialization": "Commercial treadmill drive motors, inverter boards, StairMaster step chains, console motherboards",
+      "linkedEquipment": [
+        "eq_5",
+        "Commercial Treadmills & StairMasters (6x)"
+      ],
+      "contractStartDate": "2026-01-15",
+      "contractEndDate": "2026-12-31",
+      "serviceFrequency": "Bi-Annual",
+      "lastServiceDate": "2026-10-08",
+      "nextServiceDue": "2026-10-11",
+      "rating": 4,
+      "notes": "Supplies genuine motor belts and console firmware flash tools.",
+      "isActive": true,
+      "createdAt": "2026-01-15T10:00:00.000Z",
+      "updatedAt": "2026-10-08T16:00:00.000Z"
+    },
+    {
+      "id": "dir_4",
+      "name": "Dr. Anya Lindqvist",
+      "category": "AMC/Service Contract",
+      "companyName": "Nordic Cryo & Thermal Systems",
+      "phone": "+91 98333 44556",
+      "alternatePhone": "+91 98333 44557",
+      "email": "support@nordiccryo.eu",
+      "address": "Suite 502, Horizon Technology Park",
+      "specialization": "Sub-zero cold plunge chillers (4°C), titanium heat exchangers, ozone sanitization, infrared sauna carbon heaters",
+      "linkedEquipment": [
+        "eq_6",
+        "Infrared Sauna & Cold Plunge Cryo-Bath (4°C)"
+      ],
+      "contractStartDate": "2026-06-01",
+      "contractEndDate": "2027-06-01",
+      "serviceFrequency": "Monthly",
+      "lastServiceDate": "2026-10-09",
+      "nextServiceDue": "2026-10-16",
+      "rating": 5,
+      "notes": "24/7 priority support for cold plunge chiller loop and infrared sauna heaters.",
+      "isActive": true,
+      "createdAt": "2026-06-01T09:00:00.000Z",
+      "updatedAt": "2026-10-09T11:00:00.000Z"
+    },
+    {
+      "id": "dir_5",
+      "name": "Vikram Sethi",
+      "category": "Emergency Contact",
+      "companyName": "RapidFix 24/7 Commercial Plumbing & Steam",
+      "phone": "+91 98444 55667",
+      "alternatePhone": "+91 98444 55668",
+      "email": "emergency@rapidfixplumbing.com",
+      "address": "Shop 14, Main Market, Downtown Metro",
+      "specialization": "High-pressure locker showers, steam room boilers, cold plunge drainage pumps, backflow valves",
+      "linkedEquipment": [],
+      "contractStartDate": "",
+      "contractEndDate": "",
+      "serviceFrequency": "On-Call",
+      "lastServiceDate": "2026-09-15",
+      "nextServiceDue": "2026-11-15",
+      "rating": 5,
+      "notes": "Available 24/7 for locker room flooding or steam room steam boiler pressure drops.",
+      "isActive": true,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-09-15T15:00:00.000Z"
+    },
+    {
+      "id": "dir_6",
+      "name": "Harish Verma",
+      "category": "Technician",
+      "companyName": "VoltSafe Industrial Electricians",
+      "phone": "+91 98555 66778",
+      "alternatePhone": "+91 98555 66779",
+      "email": "harish@voltsafe.in",
+      "address": "B-29, Phase 2, Industrial Estate",
+      "specialization": "Three-phase commercial power, gym floor DB panels, cardio surge protectors, backup generator link",
+      "linkedEquipment": [
+        "eq_5"
+      ],
+      "contractStartDate": "2026-01-01",
+      "contractEndDate": "2026-12-31",
+      "serviceFrequency": "Quarterly",
+      "lastServiceDate": "2026-08-20",
+      "nextServiceDue": "2026-10-05",
+      "rating": 4,
+      "notes": "Overdue for quarterly load balancing inspection across cardio treadmill bank.",
+      "isActive": true,
+      "createdAt": "2026-01-01T09:00:00.000Z",
+      "updatedAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "dir_7",
+      "name": "Meenakshi Devi",
+      "category": "Cleaning/Housekeeping",
+      "companyName": "CleanPro Facility Hygiene Solutions",
+      "phone": "+91 98666 77889",
+      "alternatePhone": "+91 98666 77890",
+      "email": "ops@cleanproindia.com",
+      "address": "Corporate Towers, 3rd Floor, Central Avenue",
+      "specialization": "Hospital-grade rubber floor sanitization, vinyl bench upholstery disinfection, sweat barrier treatments, chalk air filtration",
+      "linkedEquipment": [
+        "eq_1",
+        "eq_2",
+        "eq_3",
+        "eq_4",
+        "eq_5",
+        "eq_6"
+      ],
+      "contractStartDate": "2026-01-01",
+      "contractEndDate": "2026-12-31",
+      "serviceFrequency": "Daily",
+      "lastServiceDate": "2026-10-09",
+      "nextServiceDue": "2026-10-10",
+      "rating": 5,
+      "notes": "Provides 4 full-time floor sanitation crew members on rolling shifts.",
+      "isActive": true,
+      "createdAt": "2026-01-01T06:00:00.000Z",
+      "updatedAt": "2026-10-09T18:00:00.000Z"
+    },
+    {
+      "id": "dir_8",
+      "name": "Balwant Singh",
+      "category": "Vendor/Supplier",
+      "companyName": "SteelGrip Upholstery & Custom Gym Pads",
+      "phone": "+91 98777 88990",
+      "alternatePhone": "+91 98777 88991",
+      "email": "balwant@steelgrip.in",
+      "address": "Khasra 410, Artisan Hub, East Sector",
+      "specialization": "Heavy-duty 1000D vinyl pad re-covering, high-density foam injection, custom embroidered gym logo bench pads",
+      "linkedEquipment": [
+        "eq_1",
+        "eq_3",
+        "Olympic Flat Bench Press Station (Eleiko 4x)",
+        "45-Degree Heavy Duty Leg Press & Hack Squat"
+      ],
+      "contractStartDate": "",
+      "contractEndDate": "",
+      "serviceFrequency": "On-Call",
+      "lastServiceDate": "2026-09-10",
+      "nextServiceDue": "2026-12-01",
+      "rating": 5,
+      "notes": "Custom re-upholstery within 24-hour turnaround for torn bench pads.",
+      "isActive": true,
+      "createdAt": "2026-01-01T10:00:00.000Z",
+      "updatedAt": "2026-09-10T11:00:00.000Z"
+    },
+    {
+      "id": "dir_1791560238704",
+      "createdAt": "2026-10-09T15:37:18.704Z",
+      "updatedAt": "2026-10-09T15:37:18.704Z",
+      "name": "Vikram Electricals & HVAC",
+      "category": "Technician",
+      "companyName": "Vikram Power Care",
+      "phone": "+91 98888 77777",
+      "alternatePhone": "",
+      "email": "vikram@powercare.com",
+      "address": "",
+      "specialization": "High-Power Treadmill Inverters & Central AC Ducting",
+      "linkedEquipment": [],
+      "contractStartDate": "",
+      "contractEndDate": "",
+      "serviceFrequency": "Monthly",
+      "lastServiceDate": "",
+      "nextServiceDue": "",
+      "rating": 5,
+      "notes": "24/7 on-call electrician for high amp gym panels",
+      "isActive": true
+    }
+  ],
+  "adminAuditLogs": [
+    {
+      "id": "log_1791560238723_28mp",
+      "action": "CREATE_ADMIN_NOTE",
+      "entityType": "AdminNote",
+      "entityId": "note_1791560238721",
+      "adminId": "user_admin_201",
+      "adminName": "Coach Marcus Vance",
+      "adminEmail": "admin@fithealth.io",
+      "details": {
+        "title": "Floor Inspection Checklist for Monday",
+        "category": "Maintenance",
+        "isPrivate": false
+      },
+      "timestamp": "2026-10-09T15:37:18.723Z"
+    },
+    {
+      "id": "log_1791560238706_qtw1",
+      "action": "CREATE_DIRECTORY_ENTRY",
+      "entityType": "DirectoryEntry",
+      "entityId": "dir_1791560238704",
+      "adminId": "user_admin_201",
+      "adminName": "Coach Marcus Vance",
+      "adminEmail": "admin@fithealth.io",
+      "details": {
+        "name": "Vikram Electricals & HVAC",
+        "category": "Technician"
+      },
+      "timestamp": "2026-10-09T15:37:18.706Z"
+    }
+  ]
+}

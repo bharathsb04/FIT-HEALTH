@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#10B981</color>
+    <color name="primary_dark">#059669</color>
+    <color name="accent">#06B6D4</color>
+    <color name="background">#0B0F19</color>
+    <color name="surface">#121927</color>
+    <color name="card">#161F33</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="samsung_blue">#1428A0</color>
+    <color name="rose">#F43F5E</color>
+    <color name="amber">#F59E0B</color>
+</resources>
+

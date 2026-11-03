@@ -1,0 +1,21 @@
+# Vercel Deployment Ignore Rules
+node_modules
+.git
+.github
+*.log
+*.zip
+*.bat
+_staging
+
+# Mobile Companions (Built separately for Android Studio & Xcode)
+android-companion
+ios-companion
+
+# Electron desktop app
+electron
+
+# Local environment & tests
+backend/tests
+backend/scripts
+backend/logs
+

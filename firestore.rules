@@ -1,0 +1,117 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.role == 'admin' ||
+        request.auth.token.email.matches('.*admin.*')
+      );
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && (request.auth.uid == userId || resource.data.userId == request.auth.uid);
+    }
+
+    // Public / Catalog Collections (Read-only for users, Admin can modify)
+    match /gyms/{gymId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /supplements/{supplementId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /foodItems/{foodId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /gymFeePlans/{planId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // User-specific Private Health & Fitness Data
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+    }
+
+    match /workoutPlans/{planId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    match /dietPlans/{planId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    match /vitalsLogs/{logId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    match /hydrationLogs/{logId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    match /progressRecords/{recordId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    match /dayPassBookings/{bookingId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // Gym Administration Collections (Strict Admin Access Only)
+    match /gymMembers/{memberId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /gymCheckIns/{checkInId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /gymEquipment/{equipmentId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /maintenanceDirectory/{entryId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /adminNotes/{noteId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /adminAuditLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /cashPaymentTokens/{tokenId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /membershipTransactions/{txId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /systemState/{stateId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Default deny all other requests
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

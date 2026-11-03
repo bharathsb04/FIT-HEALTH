@@ -1,0 +1,30 @@
+{
+  "name": "fit-health-app",
+  "version": "1.0.0",
+  "description": "Fit Health - The Ultimate Gym Fitness Companion for the Health Conscious (BCA Final Project)",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "run.bat",
+    "fullstack": "cd frontend && npm run build && cd ../backend && node server.js",
+    "windows": "FitHealth-Windows.bat",
+    "mobile": "FitHealth-Mobile.bat",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm install && npm run build",
+    "build:mobile": "cd frontend && npm run build && npx cap sync",
+    "install:all": "cd backend && npm.cmd install && cd ../frontend && npm.cmd install"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase-admin": "^14.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^10.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
