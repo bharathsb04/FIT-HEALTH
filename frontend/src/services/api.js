@@ -1,7 +1,17 @@
 // Fit Health API Service Client
 
 const getBaseUrl = () => {
-  // Read configured API URL from Vite environment (frontend/.env: VITE_API_URL=http://localhost:5000)
+  // In production builds, use relative '/api' unless a non-localhost remote URL is explicitly specified
+  if (import.meta.env?.PROD) {
+    const envUrl = import.meta.env?.VITE_API_URL;
+    if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0 && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+      const cleanUrl = envUrl.trim().replace(/\/$/, '');
+      return cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+    }
+    return '/api';
+  }
+
+  // Read configured API URL from Vite environment during development (frontend/.env: VITE_API_URL=http://localhost:5000)
   const envUrl = import.meta.env?.VITE_API_URL;
   if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0) {
     const cleanUrl = envUrl.trim().replace(/\/$/, '');

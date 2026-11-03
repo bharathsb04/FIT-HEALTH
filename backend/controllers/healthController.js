@@ -71,7 +71,10 @@ exports.handleOAuthCallback = async (req, res) => {
     // If request comes from browser OAuth redirect, redirect to frontend vitals view
     const acceptsHtml = req.headers.accept && req.headers.accept.includes('text/html');
     if (acceptsHtml) {
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+      const host = req.get('host');
+      const protocol = req.headers['x-forwarded-proto'] || (host && !host.includes('localhost') ? 'https' : 'http');
+      const fallbackOrigin = host ? `${protocol}://${host}` : 'http://localhost:3000';
+      const frontendUrl = process.env.FRONTEND_URL || fallbackOrigin;
       return res.redirect(`${frontendUrl}?connected_provider=${providerId}&status=success`);
     }
 
