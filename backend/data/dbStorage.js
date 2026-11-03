@@ -43,7 +43,8 @@ class JSONDatabase {
       adminAuditLogs: [],
       biometrics: [],
       biometricsConsent: [],
-      providerConnections: []
+      providerConnections: [],
+      otps: []
     };
     this.init();
   }
@@ -86,6 +87,7 @@ class JSONDatabase {
     if (!this.data.biometrics) this.data.biometrics = [];
     if (!this.data.biometricsConsent) this.data.biometricsConsent = [];
     if (!this.data.providerConnections) this.data.providerConnections = [];
+    if (!this.data.otps) this.data.otps = [];
 
     // Always keep gyms collection initialized if empty, but preserve customizations
     if (!this.data.gyms || this.data.gyms.length === 0) {

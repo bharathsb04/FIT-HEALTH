@@ -352,3 +352,4 @@ main()
     console.error('\n❌ Lifecycle verification failed:', err.message);
     process.exit(1);
   });
+

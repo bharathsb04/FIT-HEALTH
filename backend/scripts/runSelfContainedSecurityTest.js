@@ -5,6 +5,8 @@
  */
 
 const http = require('http');
+const path = require('path');
+const fs = require('fs');
 const app = require('../server');
 
 async function main() {
@@ -199,10 +201,10 @@ async function main() {
     record('Logout & Immediate Token Revocation', postLogoutAccess.status === 401, `Revoked token blocked with HTTP 401: "${postLogoutAccess.data.message}"`);
 
     // 18. Zero MongoDB / Zero Demo Check
-    const fs = require('fs');
-    const store = JSON.parse(fs.readFileSync('backend/data/fit_health_store.json', 'utf8'));
+    const storeFile = path.resolve(__dirname, '../data/fit_health_store.json');
+    const store = JSON.parse(fs.readFileSync(storeFile, 'utf8'));
     const demoFound = store.users.some(u => u.email === 'alex@fithealth.io' || u.email === 'admin@fithealth.io');
-    const mongoFound = fs.existsSync('backend/config/db.js') || fs.existsSync('backend/models');
+    const mongoFound = fs.existsSync(path.resolve(__dirname, '../config/db.js')) || fs.existsSync(path.resolve(__dirname, '../models'));
     record('Zero MongoDB & Zero Demo Credentials in Database', !demoFound && !mongoFound, `Verified: MongoDB files deleted, demo users purged.`);
 
   } catch (err) {

@@ -108,6 +108,11 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Cryptographically Hashed OTP Table (Backend / Admin Only - No Direct Public Access)
+    match /otps/{otpId} {
+      allow read, write: if isAdmin();
+    }
+
     // Biometrics Telemetry & Hardware Health Connect
     match /biometrics/{recordId} {
       allow read: if isAuthenticated() && (resource == null || resource.data.memberId == request.auth.uid || isAdmin());
