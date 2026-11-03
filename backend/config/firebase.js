@@ -1,49 +1,81 @@
 /**
  * Firebase Cloud Firestore Admin SDK Module
  * Exclusive application database initialization and singleton provider.
+ * Supports:
+ *  1. Local development via service-account JSON file (FIREBASE_SERVICE_ACCOUNT_PATH)
+ *  2. Cloud / Vercel serverless deployment via environment variables (FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY)
  */
 
 const admin = require('firebase-admin');
+const { getFirestore: getFirestoreModular } = require('firebase-admin/firestore');
 const path = require('path');
 const fs = require('fs');
+
+// Ensure backward and forward compatibility for admin.credential.cert() and admin.firestore()
+if (!admin.credential) {
+  admin.credential = {
+    cert: (certData) => (admin.cert ? admin.cert(certData) : certData)
+  };
+}
+if (!admin.firestore) {
+  admin.firestore = (app) => (app ? getFirestoreModular(app) : getFirestoreModular());
+}
 
 let firestoreInstance = null;
 let isConfigured = false;
 
+/**
+ * Initialize Firebase Admin SDK singleton.
+ * Ensures Firebase is initialized only once.
+ * @returns {FirebaseFirestore.Firestore | null}
+ */
 const initFirebase = () => {
-  // Return cached instance if already initialized (serverless-friendly)
-  if (admin && admin.apps && Array.isArray(admin.apps) && admin.apps.length > 0) {
-    if (!firestoreInstance) {
-      firestoreInstance = admin.firestore();
-    }
+  // Return cached instance if already initialized (Requirement 5: Initialize only once)
+  if (firestoreInstance) {
+    return firestoreInstance;
+  }
+
+  const existingApps = admin.getApps ? admin.getApps() : (admin.apps || []);
+  if (existingApps.length > 0) {
+    firestoreInstance = admin.firestore(existingApps[0]);
+    firestoreInstance.settings({ ignoreUndefinedProperties: true });
     isConfigured = true;
     return firestoreInstance;
   }
 
-  // 1. Try service account file if path specified
+  // 1. Local JSON File Mode: Read service-account JSON if specified (Requirements 1, 2, 3, 7)
   const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
   if (serviceAccountPath) {
-    const fullPath = path.isAbsolute(serviceAccountPath)
-      ? serviceAccountPath
-      : path.join(__dirname, '..', serviceAccountPath);
+    const resolvedPath = path.isAbsolute(serviceAccountPath)
+      ? path.normalize(serviceAccountPath)
+      : path.resolve(__dirname, '..', serviceAccountPath);
 
-    if (fs.existsSync(fullPath)) {
+    if (fs.existsSync(resolvedPath)) {
       try {
-        const serviceAccount = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-        admin.initializeApp({
+        const fileContent = fs.readFileSync(resolvedPath, 'utf8');
+        const serviceAccount = JSON.parse(fileContent);
+
+        // Requirement 2: Initialize Firebase Admin using admin.credential.cert()
+        const app = admin.initializeApp({
           credential: admin.credential.cert(serviceAccount)
         });
-        firestoreInstance = admin.firestore();
+
+        firestoreInstance = admin.firestore(app);
+        firestoreInstance.settings({ ignoreUndefinedProperties: true });
         isConfigured = true;
-        console.log('[Firebase] Initialized with Service Account file:', fullPath);
+        console.log(`[Firebase Admin SDK] Initialized successfully using service-account JSON file.`);
+        console.log(`[Firebase Admin SDK] Project ID: ${serviceAccount.project_id}`);
+        console.log(`[Firebase Admin SDK] Client Email: ${serviceAccount.client_email}`);
         return firestoreInstance;
       } catch (err) {
-        console.warn('[Firebase] Failed to load Service Account file:', err.message);
+        console.error('[Firebase Admin SDK] Failed to load Service Account JSON file:', err.message);
       }
+    } else {
+      console.warn(`[Firebase Admin SDK] Service account file not found at: ${resolvedPath}. Falling back to environment variables...`);
     }
   }
 
-  // 2. Try environment variables
+  // 2. Vercel / Cloud Environment Mode: Environment Variables (Requirement 10)
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   let privateKey = process.env.FIREBASE_PRIVATE_KEY;
@@ -54,63 +86,57 @@ const initFirebase = () => {
         privateKey = privateKey.replace(/\\n/g, '\n');
       }
 
-      admin.initializeApp({
+      const app = admin.initializeApp({
         credential: admin.credential.cert({
           projectId,
           clientEmail,
           privateKey
         })
       });
-      firestoreInstance = admin.firestore();
+
+      firestoreInstance = admin.firestore(app);
+      firestoreInstance.settings({ ignoreUndefinedProperties: true });
       isConfigured = true;
-      console.log(`[Firebase] Initialized with Cloud Firestore Project: ${projectId}`);
+      console.log(`[Firebase Admin SDK] Initialized using environment credentials for project: ${projectId}`);
       return firestoreInstance;
     } catch (err) {
-      console.warn('[Firebase] Initialization error with env credentials:', err.message);
+      console.error('[Firebase Admin SDK] Initialization error with environment credentials:', err.message);
     }
   }
 
-  // 3. Application Default Credentials (GCP environment)
+  // 3. Application Default Credentials (Google Cloud Platform environment)
   if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
     try {
-      admin.initializeApp();
-      firestoreInstance = admin.firestore();
+      const app = admin.initializeApp();
+      firestoreInstance = admin.firestore(app);
+      firestoreInstance.settings({ ignoreUndefinedProperties: true });
       isConfigured = true;
-      console.log('[Firebase] Initialized with Application Default Credentials');
+      console.log('[Firebase Admin SDK] Initialized with Application Default Credentials');
       return firestoreInstance;
     } catch (err) {
-      console.warn('[Firebase] Application Default Credentials failed:', err.message);
+      console.warn('[Firebase Admin SDK] Application Default Credentials failed:', err.message);
     }
   }
 
-  // 4. Firestore Local Emulator (if FIRESTORE_EMULATOR_HOST is set)
-  if (process.env.FIRESTORE_EMULATOR_HOST) {
-    try {
-      admin.initializeApp({ projectId: projectId || 'fit-health-emulator' });
-      firestoreInstance = admin.firestore();
-      isConfigured = true;
-      console.log(`[Firebase] Connected to local Firestore Emulator: ${process.env.FIRESTORE_EMULATOR_HOST}`);
-      return firestoreInstance;
-    } catch (err) {
-      console.warn('[Firebase] Emulator connection failed:', err.message);
-    }
-  }
-
-  // In production, Firebase is mandatory per Phase 4 requirements
+  // In production, Firebase is mandatory per project requirements
   if (process.env.NODE_ENV === 'production') {
     throw new Error(
       'FATAL CONFIGURATION ERROR: Firebase Cloud Firestore is not configured!\n' +
       'Fit Health requires Firebase Cloud Firestore as the exclusive application database.\n' +
-      'Please configure FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in your environment.'
+      'Please configure FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY (or FIREBASE_SERVICE_ACCOUNT_PATH).'
     );
   }
 
-  console.log('[Firebase] Notice: Live Cloud Firestore credentials not yet supplied in backend/.env.');
-  console.log('           To connect live Cloud Firestore, add FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, & FIREBASE_PRIVATE_KEY.');
+  console.log('[Firebase Admin SDK] Notice: Live Cloud Firestore credentials not loaded.');
   isConfigured = false;
   return null;
 };
 
+/**
+ * Returns the reusable Firestore instance.
+ * Automatically initializes if not already initialized.
+ * @returns {FirebaseFirestore.Firestore | null}
+ */
 const getFirestore = () => {
   if (!firestoreInstance && !isConfigured) {
     initFirebase();
@@ -118,11 +144,18 @@ const getFirestore = () => {
   return firestoreInstance;
 };
 
+/**
+ * Check if Firebase is active and ready for queries.
+ * @returns {boolean}
+ */
 const isFirebaseActive = () => isConfigured && firestoreInstance !== null;
 
 module.exports = {
   admin,
   initFirebase,
   getFirestore,
-  isFirebaseActive
+  isFirebaseActive,
+  get db() {
+    return getFirestore();
+  }
 };

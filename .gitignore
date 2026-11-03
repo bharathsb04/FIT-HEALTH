@@ -17,6 +17,13 @@ backend/.env
 frontend/.env
 *.env
 
+# Firebase Service Account Credentials & Keys
+*firebase-adminsdk*.json
+*service-account*.json
+*serviceAccount*.json
+serviceAccountKey.json
+*.serviceaccount.json
+
 # Runtime and debug logs
 logs/
 *.log

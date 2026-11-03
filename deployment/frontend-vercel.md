@@ -39,3 +39,4 @@ Under the **Environment Variables** section, add only the backend API URL:
 2. Vercel will run `vite build` and publish your optimized static assets to the global Edge CDN in ~30 seconds.
 3. Note your assigned production domain (e.g., `https://fit-health-frontend.vercel.app`).
 4. Add this frontend URL to your Backend Vercel project's `CORS_ORIGINS` and `FRONTEND_URL` environment variables.
+

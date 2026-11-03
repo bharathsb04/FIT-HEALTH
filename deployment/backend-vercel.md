@@ -55,3 +55,4 @@ Expand **Environment Variables** and add all required production secrets:
 2. Note your backend live URL (e.g., `https://fit-health-backend.vercel.app`).
 3. Set `VITE_API_URL=https://fit-health-backend.vercel.app` in your frontend Vercel project environment variables.
 4. Verify backend health endpoint: `https://fit-health-backend.vercel.app/api/health`.
+

@@ -18,6 +18,11 @@ electron
 backend/tests
 backend/scripts
 backend/logs
+*firebase-adminsdk*.json
+*service-account*.json
+*serviceAccount*.json
+serviceAccountKey.json
+*.serviceaccount.json
 
 
 _backup_pre_migration/

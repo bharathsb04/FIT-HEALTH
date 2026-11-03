@@ -75,3 +75,4 @@ node scripts/testCompleteAuthSecurity.js
 - [ ] Sign in with administrative credentials.
 - [ ] Test the **Quick Check-In** with a 4-digit PIN.
 - [ ] Verify members roster, fee plans, maintenance directory, and audit logs.
+

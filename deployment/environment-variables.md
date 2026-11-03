@@ -71,3 +71,4 @@ The backend holds all application logic secrets and runtime configurations.
 | `OURA_CLIENT_ID` / `_SECRET` | No | Demo if empty, Live if populated | Oura ring sleep & readiness integration |
 | `WHOOP_CLIENT_ID` / `_SECRET` | No | Demo if empty, Live if populated | Whoop strain & recovery integration |
 | `POLAR_CLIENT_ID` / `_SECRET` | No | Demo if empty, Live if populated | Polar heart rate & workout integration |
+

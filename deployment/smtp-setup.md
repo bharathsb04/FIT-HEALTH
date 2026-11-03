@@ -62,3 +62,4 @@ When successful, it prints:
 ```json
 { "configured": true, "verified": true, "host": "smtp.gmail.com", "port": 465, "user": "..." }
 ```
+
