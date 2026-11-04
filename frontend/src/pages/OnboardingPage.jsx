@@ -98,6 +98,8 @@ export const OnboardingPage = ({ onSwitchToLogin, onSwitchToAdminLogin, onBackTo
       showToast(res?.message || `Verification code sent to ${formData.email}`, 'info');
     } catch (err) {
       console.warn('OTP send warning:', err.message);
+      setError(err.message || 'Failed to dispatch verification code. Please check your email and connection.');
+      showToast(err.message || 'Failed to dispatch verification code.', 'error');
       setShowOtpModal(true);
     } finally {
       setLoading(false);

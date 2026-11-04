@@ -6,6 +6,9 @@
  *  2. Cloud / Vercel serverless deployment via environment variables (FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY)
  */
 
+// Ensure all essential environment configurations are loaded
+require('./envLoader');
+
 const admin = require('firebase-admin');
 const { getFirestore: getFirestoreModular } = require('firebase-admin/firestore');
 const path = require('path');

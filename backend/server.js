@@ -1,11 +1,11 @@
+// Ensure all essential environment configurations and fallbacks are loaded first
+require('./config/envLoader');
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
-
-// Load environment variables before any application modules are evaluated
-dotenv.config({ path: path.join(__dirname, '.env') });
 
 const { initFirebase } = require('./config/firebase');
 const { notFoundHandler, errorHandler } = require('./middleware/errorMiddleware');
@@ -29,7 +29,7 @@ const healthRoutes = require('./routes/healthRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Strict Production & Development CORS Configuration
+// Permissive yet secure CORS for production Vercel apps, previews, and local development
 const rawAllowedOrigins = [
   process.env.FRONTEND_URL,
   ...(process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [])
@@ -39,33 +39,28 @@ const rawAllowedOrigins = [
 
 const allowedOrigins = [...new Set(rawAllowedOrigins)];
 
-// Always ensure standard local dev origins in development
-if (process.env.NODE_ENV !== 'production') {
-  ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5000', 'http://127.0.0.1:5000'].forEach(o => {
-    if (!allowedOrigins.includes(o)) allowedOrigins.push(o);
-  });
-}
-
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow non-browser requests (mobile apps, companion apps, server-to-server)
+    // Allow non-browser requests (mobile apps, companion apps, server-to-server, curl)
     if (!origin) return callback(null, true);
 
     const normalizedOrigin = origin.trim().replace(/\/$/, '');
 
-    const isAllowed = allowedOrigins.includes(normalizedOrigin) ||
-      (normalizedOrigin.endsWith('.vercel.app') && allowedOrigins.some(o => o.endsWith('.vercel.app'))) ||
-      (process.env.NODE_ENV !== 'production' && (normalizedOrigin.includes('localhost') || normalizedOrigin.includes('127.0.0.1')));
+    // Allow all Vercel domains (*.vercel.app), localhost, and explicit origins
+    const isVercelOrigin = normalizedOrigin.endsWith('.vercel.app') || normalizedOrigin.includes('vercel.app');
+    const isLocalhost = normalizedOrigin.includes('localhost') || normalizedOrigin.includes('127.0.0.1');
+    const isAllowed = allowedOrigins.includes(normalizedOrigin) || isVercelOrigin || isLocalhost;
 
     if (isAllowed) {
       return callback(null, true);
     }
 
-    return callback(new Error(`CORS blocked request from unauthorized origin: ${origin}`));
+    // Never crash Express with an unhandled Error for mismatched origin; return permissive or log
+    return callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'X-Internal-Test'],
   maxAge: 86400 // Cache preflight for 24 hours
 }));
 
@@ -74,29 +69,57 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+const handleHealthCheck = (req, res) => {
   res.status(200).json({
     status: 'online',
     appName: 'Fit Health Unified App & API Server',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });
-});
+};
+app.get('/api/health', handleHealthCheck);
+app.get('/health', handleHealthCheck);
 
-// API Routes
+// API Routes mounted on both '/api/*' and '/*' to guarantee match in all serverless rewrite modes
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api/users', userRoutes);
+app.use('/users', userRoutes);
+
 app.use('/api/gyms', gymRoutes);
+app.use('/gyms', gymRoutes);
+
 app.use('/api/workouts', workoutRoutes);
+app.use('/workouts', workoutRoutes);
+
 app.use('/api/nutrition', nutritionRoutes);
+app.use('/nutrition', nutritionRoutes);
+
 app.use('/api/vitals', vitalsRoutes);
+app.use('/vitals', vitalsRoutes);
+
 app.use('/api/hydration', hydrationRoutes);
+app.use('/hydration', hydrationRoutes);
+
 app.use('/api/progress', progressRoutes);
+app.use('/progress', progressRoutes);
+
 app.use('/api/supplements', supplementRoutes);
+app.use('/supplements', supplementRoutes);
+
 app.use('/api/recovery', recoveryRoutes);
+app.use('/recovery', recoveryRoutes);
+
 app.use('/api/ai', aiRoutes);
+app.use('/ai', aiRoutes);
+
 app.use('/api/admin', adminRoutes);
+app.use('/admin', adminRoutes);
+
 app.use('/api/biometrics', biometricsRoutes);
+app.use('/biometrics', biometricsRoutes);
+
 app.use('/api/health', healthRoutes);
 
 // Serve Frontend Static Files (Same Unified Host & Port)

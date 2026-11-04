@@ -1,7 +1,11 @@
+// Ensure all essential environment configurations are loaded
+require('../config/envLoader');
+
 const nodemailer = require('nodemailer');
 const { getOtpEmailTemplate } = require('../templates/otpEmailTemplate');
 
 let transporter = null;
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 
 // Fictional, mock, or internal test domains that do not possess public MX records
 const UNROUTABLE_TEST_DOMAINS = [
@@ -18,34 +22,35 @@ const UNROUTABLE_TEST_DOMAINS = [
  * Returns or initializes a singleton Nodemailer SMTP transporter.
  * Supports Gmail App Passwords, Brevo SMTP Relay, and standard custom SMTP servers.
  */
-const getTransporter = () => {
-  if (transporter) return transporter;
+const getTransporter = (forcePort = null, forceSecure = null) => {
+  if (transporter && !forcePort) return transporter;
 
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const rawPort = Number(process.env.SMTP_PORT) || 465;
-  const secure = rawPort === 465 ? true : (process.env.SMTP_SECURE === 'true' && rawPort !== 587);
+  const rawPort = forcePort || (Number(process.env.SMTP_PORT) || 465);
+  const secure = forceSecure !== null ? forceSecure : (rawPort === 465 ? true : (process.env.SMTP_SECURE === 'true' && rawPort !== 587));
   const user = process.env.SMTP_USER;
   // Gmail 16-character app passwords frequently include spaces that must be stripped
   const pass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
 
   if (host && user && pass) {
     try {
-      transporter = nodemailer.createTransport({
+      const createdTransporter = nodemailer.createTransport({
         host,
         port: rawPort,
         secure,
         auth: { user, pass },
-        pool: true,
-        maxConnections: 5,
-        connectionTimeout: 10000,
-        greetingTimeout: 10000,
-        socketTimeout: 15000,
+        pool: !isServerless,
+        maxConnections: isServerless ? 1 : 5,
+        connectionTimeout: 8000,
+        greetingTimeout: 8000,
+        socketTimeout: 10000,
         tls: {
           rejectUnauthorized: false
         }
       });
-      console.log(`[Email Service] Configured SMTP Transport via ${host}:${rawPort} (secure: ${secure}) (${user})`);
-      return transporter;
+      console.log(`[Email Service] Configured SMTP Transport via ${host}:${rawPort} (secure: ${secure}, serverless: ${isServerless}) (${user})`);
+      if (!forcePort) transporter = createdTransporter;
+      return createdTransporter;
     } catch (err) {
       console.warn('[Email Service] Failed to create SMTP transporter:', err.message);
     }
@@ -154,6 +159,23 @@ const sendOTPEmail = async (email, otp, purpose = 'registration', role = 'member
       console.log(`[Email Service] Sent OTP email to ${cleanEmail} (Message ID: ${info.messageId})`);
       return { success: true, delivered: true, messageId: info.messageId };
     } catch (err) {
+      console.warn(`[Email Service] Primary SMTP port attempt failed for ${cleanEmail}: ${err.message}. Retrying via alternate port 587 (TLS)...`);
+      try {
+        const fallbackTransporter = getTransporter(587, false);
+        if (fallbackTransporter) {
+          const fallbackInfo = await fallbackTransporter.sendMail({
+            from,
+            to: cleanEmail,
+            subject,
+            html,
+            text
+          });
+          console.log(`[Email Service] Sent OTP email via port 587 to ${cleanEmail} (Message ID: ${fallbackInfo.messageId})`);
+          return { success: true, delivered: true, messageId: fallbackInfo.messageId };
+        }
+      } catch (fallbackErr) {
+        console.error(`[Email Service] Fallback SMTP port 587 also failed:`, fallbackErr.message);
+      }
       console.error(`[Email Service] SMTP Transmission Error for ${cleanEmail}:`, err.message);
       return { success: false, delivered: false, error: err.message };
     }
