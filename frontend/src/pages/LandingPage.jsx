@@ -417,27 +417,6 @@ export const LandingPage = ({
           zIndex: 0
         }} />
 
-        {/* Status Pill */}
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '6px 16px',
-          borderRadius: '9999px',
-          background: 'rgba(16, 185, 129, 0.1)',
-          border: '1px solid rgba(16, 185, 129, 0.3)',
-          color: 'var(--primary)',
-          fontSize: '12px',
-          fontWeight: 700,
-          marginBottom: '24px',
-          boxShadow: '0 2px 8px rgba(16, 185, 129, 0.15)'
-        }}>
-          <Sparkles size={14} />
-          <span>Firebase Cloud Firestore &amp; SMTP OTP Verified Architecture</span>
-        </div>
-
         {/* Main Headline */}
         <h1 style={{
           position: 'relative',
