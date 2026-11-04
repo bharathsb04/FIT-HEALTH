@@ -2,7 +2,7 @@ import React from 'react';
 import { useFitness } from '../contexts/FitnessContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
-import { Home, Dumbbell, Utensils, MapPin, Activity, ShieldCheck, Wrench, BookOpen, Banknote } from 'lucide-react';
+import { Home, Dumbbell, Utensils, MapPin, Activity, ShieldCheck, Wrench, BookOpen, Banknote, User } from 'lucide-react';
 
 export const BottomNav = () => {
   const { activeTab, setActiveTab, adminSubTab, navigateToAdminSection, selectedFeatures } = useFitness();
@@ -20,10 +20,10 @@ export const BottomNav = () => {
 
   const allMemberNavItems = [
     { key: 'dashboard', label: 'Home', icon: Home, interface: 'core' },
-    { key: 'workout', label: 'Workout', icon: Dumbbell, interface: 'workout' },
+    { key: 'workout', label: 'Workouts', icon: Dumbbell, interface: 'workout' },
     { key: 'nutrition', label: 'Nutrition', icon: Utensils, interface: 'nutrition' },
     { key: 'gyms', label: 'Gyms', icon: MapPin, interface: 'gyms' },
-    { key: 'vitals', label: 'Vitals', icon: Activity, interface: 'nutrition' }
+    { key: 'profile', label: 'Profile', icon: User, interface: 'core' }
   ];
 
   const memberNavItems = allMemberNavItems.filter(item => {

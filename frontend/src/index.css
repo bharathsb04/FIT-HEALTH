@@ -103,7 +103,7 @@ body {
   background-color: var(--bg-app);
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -171,6 +171,7 @@ a {
 .app-container {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-app);
   display: flex;
   flex-direction: column;
@@ -190,6 +191,7 @@ a {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
@@ -199,7 +201,9 @@ a {
 .mobile-device-wrapper.full-screen-mode {
   max-width: 100%;
   height: 100vh;
+  height: 100dvh;
   max-height: 100vh;
+  max-height: 100dvh;
   border-radius: 0;
   box-shadow: none;
   border: none;
@@ -1792,28 +1796,220 @@ a {
 }
 
 /* ==========================================================================
-   FIT HEALTH LANDING PAGE RESPONSIVE UTILITIES
+   FIT HEALTH MOBILE-FIRST RESPONSIVE UTILITIES & SYSTEM OVERHAUL
    ========================================================================== */
-@media (min-width: 900px) {
-  .landing-desktop-nav {
-    display: flex !important;
+
+/* Brand Subtitle: hides below 400px to prevent header overflow */
+.brand-subtitle {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 400px) {
+  .brand-subtitle {
+    display: none !important;
   }
-  #landing-quick-login-btn {
-    display: inline-flex !important;
+}
+
+/* Header Action Controls (Mobile-First: hidden on < 768px, visible on >= 768px) */
+.landing-desktop-nav,
+.landing-desktop-actions {
+  display: none !important;
+}
+
+.landing-mobile-menu-btn {
+  display: inline-flex !important;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@media (min-width: 768px) {
+  .landing-desktop-actions {
+    display: flex !important;
   }
   .landing-mobile-menu-btn {
     display: none !important;
   }
 }
 
-@media (max-width: 899px) {
+@media (min-width: 992px) {
   .landing-desktop-nav {
-    display: none !important;
+    display: flex !important;
   }
-  #landing-quick-login-btn {
-    display: none !important;
+}
+
+/* Mobile Slide-in Drawer */
+.landing-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  z-index: 998;
+}
+
+.landing-drawer-content {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  z-index: 999;
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-drawer-item {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 18px;
+  text-align: left;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.landing-drawer-item:active {
+  background: var(--bg-surface-hover);
+  transform: scale(0.99);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
   }
-  .landing-mobile-menu-btn {
-    display: inline-flex !important;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section Responsive Layout */
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+
+.hero-cta-group .btn {
+  width: 100%;
+  min-height: 48px;
+  font-size: 16px;
+  font-weight: 800;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .hero-cta-group {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+  }
+  .hero-cta-group .btn {
+    width: auto;
+    flex: 1 1 200px;
+  }
+}
+
+/* Feature Cards Responsive Grid: 1 col on mobile, 2 on tablet, 3 on desktop */
+.features-responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .features-responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Hero Badges Grid: 2 cols on mobile, 4 on desktop */
+.hero-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .hero-badges-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+}
+
+/* Responsive Table Container with Sticky First Column */
+.table-responsive-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.table-responsive-wrapper table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+/* Loading Skeleton Shimmer */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-surface-hover) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessible Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

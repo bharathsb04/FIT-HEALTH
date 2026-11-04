@@ -145,15 +145,7 @@ export const LandingPage = ({
             }}>
               Fit Health
             </span>
-            <span style={{
-              display: 'block',
-              fontSize: '10px',
-              fontWeight: 700,
-              color: 'var(--primary)',
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              whiteSpace: 'nowrap'
-            }}>
+            <span className="brand-subtitle">
               Unified Platform
             </span>
           </div>
@@ -202,199 +194,186 @@ export const LandingPage = ({
           </button>
         </nav>
 
-        {/* Desktop Header Action Buttons */}
+        {/* Header Right Action Group */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          {/* Theme Toggle (Always visible on mobile & desktop) */}
           <button
             type="button"
             onClick={toggleTheme}
             className="icon-btn"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-            style={{ width: '36px', height: '36px', borderRadius: '10px', flexShrink: 0 }}
+            style={{ width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0 }}
           >
-            {theme === 'dark' ? <Sun size={17} color="var(--amber)" /> : <Moon size={17} color="var(--indigo)" />}
+            {theme === 'dark' ? <Sun size={18} color="var(--amber)" /> : <Moon size={18} color="var(--indigo)" />}
           </button>
 
-          <button
-            type="button"
-            onClick={() => openLoginModal('member')}
-            className="btn btn-secondary"
-            style={{
-              display: 'none',
-              padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: 700,
-              borderRadius: '10px',
-              whiteSpace: 'nowrap'
-            }}
-            id="landing-quick-login-btn"
-          >
-            Quick 3-Feature Login
-          </button>
+          {/* Desktop-Only Action Buttons (Hidden on mobile < 768px) */}
+          <div className="landing-desktop-actions" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button
+              type="button"
+              onClick={() => openLoginModal('admin')}
+              className="btn btn-secondary"
+              style={{
+                minHeight: '44px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                fontWeight: 700,
+                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                borderColor: 'rgba(245, 158, 11, 0.4)',
+                color: 'var(--amber)',
+                whiteSpace: 'nowrap'
+              }}
+              title="Access the Gym Administrator Portal"
+            >
+              <ShieldCheck size={15} color="var(--amber)" />
+              <span>Admin Portal</span>
+            </button>
 
-          <button
-            type="button"
-            onClick={() => openLoginModal('admin')}
-            className="btn btn-secondary"
-            style={{
-              padding: '7px 12px',
-              fontSize: '12px',
-              fontWeight: 700,
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              borderColor: 'rgba(245, 158, 11, 0.4)',
-              color: 'var(--amber)',
-              whiteSpace: 'nowrap',
-              flexShrink: 0
-            }}
-            title="Access the Gym Administrator Portal"
-          >
-            <ShieldCheck size={14} color="var(--amber)" />
-            <span>Admin Portal</span>
-          </button>
+            <button
+              type="button"
+              onClick={() => openLoginModal('member')}
+              className="btn btn-secondary"
+              style={{
+                minHeight: '44px',
+                padding: '8px 18px',
+                fontSize: '13px',
+                fontWeight: 600,
+                borderRadius: '10px',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              Sign In
+            </button>
 
-          <button
-            type="button"
-            onClick={() => openLoginModal('member')}
-            className="btn btn-secondary"
-            style={{
-              padding: '7px 14px',
-              fontSize: '13px',
-              fontWeight: 600,
-              borderRadius: '10px',
-              whiteSpace: 'nowrap',
-              flexShrink: 0
-            }}
-          >
-            Sign In
-          </button>
+            <button
+              type="button"
+              onClick={onGetStarted}
+              className="btn btn-primary"
+              style={{
+                minHeight: '44px',
+                padding: '8px 20px',
+                fontSize: '13px',
+                fontWeight: 700,
+                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              <span>Get Started</span>
+              <ArrowRight size={15} />
+            </button>
+          </div>
 
-          <button
-            type="button"
-            onClick={onGetStarted}
-            className="btn btn-primary"
-            style={{
-              padding: '9px 18px',
-              fontSize: '13px',
-              fontWeight: 700,
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
-            }}
-          >
-            <span>Get Started</span>
-            <ArrowRight size={15} />
-          </button>
-
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Hamburger Button (Only on < 768px, min 44x44px touch target) */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="icon-btn landing-mobile-menu-btn"
-            style={{ width: '38px', height: '38px', borderRadius: '10px' }}
+            style={{ width: '44px', height: '44px', borderRadius: '12px' }}
+            aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Slide-in Drawer Menu (Full-width, thumb-friendly items) */}
       {mobileMenuOpen && (
-        <div style={{
-          position: 'fixed',
-          top: '70px',
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'var(--bg-app)',
-          zIndex: 99,
-          padding: '24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          borderBottom: '1px solid var(--border-color)',
-          overflowY: 'auto'
-        }}>
-          <button
-            type="button"
-            onClick={() => scrollToSection('features')}
-            style={{ padding: '12px', textAlign: 'left', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '10px', color: 'var(--text-primary)', fontWeight: 600 }}
-          >
-            Features
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollToSection('preview')}
-            style={{ padding: '12px', textAlign: 'left', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '10px', color: 'var(--text-primary)', fontWeight: 600 }}
-          >
-            Interactive Preview
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollToSection('how-it-works')}
-            style={{ padding: '12px', textAlign: 'left', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '10px', color: 'var(--text-primary)', fontWeight: 600 }}
-          >
-            How It Works
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollToSection('benefits')}
-            style={{ padding: '12px', textAlign: 'left', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '10px', color: 'var(--text-primary)', fontWeight: 600 }}
-          >
-            Benefits
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollToSection('faq')}
-            style={{ padding: '12px', textAlign: 'left', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '10px', color: 'var(--text-primary)', fontWeight: 600 }}
-          >
-            Frequently Asked Questions
-          </button>
+        <>
+          <div className="landing-drawer-overlay" onClick={() => setMobileMenuOpen(false)} />
+          <div className="landing-drawer-content">
+            <button
+              type="button"
+              className="landing-drawer-item"
+              onClick={() => scrollToSection('features')}
+            >
+              <span>Features</span>
+              <ArrowRight size={16} color="var(--text-muted)" />
+            </button>
+            <button
+              type="button"
+              className="landing-drawer-item"
+              onClick={() => scrollToSection('preview')}
+            >
+              <span>Interactive Preview</span>
+              <ArrowRight size={16} color="var(--text-muted)" />
+            </button>
+            <button
+              type="button"
+              className="landing-drawer-item"
+              onClick={() => scrollToSection('how-it-works')}
+            >
+              <span>How It Works</span>
+              <ArrowRight size={16} color="var(--text-muted)" />
+            </button>
+            <button
+              type="button"
+              className="landing-drawer-item"
+              onClick={() => scrollToSection('benefits')}
+            >
+              <span>Benefits</span>
+              <ArrowRight size={16} color="var(--text-muted)" />
+            </button>
+            <button
+              type="button"
+              className="landing-drawer-item"
+              onClick={() => scrollToSection('faq')}
+            >
+              <span>Frequently Asked Questions</span>
+              <ArrowRight size={16} color="var(--text-muted)" />
+            </button>
 
-          <hr style={{ borderColor: 'var(--border-color)', margin: '8px 0' }} />
+            <div style={{ height: '1px', background: 'var(--border-color)', margin: '8px 0' }} />
 
-          <button
-            type="button"
-            onClick={() => openLoginModal('member')}
-            className="btn btn-secondary btn-full"
-            style={{ height: '46px', fontWeight: 700 }}
-          >
-            Quick 3-Feature Login
-          </button>
-          <button
-            type="button"
-            onClick={() => openLoginModal('member')}
-            className="btn btn-secondary btn-full"
-            style={{ height: '46px', fontWeight: 600 }}
-          >
-            Member Login
-          </button>
-          <button
-            type="button"
-            onClick={() => openLoginModal('admin')}
-            className="btn btn-secondary btn-full"
-            style={{ height: '46px', fontWeight: 700, borderColor: 'rgba(245, 158, 11, 0.4)', color: 'var(--amber)' }}
-          >
-            🛡️ Gym Admin Portal Login
-          </button>
-          <button
-            type="button"
-            onClick={() => { setMobileMenuOpen(false); onGetStarted(); }}
-            className="btn btn-primary btn-full"
-            style={{ height: '46px', fontWeight: 700 }}
-          >
-            Create Free Account
-          </button>
-        </div>
+            {/* Full-width Login & Portal Action Buttons on Mobile */}
+            <button
+              type="button"
+              onClick={() => openLoginModal('member')}
+              className="btn btn-secondary btn-full"
+              style={{ minHeight: '48px', fontSize: '15px', fontWeight: 700 }}
+            >
+              Sign In to Fit Health
+            </button>
+
+            <button
+              type="button"
+              onClick={() => openLoginModal('admin')}
+              className="btn btn-secondary btn-full"
+              style={{
+                minHeight: '48px',
+                fontSize: '15px',
+                fontWeight: 700,
+                borderColor: 'rgba(245, 158, 11, 0.4)',
+                color: 'var(--amber)'
+              }}
+            >
+              <ShieldCheck size={16} color="var(--amber)" />
+              <span>Admin Portal Login</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => { setMobileMenuOpen(false); onGetStarted(); }}
+              className="btn btn-primary btn-full"
+              style={{ minHeight: '48px', fontSize: '15px', fontWeight: 800 }}
+            >
+              <span>Start Free Journey</span>
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </>
       )}
 
       {/* ─── 2. HERO SECTION ─── */}
       <section style={{
         position: 'relative',
-        padding: '70px 24px 60px',
+        padding: 'clamp(28px, 6vh, 60px) 16px 36px',
         maxWidth: '1200px',
         margin: '0 auto',
         width: '100%',
@@ -409,8 +388,8 @@ export const LandingPage = ({
           top: '20px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '650px',
-          height: '350px',
+          width: 'min(650px, 90vw)',
+          height: '280px',
           background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.08) 50%, rgba(0,0,0,0) 80%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
@@ -421,12 +400,12 @@ export const LandingPage = ({
         <h1 style={{
           position: 'relative',
           zIndex: 1,
-          fontSize: 'clamp(32px, 5vw, 56px)',
+          fontSize: 'clamp(1.75rem, 7vw, 3rem)',
           fontWeight: 900,
-          lineHeight: 1.15,
-          letterSpacing: '-1.5px',
+          lineHeight: 1.2,
+          letterSpacing: '-0.02em',
           maxWidth: '920px',
-          margin: '0 auto 20px',
+          margin: '0 auto 16px',
           color: 'var(--text-primary)'
         }}>
           Transform Your Fitness Journey With Intelligent Tracking &amp;{' '}
@@ -443,35 +422,26 @@ export const LandingPage = ({
         <p style={{
           position: 'relative',
           zIndex: 1,
-          fontSize: 'clamp(15px, 2vw, 19px)',
+          fontSize: '1rem',
           color: 'var(--text-secondary)',
-          maxWidth: '740px',
+          maxWidth: '680px',
           lineHeight: 1.6,
-          margin: '0 auto 36px'
+          margin: '0 auto 28px'
         }}>
           The ultimate fitness companion unifying your <strong>6-Day Split Workout Planner</strong>,
           real-time <strong>Nutrition &amp; Vitals Sync</strong>, and a <strong>GPS-powered Gym Locator</strong> with
           instant day-pass booking and automated facility management.
         </p>
 
-        {/* CTA Buttons Row */}
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '14px',
-          justifyContent: 'center',
-          marginBottom: '48px',
-          width: '100%',
-          maxWidth: '600px'
-        }}>
+        {/* CTA Buttons Group: Stacked full-width on mobile, side-by-side on desktop */}
+        <div className="hero-cta-group" style={{ position: 'relative', zIndex: 1 }}>
           <button
             type="button"
             onClick={onGetStarted}
             className="btn btn-primary"
             style={{
               padding: '14px 28px',
+              minHeight: '48px',
               fontSize: '16px',
               fontWeight: 800,
               borderRadius: '12px',
@@ -479,7 +449,6 @@ export const LandingPage = ({
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              flex: '1 1 200px',
               boxShadow: '0 6px 20px rgba(16, 185, 129, 0.35)'
             }}
           >
@@ -493,6 +462,7 @@ export const LandingPage = ({
             className="btn btn-secondary"
             style={{
               padding: '14px 28px',
+              minHeight: '48px',
               fontSize: '15px',
               fontWeight: 700,
               borderRadius: '12px',
@@ -500,7 +470,6 @@ export const LandingPage = ({
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              flex: '1 1 200px',
               borderColor: 'rgba(16, 185, 129, 0.4)',
               background: 'rgba(26, 37, 60, 0.8)'
             }}
@@ -511,16 +480,15 @@ export const LandingPage = ({
         </div>
 
         {/* Feature Badges Grid */}
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '14px',
-          width: '100%',
-          maxWidth: '1000px',
-          textAlign: 'left'
-        }}>
+        <div
+          className="hero-badges-grid"
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            maxWidth: '1000px',
+            textAlign: 'left'
+          }}
+        >
           <div className="card" style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px', background: 'var(--bg-surface)' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Dumbbell size={20} color="var(--primary)" />
@@ -845,11 +813,7 @@ export const LandingPage = ({
           </p>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '24px'
-        }}>
+        <div className="features-responsive-grid">
           {/* Feature 1 */}
           <div className="card" style={{ padding: '28px', background: 'var(--bg-surface)' }}>
             <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(16, 185, 129, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>

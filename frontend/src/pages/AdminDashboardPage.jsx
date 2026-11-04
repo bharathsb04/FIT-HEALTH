@@ -1822,19 +1822,24 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
         </div>
 
         {/* Navigation Tabs: Member Directory | Fees Structure | Check-In Log | Maintenance (Group: Equipment + Directory) | Admin Notes */}
-        <div style={{
-          display: 'flex',
-          gap: '8px',
-          borderBottom: '1px solid var(--border-color)',
-          paddingBottom: '10px',
-          marginBottom: '16px',
-          flexWrap: 'wrap',
-          alignItems: 'center'
-        }}>
+        <div
+          className="horizontal-scroll-row"
+          style={{
+            display: 'flex',
+            gap: '8px',
+            borderBottom: '1px solid var(--border-color)',
+            paddingBottom: '10px',
+            marginBottom: '16px',
+            overflowX: 'auto',
+            whiteSpace: 'nowrap',
+            alignItems: 'center',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
           <button
             onClick={() => setActiveSubTab('members')}
             className={`btn btn-sm ${activeSubTab === 'members' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '12px', padding: '7px 16px' }}
+            style={{ fontSize: '12px', padding: '7px 16px', flexShrink: 0 }}
           >
             <Users size={14} /> Member Roster ({filteredMembers.length})
           </button>
@@ -1842,7 +1847,7 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
           <button
             onClick={() => setActiveSubTab('fees')}
             className={`btn btn-sm ${activeSubTab === 'fees' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '12px', padding: '7px 16px', position: 'relative' }}
+            style={{ fontSize: '12px', padding: '7px 16px', position: 'relative', flexShrink: 0 }}
           >
             <Banknote size={14} /> Gym Fees Structure & Desk Payments
             {(dashboardData?.cashTokens?.filter(t => t.status?.includes('Pending'))?.length || 0) > 0 && (
@@ -1863,13 +1868,13 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
           <button
             onClick={() => setActiveSubTab('checkins')}
             className={`btn btn-sm ${activeSubTab === 'checkins' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '12px', padding: '7px 16px' }}
+            style={{ fontSize: '12px', padding: '7px 16px', flexShrink: 0 }}
           >
             <Clock size={14} /> Today's Check-In Log ({checkIns.length})
           </button>
 
           {/* Maintenance Nav Group (Equipment Maintenance + Directory) */}
-          <div style={{ display: 'inline-flex', position: 'relative' }}>
+          <div style={{ display: 'inline-flex', position: 'relative', flexShrink: 0 }}>
             <div style={{
               display: 'inline-flex',
               borderRadius: '8px',
@@ -1932,6 +1937,7 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
             style={{
               fontSize: '12px',
               padding: '7px 16px',
+              flexShrink: 0,
               background: activeSubTab === 'notes' ? 'linear-gradient(135deg, #f59e0b, #d97706)' : undefined,
               color: activeSubTab === 'notes' ? '#0b0f19' : undefined,
               fontWeight: activeSubTab === 'notes' ? 800 : undefined,
