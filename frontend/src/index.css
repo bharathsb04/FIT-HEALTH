@@ -167,15 +167,16 @@ a {
   background: rgba(0, 0, 0, 0.15);
 }
 
-/* App Wrapper & Responsive Mobile Simulator Layout */
+/* App Wrapper & Responsive Layout */
 .app-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   min-height: 100vh;
-  background: radial-gradient(circle at 50% 0%, #17223b 0%, var(--bg-app) 75%);
-  padding: 16px;
-  transition: all var(--transition-base);
+  background: var(--bg-app);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 .app-container.full-screen-container {
@@ -184,23 +185,17 @@ a {
   align-items: stretch;
 }
 
-/* Standalone Desktop Mobile Frame Wrapper */
+/* Standalone Responsive Container */
 .mobile-device-wrapper {
   position: relative;
   width: 100%;
-  max-width: 440px;
-  height: 900px;
-  max-height: 96vh;
+  min-height: 100vh;
   background-color: var(--bg-primary);
-  border-radius: 44px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 10px #1e293b, 0 0 0 12px #334155;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  transition: all var(--transition-base);
 }
 
-/* When expanded to full responsive screen */
+/* Full responsive screen mode */
 .mobile-device-wrapper.full-screen-mode {
   max-width: 100%;
   height: 100vh;
@@ -244,6 +239,198 @@ a {
   background: rgba(16, 185, 129, 0.15);
   border-color: var(--primary);
   color: var(--primary);
+}
+
+/* =========================================================================
+   LAPTOP / DESKTOP SPECIFIC COMMAND CENTER & DEVICE SWITCHER
+   ========================================================================= */
+
+/* Device Mode Switcher Pill in Header */
+.device-switcher-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 3px;
+  backdrop-filter: blur(8px);
+}
+
+.device-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.device-toggle-btn:hover {
+  color: var(--text-primary);
+}
+
+.device-toggle-btn.active {
+  background: var(--primary);
+  color: #041f18;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+[data-theme="light"] .device-switcher-pill {
+  background: rgba(241, 245, 249, 0.9);
+}
+
+/* Laptop 4-Card Performance Metric Row */
+.laptop-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.laptop-metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.laptop-metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--cyan));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.laptop-metric-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.4);
+}
+
+.laptop-metric-card:hover::before {
+  opacity: 1;
+}
+
+.laptop-metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.laptop-metric-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recovery-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--primary);
+}
+
+.workout-icon {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}
+
+.nutrition-icon {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.gym-icon {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--cyan);
+}
+
+.laptop-metric-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.laptop-metric-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.laptop-metric-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-primary);
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.laptop-metric-val span {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.laptop-metric-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Ensure Laptop Experience occupies 100% of browser viewport smoothly */
+.laptop-experience-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.laptop-viewport {
+  width: 100%;
+  height: 100%;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.native-mobile-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.native-mobile-viewport {
+  width: 100%;
+  height: 100%;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 /* Authenticated Layout with Sideways Navigation */
@@ -773,36 +960,11 @@ a {
   }
 }
 
-/* Device Frame Status Bar (Clock, Island, Battery) */
-.device-status-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  user-select: none;
-  z-index: 50;
-  background: var(--bg-primary);
-}
-
-.device-island {
-  width: 100px;
-  height: 22px;
-  background: #000000;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
+/* Hide any obsolete simulator status bar / fake camera pill elements */
+.device-status-bar,
+.device-island,
 .island-camera {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #111e38;
+  display: none !important;
 }
 
 /* Main Scrollable Screen Content Container */

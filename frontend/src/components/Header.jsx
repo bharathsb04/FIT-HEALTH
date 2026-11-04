@@ -1,11 +1,13 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useFitness } from '../contexts/FitnessContext';
-import { Flame, Sparkles, User as UserIcon } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { Flame, Sparkles, User as UserIcon, Laptop, Smartphone, Sun, Moon } from 'lucide-react';
 
 export const Header = ({ title, subtitle }) => {
   const { user } = useAuth();
   const { setActiveTab } = useFitness();
+  const { isLaptop, isRealMobileScreen, deviceMode, setDeviceMode, theme, toggleTheme } = useTheme();
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -55,6 +57,28 @@ export const Header = ({ title, subtitle }) => {
       </div>
 
       <div className="header-actions">
+        {/* Device Switcher Pill: Shown on Laptop / Desktop to toggle between Laptop and Mobile UI */}
+        {!isRealMobileScreen && (
+          <div className="device-switcher-pill" title="Toggle between Widescreen Laptop UI and Mobile View">
+            <button
+              type="button"
+              className={`device-toggle-btn ${isLaptop ? 'active' : ''}`}
+              onClick={() => setDeviceMode('laptop')}
+            >
+              <Laptop size={13} />
+              <span>Laptop UI</span>
+            </button>
+            <button
+              type="button"
+              className={`device-toggle-btn ${!isLaptop ? 'active' : ''}`}
+              onClick={() => setDeviceMode('mobile')}
+            >
+              <Smartphone size={13} />
+              <span>Mobile UI</span>
+            </button>
+          </div>
+        )}
+
         {/* Streak Indicator (Only for regular members) */}
         {user?.role !== 'admin' && (
           <div
@@ -68,6 +92,15 @@ export const Header = ({ title, subtitle }) => {
           </div>
         )}
 
+        {/* Quick Theme Toggle on Laptop */}
+        <button
+          className="icon-btn"
+          onClick={toggleTheme}
+          title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
+          style={{ display: 'inline-flex' }}
+        >
+          {theme === 'dark' ? <Sun size={17} color="#f59e0b" /> : <Moon size={17} color="#6366f1" />}
+        </button>
 
         {/* AI Assistant Button */}
         <button

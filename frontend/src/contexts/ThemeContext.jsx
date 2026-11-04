@@ -82,20 +82,35 @@ const calculateMetrics = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem('fit_health_theme') || 'dark');
+  
+  // Dynamic metrics calculation
+  const [displayMetrics, setDisplayMetrics] = useState(calculateMetrics);
+  
+  // Device Mode: 'laptop' | 'mobile'
+  const [deviceMode, setDeviceModeState] = useState(() => {
+    const saved = localStorage.getItem('fit_health_device_mode');
+    if (saved === 'mobile' || saved === 'laptop') return saved;
+    return typeof window !== 'undefined' && window.innerWidth < 768 ? 'mobile' : 'laptop';
+  });
+
   const [isFullScreen, setIsFullScreen] = useState(() => {
     const saved = localStorage.getItem('fit_health_fullscreen');
     if (saved !== null) return saved === 'true';
     return typeof window !== 'undefined' ? window.innerWidth > 768 : true;
   });
 
-  const [displayMetrics, setDisplayMetrics] = useState(calculateMetrics);
   const [showDisplayModal, setShowDisplayModal] = useState(false);
   const [isNativeFullscreen, setIsNativeFullscreen] = useState(false);
 
   // Resize and Orientation Listener to capture live display changes
   useEffect(() => {
     const handleResize = () => {
-      setDisplayMetrics(calculateMetrics());
+      const metrics = calculateMetrics();
+      setDisplayMetrics(metrics);
+      // Auto-switch to mobile if actual screen is small and mode not explicitly pinned
+      if (metrics.windowWidth < 768) {
+        setIsFullScreen(true);
+      }
     };
 
     const handleFullscreenChange = () => {
@@ -126,8 +141,27 @@ export const ThemeProvider = ({ children }) => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
+  const isRealMobileScreen = displayMetrics.windowWidth < 768;
+  const isLaptop = !isRealMobileScreen && deviceMode !== 'mobile';
+  const isMobile = !isLaptop;
+
+  const setDeviceMode = (mode) => {
+    setDeviceModeState(mode);
+    localStorage.setItem('fit_health_device_mode', mode);
+    setIsFullScreen(mode === 'laptop');
+  };
+
+  const toggleDeviceMode = () => {
+    setDeviceMode(isLaptop ? 'mobile' : 'laptop');
+  };
+
   const toggleFullScreen = () => {
-    setIsFullScreen(prev => !prev);
+    setIsFullScreen(prev => {
+      const next = !prev;
+      setDeviceModeState(next ? 'laptop' : 'mobile');
+      localStorage.setItem('fit_health_device_mode', next ? 'laptop' : 'mobile');
+      return next;
+    });
   };
 
   const toggleNativeFullscreen = useCallback(async () => {
@@ -149,6 +183,12 @@ export const ThemeProvider = ({ children }) => {
       isFullScreen,
       toggleFullScreen,
       setIsFullScreen,
+      deviceMode,
+      setDeviceMode,
+      toggleDeviceMode,
+      isLaptop,
+      isMobile,
+      isRealMobileScreen,
       displayMetrics,
       showDisplayModal,
       setShowDisplayModal,
@@ -161,4 +201,3 @@ export const ThemeProvider = ({ children }) => {
 };
 
 export const useTheme = () => useContext(ThemeContext);
-

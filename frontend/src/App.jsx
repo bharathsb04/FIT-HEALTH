@@ -35,6 +35,7 @@ import { GymMembersPage } from './pages/GymMembersPage';
 
 const AppNavigator = () => {
   const { isAuthenticated, loading, user } = useAuth();
+  const { isLaptop, isMobile } = useTheme();
   const { activeTab, setActiveTab, isFeatureSelected, toggleFeatureSelection } = useFitness();
   const [authView, setAuthView] = useState('landing'); // 'landing' | 'splash' | 'onboarding' | 'login' | 'forgot'
   const [authRole, setAuthRole] = useState('member'); // 'member' | 'admin'
@@ -277,15 +278,15 @@ const AppNavigator = () => {
 
 
   return (
-    <div className="authenticated-layout">
-      {/* Sideways Navigation Bar after Login */}
+    <div className={`authenticated-layout ${isLaptop ? 'laptop-mode' : 'mobile-mode'}`}>
+      {/* Sideways Navigation Bar on Laptop */}
       <Sidebar />
       <div className="main-content-area">
         <Toast />
         <main className="screen-content">
           {renderAuthenticatedPage()}
         </main>
-        {/* Mobile Navigation Bar (visible based on display size) */}
+        {/* Mobile Navigation Bar (visible only in mobile mode) */}
         <BottomNav />
       </div>
     </div>

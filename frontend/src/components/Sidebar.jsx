@@ -38,7 +38,12 @@ export const Sidebar = () => {
     showToast
   } = useFitness();
   const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isLaptop } = useTheme();
+
+  // On Mobile view, Desktop Sidebar is completely hidden to maximize phone screen space
+  if (!isLaptop) {
+    return null;
+  }
 
   const isAdmin = user?.role === 'admin';
   const hasMembership = Boolean(user?.membershipId || user?.membershipStatus === 'Active');

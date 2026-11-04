@@ -1,11 +1,18 @@
 import React from 'react';
 import { useFitness } from '../contexts/FitnessContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { Home, Dumbbell, Utensils, MapPin, Activity, ShieldCheck, Wrench, BookOpen, Banknote } from 'lucide-react';
 
 export const BottomNav = () => {
   const { activeTab, setActiveTab, adminSubTab, navigateToAdminSection, selectedFeatures } = useFitness();
   const { user } = useAuth();
+  const { isLaptop } = useTheme();
+
+  // On Laptop / Desktop view, Bottom Navigation is hidden (Sidebar is used instead)
+  if (isLaptop) {
+    return null;
+  }
 
   const isWorkoutActive = selectedFeatures?.includes('workout');
   const isNutritionActive = selectedFeatures?.includes('nutrition');

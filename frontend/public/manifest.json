@@ -1,20 +1,27 @@
 {
-  "name": "Fit Health — Gym Fitness Companion",
+  "name": "Fit Health",
   "short_name": "Fit Health",
   "description": "The Ultimate Gym Fitness Companion for the Health Conscious. Workout planner, nutrition tracking, vitals, and gym discovery.",
   "start_url": "/",
   "id": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#080c14",
-  "theme_color": "#0f172a",
-  "orientation": "portrait-primary",
+  "theme_color": "#080c14",
+  "orientation": "any",
   "categories": ["fitness", "health", "sports", "lifestyle"],
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "192x192 512x512",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ]
 }

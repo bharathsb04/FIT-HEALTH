@@ -57,7 +57,7 @@ function collectFiles(dir, baseDir = dir) {
   for (const item of list) {
     if (['_backup_pre_migration', 'node_modules', '.git', '.gemini', 'dist', 'logs', '_staging', '.vscode', '.idea', 'scratch'].includes(item)) continue;
     if (item.endsWith('.zip') || item.endsWith('.tmp') || item.endsWith('.log')) continue;
-    if (item === '.env' || item === 'backend/.env' || item === 'frontend/.env' || item.endsWith('.env.local')) continue;
+    if (item === '.env' || item === 'backend/.env' || item === 'frontend/.env' || item.endsWith('.env.local') || item.includes('adminsdk')) continue;
 
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);

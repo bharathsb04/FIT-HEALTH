@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useFitness } from '../contexts/FitnessContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { api } from '../services/api';
 import { Header } from '../components/Header';
 import { MacroRing } from '../components/MacroRing';
@@ -49,6 +50,7 @@ import {
 
 export const DashboardPage = () => {
   const { user } = useAuth();
+  const { isLaptop, isMobile } = useTheme();
   const {
     setActiveTab,
     showToast,
@@ -186,52 +188,127 @@ export const DashboardPage = () => {
       <Header />
 
       <div className="page-container" style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
-        {/* Readiness Motivational Banner */}
-        <div
-          className="card"
-          style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.14) 0%, rgba(6, 182, 212, 0.08) 100%)',
-            borderColor: 'rgba(16, 185, 129, 0.25)',
-            padding: '18px 22px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-              <span className={`badge badge-${goalClass}`}>{goal} MODE</span>
-              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>• Daily Readiness Status</span>
+        {/* Widescreen Laptop 4-Card Performance Command Strip */}
+        {isLaptop && (
+          <div className="laptop-metrics-row">
+            {/* Metric 1: Recovery Readiness */}
+            <div className="laptop-metric-card" onClick={() => setActiveTab('recovery')} style={{ cursor: 'pointer' }}>
+              <div className="laptop-metric-header">
+                <div className="laptop-metric-icon recovery-icon">
+                  <Activity size={18} />
+                </div>
+                <span className="badge badge-fitness">READY</span>
+              </div>
+              <div className="laptop-metric-body">
+                <span className="laptop-metric-label">Daily Recovery Score</span>
+                <div className="laptop-metric-val">
+                  {recovery?.recoveryScore || 88}<span>%</span>
+                </div>
+                <span className="laptop-metric-sub">Prime CNS & Glycogen</span>
+              </div>
             </div>
-            <h3 style={{ fontSize: '18px', fontWeight: 800 }}>
-              Your body is ready for today's workout.
-            </h3>
-            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              Recovery readiness score is <b style={{ color: 'var(--primary)' }}>{recovery?.recoveryScore || 88}%</b>. CNS and glycogen stores primed.
-            </p>
-          </div>
 
+            {/* Metric 2: Today's Workout Focus */}
+            <div className="laptop-metric-card" onClick={() => setActiveTab('workout')} style={{ cursor: 'pointer' }}>
+              <div className="laptop-metric-header">
+                <div className="laptop-metric-icon workout-icon">
+                  <Dumbbell size={18} />
+                </div>
+                <span className={`badge badge-${goalClass}`}>{goal.toUpperCase()}</span>
+              </div>
+              <div className="laptop-metric-body">
+                <span className="laptop-metric-label">Today's Focus Split</span>
+                <div className="laptop-metric-val" style={{ fontSize: '18px', lineHeight: 1.2 }}>
+                  {activeDay?.name || 'Push Day'}
+                </div>
+                <span className="laptop-metric-sub">{activeDay?.exercises?.length || 3} exercises scheduled</span>
+              </div>
+            </div>
+
+            {/* Metric 3: Calories & Macros */}
+            <div className="laptop-metric-card" onClick={() => setActiveTab('nutrition')} style={{ cursor: 'pointer' }}>
+              <div className="laptop-metric-header">
+                <div className="laptop-metric-icon nutrition-icon">
+                  <Utensils size={18} />
+                </div>
+                <span className="badge badge-amber">{nutrition?.percentage?.calories || 52}% KCAL</span>
+              </div>
+              <div className="laptop-metric-body">
+                <span className="laptop-metric-label">Nutrition & Macros</span>
+                <div className="laptop-metric-val">
+                  {nutrition?.consumed?.calories || 1490}<span>/{nutrition?.targets?.calories || 2850} kcal</span>
+                </div>
+                <span className="laptop-metric-sub">P: {nutrition?.consumed?.protein || 112}g • C: {nutrition?.consumed?.carbs || 145}g</span>
+              </div>
+            </div>
+
+            {/* Metric 4: Nearest Gym & Passes */}
+            <div className="laptop-metric-card" onClick={() => setActiveTab('gyms')} style={{ cursor: 'pointer' }}>
+              <div className="laptop-metric-header">
+                <div className="laptop-metric-icon gym-icon">
+                  <Building2 size={18} />
+                </div>
+                <span className="badge badge-cyan">{hasEnrolledMembership ? 'ENROLLED' : 'ACTIVE GPS'}</span>
+              </div>
+              <div className="laptop-metric-body">
+                <span className="laptop-metric-label">Connected Center</span>
+                <div className="laptop-metric-val" style={{ fontSize: '16px', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {linkedGym?.name || 'RSV Gym & Sports Club'}
+                </div>
+                <span className="laptop-metric-sub">Live biometric access ready</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Readiness Motivational Banner (Streamlined on Laptop, Full on Mobile) */}
+        {!isLaptop && (
           <div
-            onClick={() => setActiveTab('recovery')}
+            className="card"
             style={{
-              width: '52px',
-              height: '52px',
-              borderRadius: '50%',
-              background: 'var(--bg-surface)',
-              border: '3px solid var(--primary)',
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.14) 0%, rgba(6, 182, 212, 0.08) 100%)',
+              borderColor: 'rgba(16, 185, 129, 0.25)',
+              padding: '18px 22px',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer'
+              justifyContent: 'space-between'
             }}
           >
-            <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--primary)' }}>
-              {recovery?.recoveryScore || 88}
-            </span>
-            <span style={{ fontSize: '8px', color: 'var(--text-muted)', fontWeight: 700 }}>SCORE</span>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                <span className={`badge badge-${goalClass}`}>{goal} MODE</span>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>• Daily Readiness Status</span>
+              </div>
+              <h3 style={{ fontSize: '18px', fontWeight: 800 }}>
+                Your body is ready for today's workout.
+              </h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                Recovery readiness score is <b style={{ color: 'var(--primary)' }}>{recovery?.recoveryScore || 88}%</b>. CNS and glycogen stores primed.
+              </p>
+            </div>
+
+            <div
+              onClick={() => setActiveTab('recovery')}
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '50%',
+                background: 'var(--bg-surface)',
+                border: '3px solid var(--primary)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--primary)' }}>
+                {recovery?.recoveryScore || 88}
+              </span>
+              <span style={{ fontSize: '8px', color: 'var(--text-muted)', fontWeight: 700 }}>SCORE</span>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ACTIVE DATA INTERFACES CONTROLLER BAR */}
         <div style={{

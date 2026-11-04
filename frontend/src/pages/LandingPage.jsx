@@ -108,7 +108,7 @@ export const LandingPage = ({
         background: 'rgba(8, 12, 20, 0.88)',
         backdropFilter: 'blur(12px)',
         borderBottom: '1px solid var(--border-color)',
-        padding: '0 24px',
+        padding: '0 clamp(12px, 3vw, 24px)',
         height: '70px',
         display: 'flex',
         alignItems: 'center',
@@ -117,29 +117,31 @@ export const LandingPage = ({
         {/* Brand Logo */}
         <div
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', flexShrink: 0 }}
         >
           <div style={{
-            width: '42px',
-            height: '42px',
+            width: '40px',
+            height: '40px',
             borderRadius: '12px',
             background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)'
+            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)',
+            flexShrink: 0
           }}>
-            <Activity size={24} color="#080c14" strokeWidth={2.5} />
+            <Activity size={22} color="#080c14" strokeWidth={2.5} />
           </div>
-          <div>
+          <div style={{ whiteSpace: 'nowrap' }}>
             <span style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '20px',
+              fontSize: '19px',
               fontWeight: 800,
               letterSpacing: '-0.5px',
               background: 'linear-gradient(135deg, #ffffff 30%, #10b981 100%)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
+              WebkitTextFillColor: 'transparent',
+              whiteSpace: 'nowrap'
             }}>
               Fit Health
             </span>
@@ -149,7 +151,8 @@ export const LandingPage = ({
               fontWeight: 700,
               color: 'var(--primary)',
               letterSpacing: '1px',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap'
             }}>
               Unified Platform
             </span>
@@ -200,15 +203,15 @@ export const LandingPage = ({
         </nav>
 
         {/* Desktop Header Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           <button
             type="button"
             onClick={toggleTheme}
             className="icon-btn"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-            style={{ width: '38px', height: '38px', borderRadius: '10px' }}
+            style={{ width: '36px', height: '36px', borderRadius: '10px', flexShrink: 0 }}
           >
-            {theme === 'dark' ? <Sun size={18} color="var(--amber)" /> : <Moon size={18} color="var(--indigo)" />}
+            {theme === 'dark' ? <Sun size={17} color="var(--amber)" /> : <Moon size={17} color="var(--indigo)" />}
           </button>
 
           <button
@@ -220,7 +223,8 @@ export const LandingPage = ({
               padding: '8px 16px',
               fontSize: '13px',
               fontWeight: 700,
-              borderRadius: '10px'
+              borderRadius: '10px',
+              whiteSpace: 'nowrap'
             }}
             id="landing-quick-login-btn"
           >
@@ -232,7 +236,7 @@ export const LandingPage = ({
             onClick={() => openLoginModal('admin')}
             className="btn btn-secondary"
             style={{
-              padding: '8px 14px',
+              padding: '7px 12px',
               fontSize: '12px',
               fontWeight: 700,
               borderRadius: '10px',
@@ -240,11 +244,13 @@ export const LandingPage = ({
               alignItems: 'center',
               gap: '6px',
               borderColor: 'rgba(245, 158, 11, 0.4)',
-              color: 'var(--amber)'
+              color: 'var(--amber)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
             title="Access the Gym Administrator Portal"
           >
-            <ShieldCheck size={15} color="var(--amber)" />
+            <ShieldCheck size={14} color="var(--amber)" />
             <span>Admin Portal</span>
           </button>
 
@@ -253,10 +259,12 @@ export const LandingPage = ({
             onClick={() => openLoginModal('member')}
             className="btn btn-secondary"
             style={{
-              padding: '8px 16px',
+              padding: '7px 14px',
               fontSize: '13px',
               fontWeight: 600,
-              borderRadius: '10px'
+              borderRadius: '10px',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
           >
             Sign In
