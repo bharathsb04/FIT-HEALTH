@@ -295,7 +295,7 @@ export const OnboardingPage = ({ onSwitchToLogin, onSwitchToAdminLogin, onBackTo
             <input
               type="text"
               className="form-input"
-              placeholder="e.g. Alex Mercer"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
             />
@@ -306,7 +306,7 @@ export const OnboardingPage = ({ onSwitchToLogin, onSwitchToAdminLogin, onBackTo
             <input
               type="email"
               className="form-input"
-              placeholder="e.g. member@example.com"
+              placeholder="Enter your email address"
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
             />

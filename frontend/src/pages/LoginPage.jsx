@@ -849,7 +849,7 @@ export const LoginPage = ({
                     <input
                       type="text"
                       className="form-input"
-                      placeholder="e.g. Darshan Gangannavar"
+                      placeholder="Enter your full name"
                       value={signupName}
                       onChange={(e) => setSignupName(e.target.value)}
                       style={{ paddingLeft: '40px' }}
@@ -865,7 +865,7 @@ export const LoginPage = ({
                     <input
                       type="email"
                       className="form-input"
-                      placeholder="e.g. darshangangannavar30@gmail.com"
+                      placeholder="Enter your email address"
                       value={signupEmail}
                       onChange={(e) => setSignupEmail(e.target.value)}
                       style={{ paddingLeft: '40px' }}
@@ -881,7 +881,7 @@ export const LoginPage = ({
                     <input
                       type="password"
                       className="form-input"
-                      placeholder="•••••••• (min 6 characters)"
+                      placeholder="Create a password (min 6 characters)"
                       value={signupPassword}
                       onChange={(e) => setSignupPassword(e.target.value)}
                       style={{ paddingLeft: '40px' }}
@@ -1101,7 +1101,7 @@ export const LoginPage = ({
                   id="login-email"
                   type="email"
                   className="form-input"
-                  placeholder="athlete@fithealth.io"
+                  placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   style={{ paddingLeft: '40px' }}
@@ -1127,7 +1127,7 @@ export const LoginPage = ({
                   id="login-password"
                   type="password"
                   className="form-input"
-                  placeholder="••••••••"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={{ paddingLeft: '40px' }}
