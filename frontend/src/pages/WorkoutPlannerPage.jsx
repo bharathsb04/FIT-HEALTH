@@ -398,7 +398,7 @@ export const WorkoutPlannerPage = () => {
           </div>
 
           {/* Quick Day Chips on the Poster Banner */}
-          <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px' }}>
+          <div className="horizontal-scroll-row" style={{ gap: '6px' }}>
             {[
               { num: 1, name: 'Chest', icon: '🏋️‍♂️' },
               { num: 2, name: 'Shoulder', icon: '👑' },
@@ -486,7 +486,7 @@ export const WorkoutPlannerPage = () => {
         </div>
 
         {/* 6-Day Split Carousel Tabs */}
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+        <div className="horizontal-scroll-row">
           {days.map((day, idx) => (
             <button
               key={day.dayNumber || idx}

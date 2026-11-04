@@ -11,44 +11,61 @@ const https = require('https');
 const OWNER = 'bharathsb04';
 const REPO = 'FIT-HEALTH';
 
-function githubRequest(token, method, endpoint, data = null) {
-  return new Promise((resolve, reject) => {
-    const url = new URL(`https://api.github.com${endpoint}`);
-    const body = data ? JSON.stringify(data) : null;
+async function githubRequest(token, method, endpoint, data = null, retries = 3) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await new Promise((resolve, reject) => {
+        const url = new URL(`https://api.github.com${endpoint}`);
+        const body = data ? JSON.stringify(data) : null;
 
-    const req = https.request(
-      url,
-      {
-        method,
-        headers: {
-          'User-Agent': 'Fit-Health-Pusher/1.0',
-          'Authorization': `token ${token}`,
-          'Accept': 'application/vnd.github.v3+json',
-          ...(body ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } : {})
-        }
-      },
-      (res) => {
-        let raw = '';
-        res.on('data', (chunk) => (raw += chunk));
-        res.on('end', () => {
-          try {
-            const parsed = raw ? JSON.parse(raw) : {};
-            if (res.statusCode >= 200 && res.statusCode < 300) {
-              resolve(parsed);
-            } else {
-              reject(new Error(`GitHub API Error ${res.statusCode} on ${endpoint}: ${parsed.message || raw}`));
+        const req = https.request(
+          url,
+          {
+            method,
+            headers: {
+              'User-Agent': 'Fit-Health-Pusher/1.0',
+              'Authorization': `token ${token}`,
+              'Accept': 'application/vnd.github.v3+json',
+              ...(body ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } : {})
             }
-          } catch (e) {
-            reject(new Error(`Failed to parse response: ${e.message} (${raw})`));
+          },
+          (res) => {
+            let raw = '';
+            res.on('data', (chunk) => (raw += chunk));
+            res.on('end', () => {
+              try {
+                const parsed = raw ? JSON.parse(raw) : {};
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                  resolve(parsed);
+                } else {
+                  const isTransient = [500, 502, 503, 504, 429].includes(res.statusCode);
+                  const err = new Error(`GitHub API Error ${res.statusCode} on ${endpoint}: ${parsed.message || raw}`);
+                  err.isTransient = isTransient;
+                  reject(err);
+                }
+              } catch (e) {
+                reject(new Error(`Failed to parse response: ${e.message} (${raw})`));
+              }
+            });
           }
-        });
-      }
-    );
+        );
 
-    req.on('error', reject);
-    if (body) req.write(body);
-    req.end();
-  });
+        req.on('error', (err) => {
+          err.isTransient = true;
+          reject(err);
+        });
+        if (body) req.write(body);
+        req.end();
+      });
+    } catch (err) {
+      if (err.isTransient && attempt < retries) {
+        console.warn(`[Retry ${attempt}/${retries}] GitHub transient error on ${endpoint} (${err.message}). Retrying in ${attempt * 2}s...`);
+        await new Promise((r) => setTimeout(r, attempt * 2000));
+      } else {
+        throw err;
+      }
+    }
+  }
 }
 
 function collectFiles(dir, baseDir = dir) {

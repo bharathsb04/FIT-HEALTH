@@ -451,8 +451,7 @@ export const DashboardPage = () => {
         </div>
 
         {/* Quick Functional Hub Pills */}
-
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+        <div className="horizontal-scroll-row">
           {[
             { id: 'bulking-cutting', label: 'Bulking & Cutting', icon: TrendingUp },
             { id: 'hydration', label: 'Hydration (3.5L)', icon: Droplet },
