@@ -1,0 +1,3766 @@
+const fs = require('fs');
+const path = require('path');
+
+const workoutLibrary = {
+  beginner: [
+    // Chest (5 exercises)
+    {
+      id: 'beg_chest_1',
+      name: 'Chest Press Machine',
+      level: 'beginner',
+      targetMuscle: 'Chest',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '20-30 kg',
+      imageUrl: '/exercises/beginner/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/gRVjAtPip0Y?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/chest.svg',
+      formCue: 'Tempo 3-1-1-0 — 3s controlled return, 1s chest contraction, smooth press.',
+      steps: [
+        'Adjust the seat height so the handles align with your mid-chest.',
+        'Plant feet flat on the floor and press your shoulder blades firmly into the pad.',
+        'Grip handles and exhale as you press forward without locking elbows.',
+        'Inhale and slowly lower the weight over 3 seconds until a comfortable chest stretch is felt.'
+      ],
+      commonMistakes: [
+        'Allowing elbows to flare higher than shoulder level.',
+        'Arching lower back off the pad.',
+        'Letting weight stack slam between repetitions.'
+      ],
+      machine: {
+        name: 'Selectorized Chest Press Machine (Life Fitness / Matrix)',
+        type: 'Pin-Selected Upper Body Machine',
+        gymZone: 'Zone B • Selectorized Machine Bay',
+        setupGuide: 'Set seat pin to hole #3-#5 so handles match mid-sternum. Pin load to 20kg.',
+        equipmentChecklist: ['Sanitizing towel', 'Seat height adjustment pin', 'Magnetic weight stack pin'],
+        alternatives: [
+          { name: 'Pec Fly Machine', zone: 'Zone B • Machine Bay', swapReason: 'Isolates chest adduction without shoulder strain' },
+          { name: 'Incline Chest Press Machine', zone: 'Zone B • Machine Bay', swapReason: 'Targets upper chest clavicular fibers' }
+        ]
+      }
+    },
+    {
+      id: 'beg_chest_2',
+      name: 'Pec Deck / Butterfly Machine',
+      level: 'beginner',
+      targetMuscle: 'Chest',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg',
+      imageUrl: '/exercises/beginner/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/eGjt4lkGeZ4?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/chest.svg',
+      formCue: 'Tempo 3-1-2-0 — Feel deep chest stretch, squeeze chest hard at peak.',
+      steps: [
+        'Adjust seat so pads rest against your forearms with elbows bent at 90 degrees.',
+        'Press elbows together smoothly in an arc motion.',
+        'Hold contraction for 1 second at the center.',
+        'Control the return slowly over 3 seconds.'
+      ],
+      commonMistakes: [
+        'Letting elbows drop below 90 degrees.',
+        'Shrugging shoulders upward during contraction.'
+      ],
+      machine: {
+        name: 'Pec Deck Fly Machine (Hammer Strength Select)',
+        type: 'Selectorized Fly Machine',
+        gymZone: 'Zone B • Machine Bay (Bay 2)',
+        setupGuide: 'Seat height adjusted so arm pads match shoulder height.',
+        equipmentChecklist: ['Towel', 'Pin selector'],
+        alternatives: [
+          { name: 'Cable Crossover Low-to-High', zone: 'Zone C • Cable Bay', swapReason: 'Continuous cable tension' }
+        ]
+      }
+    },
+    {
+      id: 'beg_chest_3',
+      name: 'Incline Push-Up (Bench Support)',
+      level: 'beginner',
+      targetMuscle: 'Chest',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/4dF1DOWzf20?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/chest.svg',
+      formCue: 'Tempo 2-1-1-0 — Keep rigid plank line from head to heels.',
+      steps: [
+        'Place hands on a standard flat gym bench slightly wider than shoulder-width.',
+        'Step feet back until your body forms a straight diagonal plank line.',
+        'Lower chest toward the bench by bending elbows to 45 degrees.',
+        'Push firmly through your palms to return to starting position.'
+      ],
+      commonMistakes: [
+        'Sagging hips or piking glutes into the air.',
+        'Dropping head forward before chest touches.'
+      ],
+      machine: {
+        name: 'Standard Flat Utility Bench',
+        type: 'Free Weight Accessory',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Ensure bench is placed flat and stable on rubber flooring.',
+        equipmentChecklist: ['Flat bench', 'Non-slip gym shoes'],
+        alternatives: [
+          { name: 'Smith Machine Push-Up', zone: 'Zone B • Smith Bay', swapReason: 'Adjustable bar height to customize resistance' }
+        ]
+      }
+    },
+    {
+      id: 'beg_chest_4',
+      name: 'Flat Dumbbell Press (Light)',
+      level: 'beginner',
+      targetMuscle: 'Chest',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '7.5-10 kg / side',
+      imageUrl: '/exercises/beginner/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/VmB1G1K7v94?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/chest.svg',
+      formCue: 'Tempo 3-1-1-0 — Balanced independent arm control.',
+      steps: [
+        'Sit on flat bench with dumbbells resting on thighs.',
+        'Lie back, bringing dumbbells to sides of chest with palms facing forward.',
+        'Press weights directly upward over chest without clanking them together.',
+        'Lower dumbbells with control until upper arms are parallel to floor.'
+      ],
+      commonMistakes: [
+        'Bouncing weights at the bottom.',
+        'Flaring elbows out perpendicular to torso.'
+      ],
+      machine: {
+        name: 'Flat Workout Bench & Polyurethane Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbell Area',
+        setupGuide: 'Position bench clear of rack aisles. Select light matching dumbbells.',
+        equipmentChecklist: ['Pair of 7.5kg or 10kg dumbbells', 'Bench'],
+        alternatives: [
+          { name: 'Floor Dumbbell Press', zone: 'Zone A • Floor Mat', swapReason: 'Prevents shoulder hyperextension' }
+        ]
+      }
+    },
+    {
+      id: 'beg_chest_5',
+      name: 'Standing Cable Chest Fly (Mid Pulley)',
+      level: 'beginner',
+      targetMuscle: 'Chest',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '5-10 kg / side',
+      imageUrl: '/exercises/beginner/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/taI4XduLpTk?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/chest.svg',
+      formCue: 'Tempo 3-0-1-1 — Gentle hug motion with elbows softly rounded.',
+      steps: [
+        'Set pulleys to chest height. Grab D-handles and take one step forward into a split stance.',
+        'Maintain a slight forward torso lean and soft bend in your elbows.',
+        'Bring hands forward in a wide hugging arc until knuckles nearly touch.',
+        'Open arms back slowly under steady cable tension.'
+      ],
+      commonMistakes: [
+        'Using momentum or swinging the torso.',
+        'Locking elbows rigid.'
+      ],
+      machine: {
+        name: 'Dual Adjustable Cable Column',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Tower',
+        setupGuide: 'Set dual pulleys to notch #8 (chest height). Attach single D-handles.',
+        equipmentChecklist: ['2x Single D-handles', 'Cable pin'],
+        alternatives: [
+          { name: 'Resistance Band Chest Fly', zone: 'Zone E • Functional Turf', swapReason: 'Gentle progressive elastic resistance' }
+        ]
+      }
+    },
+
+    // Back (5 exercises)
+    {
+      id: 'beg_back_1',
+      name: 'Lat Pulldown (Wide Grip)',
+      level: 'beginner',
+      targetMuscle: 'Back',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '25-35 kg',
+      imageUrl: '/exercises/beginner/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/CAwf7n6Luuc?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/back.svg',
+      formCue: 'Tempo 3-1-1-0 — Pull with elbows down, not with your hands.',
+      steps: [
+        'Sit on seat and adjust thigh pad so knees are securely wedged.',
+        'Grasp wide lat bar with overhand grip just outside shoulder width.',
+        'Lean torso back 10-15 degrees, pull bar down smoothly to upper chest.',
+        'Control bar on the way up until arms are fully extended and lats stretched.'
+      ],
+      commonMistakes: [
+        'Pulling bar behind the neck.',
+        'Leaning excessively backward like a row.'
+      ],
+      machine: {
+        name: 'Selectorized Lat Pulldown Machine',
+        type: 'Cable Station',
+        gymZone: 'Zone B • Selectorized Bay',
+        setupGuide: 'Adjust roller pad firmly over thighs. Connect 48-inch lat bar.',
+        equipmentChecklist: ['Wide lat bar', 'Thigh lock pin', 'Weight pin'],
+        alternatives: [
+          { name: 'Underhand Close Grip Pulldown', zone: 'Zone B • Machine Bay', swapReason: 'More bicep assistance for beginners' }
+        ]
+      }
+    },
+    {
+      id: 'beg_back_2',
+      name: 'Seated Cable Row (Neutral Grip)',
+      level: 'beginner',
+      targetMuscle: 'Back',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '25-35 kg',
+      imageUrl: '/exercises/beginner/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/GZbfZ033f74?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/back.svg',
+      formCue: 'Tempo 3-1-1-0 — Squeeze shoulder blades together, upright torso.',
+      steps: [
+        'Sit on machine, place feet on footrests with knees slightly bent.',
+        'Grip V-handle attachment with arms extended and back straight.',
+        'Pull handle toward lower abdomen while pulling shoulders back and down.',
+        'Slowly extend arms back to start without rounding the spine.'
+      ],
+      commonMistakes: [
+        'Rocking torso back and forth excessively.',
+        'Rounding lower back during extension.'
+      ],
+      machine: {
+        name: 'Low Row Cable Bench',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Clip V-bar attachment to low pulley carabiner.',
+        equipmentChecklist: ['V-bar / Close grip handle', 'Footplates'],
+        alternatives: [
+          { name: 'Chest Supported Machine Row', zone: 'Zone B • Machine Bay', swapReason: 'Removes spinal loading entirely' }
+        ]
+      }
+    },
+    {
+      id: 'beg_back_3',
+      name: 'Chest-Supported Machine Row',
+      level: 'beginner',
+      targetMuscle: 'Back',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '20-30 kg',
+      imageUrl: '/exercises/beginner/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/0UBRfiO4zDs?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Chest pinned firmly against the pad.',
+      steps: [
+        'Adjust chest pad so handles are at arm’s reach.',
+        'Plant feet firmly and keep sternum glued to the chest cushion.',
+        'Pull handles back until elbows pass your torso line.',
+        'Pause for 1 second, then extend arms with full control.'
+      ],
+      commonMistakes: [
+        'Lifting chest off the pad to heave the weight.',
+        'Only pulling with biceps instead of retracting scapulae.'
+      ],
+      machine: {
+        name: 'Iso-Lateral Chest-Supported Row',
+        type: 'Plate-Loaded / Selectorized Machine',
+        gymZone: 'Zone B • Machine Bay',
+        setupGuide: 'Seat and chest pad adjusted to mid-torso height.',
+        equipmentChecklist: ['Padded chest support', 'Weight pin'],
+        alternatives: [
+          { name: 'Dumbbell Chest Supported Incline Row', zone: 'Zone A • Dumbbells', swapReason: 'Free weight bilateral control' }
+        ]
+      }
+    },
+    {
+      id: 'beg_back_4',
+      name: 'Assisted Pull-Up Machine',
+      level: 'beginner',
+      targetMuscle: 'Back',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 90,
+      suggestedLoad: 'Counterweight 30-40 kg',
+      imageUrl: '/exercises/beginner/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/yTgeZ_W6k5w?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/back.svg',
+      formCue: 'Tempo 2-1-1-0 — High counterweight allows strict bodyweight form.',
+      steps: [
+        'Set the counterbalance pin (heavier pin = easier assistance).',
+        'Place knees securely on the padded carriage and grasp wide handles.',
+        'Pull body upward until chin easily clears the bar level.',
+        'Lower yourself smoothly until arms are fully stretched.'
+      ],
+      commonMistakes: [
+        'Stepping off before carriage is fully stationary.',
+        'Kicking legs or swinging on the pad.'
+      ],
+      machine: {
+        name: 'Counterbalance Assisted Dip & Chin Station',
+        type: 'Assisted Bodyweight Machine',
+        gymZone: 'Zone B • Machine Bay',
+        setupGuide: 'Pull knee rest pad down into operating position.',
+        equipmentChecklist: ['Counterbalance pin', 'Knee pad cushion'],
+        alternatives: [
+          { name: 'Lat Pulldown', zone: 'Zone B • Cable Bay', swapReason: 'Simulates same vertical pulling biomechanics' }
+        ]
+      }
+    },
+    {
+      id: 'beg_back_5',
+      name: 'Back Hyperextension (45-Degree Bench)',
+      level: 'beginner',
+      targetMuscle: 'Back',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/5_ejZ9uY3ps?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/back.svg',
+      formCue: 'Tempo 2-1-2-0 — Hinge at hips, avoid hyperextending neck.',
+      steps: [
+        'Position yourself face down with hips resting on upper pads and ankles locked.',
+        'Cross arms over chest or place hands gently beside ears.',
+        'Hinge forward from the hips until torso is roughly perpendicular to legs.',
+        'Engage glutes and spinal erectors to raise torso in a straight line with legs.'
+      ],
+      commonMistakes: [
+        'Overarching backwards beyond a straight neutral spine.',
+        'Jerking torso upward quickly.'
+      ],
+      machine: {
+        name: '45-Degree Hyperextension Roman Chair',
+        type: 'Bodyweight Station',
+        gymZone: 'Zone E • Core / Functional Zone',
+        setupGuide: 'Set pelvic pad just below hip crease to allow unrestricted hip flexion.',
+        equipmentChecklist: ['Thigh pad adjustment pin', 'Ankle rollers'],
+        alternatives: [
+          { name: 'Prone Bird-Dog on Mat', zone: 'Zone E • Mat Area', swapReason: 'Gentle spinal stabilization on floor' }
+        ]
+      }
+    },
+
+    // Shoulders (5 exercises)
+    {
+      id: 'beg_shoulders_1',
+      name: 'Seated Dumbbell Shoulder Press',
+      level: 'beginner',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '5-10 kg / side',
+      imageUrl: '/exercises/beginner/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2yjwXTZQDDI?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/shoulders.svg',
+      formCue: 'Tempo 3-1-1-0 — Full back support, elbows slightly forward in scapular plane.',
+      steps: [
+        'Sit on a 90-degree upright bench with back pressed firmly into the backrest.',
+        'Hold dumbbells at shoulder height with palms facing forward or slightly angled.',
+        'Press weights straight up overhead until arms are nearly extended.',
+        'Lower with control over 3 seconds back to ear level.'
+      ],
+      commonMistakes: [
+        'Arching lower back off the backrest.',
+        'Clanking dumbbells together at the top.'
+      ],
+      machine: {
+        name: '90-Degree Upright Utility Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbell Racks',
+        setupGuide: 'Pin backrest to 85°-90° upright position.',
+        equipmentChecklist: ['Pair of dumbbells (5kg-10kg)', 'Upright bench'],
+        alternatives: [
+          { name: 'Machine Shoulder Press', zone: 'Zone B • Machine Bay', swapReason: 'Guided track provides complete stabilization' }
+        ]
+      }
+    },
+    {
+      id: 'beg_shoulders_2',
+      name: 'Standing Dumbbell Lateral Raise',
+      level: 'beginner',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '4-7 kg / side',
+      imageUrl: '/exercises/beginner/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/3VcKaXpzqRo?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/shoulders.svg',
+      formCue: 'Tempo 2-1-2-0 — Lead with elbows, pour from a pitcher motion.',
+      steps: [
+        'Stand with feet shoulder-width apart, holding light dumbbells at your sides.',
+        'Slight bend in elbows. Raise dumbbells outward and upward until parallel to floor.',
+        'Hold for a split-second feeling the lateral deltoid burn.',
+        'Lower smoothly back to starting position.'
+      ],
+      commonMistakes: [
+        'Swinging hips or using momentum.',
+        'Lifting higher than shoulder level.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Accessory',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Select light pair to preserve strict deltoid isolation.',
+        equipmentChecklist: ['Light dumbbells (4kg-7kg)'],
+        alternatives: [
+          { name: 'Cable Lateral Raise', zone: 'Zone C • Cable Bay', swapReason: 'Constant tension throughout bottom range' }
+        ]
+      }
+    },
+    {
+      id: 'beg_shoulders_3',
+      name: 'Machine Shoulder Press',
+      level: 'beginner',
+      targetMuscle: 'Shoulders',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg',
+      imageUrl: '/exercises/beginner/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/kGpo74u_1DQ?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/shoulders.svg',
+      formCue: 'Tempo 3-0-1-0 — Guided overhead vertical press path.',
+      steps: [
+        'Adjust seat so handles start at ear height.',
+        'Sit with back flat against the pad and grasp handles.',
+        'Exhale as you press upward into full extension without hyperextending elbows.',
+        'Inhale while lowering handles smoothly to ear height.'
+      ],
+      commonMistakes: [
+        'Dropping seat too low putting rotator cuff under excessive strain.',
+        'Shrugging traps excessively.'
+      ],
+      machine: {
+        name: 'Overhead Shoulder Press Machine',
+        type: 'Selectorized Machine',
+        gymZone: 'Zone B • Machine Bay',
+        setupGuide: 'Seat height notch #4. Neutral or pronated grip handles.',
+        equipmentChecklist: ['Seat pin', 'Weight stack pin'],
+        alternatives: [
+          { name: 'Seated Dumbbell Press', zone: 'Zone A • Free Weights', swapReason: 'Free weight functional stabilization' }
+        ]
+      }
+    },
+    {
+      id: 'beg_shoulders_4',
+      name: 'Cable Face Pull (Rope Attachment)',
+      level: 'beginner',
+      targetMuscle: 'Shoulders',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '10-20 kg',
+      imageUrl: '/exercises/beginner/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/b_lex4Bi1nQ?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/shoulders.svg',
+      formCue: 'Tempo 2-1-2-1 — Pull rope to forehead, rotate hands outward.',
+      steps: [
+        'Attach rope attachment to cable pulley set at eye level.',
+        'Grip rope ends with thumbs pointing backward and step into split stance.',
+        'Pull rope directly toward eye level while driving elbows high and wide.',
+        'External rotate hands back at end range, pause 1s, then slowly extend.'
+      ],
+      commonMistakes: [
+        'Pulling down to chest instead of face.',
+        'Dropping elbows below wrist level.'
+      ],
+      machine: {
+        name: 'Adjustable Cable Column & Braided Rope',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Set pulley to eye height (hole #9).',
+        equipmentChecklist: ['Tricep / Face pull braided rope'],
+        alternatives: [
+          { name: 'Reverse Pec Deck Fly', zone: 'Zone B • Machine Bay', swapReason: 'Direct rear delt isolation' }
+        ]
+      }
+    },
+    {
+      id: 'beg_shoulders_5',
+      name: 'Dumbbell Front Raise (Alternating)',
+      level: 'beginner',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '5-7.5 kg / side',
+      imageUrl: '/exercises/beginner/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/-t7fuZ0KhDA?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/shoulders.svg',
+      formCue: 'Tempo 2-0-1-0 — Smooth alternating front delt raise.',
+      steps: [
+        'Hold dumbbells resting on the front of your thighs.',
+        'Raise one dumbbell straight forward to shoulder height with palm down.',
+        'Pause briefly at horizontal level, then lower under control.',
+        'Alternate with the opposite arm in rhythm.'
+      ],
+      commonMistakes: [
+        'Leaning back as weight rises.',
+        'Swinging torso.'
+      ],
+      machine: {
+        name: 'Free Weight Dumbbell Rack',
+        type: 'Free Weight Area',
+        gymZone: 'Zone A • Dumbbell Bay',
+        setupGuide: 'Clear 2-meter standing perimeter.',
+        equipmentChecklist: ['Dumbbells'],
+        alternatives: [
+          { name: 'Cable Front Raise with Straight Bar', zone: 'Zone C • Cable Bay', swapReason: 'Smooth cable resistance' }
+        ]
+      }
+    },
+
+    // Legs (5 exercises)
+    {
+      id: 'beg_legs_1',
+      name: 'Leg Press (45-Degree Incline)',
+      level: 'beginner',
+      targetMuscle: 'Legs',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 90,
+      suggestedLoad: '40-60 kg',
+      imageUrl: '/exercises/beginner/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/MVMNk0HiTMg?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — Knees track over toes, do not lock knees at lockout.',
+      steps: [
+        'Sit firmly in the leg press seat with lower back and hips pressed against pad.',
+        'Place feet hip-width apart in the center of the footplate.',
+        'Release safety handles and lower weight slowly until knees bend to 90 degrees.',
+        'Press smoothly through heels to return, keeping soft bend in knees at top.'
+      ],
+      commonMistakes: [
+        'Allowing lower back to curl off the seat pad.',
+        'Hyperextending and violently locking knee joints at the top.'
+      ],
+      machine: {
+        name: '45-Degree Plate-Loaded Leg Press',
+        type: 'Compound Lower Body Machine',
+        gymZone: 'Zone D • Leg Arena',
+        setupGuide: 'Check safety catch handles. Seat angle set to notch #3.',
+        equipmentChecklist: ['Bumper/Iron weight plates', 'Safety locks'],
+        alternatives: [
+          { name: 'Horizontal Cable Leg Press', zone: 'Zone B • Selectorized Bay', swapReason: 'Easier pin selection for beginners' }
+        ]
+      }
+    },
+    {
+      id: 'beg_legs_2',
+      name: 'Goblet Squat (Dumbbell or Kettlebell)',
+      level: 'beginner',
+      targetMuscle: 'Legs',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '8-14 kg',
+      imageUrl: '/exercises/beginner/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/SW_C1A-rejs?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — Keep weight tight against sternum, elbows inside knees.',
+      steps: [
+        'Stand with feet slightly wider than shoulder-width, toes angled slightly out.',
+        'Hold dumbbell vertically against chest with palms supporting the upper head.',
+        'Sit hips back and down between heels, keeping chest proudly upright.',
+        'Drive through whole foot to stand back up to starting position.'
+      ],
+      commonMistakes: [
+        'Letting chest collapse forward.',
+        'Knees caving inward during ascent.'
+      ],
+      machine: {
+        name: 'Dumbbell / Kettlebell Stand',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Dumbbell Arena',
+        setupGuide: 'Select single 8kg or 12kg dumbbell/kettlebell.',
+        equipmentChecklist: ['1x Dumbbell or Kettlebell'],
+        alternatives: [
+          { name: 'Box Squat', zone: 'Zone A • Free Weights', swapReason: 'Provides tangible depth reference point' }
+        ]
+      }
+    },
+    {
+      id: 'beg_legs_3',
+      name: 'Seated Leg Extension (Quads)',
+      level: 'beginner',
+      targetMuscle: 'Legs',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '20-30 kg',
+      imageUrl: '/exercises/beginner/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2C-uNgKwPLE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/legs.svg',
+      formCue: 'Tempo 2-1-2-0 — Controlled quad extension with 1s squeeze at top.',
+      steps: [
+        'Sit with back against backrest, knee joint aligned with machine pivot axis.',
+        'Ankle pad should rest comfortably on lower shins just above ankles.',
+        'Extend legs forward and upward until knees are fully extended.',
+        'Squeeze quadriceps for 1s, then lower slowly over 2-3 seconds.'
+      ],
+      commonMistakes: [
+        'Kicking weight up with momentum.',
+        'Letting hips rise up off the seat.'
+      ],
+      machine: {
+        name: 'Selectorized Leg Extension Machine',
+        type: 'Quadriceps Isolation Machine',
+        gymZone: 'Zone B • Selectorized Machine Bay',
+        setupGuide: 'Align knee joint precisely with rotation pivot indicator.',
+        equipmentChecklist: ['Backrest adjustment pin', 'Ankle roller pad pin'],
+        alternatives: [
+          { name: 'Terminal Knee Extension with Band', zone: 'Zone E • Functional Bay', swapReason: 'Gentle rehab-friendly quad recruitment' }
+        ]
+      }
+    },
+    {
+      id: 'beg_legs_4',
+      name: 'Lying or Seated Leg Curl (Hamstrings)',
+      level: 'beginner',
+      targetMuscle: 'Legs',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '20-30 kg',
+      imageUrl: '/exercises/beginner/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/1Tq3QdYUuHs?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/legs.svg',
+      formCue: 'Tempo 2-1-3-0 — Smooth hamstring contraction, slow 3s eccentric.',
+      steps: [
+        'Lie face down with Achilles tendons tucked under the lower leg roller pad.',
+        'Grip side handles and keep hips pressed down firmly against the bench.',
+        'Curl roller up toward your glutes by bending knees.',
+        'Hold contraction for 1 second, then lower back slowly.'
+      ],
+      commonMistakes: [
+        'Lifting hips off bench during contraction.',
+        'Lowering weight quickly without resistance.'
+      ],
+      machine: {
+        name: 'Prone Lying Leg Curl Machine',
+        type: 'Hamstring Isolation Machine',
+        gymZone: 'Zone B • Machine Bay',
+        setupGuide: 'Adjust ankle roller so it sits below calves on Achilles tendon.',
+        equipmentChecklist: ['Roller position pin', 'Weight stack pin'],
+        alternatives: [
+          { name: 'Seated Leg Curl', zone: 'Zone B • Machine Bay', swapReason: 'More comfortable position for lower back' }
+        ]
+      }
+    },
+    {
+      id: 'beg_legs_5',
+      name: 'Standing Calf Raise on Step',
+      level: 'beginner',
+      targetMuscle: 'Legs',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '15-20',
+      restSeconds: 45,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/YMmgqO8Jo-k?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/legs.svg',
+      formCue: 'Tempo 2-1-2-1 — Deep calf stretch at bottom, high extension on balls of feet.',
+      steps: [
+        'Stand with balls of feet on an elevated aerobic step or calf block, holding a railing for balance.',
+        'Lower heels down below step level until you feel a deep stretch in calves.',
+        'Press up powerfully onto the balls of both feet as high as possible.',
+        'Pause at peak for 1 second before lowering.'
+      ],
+      commonMistakes: [
+        'Bouncing rapidly without pausing.',
+        'Bending knees to generate momentum.'
+      ],
+      machine: {
+        name: 'Standing Calf Block / Aerobic Riser',
+        type: 'Calf Station',
+        gymZone: 'Zone A / Zone E • Free Weights',
+        setupGuide: 'Place sturdy block near wall or handrail.',
+        equipmentChecklist: ['Calf step block'],
+        alternatives: [
+          { name: 'Seated Calf Raise Machine', zone: 'Zone B • Machine Bay', swapReason: 'Isolates soleus muscle' }
+        ]
+      }
+    },
+
+    // Arms (5 exercises)
+    {
+      id: 'beg_arms_1',
+      name: 'Standing Dumbbell Bicep Curl',
+      level: 'beginner',
+      targetMuscle: 'Arms',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '6-10 kg / side',
+      imageUrl: '/exercises/beginner/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/ykJmrZ5v0Oo?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/arms.svg',
+      formCue: 'Tempo 2-1-2-0 — Pin elbows against ribs, rotate wrists outward as you curl.',
+      steps: [
+        'Stand tall with dumbbells hanging at arm’s length, palms facing inward.',
+        'Keep upper arms stationary and curl weights upward while supinating wrists.',
+        'Squeeze biceps firmly at shoulder height.',
+        'Lower dumbbells with control back to starting neutral position.'
+      ],
+      commonMistakes: [
+        'Swinging torso to get weights up.',
+        'Moving elbows forward to reduce bicep tension.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Dumbbell Racks',
+        setupGuide: 'Select matching dumbbell pair.',
+        equipmentChecklist: ['Pair of 6kg-10kg dumbbells'],
+        alternatives: [
+          { name: 'Cable Bicep Curl with EZ Bar', zone: 'Zone C • Cable Bay', swapReason: 'Consistent cable tension throughout' }
+        ]
+      }
+    },
+    {
+      id: 'beg_arms_2',
+      name: 'Cable Tricep Rope Pushdown',
+      level: 'beginner',
+      targetMuscle: 'Arms',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '12-20 kg',
+      imageUrl: '/exercises/beginner/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2-LAMcpzODU?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/arms.svg',
+      formCue: 'Tempo 2-1-2-0 — Spread rope ends apart at the bottom for tricep lock.',
+      steps: [
+        'Attach rope attachment to high cable pulley.',
+        'Hold rope ends with elbows pinned tight against your sides.',
+        'Push hands down toward thighs, spreading ends of the rope outward at the bottom.',
+        'Squeeze triceps for 1s, then return hands slowly to chest level.'
+      ],
+      commonMistakes: [
+        'Allowing elbows to flare forward or drift upward.',
+        'Leaning entire bodyweight over the rope.'
+      ],
+      machine: {
+        name: 'High Pulley Cable Column',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Pulley pin set to top position (notch #12).',
+        equipmentChecklist: ['Braided tricep rope'],
+        alternatives: [
+          { name: 'Straight Bar Cable Pushdown', zone: 'Zone C • Cable Bay', swapReason: 'Heavier load capacity with fixed grip' }
+        ]
+      }
+    },
+    {
+      id: 'beg_arms_3',
+      name: 'Dumbbell Hammer Curl (Neutral Grip)',
+      level: 'beginner',
+      targetMuscle: 'Arms',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '6-10 kg / side',
+      imageUrl: '/exercises/beginner/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/in7PaeYlhrM?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/arms.svg',
+      formCue: 'Tempo 2-0-2-0 — Palms face each other throughout to target brachialis.',
+      steps: [
+        'Hold dumbbells at sides with neutral grip (palms facing each other).',
+        'Keep elbows stationary beside torso and curl dumbbells upward.',
+        'Pause at top for 1 second squeezing forearms and brachialis.',
+        'Lower weights slowly under complete muscular control.'
+      ],
+      commonMistakes: [
+        'Swinging weights using shoulder flexion.',
+        'Letting wrists bend backwards.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Dumbbells',
+        setupGuide: 'Dumbbells ready at side.',
+        equipmentChecklist: ['Dumbbell pair'],
+        alternatives: [
+          { name: 'Rope Cable Hammer Curl', zone: 'Zone C • Cable Bay', swapReason: 'Continuous cable resistance' }
+        ]
+      }
+    },
+    {
+      id: 'beg_arms_4',
+      name: 'Bench Tricep Dips (Feet on Floor)',
+      level: 'beginner',
+      targetMuscle: 'Arms',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/0326dy_-CzM?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/arms.svg',
+      formCue: 'Tempo 2-1-1-0 — Keep back close to bench, bend elbows to 90 degrees.',
+      steps: [
+        'Sit on edge of a flat bench with hands next to hips gripping edge.',
+        'Extend legs forward with knees bent at 90 degrees and feet flat on floor.',
+        'Slide glutes off bench and lower hips by bending elbows to 90 degrees.',
+        'Press through palms to push back up to starting lockout.'
+      ],
+      commonMistakes: [
+        'Drifting hips too far away from bench putting excessive torque on shoulders.',
+        'Shrugging shoulders up toward ears.'
+      ],
+      machine: {
+        name: 'Flat Utility Gym Bench',
+        type: 'Free Weight Accessory',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Position bench securely on level rubber matting.',
+        equipmentChecklist: ['Flat bench'],
+        alternatives: [
+          { name: 'Assisted Dip Machine', zone: 'Zone B • Machine Bay', swapReason: 'Allows full range dip motion with counterweight' }
+        ]
+      }
+    },
+    {
+      id: 'beg_arms_5',
+      name: 'Preacher Curl Machine',
+      level: 'beginner',
+      targetMuscle: 'Arms',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg',
+      imageUrl: '/exercises/beginner/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/0AUGkch3tzc?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/arms.svg',
+      formCue: 'Tempo 3-1-1-0 — Full bicep isolation without swinging.',
+      steps: [
+        'Adjust seat height so armpits rest comfortably over the top edge of the angled pad.',
+        'Grasp handles with underhand grip and arms fully extended on the pad.',
+        'Curl handles upward toward shoulders, squeezing biceps hard at the top.',
+        'Lower weights smoothly over 3 seconds until arms are nearly straight.'
+      ],
+      commonMistakes: [
+        'Lifting elbows off pad during curl.',
+        'Hyperextending elbows abruptly at bottom.'
+      ],
+      machine: {
+        name: 'Selectorized Preacher Bicep Curl Machine',
+        type: 'Bicep Isolation Machine',
+        gymZone: 'Zone B • Machine Bay',
+        setupGuide: 'Seat pin set so chest meets pad comfortably.',
+        equipmentChecklist: ['Seat pin', 'Weight pin'],
+        alternatives: [
+          { name: 'EZ-Bar Preacher Bench Curl', zone: 'Zone A • Free Weights', swapReason: 'Free weight barbell track' }
+        ]
+      }
+    },
+
+    // Core (5 exercises)
+    {
+      id: 'beg_core_1',
+      name: 'Forearm Plank (Standard Hold)',
+      level: 'beginner',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '30-45s',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/wkD8rjkodUI?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/core.svg',
+      formCue: 'Static Hold — Squeeze glutes and brace core as if bracing for a punch.',
+      steps: [
+        'Place forearms on mat with elbows directly under shoulders.',
+        'Extend legs straight behind you, resting on balls of feet.',
+        'Tuck pelvis slightly, squeeze glutes, and draw navel toward spine.',
+        'Breathe steadily while maintaining a straight line from crown of head to heels.'
+      ],
+      commonMistakes: [
+        'Sagging lower back towards floor.',
+        'Hiking hips up into an inverted V shape.'
+      ],
+      machine: {
+        name: 'Stretching Mat & Floor Area',
+        type: 'Floor Area',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Roll out clean exercise mat.',
+        equipmentChecklist: ['Padded exercise mat'],
+        alternatives: [
+          { name: 'Knee Plank', zone: 'Zone E • Mat Area', swapReason: 'Reduced lever arm for beginners' }
+        ]
+      }
+    },
+    {
+      id: 'beg_core_2',
+      name: 'Dead Bug (Floor Core Stabilization)',
+      level: 'beginner',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '10-12 / side',
+      restSeconds: 45,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/g_BYB0R-4Ws?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/core.svg',
+      formCue: 'Tempo 2-1-2-0 — Keep lower back pinned firmly against the floor.',
+      steps: [
+        'Lie on back with arms pointing to ceiling and knees bent at 90 degrees above hips.',
+        'Press your lower back flat into the mat eliminating any gap.',
+        'Slowly lower right arm back and left leg forward toward the floor simultaneously.',
+        'Return to center and repeat on opposite diagonal side.'
+      ],
+      commonMistakes: [
+        'Allowing lower back to arch off the floor.',
+        'Rushing the movement without breathing.'
+      ],
+      machine: {
+        name: 'Cushioned Exercise Mat',
+        type: 'Floor Equipment',
+        gymZone: 'Zone E • Core Bay',
+        setupGuide: 'Open mat area.',
+        equipmentChecklist: ['Floor mat'],
+        alternatives: [
+          { name: 'Bird Dog', zone: 'Zone E • Mat Area', swapReason: 'Prone diagonal stabilization' }
+        ]
+      }
+    },
+    {
+      id: 'beg_core_3',
+      name: 'Seated Abdominal Crunch Machine',
+      level: 'beginner',
+      targetMuscle: 'Core',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg',
+      imageUrl: '/exercises/beginner/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2vIe0D83v2I?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/core.svg',
+      formCue: 'Tempo 2-1-2-0 — Curl spine forward rather than pushing with arms.',
+      steps: [
+        'Sit in machine and adjust seat so chest pad sits against sternum.',
+        'Place feet securely on the footrests or under rollers.',
+        'Contract abdominal wall and crunch ribs down toward hips.',
+        'Hold contraction for 1 second, then control back to starting upright posture.'
+      ],
+      commonMistakes: [
+        'Pulling with arm strength rather than contracting abs.',
+        'Over-arching spine on the return.'
+      ],
+      machine: {
+        name: 'Selectorized Ab Crunch Machine',
+        type: 'Core Machine',
+        gymZone: 'Zone B • Machine Bay',
+        setupGuide: 'Pin load to 15kg-20kg to start.',
+        equipmentChecklist: ['Seat pin', 'Weight pin'],
+        alternatives: [
+          { name: 'Floor Crunches on Mat', zone: 'Zone E • Turf', swapReason: 'Classic bodyweight crunch' }
+        ]
+      }
+    },
+    {
+      id: 'beg_core_4',
+      name: 'Bird-Dog (Quadruped Core Balance)',
+      level: 'beginner',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '10-12 / side',
+      restSeconds: 45,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/wiFNA3sqjCA?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/core.svg',
+      formCue: 'Tempo 2-1-2-0 — Hips level, reach fingers forward and heels back.',
+      steps: [
+        'Start on hands and knees with hands under shoulders and knees under hips.',
+        'Reach right arm straight forward and left leg straight back until parallel to floor.',
+        'Hold for 1 second keeping hips square to the ground.',
+        'Return to hands and knees and alternate sides.'
+      ],
+      commonMistakes: [
+        'Rotating hips sideways.',
+        'Lifting limbs higher than torso height.'
+      ],
+      machine: {
+        name: 'Floor Exercise Mat',
+        type: 'Bodyweight Space',
+        gymZone: 'Zone E • Mat Bay',
+        setupGuide: 'Clear mat area.',
+        equipmentChecklist: ['Mat'],
+        alternatives: [
+          { name: 'Dead Bug', zone: 'Zone E • Mat Bay', swapReason: 'Supine equivalent' }
+        ]
+      }
+    },
+    {
+      id: 'beg_core_5',
+      name: 'Pallof Press (Cable Core Anti-Rotation)',
+      level: 'beginner',
+      targetMuscle: 'Core',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '10-12 / side',
+      restSeconds: 45,
+      suggestedLoad: '7.5-12.5 kg',
+      imageUrl: '/exercises/beginner/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/AH_QZLm_0-s?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/core.svg',
+      formCue: 'Tempo 2-2-2-0 — Resist the cable pull trying to rotate your torso.',
+      steps: [
+        'Set cable pulley to chest height with a single D-handle.',
+        'Stand sideways to cable machine holding handle with both hands at center of chest.',
+        'Step out to create tension. Feet shoulder-width apart, knees soft.',
+        'Press handle straight out in front of chest, hold for 2s resisting rotation, then return to chest.'
+      ],
+      commonMistakes: [
+        'Letting cable twist the torso towards the machine.',
+        'Holding breath during the press.'
+      ],
+      machine: {
+        name: 'Adjustable Cable Pulley Column',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Pulley height notch #8 (chest height). D-handle attachment.',
+        equipmentChecklist: ['Single D-handle', 'Weight pin'],
+        alternatives: [
+          { name: 'Band Anti-Rotation Press', zone: 'Zone E • Turf Area', swapReason: 'Elastic band variation' }
+        ]
+      }
+    },
+
+    // Cardio (5 exercises)
+    {
+      id: 'beg_cardio_1',
+      name: 'Treadmill Incline Walking (Low Impact)',
+      level: 'beginner',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 1,
+      reps: '15-20 min',
+      restSeconds: 60,
+      suggestedLoad: 'Speed 4.5-5.5 km/h | Incline 3-6%',
+      imageUrl: '/exercises/beginner/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/8i3Vrd95o2k?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/cardio.svg',
+      formCue: 'Steady State — Upright posture, arm swing rhythm, do not hold side rails.',
+      steps: [
+        'Step onto treadmill belt and attach safety stop clip to clothing.',
+        'Start at 4.0 km/h warm-up speed on flat incline for 2 minutes.',
+        'Increase incline to 4-6% and speed to 4.8-5.2 km/h for working interval.',
+        'Walk tall with natural arm swings keeping eyes forward on horizon.'
+      ],
+      commonMistakes: [
+        'Gripping handrails tightly reducing caloric burn and posture.',
+        'Slouching or looking down at feet.'
+      ],
+      machine: {
+        name: 'Commercial Motorized Treadmill (Life Fitness / Woodway)',
+        type: 'Cardio Machine',
+        gymZone: 'Zone F • Cardio Deck (East Window)',
+        setupGuide: 'Attach safety clip. Select Quick Start or Incline Walk program.',
+        equipmentChecklist: ['Safety stop clip', 'Water bottle holder'],
+        alternatives: [
+          { name: 'Elliptical Cross Trainer', zone: 'Zone F • Cardio Deck', swapReason: 'Zero-impact option for sensitive knees' }
+        ]
+      }
+    },
+    {
+      id: 'beg_cardio_2',
+      name: 'Stationary Recumbent Bike',
+      level: 'beginner',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 1,
+      reps: '15-20 min',
+      restSeconds: 60,
+      suggestedLoad: 'Resistance Level 4-6 | RPM 70-85',
+      imageUrl: '/exercises/beginner/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/9Zk7aZkU9_w?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/cardio.svg',
+      formCue: 'Aerobic Zone 2 — Relaxed back against seat, continuous fluid pedal strokes.',
+      steps: [
+        'Adjust seat distance so knees maintain slight bend at full pedal extension.',
+        'Fasten foot straps over running shoes.',
+        'Begin pedaling at a smooth cadence of 75-80 RPM.',
+        'Maintain steady aerobic breathing throughout the 15-minute session.'
+      ],
+      commonMistakes: [
+        'Seat too close causing knee strain.',
+        'Pedaling too slowly with excessively heavy resistance.'
+      ],
+      machine: {
+        name: 'Recumbent Exercise Bike (Matrix)',
+        type: 'Low-Impact Cardio Machine',
+        gymZone: 'Zone F • Cardio Deck',
+        setupGuide: 'Adjust seat slider lever to leg length.',
+        equipmentChecklist: ['Pedal straps', 'Console screen'],
+        alternatives: [
+          { name: 'Upright Stationary Bike', zone: 'Zone F • Cardio Deck', swapReason: 'More upright core engagement' }
+        ]
+      }
+    },
+    {
+      id: 'beg_cardio_3',
+      name: 'Elliptical Cross Trainer (Zero Impact)',
+      level: 'beginner',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 1,
+      reps: '12-15 min',
+      restSeconds: 60,
+      suggestedLoad: 'Resistance 4-6 | Incline 3',
+      imageUrl: '/exercises/beginner/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/oKz_1RrhxQc?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/cardio.svg',
+      formCue: 'Full Body Push-Pull — Drive with legs while pushing and pulling dual handles.',
+      steps: [
+        'Step onto foot pedals and grasp moving upper handlebars.',
+        'Push forward in a smooth gliding oval path.',
+        'Distribute effort 60% through legs and 40% through upper body handles.',
+        'Keep heels pressed down onto pedals to protect calves.'
+      ],
+      commonMistakes: [
+        'Bouncing on toes only.',
+        'Leaning all weight onto stationary center handles.'
+      ],
+      machine: {
+        name: 'Elliptical Trainer (Precor EFX)',
+        type: 'Zero Impact Cardio Machine',
+        gymZone: 'Zone F • Cardio Deck',
+        setupGuide: 'Power on console by beginning pedal motion.',
+        equipmentChecklist: ['Hand pulse sensors', 'Handlebars'],
+        alternatives: [
+          { name: 'Treadmill Incline Walk', zone: 'Zone F • Cardio Deck', swapReason: 'Weight-bearing bone density support' }
+        ]
+      }
+    },
+    {
+      id: 'beg_cardio_4',
+      name: 'Concept2 Rowing Machine (Steady Aerobic Pace)',
+      level: 'beginner',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 1,
+      reps: '10-12 min',
+      restSeconds: 90,
+      suggestedLoad: 'Damper Setting 3-4 | Stroke Rate 22-24 s/m',
+      imageUrl: '/exercises/beginner/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/r_M39m_3r10?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/cardio.svg',
+      formCue: 'Sequencing: Legs -> Body -> Arms on drive; Arms -> Body -> Legs on recovery.',
+      steps: [
+        'Fasten foot straps over widest part of shoes. Set damper lever to 3 or 4.',
+        'Grasp handle with overhand grip and slide forward to the catch.',
+        'Drive powerfully through legs, swing torso back, and pull handle to lower ribs.',
+        'Extend arms forward, hinge torso forward, then slide legs back to repeat.'
+      ],
+      commonMistakes: [
+        'Pulling with arms before legs have driven.',
+        'Setting damper to 10 causing premature muscular fatigue.'
+      ],
+      machine: {
+        name: 'Concept2 Ergometer Model D',
+        type: 'Full Body Air Resistance Ergometer',
+        gymZone: 'Zone F • Cardio Arena',
+        setupGuide: 'Damper set to 3. PM5 monitor on Just Row.',
+        equipmentChecklist: ['Footplates & straps', 'Chain & handle'],
+        alternatives: [
+          { name: 'SkiErg Machine', zone: 'Zone F • Erg Bay', swapReason: 'Upper body pulling emphasis' }
+        ]
+      }
+    },
+    {
+      id: 'beg_cardio_5',
+      name: 'Low-Impact Step-Touch & Jumping Jacks (Modified)',
+      level: 'beginner',
+      targetMuscle: 'Cardio',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '45s work / 15s rest',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/beginner/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/UpH7rm0cYbM?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/beginner/cardio.svg',
+      formCue: 'Agility & Heart Rate — Soft knees, step feet out side to side with overhead clap.',
+      steps: [
+        'Stand with feet together and hands at sides.',
+        'Step right foot wide while raising arms overhead.',
+        'Return to center, then step left foot wide with overhead reach.',
+        'Maintain a quick, upbeat cardiovascular tempo for 45 continuous seconds.'
+      ],
+      commonMistakes: [
+        'Stomping heavily on heels.',
+        'Holding breath during movement intervals.'
+      ],
+      machine: {
+        name: 'Aerobic Exercise Flooring',
+        type: 'Bodyweight Zone',
+        gymZone: 'Zone E • Functional Studio',
+        setupGuide: 'Clear 2x2 meter floor perimeter.',
+        equipmentChecklist: ['Supportive athletic shoes'],
+        alternatives: [
+          { name: 'Jump Rope Single Bounces', zone: 'Zone E • Turf', swapReason: 'Higher impact rope skipping' }
+        ]
+      }
+    }
+  ],
+
+  intermediate: [
+    // Chest (5 exercises)
+    {
+      id: 'int_chest_1',
+      name: 'Barbell Flat Bench Press',
+      level: 'intermediate',
+      targetMuscle: 'Chest',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '50-70 kg',
+      imageUrl: '/exercises/intermediate/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/rT7DgCr-3pg?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/chest.svg',
+      formCue: 'Tempo 3-1-1-0 — Retract scapulae, touch mid-chest, drive feet into floor.',
+      steps: [
+        'Lie on bench with eyes directly under barbell. Pin shoulder blades into pad.',
+        'Grasp bar with thumb-around grip slightly wider than shoulder width.',
+        'Unrack bar, stabilize over chest, then lower bar under control to lower sternum.',
+        'Drive bar explosively back up to starting lockout.'
+      ],
+      commonMistakes: [
+        'Flaring elbows out at 90 degrees.',
+        'Bouncing bar violently off sternum.'
+      ],
+      machine: {
+        name: 'Olympic Flat Bench Press Station',
+        type: 'Free Weight Olympic Station',
+        gymZone: 'Zone A • Free Weights (East Bay)',
+        setupGuide: 'J-cup hooks set at notch #7. Collars secured on both ends.',
+        equipmentChecklist: ['20kg Olympic Barbell', 'Plates', 'Spring collars'],
+        alternatives: [
+          { name: 'Dumbbell Flat Bench Press', zone: 'Zone A • Dumbbells', swapReason: 'Allows independent hand rotation and deeper stretch' }
+        ]
+      }
+    },
+    {
+      id: 'int_chest_2',
+      name: 'Incline Dumbbell Press (30-Degree)',
+      level: 'intermediate',
+      targetMuscle: 'Chest',
+      equipment: 'Dumbbells',
+      sets: 4,
+      reps: '8-12',
+      restSeconds: 90,
+      suggestedLoad: '16-24 kg / side',
+      imageUrl: '/exercises/intermediate/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/4Y2ZdHCOXok?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/chest.svg',
+      formCue: 'Tempo 3-1-1-0 — 30-degree incline isolates upper clavicular fibers.',
+      steps: [
+        'Set utility bench to a 30-degree incline.',
+        'Kick dumbbells up to shoulders with knees and lie back.',
+        'Lower weights with elbows tucked at 45 degrees until deep chest stretch.',
+        'Press dumbbells upward in converging arc without clanking weights.'
+      ],
+      commonMistakes: [
+        'Setting bench angle too steep (>45 degrees engages front delts).',
+        'Dropping weights abruptly at bottom.'
+      ],
+      machine: {
+        name: 'Adjustable Incline Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Incline bench set to hole #3 (30 degrees).',
+        equipmentChecklist: ['Pair of dumbbells', 'Incline bench'],
+        alternatives: [
+          { name: 'Incline Barbell Bench Press', zone: 'Zone A • Olympic Bay', swapReason: 'Heavy progressive overload on upper chest' }
+        ]
+      }
+    },
+    {
+      id: 'int_chest_3',
+      name: 'Flat Dumbbell Chest Fly',
+      level: 'intermediate',
+      targetMuscle: 'Chest',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '12-16 kg / side',
+      imageUrl: '/exercises/intermediate/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/yN6Q1UI_xkE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/chest.svg',
+      formCue: 'Tempo 3-1-1-0 — Maintain fixed 15-degree elbow bend throughout arc.',
+      steps: [
+        'Lie on flat bench holding dumbbells extended above chest, palms facing each other.',
+        'Open arms out laterally in a wide hugging arc keeping a slight bend in elbows.',
+        'Lower until elbows are in line with bench surface and chest is fully stretched.',
+        'Squeeze pecs hard to bring dumbbells back together over sternum.'
+      ],
+      commonMistakes: [
+        'Bending elbows too much turning fly into a bench press.',
+        'Over-stretching below bench plane straining shoulder joint.'
+      ],
+      machine: {
+        name: 'Flat Utility Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbells',
+        setupGuide: 'Flat bench placed with clearance around.',
+        equipmentChecklist: ['Dumbbells', 'Flat bench'],
+        alternatives: [
+          { name: 'Cable Crossover Fly', zone: 'Zone C • Cable Bay', swapReason: 'Constant tension at peak contraction' }
+        ]
+      }
+    },
+    {
+      id: 'int_chest_4',
+      name: 'Parallel Bar Bodyweight Dips (Chest Lean)',
+      level: 'intermediate',
+      targetMuscle: 'Chest',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '8-12',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/intermediate/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2z8JmcrW-As?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/chest.svg',
+      formCue: 'Tempo 3-0-1-0 — Lean torso forward 20-30 degrees to bias lower pectorals.',
+      steps: [
+        'Mount parallel dip bars with arms locked out and wrists straight.',
+        'Cross ankles and pitch torso forward roughly 30 degrees.',
+        'Lower body smoothly by bending elbows until upper arms are parallel to floor.',
+        'Press powerfully upward through palms returning to start.'
+      ],
+      commonMistakes: [
+        'Staying too upright which shifts all load to triceps.',
+        'Dropping too deep tearing anterior shoulder capsule.'
+      ],
+      machine: {
+        name: 'Parallel Dip Tower Station',
+        type: 'Calisthenics Rig',
+        gymZone: 'Zone B • Dip & Pull-Up Tower',
+        setupGuide: 'Grip bars at shoulder width.',
+        equipmentChecklist: ['Dip station'],
+        alternatives: [
+          { name: 'Decline Dumbbell Press', zone: 'Zone A • Free Weights', swapReason: 'Targets lower chest with supported back' }
+        ]
+      }
+    },
+    {
+      id: 'int_chest_5',
+      name: 'Low-to-High Cable Crossover (Upper Pecs)',
+      level: 'intermediate',
+      targetMuscle: 'Chest',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '10-15 kg / side',
+      imageUrl: '/exercises/intermediate/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/qqlJe4T1_uI?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/chest.svg',
+      formCue: 'Tempo 2-1-2-1 — Scoop upward from hip level to chin height, peak squeeze.',
+      steps: [
+        'Set pulleys to lowest notch on dual cable column with single D-handles.',
+        'Stand in split stance between towers with palms facing forward and slightly up.',
+        'Sweep handles upward and inward in a scooping motion meeting at upper chest level.',
+        'Squeeze upper chest for 1 second, then lower back slowly under tension.'
+      ],
+      commonMistakes: [
+        'Using back momentum to fling cables up.',
+        'Turning movement into a bicep curl.'
+      ],
+      machine: {
+        name: 'Dual Adjustable Cable Column',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Pulleys set to bottom position (notch #1).',
+        equipmentChecklist: ['2x Single D-handles'],
+        alternatives: [
+          { name: 'Incline Dumbbell Fly', zone: 'Zone A • Free Weights', swapReason: 'Free weight upper chest stretch' }
+        ]
+      }
+    },
+
+    // Back (5 exercises)
+    {
+      id: 'int_back_1',
+      name: 'Bent-Over Barbell Row',
+      level: 'intermediate',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '45-65 kg',
+      imageUrl: '/exercises/intermediate/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/FWJR5Ve8gkQ?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/back.svg',
+      formCue: 'Tempo 2-1-1-0 — 45-degree hip hinge, pull bar to lower belly button.',
+      steps: [
+        'Stand with feet hip-width apart holding barbell with overhand shoulder-width grip.',
+        'Hinge at hips, bending knees slightly, until torso is at a 45-degree angle.',
+        'Pull bar up toward lower ribcage by driving elbows behind you.',
+        'Pause at peak to squeeze lats and rhomboids, then lower under control.'
+      ],
+      commonMistakes: [
+        'Standing completely upright to heave weight with traps.',
+        'Rounding lumbar spine during the row.'
+      ],
+      machine: {
+        name: 'Olympic Barbell & Rubber Bumper Plates',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Free Weight Platforms',
+        setupGuide: 'Load barbell on floor or rack pins. Collar weight plates.',
+        equipmentChecklist: ['Olympic bar', 'Plates', 'Spring collars'],
+        alternatives: [
+          { name: 'T-Bar Row Station', zone: 'Zone A • Free Weights', swapReason: 'More stable footplate position' }
+        ]
+      }
+    },
+    {
+      id: 'int_back_2',
+      name: 'One-Arm Dumbbell Row',
+      level: 'intermediate',
+      targetMuscle: 'Back',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '8-12 / side',
+      restSeconds: 60,
+      suggestedLoad: '18-28 kg',
+      imageUrl: '/exercises/intermediate/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/dFzUjzfih7k?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Pull dumbbell towards hip pocket, full lat stretch at bottom.',
+      steps: [
+        'Place left knee and left hand on a flat bench for sturdy support.',
+        'Hold dumbbell in right hand with arm extended, back flat and parallel to floor.',
+        'Row dumbbell upward toward your right hip, driving elbow toward the ceiling.',
+        'Lower dumbbell smoothly until back lat is fully lengthened.'
+      ],
+      commonMistakes: [
+        'Twisting upper torso aggressively to throw weight up.',
+        'Pulling dumbbell straight up to armpit instead of hip.'
+      ],
+      machine: {
+        name: 'Flat Utility Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbell Bay',
+        setupGuide: 'Select single heavy dumbbell.',
+        equipmentChecklist: ['Heavy dumbbell (18-28kg)', 'Bench'],
+        alternatives: [
+          { name: 'Chest Supported Machine Row', zone: 'Zone B • Machine Bay', swapReason: 'Removes lower back stabilizer fatigue' }
+        ]
+      }
+    },
+    {
+      id: 'int_back_3',
+      name: 'Unassisted Pull-Up (Overhand Wide Grip)',
+      level: 'intermediate',
+      targetMuscle: 'Back',
+      equipment: 'Bodyweight',
+      sets: 4,
+      reps: '6-10',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/intermediate/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/eGo4IYlbE5g?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Dead hang to full chin-over-bar clearance.',
+      steps: [
+        'Grasp pull-up bar with overhand grip wider than shoulder width.',
+        'Hang with arms fully extended and engage core.',
+        'Drive elbows down and back, pulling chest toward the bar until chin clears.',
+        'Lower under complete control back to full dead hang stretch.'
+      ],
+      commonMistakes: [
+        'Kipping legs or swinging torso to bounce up.',
+        'Half repetitions without reaching full extension.'
+      ],
+      machine: {
+        name: 'Multi-Grip Pull-Up Rig',
+        type: 'Calisthenics Station',
+        gymZone: 'Zone B • Rig Area',
+        setupGuide: 'Step onto platform to reach high bar.',
+        equipmentChecklist: ['Chalk block for grip'],
+        alternatives: [
+          { name: 'Band-Assisted Pull-Up', zone: 'Zone B • Rig', swapReason: 'Elastic assist to finish target reps' }
+        ]
+      }
+    },
+    {
+      id: 'int_back_4',
+      name: 'T-Bar Row (Chest Supported or Landmine)',
+      level: 'intermediate',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '30-50 kg',
+      imageUrl: '/exercises/intermediate/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/j3Igk5nyZE4?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Heavy mid-back thickness builder.',
+      steps: [
+        'Straddle T-bar platform or landmine barbell with feet wide and stable.',
+        'Hinge at hips with flat spine and grasp handles with neutral grip.',
+        'Pull handles forcefully into lower ribcage, pinning shoulder blades together.',
+        'Lower plates under control until arms are extended.'
+      ],
+      commonMistakes: [
+        'Rounding upper and lower spine under heavy loads.',
+        'Bouncing knees to cheat the row.'
+      ],
+      machine: {
+        name: 'T-Bar Plate Loaded Row Station',
+        type: 'Plate-Loaded Machine',
+        gymZone: 'Zone D • Back & Row Arena',
+        setupGuide: 'Load Olympic plates onto sleeve. Step onto textured footplates.',
+        equipmentChecklist: ['Olympic plates', 'Neutral handles'],
+        alternatives: [
+          { name: 'Seated Cable Row', zone: 'Zone C • Cable Bay', swapReason: 'Smoother cable resistance' }
+        ]
+      }
+    },
+    {
+      id: 'int_back_5',
+      name: 'Straight-Arm Cable Lat Pushdown',
+      level: 'intermediate',
+      targetMuscle: 'Back',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg',
+      imageUrl: '/exercises/intermediate/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/P_PqgLp3aP8?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/back.svg',
+      formCue: 'Tempo 3-1-1-0 — Pure lat isolation without bicep involvement.',
+      steps: [
+        'Attach straight bar or rope to high cable pulley.',
+        'Step back with feet shoulder-width, slight hip hinge, arms straight.',
+        'Push bar down in sweeping arc until it touches upper thighs.',
+        'Squeeze lats for 1 second, then control bar back up to eye level.'
+      ],
+      commonMistakes: [
+        'Bending elbows converting it into a tricep pushdown.',
+        'Swinging torso forward and back.'
+      ],
+      machine: {
+        name: 'High Pulley Cable Column & Straight Bar',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Set pulley to top notch #12. Attach 20-inch straight bar.',
+        equipmentChecklist: ['Straight revolving bar'],
+        alternatives: [
+          { name: 'Dumbbell Pullover on Bench', zone: 'Zone A • Free Weights', swapReason: 'Free weight lat stretch' }
+        ]
+      }
+    },
+
+    // Shoulders (5 exercises)
+    {
+      id: 'int_shoulders_1',
+      name: 'Standing Barbell Overhead Press (OHP)',
+      level: 'intermediate',
+      targetMuscle: 'Shoulders',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 90,
+      suggestedLoad: '35-50 kg',
+      imageUrl: '/exercises/intermediate/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/qEwKCR5JCog?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/shoulders.svg',
+      formCue: 'Tempo 2-1-1-0 — Full body tension, glutes squeezed, head moves through window.',
+      steps: [
+        'Unrack barbell from collarbone height with grip just outside shoulders.',
+        'Brace core and squeeze glutes tight to protect lower back.',
+        'Press bar vertically overhead, moving head back slightly to clear chin, then pushing head through window at top.',
+        'Lock out directly over mid-foot, then lower under control to clavicle.'
+      ],
+      commonMistakes: [
+        'Hyperextending lumbar spine excessively.',
+        'Pressing bar too far forward in front of body.'
+      ],
+      machine: {
+        name: 'Power Rack & Olympic Barbell',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Power Cages',
+        setupGuide: 'Set J-cups at mid-chest height. Collar all plates.',
+        equipmentChecklist: ['20kg Olympic bar', 'Weight plates', 'Spring collars'],
+        alternatives: [
+          { name: 'Seated Dumbbell Shoulder Press', zone: 'Zone A • Dumbbells', swapReason: 'Supported back posture' }
+        ]
+      }
+    },
+    {
+      id: 'int_shoulders_2',
+      name: 'Arnold Dumbbell Press',
+      level: 'intermediate',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '8-12',
+      restSeconds: 60,
+      suggestedLoad: '12-18 kg / side',
+      imageUrl: '/exercises/intermediate/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/6Z15_WdXmVw?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/shoulders.svg',
+      formCue: 'Tempo 3-1-1-0 — Continuous 180-degree rotation engages all 3 deltoid heads.',
+      steps: [
+        'Sit on upright bench holding dumbbells at chest height with palms facing torso.',
+        'As you press upward, rotate wrists so palms face forward at top of movement.',
+        'Lock out smoothly overhead, then reverse rotation slowly as you lower.'
+      ],
+      commonMistakes: [
+        'Using excessively heavy weight sacrificing rotation control.',
+        'Rushing the descent.'
+      ],
+      machine: {
+        name: 'Upright Utility Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbell Racks',
+        setupGuide: 'Bench set to 90 degrees.',
+        equipmentChecklist: ['Dumbbells', 'Bench'],
+        alternatives: [
+          { name: 'Standard Dumbbell Shoulder Press', zone: 'Zone A • Dumbbells', swapReason: 'Simpler overhead trajectory' }
+        ]
+      }
+    },
+    {
+      id: 'int_shoulders_3',
+      name: 'Single-Arm Cable Lateral Raise',
+      level: 'intermediate',
+      targetMuscle: 'Shoulders',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '10-12 / side',
+      restSeconds: 60,
+      suggestedLoad: '5-10 kg',
+      imageUrl: '/exercises/intermediate/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/PPrzBWZDOhA?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/shoulders.svg',
+      formCue: 'Tempo 2-1-2-0 — Continuous tension on lateral head even at the bottom.',
+      steps: [
+        'Set cable pulley to lowest position. Stand with side to machine holding D-handle.',
+        'Hold machine upright with opposite hand and lean slightly outward.',
+        'Raise arm out to the side until parallel to floor, keeping slight elbow bend.',
+        'Hold for 1s, then lower slowly resisting the cable pull.'
+      ],
+      commonMistakes: [
+        'Using shoulder shrugging momentum.',
+        'Lifting hand higher than elbow.'
+      ],
+      machine: {
+        name: 'Adjustable Cable Pulley Column',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Pulley set to notch #1.',
+        equipmentChecklist: ['Single D-handle'],
+        alternatives: [
+          { name: 'Dumbbell Lateral Raise', zone: 'Zone A • Free Weights', swapReason: 'Classic free weight variant' }
+        ]
+      }
+    },
+    {
+      id: 'int_shoulders_4',
+      name: 'Barbell Upright Row (Wide Grip)',
+      level: 'intermediate',
+      targetMuscle: 'Shoulders',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '8-10',
+      restSeconds: 60,
+      suggestedLoad: '25-40 kg',
+      imageUrl: '/exercises/intermediate/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/amCU-ziHITM?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/shoulders.svg',
+      formCue: 'Tempo 2-1-2-0 — Wide grip protects rotator cuff, drive elbows high.',
+      steps: [
+        'Hold EZ-bar or barbell with wide overhand grip (wider than shoulders).',
+        'Stand tall with abs braced and bar resting on thighs.',
+        'Pull bar up along torso by driving elbows high and wide to chest height.',
+        'Lower bar under control over 2 seconds.'
+      ],
+      commonMistakes: [
+        'Using narrow grip which impinges shoulder joints.',
+        'Pulling bar up too high near chin.'
+      ],
+      machine: {
+        name: 'EZ-Curl Barbell & Plates',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Barbell Area',
+        setupGuide: 'Select EZ-curl bar for wrist-friendly angle.',
+        equipmentChecklist: ['EZ-bar', 'Collars'],
+        alternatives: [
+          { name: 'Cable Rope Upright Row', zone: 'Zone C • Cable Bay', swapReason: 'Allows wrists to separate naturally' }
+        ]
+      }
+    },
+    {
+      id: 'int_shoulders_5',
+      name: 'Bent-Over Dumbbell Rear Delt Fly',
+      level: 'intermediate',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '7.5-12 kg / side',
+      imageUrl: '/exercises/intermediate/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/ttvfGg9d76c?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/shoulders.svg',
+      formCue: 'Tempo 2-1-2-1 — Hinge torso flat, raise weights wide leading with pinkies.',
+      steps: [
+        'Stand with feet hip-width, hinge hips back until torso is almost parallel to floor.',
+        'Let dumbbells hang down with palms facing each other and elbows slightly bent.',
+        'Raise arms straight out to the sides squeezing rear delts at the top.',
+        'Hold peak contraction for 1 second before lowering slowly.'
+      ],
+      commonMistakes: [
+        'Swinging torso upward during repetition.',
+        'Using arms to row instead of flying outward.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Dumbbells',
+        setupGuide: 'Select light pair for strict rear delt isolation.',
+        equipmentChecklist: ['Dumbbells'],
+        alternatives: [
+          { name: 'Reverse Pec Deck Machine', zone: 'Zone B • Machine Bay', swapReason: 'Locked biomechanical arc' }
+        ]
+      }
+    },
+
+    // Legs (5 exercises)
+    {
+      id: 'int_legs_1',
+      name: 'Barbell Back Squat (High Bar)',
+      level: 'intermediate',
+      targetMuscle: 'Legs',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '60-90 kg',
+      imageUrl: '/exercises/intermediate/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/bEv6CCg2BC8?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — Break at hips and knees together, hit parallel depth.',
+      steps: [
+        'Step under bar in squat rack, placing it securely across upper traps.',
+        'Unrack bar, take 2 steps back, set feet shoulder-width with toes slightly flared.',
+        'Inhale deep into belly, brace core, and squat down until hip crease is below knee level.',
+        'Drive up out of the hole pushing evenly through mid-foot and heel.'
+      ],
+      commonMistakes: [
+        'Knees collapsing inward (valgus collapse).',
+        'Heels lifting off floor due to ankle tightness.'
+      ],
+      machine: {
+        name: 'Olympic Power Squat Cage',
+        type: 'Power Cage',
+        gymZone: 'Zone A • Power Rack Row (Bay 1)',
+        setupGuide: 'Set J-cups at armpit height. Safety crossbars at parallel squat depth.',
+        equipmentChecklist: ['20kg Olympic bar', 'Bumper plates', 'Collars'],
+        alternatives: [
+          { name: 'Hack Squat Machine', zone: 'Zone D • Leg Arena', swapReason: 'Supported spinal angle for high quad focus' }
+        ]
+      }
+    },
+    {
+      id: 'int_legs_2',
+      name: 'Romanian Deadlift (RDL with Dumbbells or Barbell)',
+      level: 'intermediate',
+      targetMuscle: 'Legs',
+      equipment: 'Dumbbells',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '20-30 kg / side',
+      imageUrl: '/exercises/intermediate/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/aclHkVaku9U?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — Push hips straight back to wall, intense hamstring stretch.',
+      steps: [
+        'Stand holding dumbbells or barbell in front of thighs with slight knee bend.',
+        'Hinge backward at hips, pushing glutes toward wall behind you.',
+        'Keep weights close to shins and lower until hamstrings are fully stretched (mid-shin).',
+        'Drive hips forward to return to standing, squeezing glutes at top.'
+      ],
+      commonMistakes: [
+        'Rounding lower back into flexion.',
+        'Turning movement into a squat by bending knees too much.'
+      ],
+      machine: {
+        name: 'Free Weight Lifting Platform',
+        type: 'Free Weight Area',
+        gymZone: 'Zone A • Lifting Decks',
+        setupGuide: 'Keep flat back posture.',
+        equipmentChecklist: ['Dumbbells or Barbell'],
+        alternatives: [
+          { name: 'Barbell Good Morning', zone: 'Zone A • Power Cages', swapReason: 'Direct posterior chain loading' }
+        ]
+      }
+    },
+    {
+      id: 'int_legs_3',
+      name: 'Bulgarian Split Squat (Dumbbell Loaded)',
+      level: 'intermediate',
+      targetMuscle: 'Legs',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '8-10 / leg',
+      restSeconds: 90,
+      suggestedLoad: '10-18 kg / side',
+      imageUrl: '/exercises/intermediate/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2C-uNgKwPLE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — Rear foot elevated on bench, unilateral quad & glute builder.',
+      steps: [
+        'Stand 2 feet in front of a flat bench holding dumbbells at your sides.',
+        'Place top of right foot laces-down on the bench behind you.',
+        'Lower hips until front thigh is parallel to floor and back knee nearly touches ground.',
+        'Drive through front heel to return to standing.'
+      ],
+      commonMistakes: [
+        'Front foot placed too close to bench causing extreme knee shear.',
+        'Leaning back excessively instead of maintaining forward torso angle.'
+      ],
+      machine: {
+        name: 'Flat Utility Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Bench positioned with clear floor space in front.',
+        equipmentChecklist: ['Dumbbells', 'Bench'],
+        alternatives: [
+          { name: 'Walking Dumbbell Lunges', zone: 'Zone E • Functional Turf', swapReason: 'Dynamic unilateral travel variation' }
+        ]
+      }
+    },
+    {
+      id: 'int_legs_4',
+      name: 'Hack Squat Machine (Plate Loaded)',
+      level: 'intermediate',
+      targetMuscle: 'Legs',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 90,
+      suggestedLoad: '50-80 kg',
+      imageUrl: '/exercises/intermediate/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/0tn5K9NlCfo?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — Full quad depth with complete back support.',
+      steps: [
+        'Step onto footplate with shoulder-width stance, shoulders under padded rests.',
+        'Disengage safety handles and lower carriage smoothly into full knee flexion.',
+        'Pause at bottom for 1 second without bouncing.',
+        'Press powerfully through whole foot back to near lockout.'
+      ],
+      commonMistakes: [
+        'Lifting heels off footplate.',
+        'Violently locking knees at top.'
+      ],
+      machine: {
+        name: '45-Degree Incline Hack Squat Machine',
+        type: 'Plate-Loaded Leg Machine',
+        gymZone: 'Zone D • Leg Arena (Bay 3)',
+        setupGuide: 'Release safety side levers after stepping in.',
+        equipmentChecklist: ['Olympic plates', 'Padded shoulder supports'],
+        alternatives: [
+          { name: 'Leg Press', zone: 'Zone D • Leg Arena', swapReason: 'Seated hip angle' }
+        ]
+      }
+    },
+    {
+      id: 'int_legs_5',
+      name: 'Seated Calf Raise (Soleus Focus)',
+      level: 'intermediate',
+      targetMuscle: 'Legs',
+      equipment: 'Machine',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '30-45 kg',
+      imageUrl: '/exercises/intermediate/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/JbyjNymZOt0?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/legs.svg',
+      formCue: 'Tempo 2-2-1-1 — 2s deep stretch at bottom, 1s hard contraction at peak.',
+      steps: [
+        'Sit on machine, place balls of feet on foot bar, and adjust thigh pad snugly over knees.',
+        'Release safety bar and lower heels down into maximum ankle dorsiflexion.',
+        'Hold deep stretch for 2 seconds.',
+        'Press high onto balls of feet contracting calves hard for 1 second.'
+      ],
+      commonMistakes: [
+        'Bouncing weight with momentum.',
+        'Shallow range of motion.'
+      ],
+      machine: {
+        name: 'Seated Plate-Loaded Calf Machine',
+        type: 'Plate-Loaded Machine',
+        gymZone: 'Zone D • Leg Arena',
+        setupGuide: 'Thigh pad locked securely above knee joints.',
+        equipmentChecklist: ['Plates', 'Thigh pad pin'],
+        alternatives: [
+          { name: 'Standing Calf Raise on Smith Machine', zone: 'Zone B • Smith Bay', swapReason: 'Standing gastrocnemius focus' }
+        ]
+      }
+    },
+
+    // Arms (5 exercises)
+    {
+      id: 'int_arms_1',
+      name: 'EZ-Bar Bicep Curl',
+      level: 'intermediate',
+      targetMuscle: 'Arms',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 60,
+      suggestedLoad: '20-35 kg',
+      imageUrl: '/exercises/intermediate/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/cdmWh2OQ4_Y?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/arms.svg',
+      formCue: 'Tempo 2-1-2-0 — Angled EZ grip reduces wrist torque and allows heavy loading.',
+      steps: [
+        'Grasp EZ-bar on the inner angled knurling with underhand grip.',
+        'Stand tall with elbows pinned against your flanks.',
+        'Curl bar upward toward chest, squeezing biceps firmly at top.',
+        'Lower bar under control over 2-3 seconds back to arms length.'
+      ],
+      commonMistakes: [
+        'Leaning back or swaying torso.',
+        'Letting elbows travel forward.'
+      ],
+      machine: {
+        name: 'Pre-Loaded EZ-Barbell Racks',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Barbell Area',
+        setupGuide: 'Select fixed EZ-bar or load plates with collars.',
+        equipmentChecklist: ['EZ-bar', 'Spring collars'],
+        alternatives: [
+          { name: 'Straight Olympic Bar Curl', zone: 'Zone A • Free Weights', swapReason: 'Maximum supination on bicep head' }
+        ]
+      }
+    },
+    {
+      id: 'int_arms_2',
+      name: 'Skull Crusher (Lying EZ-Bar Tricep Extension)',
+      level: 'intermediate',
+      targetMuscle: 'Arms',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '8-12',
+      restSeconds: 60,
+      suggestedLoad: '18-28 kg',
+      imageUrl: '/exercises/intermediate/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/6kALZikXxLc?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/arms.svg',
+      formCue: 'Tempo 3-1-1-0 — Lower bar to hairline, keep upper arms angled slightly back.',
+      steps: [
+        'Lie on flat bench holding EZ-bar with arms extended vertically.',
+        'Angle upper arms slightly backwards toward your head (10 degrees).',
+        'Bend elbows to lower bar smoothly down toward forehead/hairline.',
+        'Extend elbows forcefully to return bar to starting angle.'
+      ],
+      commonMistakes: [
+        'Letting elbows flare outward.',
+        'Moving entire upper arm instead of pivoting purely at elbow.'
+      ],
+      machine: {
+        name: 'Flat Utility Bench & EZ-Bar',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Bench set flat. Check collars are locked.',
+        equipmentChecklist: ['EZ-bar', 'Flat bench'],
+        alternatives: [
+          { name: 'Overhead Dumbbell Tricep Extension', zone: 'Zone A • Free Weights', swapReason: 'Deep stretch on long head of triceps' }
+        ]
+      }
+    },
+    {
+      id: 'int_arms_3',
+      name: 'Incline Dumbbell Bicep Curl',
+      level: 'intermediate',
+      targetMuscle: 'Arms',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '8-14 kg / side',
+      imageUrl: '/exercises/intermediate/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/soxrZlIl35U?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/arms.svg',
+      formCue: 'Tempo 3-1-1-0 — 45-degree incline puts long head of bicep under extreme stretch.',
+      steps: [
+        'Set utility bench to a 45-degree incline and sit back with head on pad.',
+        'Let arms hang vertically straight down holding dumbbells.',
+        'Curl dumbbells upward while supinating wrists, keeping upper arms hanging straight down.',
+        'Squeeze biceps at the top, then lower with control over 3 seconds.'
+      ],
+      commonMistakes: [
+        'Swinging arms forward out of the vertical plane.',
+        'Rushing through the bottom stretched position.'
+      ],
+      machine: {
+        name: 'Adjustable Utility Bench (45 degrees) & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbell Racks',
+        setupGuide: 'Incline pin in notch #4 (45 degrees).',
+        equipmentChecklist: ['Pair of dumbbells', 'Incline bench'],
+        alternatives: [
+          { name: 'Bayesian Cable Curl', zone: 'Zone C • Cable Bay', swapReason: 'Continuous cable tension in stretched position' }
+        ]
+      }
+    },
+    {
+      id: 'int_arms_4',
+      name: 'Overhead Cable Tricep Extension (Rope)',
+      level: 'intermediate',
+      targetMuscle: 'Arms',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg',
+      imageUrl: '/exercises/intermediate/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/kqidUIf1eJE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/arms.svg',
+      formCue: 'Tempo 3-1-1-0 — Deep stretch behind head, lock out overhead.',
+      steps: [
+        'Attach rope to mid-high cable pulley. Face away from machine with split stance.',
+        'Hold rope ends behind head with elbows pointing forward and bent.',
+        'Extend elbows forward and overhead, separating rope ends at full extension.',
+        'Slowly allow forearms to fold back behind head under steady cable tension.'
+      ],
+      commonMistakes: [
+        'Flaring elbows wide.',
+        'Arching lower back under load.'
+      ],
+      machine: {
+        name: 'Adjustable Cable Column & Braided Rope',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Set pulley to chest/shoulder height.',
+        equipmentChecklist: ['Braided rope attachment'],
+        alternatives: [
+          { name: 'Seated Overhead Dumbbell Extension', zone: 'Zone A • Free Weights', swapReason: 'Free weight long head tricep mass builder' }
+        ]
+      }
+    },
+    {
+      id: 'int_arms_5',
+      name: 'Cross-Body Dumbbell Hammer Curl',
+      level: 'intermediate',
+      targetMuscle: 'Arms',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '10-12 / side',
+      restSeconds: 60,
+      suggestedLoad: '10-16 kg / side',
+      imageUrl: '/exercises/intermediate/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/zC3nLlEvin4?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/arms.svg',
+      formCue: 'Tempo 2-0-1-0 — Curl across chest toward opposite collarbone.',
+      steps: [
+        'Stand holding dumbbells at your sides in neutral grip.',
+        'Curl right dumbbell diagonally across body toward left shoulder.',
+        'Squeeze brachioradialis and forearm hard at top.',
+        'Lower smoothly back to side and repeat with left arm.'
+      ],
+      commonMistakes: [
+        'Using momentum to throw weight across body.',
+        'Allowing wrist to bend.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Dumbbells',
+        setupGuide: 'Select moderate weight dumbbell pair.',
+        equipmentChecklist: ['Dumbbells'],
+        alternatives: [
+          { name: 'Standard Hammer Curl', zone: 'Zone A • Dumbbells', swapReason: 'Direct sagittal plane curl' }
+        ]
+      }
+    },
+
+    // Core (5 exercises)
+    {
+      id: 'int_core_1',
+      name: 'Hanging Leg Raise (Captain’s Chair or Pull-Up Bar)',
+      level: 'intermediate',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/intermediate/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/hdng3Nm1x_E?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/core.svg',
+      formCue: 'Tempo 2-1-2-0 — Roll pelvis upward to engage rectus abdominis.',
+      steps: [
+        'Mount Captain’s chair resting forearms on pads with back against cushion, or hang from pull-up bar.',
+        'Keep legs together and engage core.',
+        'Raise knees/legs up toward chest until thighs pass horizontal level.',
+        'Lower legs with complete control without swinging.'
+      ],
+      commonMistakes: [
+        'Swinging legs with momentum like a pendulum.',
+        'Arching lower back on descent.'
+      ],
+      machine: {
+        name: 'Captain’s Chair / Power Tower',
+        type: 'Core Station',
+        gymZone: 'Zone B • Tower Bay',
+        setupGuide: 'Rest forearms securely on horizontal pads.',
+        equipmentChecklist: ['Captain chair'],
+        alternatives: [
+          { name: 'Lying Leg Raise on Mat', zone: 'Zone E • Mat Area', swapReason: 'Supported back on floor' }
+        ]
+      }
+    },
+    {
+      id: 'int_core_2',
+      name: 'Cable Woodchopper (High-to-Low Oblique Drive)',
+      level: 'intermediate',
+      targetMuscle: 'Core',
+      equipment: 'Cable',
+      sets: 3,
+      reps: '10-12 / side',
+      restSeconds: 60,
+      suggestedLoad: '12-20 kg',
+      imageUrl: '/exercises/intermediate/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/Xyd_fa5zoEU?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/core.svg',
+      formCue: 'Tempo 2-0-1-0 — Pivot on back foot, drive rotation through core and hips.',
+      steps: [
+        'Set cable pulley to top height with single D-handle.',
+        'Stand sideways to machine, grasp handle with both hands above shoulder.',
+        'Pull handle diagonally downward across body toward opposite knee.',
+        'Control handle back up to start along the same diagonal path.'
+      ],
+      commonMistakes: [
+        'Pulling only with arms instead of rotating through torso.',
+        'Keeping feet glued to floor without pivoting.'
+      ],
+      machine: {
+        name: 'Adjustable Cable Pulley Column',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Pulley set to notch #12.',
+        equipmentChecklist: ['Single D-handle'],
+        alternatives: [
+          { name: 'Low-to-High Cable Woodchopper', zone: 'Zone C • Cable Bay', swapReason: 'Reverse diagonal rotation' }
+        ]
+      }
+    },
+    {
+      id: 'int_core_3',
+      name: 'Ab Roller Wheel Rollout (From Knees)',
+      level: 'intermediate',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '8-12',
+      restSeconds: 60,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/intermediate/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/1fbU_MkV7NE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/core.svg',
+      formCue: 'Tempo 3-1-2-0 — Hollow body position, roll wheel forward under strict control.',
+      steps: [
+        'Kneel on a soft exercise mat holding ab roller handles directly beneath shoulders.',
+        'Tuck pelvis into posterior tilt, rounding lower back slightly.',
+        'Roll wheel straight forward, extending body as far as you can control without sagging.',
+        'Pull through core and lats to roll wheel back to starting position.'
+      ],
+      commonMistakes: [
+        'Allowing lower back to hyperextend/dip toward floor.',
+        'Pulling hips back with glutes instead of engaging abs.'
+      ],
+      machine: {
+        name: 'Dual-Wheel Ab Roller on Mat',
+        type: 'Core Accessory',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Place knee mat on smooth level flooring.',
+        equipmentChecklist: ['Ab roller wheel', 'Knee pad'],
+        alternatives: [
+          { name: 'Stability Ball Rollout', zone: 'Zone E • Functional Turf', swapReason: 'Larger sphere makes rollout more forgiving' }
+        ]
+      }
+    },
+    {
+      id: 'int_core_4',
+      name: 'Russian Twists with Medicine Ball / Plate',
+      level: 'intermediate',
+      targetMuscle: 'Core',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '16-20 total',
+      restSeconds: 45,
+      suggestedLoad: '5-10 kg',
+      imageUrl: '/exercises/intermediate/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/DGC_x51N6yU?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/core.svg',
+      formCue: 'Tempo 2-0-2-0 — Feet elevated, rotate shoulders fully side to side.',
+      steps: [
+        'Sit on mat with knees bent, feet elevated 3 inches off the ground.',
+        'Lean torso back 45 degrees holding a 5-10kg plate or medicine ball with both hands.',
+        'Rotate torso smoothly to the right, tapping weight near hip.',
+        'Rotate fully across to the left side in steady control.'
+      ],
+      commonMistakes: [
+        'Only moving arms while torso stays rigid.',
+        'Rounding back and slouching chest.'
+      ],
+      machine: {
+        name: 'Medicine Ball / Weight Plate Area',
+        type: 'Free Weight Accessory',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Select 5kg or 8kg rubber medicine ball.',
+        equipmentChecklist: ['Medicine ball', 'Mat'],
+        alternatives: [
+          { name: 'Cable Russian Twist', zone: 'Zone C • Cable Bay', swapReason: 'Continuous rotational resistance' }
+        ]
+      }
+    },
+    {
+      id: 'int_core_5',
+      name: 'Decline Bench Weighted Crunch',
+      level: 'intermediate',
+      targetMuscle: 'Core',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '12-15',
+      restSeconds: 60,
+      suggestedLoad: '5-10 kg plate on chest',
+      imageUrl: '/exercises/intermediate/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/3fc_eBvT_Qc?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/core.svg',
+      formCue: 'Tempo 3-1-1-0 — Increase lever angle on decline bench, curl sternum to pelvis.',
+      steps: [
+        'Hook feet under leg rollers on decline crunch bench.',
+        'Hold weight plate flat against chest.',
+        'Lower torso back until shoulders hover just above bench pad.',
+        'Contract abdominal wall to curl torso upward to 45 degrees, squeezing at peak.'
+      ],
+      commonMistakes: [
+        'Pulling behind neck with hands.',
+        'Coming up all the way into hip flexion instead of abdominal crunch.'
+      ],
+      machine: {
+        name: 'Adjustable Decline Abdominal Bench',
+        type: 'Core Bench',
+        gymZone: 'Zone E • Core Bay',
+        setupGuide: 'Set bench to notch #2 or #3 incline angle.',
+        equipmentChecklist: ['Decline bench', 'Weight plate'],
+        alternatives: [
+          { name: 'Kneeling Cable Crunch', zone: 'Zone C • Cable Bay', swapReason: 'Exact progressive pin loading' }
+        ]
+      }
+    },
+
+    // Cardio (5 exercises)
+    {
+      id: 'int_cardio_1',
+      name: 'Treadmill Incline HIIT Intervals',
+      level: 'intermediate',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 6,
+      reps: '30s sprint / 60s walk',
+      restSeconds: 60,
+      suggestedLoad: 'Sprint 10-12 km/h @ 2% | Walk 5 km/h',
+      imageUrl: '/exercises/intermediate/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/8i3Vrd95o2k?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/cardio.svg',
+      formCue: 'High Intensity Interval Training — Maximum cardiovascular output during 30s burst.',
+      steps: [
+        'Warm up 3 minutes at light jog pace (7.5 km/h).',
+        'Increase speed to 10.5-12.0 km/h and sprint hard with high knee drive for 30s.',
+        'Step onto side rails or reduce speed to 4.5 km/h for 60s active recovery walk.',
+        'Repeat for 6 total interval rounds.'
+      ],
+      commonMistakes: [
+        'Holding side rails during sprinting intervals.',
+        'Skipping the cool-down recovery walk.'
+      ],
+      machine: {
+        name: 'Commercial Running Treadmill',
+        type: 'Cardio Machine',
+        gymZone: 'Zone F • Cardio Deck',
+        setupGuide: 'Set speed preset buttons for fast toggling.',
+        equipmentChecklist: ['Safety clip', 'Running shoes'],
+        alternatives: [
+          { name: 'Assault AirBike Sprints', zone: 'Zone F • AirBike Bay', swapReason: 'Zero-impact brutal cardio intervals' }
+        ]
+      }
+    },
+    {
+      id: 'int_cardio_2',
+      name: 'StairMaster StepMill (Climber Intervals)',
+      level: 'intermediate',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 1,
+      reps: '15-20 min',
+      restSeconds: 60,
+      suggestedLoad: 'Level 7-10 (65-85 steps/min)',
+      imageUrl: '/exercises/intermediate/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/cZnsLVArIt8?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/cardio.svg',
+      formCue: 'Glute & Cardiovascular Engine — Step with full foot on each stair, upright torso.',
+      steps: [
+        'Step onto revolving steps and press Quick Start.',
+        'Set speed level between 7 and 9 (steady challenging climbing cadence).',
+        'Keep spine upright without slouching over handrails.',
+        'Step firmly through heel and mid-foot on every revolving step.'
+      ],
+      commonMistakes: [
+        'Leaning all upper body weight forward onto side handrails.',
+        'Stepping only on toes straining Achilles tendon.'
+      ],
+      machine: {
+        name: 'StairMaster 8-Series StepMill',
+        type: 'Revolving Stair Climber',
+        gymZone: 'Zone F • Cardio Deck (Bay 1)',
+        setupGuide: 'Start at Level 5 to catch rhythm before ramping up.',
+        equipmentChecklist: ['Towel', 'Water bottle'],
+        alternatives: [
+          { name: 'Treadmill Incline Walk 12% @ 5km/h', zone: 'Zone F • Cardio Deck', swapReason: 'Continuous uphill challenge' }
+        ]
+      }
+    },
+    {
+      id: 'int_cardio_3',
+      name: 'Concept2 Rowing Machine (500m Intervals)',
+      level: 'intermediate',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 4,
+      reps: '500m sprint / 90s rest',
+      restSeconds: 90,
+      suggestedLoad: 'Pace < 1:55 / 500m | Damper 5',
+      imageUrl: '/exercises/intermediate/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/r_M39m_3r10?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/cardio.svg',
+      formCue: 'Explosive Leg Drive — Drive violently with legs, crisp arm finish.',
+      steps: [
+        'Secure feet and set damper to 5.',
+        'Execute powerful 500-meter row targeting sub-1:55 split pace.',
+        'Rest 90 seconds while breathing deeply.',
+        'Repeat for 4 total intervals.'
+      ],
+      commonMistakes: [
+        'Shooting the slide (opening hips before legs finish driving).',
+        'Rounding shoulders and back at the catch.'
+      ],
+      machine: {
+        name: 'Concept2 Rowing Ergometer',
+        type: 'Cardio Ergometer',
+        gymZone: 'Zone F • Erg Row',
+        setupGuide: 'Set PM5 screen to Interval Distance (500m / 90s rest).',
+        equipmentChecklist: ['Footstraps', 'Erg handle'],
+        alternatives: [
+          { name: 'Echo Air Bike 10-Cal Sprint', zone: 'Zone F • Bike Bay', swapReason: 'Maximum anaerobic lactic capacity' }
+        ]
+      }
+    },
+    {
+      id: 'int_cardio_4',
+      name: 'Jump Rope High-Cadence Double Bounces',
+      level: 'intermediate',
+      targetMuscle: 'Cardio',
+      equipment: 'Bodyweight',
+      sets: 4,
+      reps: '60s work / 30s rest',
+      restSeconds: 30,
+      suggestedLoad: 'Speed Cable Rope',
+      imageUrl: '/exercises/intermediate/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/vO_Vz35dKVs?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/cardio.svg',
+      formCue: 'Quick Ankle Elasticity — Bounding on balls of feet, wrists turning the cable.',
+      steps: [
+        'Hold jump rope handles with elbows close to ribs.',
+        'Turn rope with small circular wrist motions.',
+        'Jump just 1-2 inches off the ground on balls of feet as rope passes under.',
+        'Sustain steady rapid rhythm for 60 seconds.'
+      ],
+      commonMistakes: [
+        'Jumping too high bending knees excessively.',
+        'Using whole arms to swing rope instead of wrists.'
+      ],
+      machine: {
+        name: 'High-Speed Bearing Jump Rope',
+        type: 'Cardio Accessory',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Adjust cable length so handles reach armpits when standing on center.',
+        equipmentChecklist: ['Speed jump rope'],
+        alternatives: [
+          { name: 'Agility Ladder Quick Feet', zone: 'Zone E • Turf', swapReason: 'Footwork and cardiovascular agility' }
+        ]
+      }
+    },
+    {
+      id: 'int_cardio_5',
+      name: 'Kettlebell Swings (Russian Hip Hinge)',
+      level: 'intermediate',
+      targetMuscle: 'Cardio',
+      equipment: 'Kettlebell',
+      sets: 4,
+      reps: '15-20 reps',
+      restSeconds: 60,
+      suggestedLoad: '16-24 kg',
+      imageUrl: '/exercises/intermediate/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/sSESeQEqu28?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/intermediate/cardio.svg',
+      formCue: 'Explosive Hip Snap — Power comes from hips and glutes, arms are just ropes.',
+      steps: [
+        'Stand with feet wider than shoulder-width, kettlebell on floor 1 foot ahead.',
+        'Hinge hips, grasp kettlebell, hike it backward between thighs like a football.',
+        'Snap hips forward explosively, driving kettlebell up to chest level.',
+        'Let bell float, then guide it back into next hip hinge.'
+      ],
+      commonMistakes: [
+        'Squatting instead of hinging at hips.',
+        'Lifting kettlebell with shoulders and arms.'
+      ],
+      machine: {
+        name: 'Cast Iron Competition Kettlebell',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Ensure 3 meters clear distance ahead.',
+        equipmentChecklist: ['16kg-24kg Kettlebell'],
+        alternatives: [
+          { name: 'Dumbbell Swing', zone: 'Zone A • Free Weights', swapReason: 'Readily available dumbbell substitute' }
+        ]
+      }
+    }
+  ],
+
+  advanced: [
+    // Chest (5 exercises)
+    {
+      id: 'adv_chest_1',
+      name: 'Heavy Barbell Flat Bench Press (Pause Reps)',
+      level: 'advanced',
+      targetMuscle: 'Chest',
+      equipment: 'Barbell',
+      sets: 5,
+      reps: '5-8',
+      restSeconds: 120,
+      suggestedLoad: '80-120 kg',
+      imageUrl: '/exercises/advanced/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/rT7DgCr-3pg?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/chest.svg',
+      formCue: 'Tempo 3-2-X-0 — 3s eccentric descent, 2s motionless chest pause, explosive drive.',
+      steps: [
+        'Set up under Olympic bar, establish tight upper-back arch and scapular retraction.',
+        'Plant feet firmly and squeeze glutes. Unrack bar into stable lockout position.',
+        'Lower bar under strict 3-second tempo until touching lower sternum.',
+        'Pause dead still on chest for 2 full seconds without losing back tension.',
+        'Drive bar violently upward to lockout.'
+      ],
+      commonMistakes: [
+        'Losing tightness or letting chest cave during pause.',
+        'Bouncing off ribs.'
+      ],
+      machine: {
+        name: 'Competition Olympic Bench Press (Eleiko)',
+        type: 'Olympic Free Weight Station',
+        gymZone: 'Zone A • Powerlifting Deck',
+        setupGuide: 'J-cups set at notch #7. Steel safety catches pinned.',
+        equipmentChecklist: ['20kg Competition Barbell', 'Calibrated steel plates', 'Locking collars'],
+        alternatives: [
+          { name: 'Heavy Incline Barbell Bench Press', zone: 'Zone A • Olympic Deck', swapReason: 'Upper pectoral overload' }
+        ]
+      }
+    },
+    {
+      id: 'adv_chest_2',
+      name: 'Weighted Chest Dips (Dip Belt Loaded)',
+      level: 'advanced',
+      targetMuscle: 'Chest',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 120,
+      suggestedLoad: 'Bodyweight + 15-30 kg',
+      imageUrl: '/exercises/advanced/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/2z8JmcrW-As?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/chest.svg',
+      formCue: 'Tempo 3-1-1-0 — Heavy external load, forward torso pitch for lower pec shear.',
+      steps: [
+        'Fasten leather dip belt around waist with weight plate suspended between legs.',
+        'Mount parallel bars, lean torso forward 30 degrees, cross ankles.',
+        'Lower body smoothly until shoulders are below elbows at 90 degrees.',
+        'Press powerfully back up to lockout, maintaining forward lean throughout.'
+      ],
+      commonMistakes: [
+        'Swinging the hanging weight plate.',
+        'Hyperextending neck.'
+      ],
+      machine: {
+        name: 'Heavy-Duty Parallel Bar Rig & Leather Dip Belt',
+        type: 'Free Weight / Calisthenics Station',
+        gymZone: 'Zone B • Dip & Pull-Up Tower',
+        setupGuide: 'Secure chain with carabiner through center hole of Olympic plate.',
+        equipmentChecklist: ['Leather dip belt & chain', 'Carabiner', 'Olympic plates'],
+        alternatives: [
+          { name: 'Decline Barbell Press', zone: 'Zone A • Free Weights', swapReason: 'Lower chest compound overload' }
+        ]
+      }
+    },
+    {
+      id: 'adv_chest_3',
+      name: 'Incline Barbell Bench Press (Heavy Compound)',
+      level: 'advanced',
+      targetMuscle: 'Chest',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 120,
+      suggestedLoad: '70-100 kg',
+      imageUrl: '/exercises/advanced/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/SrqOu55lrYU?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/chest.svg',
+      formCue: 'Tempo 3-1-X-0 — Clavicular pectoral mass builder with 3s eccentric.',
+      steps: [
+        'Lie on dedicated 30-degree incline Olympic bench station.',
+        'Grasp bar slightly wider than shoulder width. Retract shoulder blades.',
+        'Lower bar with elbows tucked at 45 degrees to touch upper chest near collarbone.',
+        'Drive explosively upward back over eye level.'
+      ],
+      commonMistakes: [
+        'Bouncing bar off clavicle.',
+        'Flaring elbows out horizontally.'
+      ],
+      machine: {
+        name: 'Olympic Incline Bench Press Station',
+        type: 'Olympic Free Weight Station',
+        gymZone: 'Zone A • Free Weight Deck',
+        setupGuide: 'Ensure safety catches are pinned.',
+        equipmentChecklist: ['Olympic bar', 'Plates', 'Collars'],
+        alternatives: [
+          { name: 'Incline Dumbbell Press (Heavy)', zone: 'Zone A • Dumbbells', swapReason: 'Greater independent stabilization' }
+        ]
+      }
+    },
+    {
+      id: 'adv_chest_4',
+      name: 'Plate-Loaded Hammer Strength Incline Press (Drop Set)',
+      level: 'advanced',
+      targetMuscle: 'Chest',
+      equipment: 'Machine',
+      sets: 4,
+      reps: '6-8 (+ drop set of 6)',
+      restSeconds: 90,
+      suggestedLoad: '40-60 kg / side',
+      imageUrl: '/exercises/advanced/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/gRVjAtPip0Y?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/chest.svg',
+      formCue: 'Tempo 3-0-1-0 — Heavy top set immediately stripped by 30% for brutal drop set.',
+      steps: [
+        'Load plate pegs with working weight and drop set plates on outside.',
+        'Set seat height so handles match upper pectoral line.',
+        'Perform 6-8 heavy repetitions to technical near-failure.',
+        'Immediately stand up, strip outer plate, sit back down and complete 6 drop repetitions.'
+      ],
+      commonMistakes: [
+        'Resting too long during plate stripping.',
+        'Lifting upper back off pad.'
+      ],
+      machine: {
+        name: 'Hammer Strength Iso-Lateral Incline Press',
+        type: 'Plate-Loaded Converging Machine',
+        gymZone: 'Zone D • Plate-Loaded Arena',
+        setupGuide: 'Seat height notch #3. Converging motion path.',
+        equipmentChecklist: ['Olympic iron plates'],
+        alternatives: [
+          { name: 'Cable Crossover Low to High', zone: 'Zone C • Cable Bay', swapReason: 'Continuous cable tension' }
+        ]
+      }
+    },
+    {
+      id: 'adv_chest_5',
+      name: 'Deficit Push-Up to Dumbbell Fly Superset',
+      level: 'advanced',
+      targetMuscle: 'Chest',
+      equipment: 'Dumbbells',
+      sets: 4,
+      reps: '10 push-ups + 10 flyes',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight + 14-18 kg dumbbells',
+      imageUrl: '/exercises/advanced/chest.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/yN6Q1UI_xkE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/chest.svg',
+      formCue: 'Mechanical Superset — Deep deficit push-up followed immediately by dumbbell fly.',
+      steps: [
+        'Place two step risers or weight plates on floor; perform 10 deep deficit push-ups with chest sinking past hands.',
+        'Immediately transition onto flat bench, grab dumbbells and perform 10 strict chest flyes.',
+        'Squeeze chest intensely at completion of each rep.'
+      ],
+      commonMistakes: [
+        'Resting between the two movements.',
+        'Sacrificing form as fatigue sets in.'
+      ],
+      machine: {
+        name: 'Flat Bench, Step Blocks & Dumbbells',
+        type: 'Superset Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Set bench and deficit blocks in close proximity.',
+        equipmentChecklist: ['2x Deficit blocks', 'Dumbbells', 'Flat bench'],
+        alternatives: [
+          { name: 'Cable Fly to Push-Up Superset', zone: 'Zone C • Cable Bay', swapReason: 'Cable adduction superset' }
+        ]
+      }
+    },
+
+    // Back (5 exercises)
+    {
+      id: 'adv_back_1',
+      name: 'Conventional Barbell Deadlift',
+      level: 'advanced',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 5,
+      reps: '5-6',
+      restSeconds: 120,
+      suggestedLoad: '100-160 kg',
+      imageUrl: '/exercises/advanced/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/op9kVnSso6Q?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/back.svg',
+      formCue: 'Tempo 1-1-X-0 — Pull slack out of bar, wedge hips, push floor away explosively.',
+      steps: [
+        'Step up to bar with feet hip-width, barbell cutting across mid-foot.',
+        'Hinge at hips, grip bar outside shins with hook grip or double overhand with chalk.',
+        'Pull chest up, drag bar up against shins, and wedge hips into the bar.',
+        'Drive floor away with legs, extending hips and knees simultaneously to strong upright lockout.'
+      ],
+      commonMistakes: [
+        'Rounding lumbar spine under heavy pull.',
+        'Jerking bar off floor without pulling slack out first.'
+      ],
+      machine: {
+        name: 'Olympic Deadlift Platform (Oak & Rubber)',
+        type: 'Heavy Free Weight Platform',
+        gymZone: 'Zone A • Olympic Platforms (Platform 2)',
+        setupGuide: 'Chalk hands at chalk station. Secure spring or lockjaw collars.',
+        equipmentChecklist: ['20kg Power Barbell', 'Bumper plates', 'Gym chalk', 'Lockjaw collars'],
+        alternatives: [
+          { name: 'Trap Bar Deadlift (High Handles)', zone: 'Zone A • Platform', swapReason: 'More upright torso reducing spinal shear' }
+        ]
+      }
+    },
+    {
+      id: 'adv_back_2',
+      name: 'Weighted Pull-Up (Dip Belt Loaded)',
+      level: 'advanced',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 120,
+      suggestedLoad: 'Bodyweight + 10-25 kg',
+      imageUrl: '/exercises/advanced/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/eGo4IYlbE5g?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Full range from dead hang to chin clearing bar with heavy belt load.',
+      steps: [
+        'Fasten leather dip belt around waist with Olympic weight plate securely chained.',
+        'Grasp pull-up bar with overhand grip slightly wider than shoulder width.',
+        'Hang with arms fully extended, contract core and drive elbows down toward ribs.',
+        'Pull until chin completely clears the bar level. Lower under control.'
+      ],
+      commonMistakes: [
+        'Kicking legs forward to swing weight plate up.',
+        'Stopping short of full arm extension at bottom.'
+      ],
+      machine: {
+        name: 'Multi-Grip Chinning Station & Dip Belt',
+        type: 'Weighted Calisthenics Rig',
+        gymZone: 'Zone B • Rig Area',
+        setupGuide: 'Dip belt chained with 10kg or 20kg plate.',
+        equipmentChecklist: ['Dip belt', 'Carabiner', 'Plates'],
+        alternatives: [
+          { name: 'Heavy Lat Pulldown (Drop Set)', zone: 'Zone B • Machine Bay', swapReason: 'Pin-selected equivalent overload' }
+        ]
+      }
+    },
+    {
+      id: 'adv_back_3',
+      name: 'Pendlay Row (Dead Stop From Floor)',
+      level: 'advanced',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 90,
+      suggestedLoad: '60-85 kg',
+      imageUrl: '/exercises/advanced/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/h4nkgwMhgmU?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/back.svg',
+      formCue: 'Tempo 1-1-X-1 — Back parallel to floor, barbell rests on ground between every rep.',
+      steps: [
+        'Stand over barbell with feet hip-width. Hinge at hips until torso is completely parallel to floor.',
+        'Grip bar with overhand grip wider than shoulders.',
+        'Explosively row bar from the floor to touch lower sternum without rising up.',
+        'Lower bar back to dead stop on the floor before next rep.'
+      ],
+      commonMistakes: [
+        'Lifting torso upright during pull.',
+        'Bouncing bar off the floor.'
+      ],
+      machine: {
+        name: 'Olympic Barbell & Bumper Plates on Platform',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Lifting Platforms',
+        setupGuide: 'Use full-diameter bumper plates so bar sits at proper height off floor.',
+        equipmentChecklist: ['Olympic bar', 'Bumper plates', 'Collars'],
+        alternatives: [
+          { name: 'Standard Barbell Bent Row', zone: 'Zone A • Free Weights', swapReason: 'Continuous tension without dead stop' }
+        ]
+      }
+    },
+    {
+      id: 'adv_back_4',
+      name: 'Seal Row (Elevated Bench Chest-Supported)',
+      level: 'advanced',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '50-75 kg',
+      imageUrl: '/exercises/advanced/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/d3H-90z3Ryg?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Zero momentum, pure lat and rhomboid contraction.',
+      steps: [
+        'Lie face down on elevated high bench with barbell resting directly beneath.',
+        'Grasp barbell with overhand grip.',
+        'Row bar up to bottom of the bench pad, squeezing upper back intensely at peak.',
+        'Lower bar back to arms length under complete control.'
+      ],
+      commonMistakes: [
+        'Lifting chest off bench pad.',
+        'Dropping bar too fast.'
+      ],
+      machine: {
+        name: 'Dedicated Seal Row Bench Station',
+        type: 'Specialty Free Weight Bench',
+        gymZone: 'Zone A • Specialty Deck',
+        setupGuide: 'Elevated bench on blocks so arms hang fully extended.',
+        equipmentChecklist: ['Cambered or Olympic bar', 'High bench'],
+        alternatives: [
+          { name: 'Incline Dumbbell Row', zone: 'Zone A • Free Weights', swapReason: 'Adjustable incline bench setup' }
+        ]
+      }
+    },
+    {
+      id: 'adv_back_5',
+      name: 'Meadows Row (Landmine Single-Arm Overhand)',
+      level: 'advanced',
+      targetMuscle: 'Back',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '8-10 / side',
+      restSeconds: 90,
+      suggestedLoad: '25-45 kg on landmine',
+      imageUrl: '/exercises/advanced/back.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/AY4YuhP9K34?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/back.svg',
+      formCue: 'Tempo 2-1-1-0 — Stand perpendicular to landmine bar, pull with overhand flared elbow.',
+      steps: [
+        'Stand perpendicular to landmine barbell in a staggered stance.',
+        'Grip thick end of the bar sleeve with overhand grip using lifting strap.',
+        'Rest other arm on knee for balance.',
+        'Row elbow up and back, targeting upper lat and rear delt tie-in.',
+        'Lower smoothly feeling full lat stretch.'
+      ],
+      commonMistakes: [
+        'Standing too upright.',
+        'Letting hips twist out of position.'
+      ],
+      machine: {
+        name: 'Landmine Swivel Attachment & Olympic Bar',
+        type: 'Specialty Landmine Rig',
+        gymZone: 'Zone A / Zone E • Landmine Station',
+        setupGuide: 'Insert Olympic bar into landmine swivel sleeve. Load 10kg plates for clearance.',
+        equipmentChecklist: ['Landmine base', 'Olympic bar', 'Lifting straps'],
+        alternatives: [
+          { name: 'Kroc Row (Heavy Dumbbell)', zone: 'Zone A • Dumbbells', swapReason: 'Heavy unilateral overload' }
+        ]
+      }
+    },
+
+    // Shoulders (5 exercises)
+    {
+      id: 'adv_shoulders_1',
+      name: 'Push Press (Barbell Triple Extension)',
+      level: 'advanced',
+      targetMuscle: 'Shoulders',
+      equipment: 'Barbell',
+      sets: 5,
+      reps: '5-6',
+      restSeconds: 120,
+      suggestedLoad: '50-80 kg',
+      imageUrl: '/exercises/advanced/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/iaBVSJm78ko?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/shoulders.svg',
+      formCue: 'Tempo 1-0-X-1 — Shallow knee dip, explosive leg drive, lock out overhead.',
+      steps: [
+        'Rack barbell across front shoulders with elbows forward.',
+        'Dip knees 2-3 inches in a vertical shallow dip keeping torso upright.',
+        'Explode upward through legs, transferring power directly into the overhead press.',
+        'Lock out aggressively overhead and hold for 1 second before resetting.'
+      ],
+      commonMistakes: [
+        'Dipping too deep into a full squat.',
+        'Leaning forward on the dip.'
+      ],
+      machine: {
+        name: 'Olympic Power Rack Station',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Power Cages',
+        setupGuide: 'J-cups set at armpit height. Secure collars.',
+        equipmentChecklist: ['Olympic bar', 'Bumper plates', 'Collars'],
+        alternatives: [
+          { name: 'Strict Barbell Overhead Press', zone: 'Zone A • Power Cages', swapReason: 'Pure deltoid press without leg drive' }
+        ]
+      }
+    },
+    {
+      id: 'adv_shoulders_2',
+      name: 'Heavy Dumbbell Lateral Raise (Partials & Drop Set)',
+      level: 'advanced',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 4,
+      reps: '8 full reps + 6 partials + drop set',
+      restSeconds: 90,
+      suggestedLoad: '12-16 kg / side (+ drop to 8 kg)',
+      imageUrl: '/exercises/advanced/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/3VcKaXpzqRo?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/shoulders.svg',
+      formCue: 'Tempo 2-1-1-0 — Full range to failure, continuous partial burn, immediate lighter drop.',
+      steps: [
+        'Perform 8 strict full-range dumbbell lateral raises.',
+        'Without stopping, continue with 6 partial swings from the bottom to mid-thigh.',
+        'Drop weights immediately, pick up 50% lighter pair, and pump 8 more full reps to failure.'
+      ],
+      commonMistakes: [
+        'Resting between drops.',
+        'Shrugging traps excessively.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Area',
+        gymZone: 'Zone A • Dumbbell Racks',
+        setupGuide: 'Have heavy and light pair ready at your feet.',
+        equipmentChecklist: ['2 pairs of dumbbells'],
+        alternatives: [
+          { name: 'Cable Lateral Raise Drop Set', zone: 'Zone C • Cable Bay', swapReason: 'Smoother cable pin drop' }
+        ]
+      }
+    },
+    {
+      id: 'adv_shoulders_3',
+      name: 'Behind-The-Neck Barbell Press (Controlled Mobility)',
+      level: 'advanced',
+      targetMuscle: 'Shoulders',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 90,
+      suggestedLoad: '40-60 kg',
+      imageUrl: '/exercises/advanced/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/qEwKCR5JCog?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/shoulders.svg',
+      formCue: 'Tempo 3-1-1-0 — Requires excellent shoulder mobility; lower only to ear level.',
+      steps: [
+        'Sit on upright bench with bar unracked behind head with wide snatch grip.',
+        'Lower bar slowly over 3 seconds only down to ear/upper neck level.',
+        'Do not force past comfortable shoulder mobility range.',
+        'Press bar straight back up to overhead lockout.'
+      ],
+      commonMistakes: [
+        'Dropping bar too low impinging cervical spine.',
+        'Using narrow grip.'
+      ],
+      machine: {
+        name: 'Seated Olympic Shoulder Press Station',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Set J-cups to ear level behind head.',
+        equipmentChecklist: ['Olympic bar', 'Plates', 'Collars'],
+        alternatives: [
+          { name: 'Smith Machine Behind-the-Neck Press', zone: 'Zone B • Smith Bay', swapReason: 'Fixed guide rails for safe tracking' }
+        ]
+      }
+    },
+    {
+      id: 'adv_shoulders_4',
+      name: 'Barbell Bradford Press (Front-To-Back Flurry)',
+      level: 'advanced',
+      targetMuscle: 'Shoulders',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '10-12 (over & back = 1 rep)',
+      restSeconds: 90,
+      suggestedLoad: '25-40 kg',
+      imageUrl: '/exercises/advanced/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/wXz38N10V5w?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/shoulders.svg',
+      formCue: 'Tempo Continuous — Bar barely clears the crown of head, constant time under tension.',
+      steps: [
+        'Start with bar resting on front collarbones in standing position.',
+        'Press bar upward just high enough to skim over hair, then lower behind head to ear level.',
+        'Without pausing, press bar back over top of head to front collarbone.',
+        'Front-to-back and back-to-front equals 1 complete repetition.'
+      ],
+      commonMistakes: [
+        'Using too heavy weight losing control near the skull.',
+        'Locking out arms completely at top.'
+      ],
+      machine: {
+        name: 'Olympic Barbell Area',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Select light barbell to maintain constant tension.',
+        equipmentChecklist: ['Barbell', 'Collars'],
+        alternatives: [
+          { name: 'Dumbbell Arnold Press', zone: 'Zone A • Free Weights', swapReason: 'Individual dumbbell alternative' }
+        ]
+      }
+    },
+    {
+      id: 'adv_shoulders_5',
+      name: 'Incline Bench Prone Y-T-W Dumbbell Circuit',
+      level: 'advanced',
+      targetMuscle: 'Shoulders',
+      equipment: 'Dumbbells',
+      sets: 3,
+      reps: '6 Ys + 6 Ts + 6 Ws',
+      restSeconds: 60,
+      suggestedLoad: '3-6 kg / side',
+      imageUrl: '/exercises/advanced/shoulders.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/PPrzBWZDOhA?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/shoulders.svg',
+      formCue: 'Rotator Cuff & Lower Trap Circuit — Strict thumbs-up alignment, zero momentum.',
+      steps: [
+        'Lie face down on 30-degree incline bench with light dumbbells.',
+        'Perform 6 raises in a Y-formation (45 degrees forward, thumbs up).',
+        'Immediately perform 6 raises straight out in a T-formation.',
+        'Finish with 6 W-extensions (elbows bent, external rotation).',
+        'Hold each peak for 1 second.'
+      ],
+      commonMistakes: [
+        'Using heavy weights that engage upper traps instead of rotator cuff.',
+        'Jerking torso off bench.'
+      ],
+      machine: {
+        name: 'Incline Utility Bench & Light Dumbbells',
+        type: 'Free Weight Accessory',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Bench set to 30-degree incline.',
+        equipmentChecklist: ['3kg-5kg dumbbells', 'Bench'],
+        alternatives: [
+          { name: 'Prone Floor YTW Raises', zone: 'Zone E • Mat Area', swapReason: 'Floor bodyweight variant' }
+        ]
+      }
+    },
+
+    // Legs (5 exercises)
+    {
+      id: 'adv_legs_1',
+      name: 'Pause Barbell Back Squat (2-Second Depth Pause)',
+      level: 'advanced',
+      targetMuscle: 'Legs',
+      equipment: 'Barbell',
+      sets: 5,
+      reps: '5-6',
+      restSeconds: 120,
+      suggestedLoad: '90-130 kg',
+      imageUrl: '/exercises/advanced/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/bEv6CCg2BC8?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/legs.svg',
+      formCue: 'Tempo 3-2-X-0 — 3s descent, 2s dead stop at rock bottom, explosive concentric drive.',
+      steps: [
+        'Unrack heavy barbell across traps, step back into squat stance.',
+        'Take deep diaphragmatic breath, brace core 360 degrees.',
+        'Descend under control to full deep squat depth below parallel.',
+        'Hold completely still in the hole for 2 seconds without bouncing or losing core pressure.',
+        'Drive out of the hole explosively through mid-foot.'
+      ],
+      commonMistakes: [
+        'Bouncing out of the bottom instead of holding dead stop.',
+        'Letting chest collapse during the 2s pause.'
+      ],
+      machine: {
+        name: 'Heavy Duty Olympic Power Cage',
+        type: 'Power Cage Station',
+        gymZone: 'Zone A • Powerlifting Bays',
+        setupGuide: 'Set heavy safety crossbars at parallel level.',
+        equipmentChecklist: ['Olympic power bar', 'Calibrated bumper plates', 'Collars'],
+        alternatives: [
+          { name: 'Box Squats', zone: 'Zone A • Power Cages', swapReason: 'Tangible box pause' }
+        ]
+      }
+    },
+    {
+      id: 'adv_legs_2',
+      name: 'Barbell Front Squat (Clean Grip)',
+      level: 'advanced',
+      targetMuscle: 'Legs',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 120,
+      suggestedLoad: '70-100 kg',
+      imageUrl: '/exercises/advanced/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/uYumuL_G_V0?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/legs.svg',
+      formCue: 'Tempo 3-1-1-0 — High elbows parallel to floor, pure vertical quadriceps loading.',
+      steps: [
+        'Rest bar across anterior deltoids in front rack with fingertips under bar and elbows high.',
+        'Unrack bar, set feet shoulder-width apart.',
+        'Squat straight down between hips while keeping torso completely vertical.',
+        'Hit full depth, drive out of bottom keeping elbows pointing forward.'
+      ],
+      commonMistakes: [
+        'Dropping elbows allowing bar to slip down arms.',
+        'Rounding upper thoracic spine.'
+      ],
+      machine: {
+        name: 'Olympic Squat Rack',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Lifting Decks',
+        setupGuide: 'J-cups set at shoulder height.',
+        equipmentChecklist: ['20kg Olympic bar', 'Bumper plates', 'Collars'],
+        alternatives: [
+          { name: 'Cross-Arm Front Squat', zone: 'Zone A • Rack', swapReason: 'For lifters with limited wrist mobility' }
+        ]
+      }
+    },
+    {
+      id: 'adv_legs_3',
+      name: 'Deficit Deadlift (1-2 Inch Elevated Platform)',
+      level: 'advanced',
+      targetMuscle: 'Legs',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '5-6',
+      restSeconds: 120,
+      suggestedLoad: '100-140 kg',
+      imageUrl: '/exercises/advanced/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/op9kVnSso6Q?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/legs.svg',
+      formCue: 'Tempo 2-1-X-0 — Standing on 2-inch plate increases range of motion and quad off-the-floor drive.',
+      steps: [
+        'Place a 20kg rubber bumper plate on lifting platform and stand on top of it.',
+        'Roll barbell up to shins. Hinge down deeper than normal deadlift setup.',
+        'Brace lats and core, pull slack, drive legs through the floor.',
+        'Lock out at top, lower bar under control back to platform.'
+      ],
+      commonMistakes: [
+        'Rounding back due to the deeper starting deficit.',
+        'Dropping bar from top without eccentric control.'
+      ],
+      machine: {
+        name: 'Deadlift Platform & Bumper Plate Platform',
+        type: 'Heavy Free Weight Station',
+        gymZone: 'Zone A • Olympic Platforms',
+        setupGuide: 'Stand on stable 2-inch rubber plate.',
+        equipmentChecklist: ['Olympic bar', 'Deficit plate', 'Chalk', 'Collars'],
+        alternatives: [
+          { name: 'Snatch-Grip Deadlift', zone: 'Zone A • Platform', swapReason: 'Wide grip increases range of motion' }
+        ]
+      }
+    },
+    {
+      id: 'adv_legs_4',
+      name: 'Barbell Walking Lunges (Heavy Overload)',
+      level: 'advanced',
+      targetMuscle: 'Legs',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '10 steps / leg (20 total)',
+      restSeconds: 90,
+      suggestedLoad: '40-60 kg across back',
+      imageUrl: '/exercises/advanced/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/D7KaRcUTQeE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/legs.svg',
+      formCue: 'Tempo Continuous — Long stride, 90-degree knee angles, explosive push through front heel.',
+      steps: [
+        'Position barbell comfortably on upper traps in clear turf aisle.',
+        'Step forward with long stride, drop back knee until hovering 1 inch off ground.',
+        'Drive through front heel to step directly into the next lunge stride with opposite leg.',
+        'Keep torso tall and stable throughout the walking sequence.'
+      ],
+      commonMistakes: [
+        'Wobbling side to side or taking too short strides.',
+        'Banging back knee hard into the floor.'
+      ],
+      machine: {
+        name: 'Olympic Barbell & Functional Turf Track',
+        type: 'Free Weight / Functional Track',
+        gymZone: 'Zone E • 25-Meter Sprint & Lunge Turf',
+        setupGuide: 'Ensure 20-meter turf path is clear of obstacles.',
+        equipmentChecklist: ['Barbell', 'Collars'],
+        alternatives: [
+          { name: 'Heavy Dumbbell Walking Lunges', zone: 'Zone E • Turf', swapReason: 'Dumbbells at sides lower center of gravity' }
+        ]
+      }
+    },
+    {
+      id: 'adv_legs_5',
+      name: 'Nordic Hamstring Curl (Eccentric Control)',
+      level: 'advanced',
+      targetMuscle: 'Legs',
+      equipment: 'Bodyweight',
+      sets: 4,
+      reps: '5-8 (4-second eccentric)',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight (Extreme eccentric)',
+      imageUrl: '/exercises/advanced/legs.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/jZqVn2Fm81E?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/legs.svg',
+      formCue: 'Tempo 4-0-1-0 — 4-second pure eccentric descent, legendary hamstring injury prevention.',
+      steps: [
+        'Kneel on soft pad with partner holding ankles or feet locked under heavy padded bar.',
+        'Keep hips extended straight in line with torso and thighs.',
+        'Slowly lower body forward toward the floor resisting as hard as possible with hamstrings.',
+        'Catch yourself on palms in push-up position, push lightly off floor, and use hamstrings to pull back up.'
+      ],
+      commonMistakes: [
+        'Bending at hips instead of keeping body in a straight line.',
+        'Falling uncontrollably without resisting.'
+      ],
+      machine: {
+        name: 'Dedicated Nordic Hamstring Bench',
+        type: 'Specialty Calisthenics Bench',
+        gymZone: 'Zone E • Functional Turf / Hamstring Station',
+        setupGuide: 'Lock ankle rollers firmly over Achilles.',
+        equipmentChecklist: ['Nordic curl station or padded bar'],
+        alternatives: [
+          { name: 'Glute-Ham Developer (GHD)', zone: 'Zone E • GHD Station', swapReason: 'Machine-assisted GHR' }
+        ]
+      }
+    },
+
+    // Arms (5 exercises)
+    {
+      id: 'adv_arms_1',
+      name: 'Barbell 21s (Bicep Triple-Range Agony)',
+      level: 'advanced',
+      targetMuscle: 'Arms',
+      equipment: 'Barbell',
+      sets: 3,
+      reps: '21 reps (7 lower + 7 upper + 7 full)',
+      restSeconds: 90,
+      suggestedLoad: '20-30 kg',
+      imageUrl: '/exercises/advanced/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/q6w48jE6Z0M?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/arms.svg',
+      formCue: 'Tempo Continuous — 7 reps bottom-to-halfway, 7 reps halfway-to-top, 7 full range reps.',
+      steps: [
+        'Stand tall with EZ-bar or barbell in underhand grip.',
+        'Perform 7 reps from full extension up to 90 degrees (forearms parallel to floor).',
+        'Immediately perform 7 reps from 90 degrees to full peak contraction at shoulders.',
+        'Immediately finish with 7 full range-of-motion repetitions to complete the 21-rep cycle.'
+      ],
+      commonMistakes: [
+        'Resting between the 7-rep stages.',
+        'Swinging hips on the final 7 full reps.'
+      ],
+      machine: {
+        name: 'EZ-Barbell Area',
+        type: 'Free Weight Equipment',
+        gymZone: 'Zone A • Barbell Area',
+        setupGuide: 'Select moderate EZ-bar.',
+        equipmentChecklist: ['EZ-bar', 'Collars'],
+        alternatives: [
+          { name: 'Cable 21s with Straight Bar', zone: 'Zone C • Cable Bay', swapReason: 'Continuous cable tension throughout all 3 phases' }
+        ]
+      }
+    },
+    {
+      id: 'adv_arms_2',
+      name: 'Weighted Close-Grip Barbell Bench Press',
+      level: 'advanced',
+      targetMuscle: 'Arms',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 90,
+      suggestedLoad: '60-85 kg',
+      imageUrl: '/exercises/advanced/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/nEF0bny3y1E?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/arms.svg',
+      formCue: 'Tempo 3-1-1-0 — Hands shoulder-width, elbows tucked against ribs for heavy tricep mass.',
+      steps: [
+        'Lie on flat Olympic bench, grasp bar with hands exactly shoulder-width apart.',
+        'Unrack bar, lower smoothly to lower sternum keeping elbows tucked tightly along flanks.',
+        'Pause for 1 second on chest.',
+        'Press upward explosively through palms, locking out triceps at top.'
+      ],
+      commonMistakes: [
+        'Grip too narrow (< 8 inches) which destroys wrists.',
+        'Flaring elbows out to sides.'
+      ],
+      machine: {
+        name: 'Olympic Flat Bench Press Station',
+        type: 'Free Weight Olympic Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'J-cups set at arm length. Secure collars.',
+        equipmentChecklist: ['Olympic bar', 'Plates', 'Collars'],
+        alternatives: [
+          { name: 'Close-Grip Dumbbell Press', zone: 'Zone A • Dumbbells', swapReason: 'Neutral wrist orientation' }
+        ]
+      }
+    },
+    {
+      id: 'adv_arms_3',
+      name: 'Incline Dumbbell Spider Curl (Chest on Pad)',
+      level: 'advanced',
+      targetMuscle: 'Arms',
+      equipment: 'Dumbbells',
+      sets: 4,
+      reps: '8-10',
+      restSeconds: 60,
+      suggestedLoad: '10-16 kg / side',
+      imageUrl: '/exercises/advanced/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/fW49Q_V138Q?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/arms.svg',
+      formCue: 'Tempo 2-1-2-1 — Pure strict short-head bicep isolation; zero body English possible.',
+      steps: [
+        'Set utility bench to 45-degree incline, lie face down with chest supported over backrest.',
+        'Let arms hang vertically toward floor holding dumbbells with underhand grip.',
+        'Curl dumbbells up toward forehead, holding peak contraction for 1 full second.',
+        'Lower dumbbells with slow control until arms are perpendicular to floor.'
+      ],
+      commonMistakes: [
+        'Swinging arms backward like a row.',
+        'Lifting chest off pad.'
+      ],
+      machine: {
+        name: 'Adjustable Utility Bench & Dumbbells',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Dumbbells',
+        setupGuide: 'Bench set to 45 degrees.',
+        equipmentChecklist: ['Incline bench', 'Dumbbells'],
+        alternatives: [
+          { name: 'Preacher Curl Machine', zone: 'Zone B • Machine Bay', swapReason: 'Armpad supported bicep curl' }
+        ]
+      }
+    },
+    {
+      id: 'adv_arms_4',
+      name: 'Overhead French Press (Heavy Seated EZ-Bar)',
+      level: 'advanced',
+      targetMuscle: 'Arms',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 90,
+      suggestedLoad: '30-45 kg',
+      imageUrl: '/exercises/advanced/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/kqidUIf1eJE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/arms.svg',
+      formCue: 'Tempo 3-1-1-0 — Full vertical stretch of the long tricep head.',
+      steps: [
+        'Sit on vertical or low-back utility bench holding EZ-bar overhead.',
+        'Keep upper arms close to ears and elbows pointing straight up.',
+        'Lower bar behind head by bending elbows until forearms touch biceps.',
+        'Press bar forcefully back to overhead extension.'
+      ],
+      commonMistakes: [
+        'Flaring elbows wide to sides.',
+        'Arching lower back off the pad.'
+      ],
+      machine: {
+        name: 'Low-Back Seated Bench & EZ-Bar',
+        type: 'Free Weight Station',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Low-back seat supports lumbar spine.',
+        equipmentChecklist: ['EZ-bar', 'Low back bench'],
+        alternatives: [
+          { name: 'Overhead Cable Tricep Extension', zone: 'Zone C • Cable Bay', swapReason: 'Constant cable tension' }
+        ]
+      }
+    },
+    {
+      id: 'adv_arms_5',
+      name: 'Cross-Body Incline Hammer Curl + Overhead Tricep Extension Superset',
+      level: 'advanced',
+      targetMuscle: 'Arms',
+      equipment: 'Dumbbells',
+      sets: 4,
+      reps: '10 curls + 10 extensions',
+      restSeconds: 90,
+      suggestedLoad: '12-16 kg dumbbells',
+      imageUrl: '/exercises/advanced/arms.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/in7PaeYlhrM?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/arms.svg',
+      formCue: 'Antagonist Superset — Bicep brachialis followed immediately by tricep long head.',
+      steps: [
+        'Perform 10 heavy cross-body hammer curls targeting forearms and brachialis.',
+        'Without resting, raise single dumbbell overhead with both hands and complete 10 overhead extensions.',
+        'Rest 90 seconds after completing both movements.'
+      ],
+      commonMistakes: [
+        'Resting between bicep and tricep sets.',
+        'Dropping elbow position on overhead extensions.'
+      ],
+      machine: {
+        name: 'Dumbbell Free Weight Area',
+        type: 'Free Weight Area',
+        gymZone: 'Zone A • Dumbbells',
+        setupGuide: 'Have dumbbells ready.',
+        equipmentChecklist: ['Dumbbells'],
+        alternatives: [
+          { name: 'Cable Bicep/Tricep Superset', zone: 'Zone C • Cable Bay', swapReason: 'Cable tower antagonist circuit' }
+        ]
+      }
+    },
+
+    // Core (5 exercises)
+    {
+      id: 'adv_core_1',
+      name: 'Dragon Flag (Bruce Lee Core Lever)',
+      level: 'advanced',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 4,
+      reps: '6-8',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight (Extreme lever)',
+      imageUrl: '/exercises/advanced/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/4y27xIq4uXw?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/core.svg',
+      formCue: 'Tempo 3-1-1-0 — Only upper shoulder blades touch bench; entire torso and legs remain rigid.',
+      steps: [
+        'Lie on flat bench, reach hands overhead and grip the edge of the bench beside your ears.',
+        'Swing legs and torso up toward vertical, supported only by upper shoulder blades.',
+        'Slowly lower straight body toward bench over 3 seconds without bending at hips.',
+        'Hover 2 inches above bench, then raise back up to vertical.'
+      ],
+      commonMistakes: [
+        'Bending at hips turning movement into a leg raise.',
+        'Dropping lower back onto bench.'
+      ],
+      machine: {
+        name: 'Solid Sturdy Flat Bench',
+        type: 'Free Weight Accessory',
+        gymZone: 'Zone A • Free Weights',
+        setupGuide: 'Check bench is firmly anchored.',
+        equipmentChecklist: ['Flat bench'],
+        alternatives: [
+          { name: 'Hanging Leg Raise (Toes to Bar)', zone: 'Zone B • Pull-Up Bar', swapReason: 'Hanging vertical alternative' }
+        ]
+      }
+    },
+    {
+      id: 'adv_core_2',
+      name: 'Toes-To-Bar (Hanging Abdominal Compression)',
+      level: 'advanced',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 4,
+      reps: '8-12',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight',
+      imageUrl: '/exercises/advanced/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/6dHvTlsMvNY?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/core.svg',
+      formCue: 'Tempo 2-1-2-0 — Strict compression, toes touch bar between hands with zero swing.',
+      steps: [
+        'Hang from pull-up bar with overhand grip and engaged shoulders.',
+        'Without swinging or kipping, compress abdomen and raise toes straight up to tap the bar.',
+        'Pause for 1 second at top contact.',
+        'Lower legs with controlled resistance back to dead hang.'
+      ],
+      commonMistakes: [
+        'Kipping hips to swing toes up.',
+        'Dropping legs like a dead weight.'
+      ],
+      machine: {
+        name: 'Pull-Up Rig / Bar',
+        type: 'Calisthenics Rig',
+        gymZone: 'Zone B • Rig Area',
+        setupGuide: 'Chalk hands for firm grip.',
+        equipmentChecklist: ['Chalk block'],
+        alternatives: [
+          { name: 'Hanging Knee-to-Elbow', zone: 'Zone B • Rig Area', swapReason: 'Bent-knee regression' }
+        ]
+      }
+    },
+    {
+      id: 'adv_core_3',
+      name: 'Standing Ab Wheel Rollout (From Toes)',
+      level: 'advanced',
+      targetMuscle: 'Core',
+      equipment: 'Bodyweight',
+      sets: 3,
+      reps: '5-8',
+      restSeconds: 90,
+      suggestedLoad: 'Bodyweight (Full lever)',
+      imageUrl: '/exercises/advanced/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/1fbU_MkV7NE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/core.svg',
+      formCue: 'Tempo 3-1-2-0 — From standing position; the ultimate anterior core challenge.',
+      steps: [
+        'Stand with feet shoulder-width, bend at hips and place ab wheel on floor in front of toes.',
+        'Brace core into hollow-body posture and roll wheel forward until nose hovers 1 inch off floor.',
+        'Hold extended position for a split second.',
+        'Contract core and pull through lats to roll wheel all the way back to standing toes.'
+      ],
+      commonMistakes: [
+        'Collapsing stomach to floor.',
+        'Hyperextending spine.'
+      ],
+      machine: {
+        name: 'Ab Roller on Functional Turf',
+        type: 'Core Equipment',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Ensure 3 meters of smooth turf.',
+        equipmentChecklist: ['Heavy-duty ab wheel'],
+        alternatives: [
+          { name: 'Kneeling Ab Rollout', zone: 'Zone E • Turf', swapReason: 'Kneeling progression' }
+        ]
+      }
+    },
+    {
+      id: 'adv_core_4',
+      name: 'Heavy Kneeling Cable Crunch (Rope Attachment)',
+      level: 'advanced',
+      targetMuscle: 'Core',
+      equipment: 'Cable',
+      sets: 4,
+      reps: '10-12',
+      restSeconds: 60,
+      suggestedLoad: '40-60 kg',
+      imageUrl: '/exercises/advanced/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/3fc_eBvT_Qc?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/core.svg',
+      formCue: 'Tempo 3-1-1-0 — Kneel facing machine, curl elbows toward thighs, spine flexion.',
+      steps: [
+        'Attach rope to high pulley, kneel 2 feet away with hands holding rope ends beside ears.',
+        'Fix hip position and curl spine downward, driving elbows toward top of thighs.',
+        'Squeeze abs intensely for 1 second at peak contraction.',
+        'Rise slowly over 3 seconds under heavy stack tension.'
+      ],
+      commonMistakes: [
+        'Sitting hips back onto heels (hip hinge instead of ab crunch).',
+        'Pulling with arms rather than crunching torso.'
+      ],
+      machine: {
+        name: 'High Pulley Cable Column & Rope',
+        type: 'Cable Station',
+        gymZone: 'Zone C • Cable Bay',
+        setupGuide: 'Pulley set to top notch #12. Knee mat on floor.',
+        equipmentChecklist: ['Braided rope', 'Knee pad'],
+        alternatives: [
+          { name: 'Decline Weighted Crunch', zone: 'Zone E • Core Bay', swapReason: 'Free weight plate alternative' }
+        ]
+      }
+    },
+    {
+      id: 'adv_core_5',
+      name: 'Barbell Landmine 180 Rotations',
+      level: 'advanced',
+      targetMuscle: 'Core',
+      equipment: 'Barbell',
+      sets: 4,
+      reps: '12-16 total (6-8 / side)',
+      restSeconds: 60,
+      suggestedLoad: '15-25 kg on landmine',
+      imageUrl: '/exercises/advanced/core.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/9wZ12h8k1gU?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/core.svg',
+      formCue: 'Tempo 2-1-2-0 — Rotational core strength and anti-rotational deceleration.',
+      steps: [
+        'Hold end of landmine barbell with both hands directly out in front of chest at eye level.',
+        'Rotate bar down to right hip in smooth arc keeping arms mostly straight and pivoting back foot.',
+        'Drive bar explosively back to center, then rotate down to left hip.',
+        'Maintain rock-solid core brace throughout the 180-degree rainbow arc.'
+      ],
+      commonMistakes: [
+        'Bending elbows excessively.',
+        'Letting weight pull spine into uncontrolled twist.'
+      ],
+      machine: {
+        name: 'Landmine Swivel Attachment & Olympic Barbell',
+        type: 'Landmine Station',
+        gymZone: 'Zone E • Landmine Core Bay',
+        setupGuide: 'Insert bar into floor swivel base. Load 10kg or 15kg plate.',
+        equipmentChecklist: ['Landmine base', 'Olympic bar', 'Plates'],
+        alternatives: [
+          { name: 'Cable Woodchopper', zone: 'Zone C • Cable Bay', swapReason: 'Constant cable resistance' }
+        ]
+      }
+    },
+
+    // Cardio (5 exercises)
+    {
+      id: 'adv_cardio_1',
+      name: 'Assault AirBike Tabata Protocol (20s All-Out / 10s Rest)',
+      level: 'advanced',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 8,
+      reps: '20s maximum sprint / 10s rest',
+      restSeconds: 10,
+      suggestedLoad: 'Max Watts (> 500W) / RPM > 75',
+      imageUrl: '/exercises/advanced/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/cZnsLVArIt8?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/cardio.svg',
+      formCue: 'Maximum Anaerobic Capacity — Full 4-minute Tabata death sprint (8 rounds).',
+      steps: [
+        'Adjust AirBike seat height so leg has slight knee bend at bottom.',
+        'Start console Tabata program (20s work / 10s rest x 8 rounds).',
+        'Sprint with 100% all-out effort pumping arms and driving legs for 20s.',
+        'Coast for 10s, then repeat for 8 brutal rounds.'
+      ],
+      commonMistakes: [
+        'Pacing yourself; Tabata requires genuine maximal output.',
+        'Letting head drop down in fatigue.'
+      ],
+      machine: {
+        name: 'Assault AirBike Classic / Rogue Echo Bike',
+        type: 'Fan Resistance Ergometer',
+        gymZone: 'Zone F • AirBike Arena',
+        setupGuide: 'Set seat pin. Select Tabata preset on monitor.',
+        equipmentChecklist: ['Fan bike'],
+        alternatives: [
+          { name: 'Concept2 Row 500m Sprints', zone: 'Zone F • Erg Row', swapReason: 'Rowing interval alternative' }
+        ]
+      }
+    },
+    {
+      id: 'adv_cardio_2',
+      name: 'Curved Manual Treadmill Sprints (Woodway Curve)',
+      level: 'advanced',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 6,
+      reps: '20s max sprint / 40s rest',
+      restSeconds: 40,
+      suggestedLoad: 'Self-Powered Max Speed (> 18 km/h)',
+      imageUrl: '/exercises/advanced/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/8i3Vrd95o2k?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/cardio.svg',
+      formCue: 'True Sprint Mechanics — Self-powered curved slat belt demands aggressive hip flexion.',
+      steps: [
+        'Step onto curved manual slat treadmill.',
+        'Sprint forward, driving balls of feet into the upward curve to accelerate the belt.',
+        'Reach top sprint velocity for 20 seconds.',
+        'Step feet onto side rails and walk off for 40 seconds recovery.'
+      ],
+      commonMistakes: [
+        'Looking down causing tripping.',
+        'Stomping flat-footed on curved slats.'
+      ],
+      machine: {
+        name: 'Woodway Curve / AssaultRunner Non-Motorized Treadmill',
+        type: 'Manual Curved Slat Treadmill',
+        gymZone: 'Zone F • Athletic Sprint Deck',
+        setupGuide: 'No power switch; belt is 100% human-powered.',
+        equipmentChecklist: ['Athletic running shoes'],
+        alternatives: [
+          { name: 'Motorized Incline Sprints', zone: 'Zone F • Treadmill Deck', swapReason: 'Standard motorized belt alternative' }
+        ]
+      }
+    },
+    {
+      id: 'adv_cardio_3',
+      name: 'Heavy Sled / Prowler Push (Turf 25-Meter Drive)',
+      level: 'advanced',
+      targetMuscle: 'Cardio',
+      equipment: 'Cardio Machine',
+      sets: 5,
+      reps: '25m push down & back',
+      restSeconds: 90,
+      suggestedLoad: '60-100 kg on sled',
+      imageUrl: '/exercises/advanced/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/d3_1y32z7eE?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/cardio.svg',
+      formCue: 'Unstoppable Leg Drive — 45-degree body lean, arms locked, piston leg drives.',
+      steps: [
+        'Load Olympic plates onto steel turf sled.',
+        'Grasp vertical upright poles with arms extended and torso at a 45-degree angle.',
+        'Drive powerfully into the turf, taking deep marching sprint steps for 25 meters.',
+        'Turn around and push back to start.'
+      ],
+      commonMistakes: [
+        'Bending arms allowing chest to collapse into poles.',
+        'Taking tiny stutter steps.'
+      ],
+      machine: {
+        name: 'Heavy Duty Steel Prowler / Push Sled',
+        type: 'Turf Conditioning Equipment',
+        gymZone: 'Zone E • 25-Meter Turf Track',
+        setupGuide: 'Load bumper plates evenly on center vertical post.',
+        equipmentChecklist: ['Steel prowler sled', 'Bumper plates'],
+        alternatives: [
+          { name: 'Farmer’s Walk with Heavy Trap Bar', zone: 'Zone E • Turf', swapReason: 'Grip & core carrying alternative' }
+        ]
+      }
+    },
+    {
+      id: 'adv_cardio_4',
+      name: 'Double-Under Jump Rope Intervals',
+      level: 'advanced',
+      targetMuscle: 'Cardio',
+      equipment: 'Bodyweight',
+      sets: 5,
+      reps: '50 unbroken double-unders',
+      restSeconds: 60,
+      suggestedLoad: 'Speed Bearing Wire Rope',
+      imageUrl: '/exercises/advanced/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/vO_Vz35dKVs?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/cardio.svg',
+      formCue: 'Double Rotation per Jump — Rope spins twice under feet on every single jump.',
+      steps: [
+        'Hold speed rope with wrists forward and elbows tucked.',
+        'Jump straight up on balls of feet with upright spine.',
+        'Flick wrists rapidly twice in mid-air so rope passes under feet twice before landing.',
+        'Maintain steady rhythmic bounds through 50 unbroken reps.'
+      ],
+      commonMistakes: [
+        'Donkey kicking feet backward.',
+        'Piking legs forward in a tuck.'
+      ],
+      machine: {
+        name: 'Speed Wire Jump Rope',
+        type: 'Conditioning Accessory',
+        gymZone: 'Zone E • Functional Turf',
+        setupGuide: 'Clear 3x3 meter zone on rubber flooring.',
+        equipmentChecklist: ['Speed rope'],
+        alternatives: [
+          { name: 'High Speed Single Unders', zone: 'Zone E • Turf', swapReason: 'High cadence single turn' }
+        ]
+      }
+    },
+    {
+      id: 'adv_cardio_5',
+      name: 'Battle Ropes Alternating Waves to Slam Finisher',
+      level: 'advanced',
+      targetMuscle: 'Cardio',
+      equipment: 'Bodyweight',
+      sets: 5,
+      reps: '30s alternating waves + 15s jump slams',
+      restSeconds: 60,
+      suggestedLoad: '50mm Heavy Poly Dacron Battle Rope',
+      imageUrl: '/exercises/advanced/cardio.svg',
+      videoUrl: 'https://www.youtube-nocookie.com/embed/cZnsLVArIt8?rel=0&modestbranding=1&playsinline=1',
+      videoPoster: '/exercises/advanced/cardio.svg',
+      formCue: 'Upper Body Anaerobic Firestorm — Quarter squat, whip rope rapidly into floor.',
+      steps: [
+        'Grip thick rope ends with thumbs toward anchor point, feet shoulder-width, athletic quarter squat.',
+        'Pump arms alternately up and down as fast as possible creating fluid waves to anchor for 30s.',
+        'Immediately raise both arms together overhead and slam ropes violently into floor for 15s.',
+        'Rest 60 seconds.'
+      ],
+      commonMistakes: [
+        'Standing straight up losing leg and hip base.',
+        'Letting rope go slack by standing too close to anchor.'
+      ],
+      machine: {
+        name: '50-Foot Heavy Battle Ropes & Ground Anchor',
+        type: 'Heavy Rope Rig',
+        gymZone: 'Zone E • Functional Turf (Anchor 1)',
+        setupGuide: 'Take 2 steps forward from anchor to allow wave amplitude.',
+        equipmentChecklist: ['50mm Poly dacron ropes', 'Anchor hook'],
+        alternatives: [
+          { name: 'Medicine Ball Overhead Slams', zone: 'Zone E • Turf', swapReason: 'Triple extension slam variation' }
+        ]
+      }
+    }
+  ]
+};
+
+// Write out to frontend/src/data/workoutLibrary.js
+const frontendPath = path.join(__dirname, '..', '..', 'frontend', 'src', 'data', 'workoutLibrary.js');
+const frontendDir = path.dirname(frontendPath);
+if (!fs.existsSync(frontendDir)) fs.mkdirSync(frontendDir, { recursive: true });
+
+const content = `/**
+ * Fit Health Comprehensive Multi-Level Workout Library
+ * Organized across three levels: Beginner, Intermediate, Advanced
+ * Covers: Chest, Back, Shoulders, Legs, Arms, Core, and Cardio (5+ exercises each)
+ * Total: 105+ Fully Documented Exercises with Media, Video Demonstrations & Gym Machine Setup Guides
+ */
+
+export const workoutLibrary = ${JSON.stringify(workoutLibrary, null, 2)};
+
+export const getExercisesByLevel = (level = 'intermediate') => {
+  const norm = (level || 'intermediate').toLowerCase();
+  return workoutLibrary[norm] || workoutLibrary.intermediate;
+};
+
+export const getExercisesByLevelAndMuscle = (level = 'intermediate', muscle = 'Chest') => {
+  const list = getExercisesByLevel(level);
+  if (!muscle || muscle === 'All') return list;
+  return list.filter(ex => ex.targetMuscle.toLowerCase() === muscle.toLowerCase());
+};
+
+export const findExerciseById = (id) => {
+  for (const level of ['beginner', 'intermediate', 'advanced']) {
+    const found = workoutLibrary[level].find(ex => ex.id === id);
+    if (found) return found;
+  }
+  return null;
+};
+`;
+
+fs.writeFileSync(frontendPath, content, 'utf8');
+console.log('Successfully wrote frontend/src/data/workoutLibrary.js with 105 exercises!');

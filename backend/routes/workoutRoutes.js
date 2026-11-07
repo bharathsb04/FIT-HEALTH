@@ -5,6 +5,7 @@ const { authMiddleware } = require('../middleware/authMiddleware');
 
 router.use(authMiddleware);
 
+router.get('/library', workoutController.getWorkoutLibrary);
 router.get('/', workoutController.getWorkouts);
 router.post('/', workoutController.createWorkout);
 router.put('/:id', workoutController.updateWorkout);

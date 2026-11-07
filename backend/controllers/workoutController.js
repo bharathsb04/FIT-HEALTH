@@ -1,5 +1,22 @@
 const db = require('../data/dbStorage');
 const { defaultSplitWorkouts } = require('../data/seedData');
+const workoutLibrary = require('../data/workoutLibrary.json');
+
+exports.getWorkoutLibrary = async (req, res) => {
+  try {
+    const { level, muscle } = req.query;
+    if (level && workoutLibrary[level.toLowerCase()]) {
+      let list = workoutLibrary[level.toLowerCase()];
+      if (muscle && muscle !== 'All') {
+        list = list.filter(ex => ex.targetMuscle.toLowerCase() === muscle.toLowerCase());
+      }
+      return res.status(200).json({ success: true, count: list.length, exercises: list });
+    }
+    return res.status(200).json({ success: true, library: workoutLibrary });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 exports.getWorkouts = async (req, res) => {
   try {

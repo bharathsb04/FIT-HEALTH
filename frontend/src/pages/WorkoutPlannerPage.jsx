@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
 import { useFitness } from '../contexts/FitnessContext';
+import { useAuth } from '../contexts/AuthContext';
 import { Header } from '../components/Header';
-import { WorkoutVideoDemonstrator } from '../components/WorkoutVideoDemonstrator';
+import { WorkoutVideoDemonstrator, getExerciseMeta } from '../components/WorkoutVideoDemonstrator';
+import {
+  workoutLibrary,
+  getExercisesByLevel,
+  getExercisesByLevelAndMuscle
+} from '../data/workoutLibrary';
 import confetti from 'canvas-confetti';
 import {
   Dumbbell,
@@ -38,10 +44,16 @@ import {
 } from 'lucide-react';
 
 export const WorkoutPlannerPage = () => {
+  const { user } = useAuth();
   const { showToast, triggerRefresh } = useFitness();
   const [workoutPlan, setWorkoutPlan] = useState(null);
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [selectedLevel, setSelectedLevel] = useState(
+    (user?.fitnessLevel?.toLowerCase() === 'beginner' || user?.fitnessLevel?.toLowerCase() === 'advanced')
+      ? user.fitnessLevel.toLowerCase()
+      : 'intermediate'
+  );
 
   // Visual Blueprint Poster Modal state
   const [showPosterModal, setShowPosterModal] = useState(false);
@@ -250,9 +262,73 @@ export const WorkoutPlannerPage = () => {
 
   const days = workoutPlan?.days || [];
   const currentDay = days[selectedDayIndex] || days[0];
-  const completedExercises = currentDay?.exercises?.filter(e => e.completed)?.length || 0;
-  const totalExercises = currentDay?.exercises?.length || 0;
+
+  const getCanonicalMuscle = (group = '') => {
+    const g = (group || '').toLowerCase();
+    if (g.includes('chest') || g.includes('pectoral')) return 'Chest';
+    if (g.includes('back') || g.includes('lat') || g.includes('row')) return 'Back';
+    if (g.includes('shoulder') || g.includes('delt')) return 'Shoulders';
+    if (g.includes('leg') || g.includes('quad') || g.includes('hamstring') || g.includes('squat')) return 'Legs';
+    if (g.includes('bicep') || g.includes('tricep') || g.includes('arm')) return 'Arms';
+    if (g.includes('core') || g.includes('ab')) return 'Core';
+    if (g.includes('cardio') || g.includes('hiit') || g.includes('recovery')) return 'Cardio';
+    return 'Chest';
+  };
+
+  const currentMuscleGroup = getCanonicalMuscle(currentDay?.targetGroup || currentDay?.dayName || 'Chest');
+
+  // Enriched exercises for currentDay with workoutLibrary metadata
+  const enrichedExercises = (currentDay?.exercises || []).map(ex => {
+    const meta = getExerciseMeta(ex.name, ex.targetMuscle || currentMuscleGroup, ex.level || selectedLevel);
+    return {
+      ...meta,
+      ...ex,
+      level: ex.level || selectedLevel,
+      imageUrl: meta.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`,
+      videoUrl: meta.videoUrl,
+      videoPoster: meta.videoPoster || meta.imageUrl,
+      formCue: meta.formCue,
+      steps: meta.steps || [ex.instructions || 'Perform with controlled form and full muscular contraction.'],
+      commonMistakes: meta.commonMistakes || ['Avoid jerking or swinging weight', 'Keep core braced throughout']
+    };
+  });
+
+  const completedExercises = enrichedExercises.filter(e => e.completed)?.length || 0;
+  const totalExercises = enrichedExercises.length;
   const progressPercent = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
+
+  const handleLoadLevelRoutine = async (levelToLoad) => {
+    try {
+      setSelectedLevel(levelToLoad);
+      const canonicalMuscle = getCanonicalMuscle(currentDay?.targetGroup || currentDay?.dayName || 'Chest');
+      const curated = getExercisesByLevelAndMuscle(levelToLoad, canonicalMuscle);
+      if (!curated || curated.length === 0) return;
+
+      const formatted = curated.map((ex, idx) => ({
+        id: `ex_${levelToLoad}_${Date.now()}_${idx}`,
+        name: ex.name,
+        targetMuscle: ex.targetMuscle,
+        sets: ex.sets || (levelToLoad === 'beginner' ? 3 : levelToLoad === 'advanced' ? 5 : 4),
+        reps: ex.reps || (levelToLoad === 'beginner' ? '12-15' : levelToLoad === 'advanced' ? '6-8' : '8-12'),
+        weight: ex.suggestedLoad || 'Moderate',
+        restTime: ex.restSeconds || 60,
+        instructions: ex.formCue || ex.steps?.[0] || 'Perform with controlled form.',
+        completed: false,
+        level: levelToLoad
+      }));
+
+      const updatedDays = [...days];
+      updatedDays[selectedDayIndex] = {
+        ...currentDay,
+        exercises: formatted
+      };
+      setWorkoutPlan(prev => ({ ...prev, days: updatedDays }));
+      setCurrentStepIndex(0);
+      showToast(`⚡ Activated ${levelToLoad.toUpperCase()} protocol (${formatted.length} exercises)!`, 'success');
+    } catch (e) {
+      console.warn('Could not load level routine:', e);
+    }
+  };
 
   return (
     <div style={{ minHeight: '100%' }}>
@@ -587,12 +663,83 @@ export const WorkoutPlannerPage = () => {
 
         {/* WORKOUT DETAILS (Sequential full-width layout after Day Splits & Banner) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '4px' }}>
+          
+          {/* Level Selector: Beginner / Intermediate / Advanced */}
+          <div className="card" style={{
+            padding: '14px 18px',
+            background: 'var(--bg-surface)',
+            borderRadius: '14px',
+            border: '1px solid var(--border-color)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px'
+          }}>
+            <div className="flex-between" style={{ flexWrap: 'wrap', gap: '10px' }}>
+              <div>
+                <span style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
+                  TRAINING INTENSITY &amp; EXPERIENCE LEVEL
+                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px', flexWrap: 'wrap' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: 900, margin: 0, textTransform: 'capitalize' }}>
+                    {selectedLevel} Protocol
+                  </h3>
+                  <span className={`badge ${selectedLevel === 'beginner' ? 'badge-success' : selectedLevel === 'intermediate' ? 'badge-primary' : 'badge-warning'}`} style={{ fontSize: '10px' }}>
+                    {selectedLevel === 'beginner' && '🟢 Machines & Bodyweight • 12-15 Reps • 60-90s Rest'}
+                    {selectedLevel === 'intermediate' && '🔵 Free Weights & Dumbbells • 8-12 Reps • 60-90s Rest'}
+                    {selectedLevel === 'advanced' && '🔴 Heavy Barbell Compounds & Supersets • 6-10 Reps • 90-120s Rest'}
+                  </span>
+                </div>
+              </div>
+
+              {/* 3 Level Selector Buttons */}
+              <div style={{
+                display: 'flex',
+                background: 'var(--bg-secondary)',
+                padding: '3px',
+                borderRadius: '10px',
+                gap: '4px'
+              }}>
+                {[
+                  { id: 'beginner', label: 'Beginner', icon: '🟢' },
+                  { id: 'intermediate', label: 'Intermediate', icon: '🔵' },
+                  { id: 'advanced', label: 'Advanced', icon: '🔴' }
+                ].map(lvl => {
+                  const isSelected = selectedLevel === lvl.id;
+                  return (
+                    <button
+                      key={lvl.id}
+                      type="button"
+                      onClick={() => handleLoadLevelRoutine(lvl.id)}
+                      style={{
+                        padding: '6px 14px',
+                        borderRadius: '8px',
+                        border: 'none',
+                        background: isSelected ? 'var(--primary)' : 'transparent',
+                        color: isSelected ? '#080c14' : 'var(--text-secondary)',
+                        fontSize: '12px',
+                        fontWeight: 800,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <span>{lvl.icon}</span>
+                      <span>{lvl.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
           <div className="flex-between">
             <div>
               <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {plannerViewMode === 'step'
-                  ? `Workout Details: Exercise ${currentStepIndex + 1} of ${currentDay?.exercises?.length || 0}`
-                  : `All Workout Exercises (${currentDay?.exercises?.length || 0})`}
+                  ? `Workout Details: Exercise ${currentStepIndex + 1} of ${enrichedExercises.length || 0}`
+                  : `All Workout Exercises (${enrichedExercises.length || 0})`}
               </span>
               <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>
                 {plannerViewMode === 'step' ? 'Step-by-step guided focus with video demonstrations' : 'Full workout overview'}
@@ -647,10 +794,11 @@ export const WorkoutPlannerPage = () => {
             {/* ══════════════════════════════════════════════════
                MODE 1: ONE-BY-ONE STEP DETAIL VIEW
                ══════════════════════════════════════════════════ */}
-            {plannerViewMode === 'step' && currentDay?.exercises?.length > 0 && (() => {
-              const ex = currentDay.exercises[currentStepIndex] || currentDay.exercises[0];
+            {plannerViewMode === 'step' && enrichedExercises.length > 0 && (() => {
+              const ex = enrichedExercises[currentStepIndex] || enrichedExercises[0];
               const isFirst = currentStepIndex === 0;
-              const isLast = currentStepIndex === (currentDay.exercises.length - 1);
+              const isLast = currentStepIndex === (enrichedExercises.length - 1);
+              const exLevel = ex.level || selectedLevel;
 
               return (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -659,8 +807,9 @@ export const WorkoutPlannerPage = () => {
                     display: 'flex', alignItems: 'center', gap: '6px',
                     overflowX: 'auto', paddingBottom: '4px'
                   }}>
-                    {currentDay.exercises.map((item, idx) => {
+                    {enrichedExercises.map((item, idx) => {
                       const isActive = currentStepIndex === idx;
+                      const itemLevel = item.level || selectedLevel;
                       return (
                         <button
                           key={item.id || idx}
@@ -693,10 +842,20 @@ export const WorkoutPlannerPage = () => {
                             transition: 'all 0.15s ease'
                           }}
                         >
+                          <span style={{
+                            fontSize: '9px',
+                            padding: '1px 5px',
+                            borderRadius: '3px',
+                            background: itemLevel === 'beginner' ? 'rgba(16,185,129,0.2)' : itemLevel === 'intermediate' ? 'rgba(6,182,212,0.2)' : 'rgba(245,158,11,0.2)',
+                            color: itemLevel === 'beginner' ? 'var(--primary)' : itemLevel === 'intermediate' ? 'var(--cyan)' : 'var(--amber)',
+                            fontWeight: 900
+                          }}>
+                            {itemLevel.slice(0, 3).toUpperCase()}
+                          </span>
                           {item.completed ? (
                             <CheckCircle2 size={12} color="var(--primary)" />
                           ) : (
-                            <span>{idx + 1}</span>
+                            <span>{idx + 1}.</span>
                           )}
                           <span>{item.name.length > 15 ? item.name.slice(0, 15) + '...' : item.name}</span>
                         </button>
@@ -709,8 +868,10 @@ export const WorkoutPlannerPage = () => {
                     {/* Left Column: Embedded Visual Video Demonstrator */}
                     <div>
                       <WorkoutVideoDemonstrator
-                        workoutDay={currentDay}
+                        workoutDay={{ ...currentDay, exercises: enrichedExercises }}
                         initialExerciseIndex={currentStepIndex}
+                        selectedLevel={selectedLevel}
+                        onSelectLevel={handleLoadLevelRoutine}
                       />
                     </div>
 
@@ -775,11 +936,23 @@ export const WorkoutPlannerPage = () => {
                               {ex.completed && <CheckCircle2 size={18} color="#0b0f19" strokeWidth={3} />}
                             </button>
                             <div>
-                              <h4 style={{ fontSize: '15px', fontWeight: 800, color: ex.completed ? 'var(--text-muted)' : 'var(--text-primary)', textDecoration: ex.completed ? 'line-through' : 'none' }}>
-                                {ex.name}
-                              </h4>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                                <h4 style={{ fontSize: '15px', fontWeight: 800, margin: 0, color: ex.completed ? 'var(--text-muted)' : 'var(--text-primary)', textDecoration: ex.completed ? 'line-through' : 'none' }}>
+                                  {ex.name}
+                                </h4>
+                                <span style={{
+                                  fontSize: '9px',
+                                  padding: '2px 6px',
+                                  borderRadius: '4px',
+                                  background: exLevel === 'beginner' ? 'rgba(16,185,129,0.2)' : exLevel === 'intermediate' ? 'rgba(6,182,212,0.2)' : 'rgba(245,158,11,0.2)',
+                                  color: exLevel === 'beginner' ? 'var(--primary)' : exLevel === 'intermediate' ? 'var(--cyan)' : 'var(--amber)',
+                                  fontWeight: 900
+                                }}>
+                                  {exLevel.toUpperCase()}
+                                </span>
+                              </div>
                               <span style={{ fontSize: '11px', color: 'var(--cyan)', fontWeight: 700 }}>
-                                Target: {ex.targetMuscle}
+                                Target: {ex.targetMuscle} &bull; {ex.equipment || 'Exercise'}
                               </span>
                             </div>
                           </div>
@@ -787,6 +960,21 @@ export const WorkoutPlannerPage = () => {
                           <span className={`badge ${ex.completed ? 'badge-completed' : 'badge-fitness'}`}>
                             {ex.completed ? '✅ Completed' : 'Pending Sets'}
                           </span>
+                        </div>
+
+                        {/* Cover Image & Form Cue */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '8px 0 12px', background: 'var(--bg-secondary)', padding: '8px 10px', borderRadius: '10px' }}>
+                          <img
+                            src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
+                            alt={ex.name}
+                            loading="lazy"
+                            onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                            style={{ width: '46px', height: '46px', borderRadius: '8px', objectFit: 'cover', background: '#0a0e1a', flexShrink: 0 }}
+                          />
+                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.35 }}>
+                            <strong style={{ color: 'var(--text-primary)' }}>Form Cue: </strong>
+                            {ex.formCue || 'Maintain steady tempo and full joint control throughout set.'}
+                          </div>
                         </div>
 
                         {/* Inputs */}
@@ -854,7 +1042,7 @@ export const WorkoutPlannerPage = () => {
                           </button>
 
                           <button
-                            onClick={() => setCurrentStepIndex(prev => Math.min(currentDay.exercises.length - 1, prev + 1))}
+                            onClick={() => setCurrentStepIndex(prev => Math.min(enrichedExercises.length - 1, prev + 1))}
                             disabled={isLast}
                             className="btn btn-outline"
                             style={{
@@ -877,8 +1065,9 @@ export const WorkoutPlannerPage = () => {
                ══════════════════════════════════════════════════ */}
             {plannerViewMode === 'list' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {currentDay?.exercises?.map((ex, i) => {
+                {enrichedExercises.map((ex, i) => {
                   const isOpen = openInstructions[ex.id];
+                  const itemLevel = ex.level || selectedLevel;
                   return (
                     <div
                       key={ex.id || i}
@@ -889,7 +1078,7 @@ export const WorkoutPlannerPage = () => {
                         background: ex.completed ? 'rgba(16, 185, 129, 0.04)' : 'var(--bg-secondary)'
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '10px' }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                           <button
                             onClick={() => handleToggleComplete(ex.id, ex.completed)}
@@ -909,18 +1098,54 @@ export const WorkoutPlannerPage = () => {
                             {ex.completed && <CheckCircle2 size={16} color="#0b0f19" strokeWidth={3} />}
                           </button>
 
+                          {/* Exercise Thumbnail Cover Image */}
+                          <div style={{
+                            width: '56px',
+                            height: '56px',
+                            borderRadius: '10px',
+                            overflow: 'hidden',
+                            background: '#070b13',
+                            border: '1px solid var(--border-color)',
+                            flexShrink: 0
+                          }}>
+                            <img
+                              src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
+                              alt={ex.name}
+                              loading="lazy"
+                              onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          </div>
+
                           <div>
-                            <h4 style={{
-                              fontSize: '14px',
-                              fontWeight: 700,
-                              color: ex.completed ? 'var(--text-muted)' : 'var(--text-primary)',
-                              textDecoration: ex.completed ? 'line-through' : 'none'
-                            }}>
-                              {ex.name}
-                            </h4>
-                            <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
-                              Target: <b style={{ color: 'var(--cyan)' }}>{ex.targetMuscle}</b>
-                            </span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                              <h4 style={{
+                                fontSize: '14px',
+                                fontWeight: 800,
+                                margin: 0,
+                                color: ex.completed ? 'var(--text-muted)' : 'var(--text-primary)',
+                                textDecoration: ex.completed ? 'line-through' : 'none'
+                              }}>
+                                {ex.name}
+                              </h4>
+                              <span style={{
+                                fontSize: '9px',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
+                                background: itemLevel === 'beginner' ? 'rgba(16,185,129,0.2)' : itemLevel === 'intermediate' ? 'rgba(6,182,212,0.2)' : 'rgba(245,158,11,0.2)',
+                                color: itemLevel === 'beginner' ? 'var(--primary)' : itemLevel === 'intermediate' ? 'var(--cyan)' : 'var(--amber)',
+                                fontWeight: 900,
+                                textTransform: 'uppercase'
+                              }}>
+                                {itemLevel.toUpperCase()}
+                              </span>
+                            </div>
+
+                            <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span>Target: <b style={{ color: 'var(--cyan)' }}>{ex.targetMuscle}</b></span>
+                              <span>•</span>
+                              <span>{ex.equipment || 'Exercise'}</span>
+                            </div>
                           </div>
                         </div>
 
@@ -933,24 +1158,25 @@ export const WorkoutPlannerPage = () => {
                             }}
                             className="btn btn-sm"
                             style={{
-                              padding: '3px 8px',
+                              padding: '5px 10px',
                               fontSize: '11px',
                               background: 'rgba(16, 185, 129, 0.12)',
                               border: '1px solid rgba(16, 185, 129, 0.3)',
                               color: 'var(--primary)',
                               gap: '4px',
-                              borderRadius: '6px'
+                              borderRadius: '8px',
+                              fontWeight: 800
                             }}
                           >
-                            <Video size={12} />
-                            <span>1-by-1 Detail</span>
+                            <Video size={13} />
+                            <span>Watch Demo</span>
                           </button>
 
                           <button
                             onClick={() => setOpenInstructions(prev => ({ ...prev, [ex.id]: !prev[ex.id] }))}
                             className="icon-btn"
                             style={{ width: '28px', height: '28px' }}
-                            title="View form instructions"
+                            title="View form guide"
                           >
                             {isOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                           </button>
@@ -996,12 +1222,24 @@ export const WorkoutPlannerPage = () => {
                       </div>
 
                       {isOpen && (
-                        <div style={{ marginTop: '10px', padding: '10px 12px', background: 'var(--bg-surface)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px', color: 'var(--primary)', fontWeight: 700 }}>
-                            <Info size={13} />
-                            <span>Form & Execution Tips</span>
+                        <div style={{ marginTop: '10px', padding: '12px 14px', background: 'var(--bg-surface)', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px', color: 'var(--primary)', fontWeight: 800 }}>
+                            <Sparkles size={14} />
+                            <span>Precision Form Cues &amp; Execution</span>
                           </div>
-                          <p style={{ margin: 0 }}>{ex.instructions}</p>
+                          <p style={{ margin: '0 0 8px', color: 'var(--text-primary)', fontWeight: 600 }}>
+                            {ex.formCue || ex.instructions}
+                          </p>
+                          {ex.steps && ex.steps.length > 0 && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '6px' }}>
+                              {ex.steps.map((st, sidx) => (
+                                <div key={sidx} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '11px' }}>
+                                  <span style={{ color: 'var(--cyan)', fontWeight: 900 }}>•</span>
+                                  <span>{st}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
@@ -1148,9 +1386,11 @@ export const WorkoutPlannerPage = () => {
             overflowY: 'auto'
           }}>
             <WorkoutVideoDemonstrator
-              workoutDay={currentDay}
+              workoutDay={{ ...currentDay, exercises: enrichedExercises }}
               initialExerciseIndex={activeVideoIndex}
               isModal={true}
+              selectedLevel={selectedLevel}
+              onSelectLevel={handleLoadLevelRoutine}
               onClose={() => setShowVideoModal(false)}
             />
           </div>
