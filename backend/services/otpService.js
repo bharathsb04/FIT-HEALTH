@@ -81,7 +81,7 @@ const checkRateLimit = (identifier, maxRequests = 10, windowMs = 10 * 60 * 1000)
  * Plaintext OTP is returned ONLY for immediate SMTP email transmission.
  * The database receives exclusively the cryptographic hash.
  */
-const createAndStoreOTP = (email, purpose = 'registration', clientIp = null) => {
+const createAndStoreOTP = async (email, purpose = 'registration', clientIp = null) => {
   if (!email || !email.includes('@')) {
     throw new Error('A valid email address is required for OTP generation.');
   }
@@ -106,6 +106,7 @@ const createAndStoreOTP = (email, purpose = 'registration', clientIp = null) => 
 
   const plainOtp = generateOTP();
   const hashed = hashOtp(normalizedEmail, plainOtp);
+  const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
 
   const otpRecord = {
     id: `otp_${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`,
@@ -148,26 +149,30 @@ const createAndStoreOTP = (email, purpose = 'registration', clientIp = null) => 
     console.warn('[Database OTP Storage] Local storage warning:', err.message);
   }
 
-  // 3. Persist to Cloud Firestore 'otps' collection in HASHED form
-  if (isFirebaseActive()) {
-    try {
-      const firestore = getFirestore();
-      const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
-      firestore.collection('otps').doc(docId).set({
+  // 3. Persist to Cloud Firestore 'otps' collection in HASHED form (CRITICAL for Serverless Vercel)
+  try {
+    const firestore = getFirestore();
+    if (firestore) {
+      await firestore.collection('otps').doc(docId).set({
+        id: otpRecord.id,
         email: normalizedEmail,
         purpose,
         otpHash: hashed,         // HASHED FORM ONLY
+        hash: hashed,
         attempts: 0,
         maxAttempts: config.maxAttempts,
         verified: false,
-        expiresAt: new Date(expiresAt),
-        resendAfter: new Date(resendAfter),
-        createdAt: new Date(now),
-        updatedAt: new Date(now)
-      }).catch(err => console.warn('[Cloud Firestore otps] Persist warning:', err.message));
-    } catch (e) {
-      console.warn('[Cloud Firestore otps] Sync error:', e.message);
+        expiresAtMs: expiresAt,
+        expiresAt: new Date(expiresAt).toISOString(),
+        resendAfterMs: resendAfter,
+        resendAfter: new Date(resendAfter).toISOString(),
+        createdAt: new Date(now).toISOString(),
+        updatedAt: new Date(now).toISOString()
+      });
+      console.log(`[Cloud Firestore otps] Persisted OTP hash for ${normalizedEmail} (${purpose})`);
     }
+  } catch (e) {
+    console.warn('[Cloud Firestore otps] Sync warning:', e.message);
   }
 
   return plainOtp;
@@ -176,8 +181,9 @@ const createAndStoreOTP = (email, purpose = 'registration', clientIp = null) => 
 /**
  * Verifies an incoming OTP code against the stored hash in the database 'otps' table.
  * Enforces attempt count limits, expiration, and timing-safe comparison.
+ * Fully supports Serverless multi-container instances via Cloud Firestore synchronization.
  */
-const verifyOTP = (email, otp, purpose = 'registration') => {
+const verifyOTP = async (email, otp, purpose = 'registration') => {
   if (!email || !otp) {
     return { success: false, message: 'Email and 6-digit verification code are required.' };
   }
@@ -187,8 +193,10 @@ const verifyOTP = (email, otp, purpose = 'registration') => {
   const config = getOtpConfig();
   const now = Date.now();
 
-  // 1. Try In-Memory cache first, fallback to database 'otps' table
+  // 1. Try In-Memory cache first
   let record = otpStore.get(storeKey);
+
+  // 2. Fallback to local database 'otps' table
   if (!record) {
     try {
       const dbRecord = db.findOne('otps', o => o.email === normalizedEmail && o.purpose === purpose);
@@ -204,6 +212,51 @@ const verifyOTP = (email, otp, purpose = 'registration') => {
         otpStore.set(storeKey, record);
       }
     } catch (_) {}
+  }
+
+  // 3. Fallback to Cloud Firestore 'otps' collection (Crucial for Vercel Serverless containers)
+  if (!record) {
+    try {
+      const firestore = getFirestore();
+      if (firestore) {
+        const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+        let docSnap = await firestore.collection('otps').doc(docId).get();
+
+        // Check alternate purpose if direct purpose didn't hit
+        if (!docSnap.exists) {
+          const altPurpose = purpose === 'registration' ? 'login' : 'registration';
+          const altDocId = `${normalizedEmail.replace(/[@.]/g, '_')}_${altPurpose}`;
+          docSnap = await firestore.collection('otps').doc(altDocId).get();
+        }
+
+        // Query by email directly if document key variant
+        if (!docSnap.exists) {
+          const querySnap = await firestore.collection('otps')
+            .where('email', '==', normalizedEmail)
+            .limit(2)
+            .get();
+          if (!querySnap.empty) {
+            docSnap = querySnap.docs[0];
+          }
+        }
+
+        if (docSnap && docSnap.exists) {
+          const d = docSnap.data();
+          record = {
+            docId: docSnap.id,
+            hash: d.otpHash || d.hash,
+            otpHash: d.otpHash || d.hash,
+            expiresAt: d.expiresAtMs || (d.expiresAt?.toDate ? d.expiresAt.toDate().getTime() : new Date(d.expiresAt).getTime()),
+            attempts: d.attempts || 0,
+            verified: Boolean(d.verified),
+            purpose: d.purpose || purpose
+          };
+          otpStore.set(storeKey, record);
+        }
+      }
+    } catch (err) {
+      console.warn('[Cloud Firestore OTP Lookup Warning]:', err.message);
+    }
   }
 
   if (!record) {
@@ -267,16 +320,16 @@ const verifyOTP = (email, otp, purpose = 'registration') => {
     } catch (_) {}
 
     // Sync attempts to Cloud Firestore 'otps' collection
-    if (isFirebaseActive()) {
-      try {
-        const firestore = getFirestore();
-        const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
-        firestore.collection('otps').doc(docId).update({
+    try {
+      const firestore = getFirestore();
+      if (firestore) {
+        const targetDocId = record.docId || `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+        await firestore.collection('otps').doc(targetDocId).update({
           attempts: record.attempts,
-          updatedAt: new Date()
+          updatedAt: new Date().toISOString()
         }).catch(() => {});
-      } catch {}
-    }
+      }
+    } catch (_) {}
 
     return {
       success: false,
@@ -303,17 +356,17 @@ const verifyOTP = (email, otp, purpose = 'registration') => {
   } catch (_) {}
 
   // Update verified status in Cloud Firestore 'otps' collection
-  if (isFirebaseActive()) {
-    try {
-      const firestore = getFirestore();
-      const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
-      firestore.collection('otps').doc(docId).update({
+  try {
+    const firestore = getFirestore();
+    if (firestore) {
+      const targetDocId = record.docId || `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+      await firestore.collection('otps').doc(targetDocId).update({
         verified: true,
-        verifiedAt: new Date(),
-        updatedAt: new Date()
+        verifiedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }).catch(() => {});
-    } catch {}
-  }
+    }
+  } catch (_) {}
 
   return {
     success: true,
@@ -321,7 +374,7 @@ const verifyOTP = (email, otp, purpose = 'registration') => {
   };
 };
 
-const isEmailVerified = (email, purpose = 'registration') => {
+const isEmailVerified = async (email, purpose = 'registration') => {
   const normalizedEmail = email.toLowerCase().trim();
   const storeKey = `${normalizedEmail}:${purpose}`;
   const record = otpStore.get(storeKey);
@@ -329,13 +382,23 @@ const isEmailVerified = (email, purpose = 'registration') => {
 
   try {
     const dbRecord = db.findOne('otps', o => o.email === normalizedEmail && o.purpose === purpose);
-    return Boolean(dbRecord && dbRecord.verified);
-  } catch {
-    return false;
-  }
+    if (dbRecord && dbRecord.verified) return true;
+  } catch (_) {}
+
+  // Cloud Firestore fallback check
+  try {
+    const firestore = getFirestore();
+    if (firestore) {
+      const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+      const docSnap = await firestore.collection('otps').doc(docId).get();
+      if (docSnap.exists && docSnap.data()?.verified) return true;
+    }
+  } catch (_) {}
+
+  return false;
 };
 
-const consumeVerifiedOTP = (email, purpose = 'registration') => {
+const consumeVerifiedOTP = async (email, purpose = 'registration') => {
   const normalizedEmail = email.toLowerCase().trim();
   const storeKey = `${normalizedEmail}:${purpose}`;
   otpStore.delete(storeKey);
@@ -347,13 +410,16 @@ const consumeVerifiedOTP = (email, purpose = 'registration') => {
   } catch (_) {}
 
   // Remove from Cloud Firestore 'otps' collection
-  if (isFirebaseActive()) {
-    try {
-      const firestore = getFirestore();
+  try {
+    const firestore = getFirestore();
+    if (firestore) {
       const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
-      firestore.collection('otps').doc(docId).delete().catch(() => {});
-    } catch {}
-  }
+      await firestore.collection('otps').doc(docId).delete().catch(() => {});
+      const altPurpose = purpose === 'registration' ? 'login' : 'registration';
+      const altDocId = `${normalizedEmail.replace(/[@.]/g, '_')}_${altPurpose}`;
+      await firestore.collection('otps').doc(altDocId).delete().catch(() => {});
+    }
+  } catch (_) {}
 };
 
 // Periodic garbage collection for expired entries (runs every 5 minutes)

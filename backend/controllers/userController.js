@@ -1,9 +1,10 @@
 const db = require('../data/dbStorage');
 const { calculateMacroTargets } = require('./authController');
+const { findUserById, updateUser } = require('../services/userService');
 
 exports.getProfile = async (req, res) => {
   try {
-    const user = db.findById('users', req.userId);
+    const user = (await findUserById(req.userId)) || req.user;
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
@@ -20,7 +21,7 @@ exports.getProfile = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
-    const user = db.findById('users', req.userId);
+    const user = (await findUserById(req.userId)) || req.user;
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
@@ -87,7 +88,7 @@ exports.updateProfile = async (req, res) => {
       targetFat
     };
 
-    const updated = db.update('users', req.userId, updates);
+    const updated = (await updateUser(req.userId, updates)) || db.update('users', req.userId, updates) || { ...user, ...updates };
 
     // If membership was added/updated to Active, sync with gymMembers roster
     if (req.body.membershipStatus === 'Active' && (req.body.membershipId || user.membershipId)) {

@@ -781,6 +781,74 @@
       "membershipStatus": "Active",
       "membershipPlan": "Gym Facility Master",
       "emailVerified": true
+    },
+    {
+      "id": "user_1794055678590",
+      "createdAt": "2026-11-07T12:47:58.591Z",
+      "updatedAt": "2026-11-07T12:47:58.591Z",
+      "name": "Alex Athlete",
+      "email": "test_athlete_1794055676133@fithealth.io",
+      "password": "$2a$10$AS9ujD.0Tx8E64iDYEgqzuai/PYZl3pGvSFAdlGofM/wqOf4Pbj1G",
+      "age": 24,
+      "gender": "Male",
+      "height": 175,
+      "weight": 75,
+      "targetWeight": 80,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Bulking",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 2907,
+      "targetProtein": 165,
+      "targetCarbs": 380,
+      "targetFat": 81,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1,
+      "role": "member",
+      "linkedGymId": "gym_1",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "Downtown Flagship Center",
+      "membershipId": "FH-MEM-5368",
+      "membershipStatus": "Active",
+      "membershipPlan": "Monthly Pro Fitness",
+      "emailVerified": true
+    },
+    {
+      "id": "user_1794055682008",
+      "createdAt": "2026-11-07T12:48:02.008Z",
+      "updatedAt": "2026-11-07T12:48:02.008Z",
+      "name": "Test Admin Coach",
+      "email": "test_admin_1794055679894@fithealth.io",
+      "password": "$2a$10$KL/YK.ro6SQNGTQdy97GWeQ6/Fc60LbACP2OEGylYf0WsD8evx3Z.",
+      "age": 24,
+      "gender": "Male",
+      "height": 175,
+      "weight": 75,
+      "targetWeight": 80,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Bulking",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 2907,
+      "targetProtein": 165,
+      "targetCarbs": 380,
+      "targetFat": 81,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1,
+      "role": "admin",
+      "linkedGymId": "gym_1",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "Downtown Flagship Center",
+      "membershipId": "FH-ADM-5613",
+      "membershipStatus": "Active",
+      "membershipPlan": "Gym Facility Master",
+      "emailVerified": true
     }
   ],
   "gyms": [
@@ -11161,6 +11229,846 @@
         }
       ],
       "history": []
+    },
+    {
+      "id": "wor_1794055678739_t5dhn",
+      "createdAt": "2026-11-07T12:47:58.739Z",
+      "updatedAt": "2026-11-07T12:47:58.739Z",
+      "userId": "user_1794055678590",
+      "goal": "Bulking",
+      "splitName": "6-Day Bulking Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Focus. Train. Transform. Pectoral Power & Volume",
+          "targetGroup": "Chest",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Bench Press",
+              "targetMuscle": "Pectoralis Major (Mid & Lower)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "80 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Arch lower back slightly, retract scapulae, lower bar under control to mid-chest, drive up explosively."
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Chest",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "28 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Set bench at 30 degrees. Keep elbows at 45 degrees, deep stretch at bottom and squeeze at peak."
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Chest Adduction",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "15 kg/side",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Slight bend in elbows. Bring arms together in a hugging motion, squeeze pecs hard at center."
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest & Serratus Anterior",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie perpendicular across bench. Lower dumbbell behind head with deep ribcage stretch, pull over to chest."
+            },
+            {
+              "id": "e5",
+              "name": "Push Ups",
+              "targetMuscle": "Chest & Triceps Finisher",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Maintain strong core plank. Lower chest to floor and push up with full range of motion."
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDER",
+          "focus": "3D Deltoid Mass, Overhead Power & Traps",
+          "targetGroup": "Shoulder",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Brace glutes and abs, press bar in straight vertical path clearing chin, lock out overhead."
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoids (Cap Width)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lead with elbows, slight forward lean, pause at parallel for maximum delt tension."
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Raise dumbbells to eye level with controlled tempo. Avoid swinging torso."
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Hinge forward at 45 degrees or use incline bench. Pull arms wide to isolate rear delts."
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg/hand",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Elevate shoulders straight up towards ears, squeeze traps for 1 second, lower under control."
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Peak Hypertrophy & Forearms",
+          "targetGroup": "Biceps",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Overall Mass)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Keep elbows pinned to ribs. Curl barbell upward with strong contraction and controlled 3-second eccentric."
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Long & Short Heads",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Supinate wrists as you curl upward to maximize bicep contraction at peak."
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearms",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "14 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Palms facing each other throughout. Great for arm thickness and grip strength."
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Short Head (Peak)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Rest upper arms firmly against angled pad to eliminate momentum and isolate the bicep peak."
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "12 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Sit and brace elbow against inner thigh. Curl dumbbell smoothly with intense focus."
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps & Inner Chest",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Grip shoulder-width apart. Keep elbows tucked close to body while pressing to overload triceps."
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "25 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Spread rope apart at bottom of motion. Lock out triceps hard for 1 second."
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Ext.",
+              "targetMuscle": "Triceps Long Head",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Keep elbows high and stationary. Lower weight behind head for a deep long head stretch."
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Chest Overload",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Stay upright on parallel bars to emphasize triceps. Lower until elbows reach 90 degrees."
+            },
+            {
+              "id": "e20",
+              "name": "Kick Back",
+              "targetMuscle": "Triceps Peak Contraction",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Torso parallel to floor, upper arm parallel to torso. Extend forearm back and squeeze."
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Power",
+          "targetGroup": "Back",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Dead hang at bottom, drive elbows down to ribs, pull chest up toward bar."
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Hinge at 45 degrees, pull bar towards belly button, pinch shoulder blades together tightly."
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Upper Lats & Teres Major",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Pull bar smoothly down to upper chest while leaning back slightly. Control the ascent."
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Mid-Back & Lower Lats",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Sit upright with neutral spine. Pull attachment into lower abdomen and squeeze back."
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Full Posterior Chain & Traps",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "120 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Bar over midfoot, chest proud, brace core, drive through heels to full standing lockout."
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop, Hamstring Sweep & Calf Power",
+          "targetGroup": "Legs",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps & Glutes",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "100 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Feet shoulder-width, brace abdominal wall, descend below parallel, drive up through midfoot."
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Adductors",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "200 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Position feet mid-platform. Lower sled with control without lifting pelvis, press without knee lockout."
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quad Teardrop (VMO)",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "55 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Extend legs fully, hold peak contraction at top for 1 full second, lower with 3-second negative."
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings & Knee Flexors",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie flat on machine pad. Curl heels up toward glutes with strong hamstring squeeze."
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Full stretch at bottom, explode up onto toes and hold at top for 2 seconds."
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — RECOVERY & MOBILITY",
+          "focus": "Active Recovery, Muscle Repair & CNS Restoration",
+          "targetGroup": "Recovery",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Light 30-min Zone 2 Walk",
+              "targetMuscle": "Cardiovascular & Recovery",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Gentle brisk walk to stimulate lymphatic drainage, blood circulation, and active recovery."
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Dynamic Stretching",
+              "targetMuscle": "Joint Mobility & Fascia",
+              "sets": 1,
+              "reps": "15 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Perform guided hip openers, shoulder dislocations, and thoracic spine rotations."
+            }
+          ]
+        }
+      ],
+      "history": []
+    },
+    {
+      "id": "wor_1794055682360_81r6n",
+      "createdAt": "2026-11-07T12:48:02.360Z",
+      "updatedAt": "2026-11-07T12:48:02.360Z",
+      "userId": "user_1794055682008",
+      "goal": "Bulking",
+      "splitName": "6-Day Bulking Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Focus. Train. Transform. Pectoral Power & Volume",
+          "targetGroup": "Chest",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Bench Press",
+              "targetMuscle": "Pectoralis Major (Mid & Lower)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "80 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Arch lower back slightly, retract scapulae, lower bar under control to mid-chest, drive up explosively."
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Chest",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "28 kg",
+              "restTime": 90,
+              "completed": true,
+              "instructions": "Set bench at 30 degrees. Keep elbows at 45 degrees, deep stretch at bottom and squeeze at peak."
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Chest Adduction",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "15 kg/side",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Slight bend in elbows. Bring arms together in a hugging motion, squeeze pecs hard at center."
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest & Serratus Anterior",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie perpendicular across bench. Lower dumbbell behind head with deep ribcage stretch, pull over to chest."
+            },
+            {
+              "id": "e5",
+              "name": "Push Ups",
+              "targetMuscle": "Chest & Triceps Finisher",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Maintain strong core plank. Lower chest to floor and push up with full range of motion."
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDER",
+          "focus": "3D Deltoid Mass, Overhead Power & Traps",
+          "targetGroup": "Shoulder",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Brace glutes and abs, press bar in straight vertical path clearing chin, lock out overhead."
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoids (Cap Width)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lead with elbows, slight forward lean, pause at parallel for maximum delt tension."
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Raise dumbbells to eye level with controlled tempo. Avoid swinging torso."
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Hinge forward at 45 degrees or use incline bench. Pull arms wide to isolate rear delts."
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg/hand",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Elevate shoulders straight up towards ears, squeeze traps for 1 second, lower under control."
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Peak Hypertrophy & Forearms",
+          "targetGroup": "Biceps",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Overall Mass)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Keep elbows pinned to ribs. Curl barbell upward with strong contraction and controlled 3-second eccentric."
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Long & Short Heads",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Supinate wrists as you curl upward to maximize bicep contraction at peak."
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearms",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "14 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Palms facing each other throughout. Great for arm thickness and grip strength."
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Short Head (Peak)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Rest upper arms firmly against angled pad to eliminate momentum and isolate the bicep peak."
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "12 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Sit and brace elbow against inner thigh. Curl dumbbell smoothly with intense focus."
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps & Inner Chest",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Grip shoulder-width apart. Keep elbows tucked close to body while pressing to overload triceps."
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "25 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Spread rope apart at bottom of motion. Lock out triceps hard for 1 second."
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Ext.",
+              "targetMuscle": "Triceps Long Head",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Keep elbows high and stationary. Lower weight behind head for a deep long head stretch."
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Chest Overload",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 75,
+              "completed": false,
+              "instructions": "Stay upright on parallel bars to emphasize triceps. Lower until elbows reach 90 degrees."
+            },
+            {
+              "id": "e20",
+              "name": "Kick Back",
+              "targetMuscle": "Triceps Peak Contraction",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Torso parallel to floor, upper arm parallel to torso. Extend forearm back and squeeze."
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Power",
+          "targetGroup": "Back",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Dead hang at bottom, drive elbows down to ribs, pull chest up toward bar."
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Hinge at 45 degrees, pull bar towards belly button, pinch shoulder blades together tightly."
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Upper Lats & Teres Major",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Pull bar smoothly down to upper chest while leaning back slightly. Control the ascent."
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Mid-Back & Lower Lats",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Sit upright with neutral spine. Pull attachment into lower abdomen and squeeze back."
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Full Posterior Chain & Traps",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "120 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Bar over midfoot, chest proud, brace core, drive through heels to full standing lockout."
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop, Hamstring Sweep & Calf Power",
+          "targetGroup": "Legs",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps & Glutes",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "100 kg",
+              "restTime": 120,
+              "completed": false,
+              "instructions": "Feet shoulder-width, brace abdominal wall, descend below parallel, drive up through midfoot."
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Adductors",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "200 kg",
+              "restTime": 90,
+              "completed": false,
+              "instructions": "Position feet mid-platform. Lower sled with control without lifting pelvis, press without knee lockout."
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quad Teardrop (VMO)",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "55 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Extend legs fully, hold peak contraction at top for 1 full second, lower with 3-second negative."
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings & Knee Flexors",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "instructions": "Lie flat on machine pad. Curl heels up toward glutes with strong hamstring squeeze."
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "instructions": "Full stretch at bottom, explode up onto toes and hold at top for 2 seconds."
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — RECOVERY & MOBILITY",
+          "focus": "Active Recovery, Muscle Repair & CNS Restoration",
+          "targetGroup": "Recovery",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Light 30-min Zone 2 Walk",
+              "targetMuscle": "Cardiovascular & Recovery",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Gentle brisk walk to stimulate lymphatic drainage, blood circulation, and active recovery."
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Dynamic Stretching",
+              "targetMuscle": "Joint Mobility & Fascia",
+              "sets": 1,
+              "reps": "15 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "instructions": "Perform guided hip openers, shoulder dislocations, and thoracic spine rotations."
+            }
+          ]
+        }
+      ],
+      "history": []
     }
   ],
   "dietPlans": [
@@ -11362,6 +12270,22 @@
       "updatedAt": "2026-11-04T17:18:56.976Z",
       "userId": "user_1793812736963",
       "date": "2026-11-04",
+      "meals": []
+    },
+    {
+      "id": "die_1794055678752_89yeu",
+      "createdAt": "2026-11-07T12:47:58.752Z",
+      "updatedAt": "2026-11-07T12:47:58.752Z",
+      "userId": "user_1794055678590",
+      "date": "2026-11-07",
+      "meals": []
+    },
+    {
+      "id": "die_1794055682371_2gfns",
+      "createdAt": "2026-11-07T12:48:02.371Z",
+      "updatedAt": "2026-11-07T12:48:02.371Z",
+      "userId": "user_1794055682008",
+      "date": "2026-11-07",
       "meals": []
     }
   ],
@@ -11983,6 +12907,58 @@
       "isWearableConnected": false,
       "wearableDevice": "Not Connected",
       "lastSyncTimestamp": "2026-11-04T17:18:56.986Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1794055678902_3hjbz",
+      "createdAt": "2026-11-07T12:47:58.902Z",
+      "updatedAt": "2026-11-07T12:47:58.902Z",
+      "userId": "user_1794055678590",
+      "date": "2026-11-07",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-11-07T12:47:58.902Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1794055682391_12ta8",
+      "createdAt": "2026-11-07T12:48:02.391Z",
+      "updatedAt": "2026-11-07T12:48:02.391Z",
+      "userId": "user_1794055682008",
+      "date": "2026-11-07",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-11-07T12:48:02.391Z",
       "cardioZones": {
         "warmUpMinutes": 10,
         "fatBurnMinutes": 15,
@@ -13377,6 +14353,36 @@
           "amountMl": 500
         }
       ]
+    },
+    {
+      "id": "hyd_1794055678892_ct6so",
+      "createdAt": "2026-11-07T12:47:58.892Z",
+      "updatedAt": "2026-11-07T12:47:58.892Z",
+      "userId": "user_1794055678590",
+      "date": "2026-11-07",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "06:17 pm",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1794055682377_lrpiw",
+      "createdAt": "2026-11-07T12:48:02.377Z",
+      "updatedAt": "2026-11-07T12:48:02.377Z",
+      "userId": "user_1794055682008",
+      "date": "2026-11-07",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "06:18 pm",
+          "amountMl": 500
+        }
+      ]
     }
   ],
   "dayPassBookings": [
@@ -14420,6 +15426,25 @@
       "status": "Active",
       "joinedDate": "2026-11-04",
       "expiryDate": "2026-12-04",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
+      "notes": "Registered member (Bulking)"
+    },
+    {
+      "id": "mem_user_1794055678590",
+      "createdAt": "2026-11-07T12:47:58.731Z",
+      "updatedAt": "2026-11-07T12:47:58.731Z",
+      "userId": "user_1794055678590",
+      "name": "Alex Athlete",
+      "email": "test_athlete_1794055676133@fithealth.io",
+      "phone": "+91 98765 43210",
+      "membershipId": "FH-MEM-5368",
+      "checkInPin": "5368",
+      "plan": "Monthly Pro Fitness",
+      "status": "Active",
+      "joinedDate": "2026-11-07",
+      "expiryDate": "2026-12-07",
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
@@ -16267,6 +17292,21 @@
       "sourceRecordId": "rec_test_1793812737023",
       "sourceApp": "samsung_health",
       "syncedAt": "2026-11-04T17:18:57.037Z"
+    },
+    {
+      "id": "bio_1794055682448_ph9qf",
+      "createdAt": "2026-11-07T12:48:02.448Z",
+      "updatedAt": "2026-11-07T12:48:02.448Z",
+      "memberId": "user_1794055678590",
+      "type": "steps",
+      "valueEncrypted": "enc:3a0cb8793bdd16adc16c8feb:ff411936e5585deda5e9cebcd715bb34:0549efe9",
+      "unit": "steps",
+      "startTime": "2026-11-07T11:48:02.433Z",
+      "endTime": "2026-11-07T12:48:02.433Z",
+      "provider": "samsung_health",
+      "sourceRecordId": "rec_test_1794055682433",
+      "sourceApp": "samsung_health",
+      "syncedAt": "2026-11-07T12:48:02.446Z"
     }
   ],
   "biometricsConsent": [
@@ -16399,6 +17439,16 @@
       "memberId": "user_1793812736552",
       "adminShareConsent": false,
       "lastSyncTimestamp": "2026-11-04T17:18:57.037Z",
+      "syncSource": "samsung_health",
+      "deviceModel": "Mobile Companion"
+    },
+    {
+      "id": "bio_1794055682469_ac51n",
+      "createdAt": "2026-11-07T12:48:02.469Z",
+      "updatedAt": "2026-11-07T12:48:02.469Z",
+      "memberId": "user_1794055678590",
+      "adminShareConsent": false,
+      "lastSyncTimestamp": "2026-11-07T12:48:02.446Z",
       "syncSource": "samsung_health",
       "deviceModel": "Mobile Companion"
     }
@@ -16573,6 +17623,18 @@
       "isPrimary": true,
       "connectedAt": "2026-11-04T17:18:57.037Z",
       "lastSyncAt": "2026-11-04T17:18:57.037Z",
+      "deviceModel": "Mobile Companion"
+    },
+    {
+      "id": "pro_1794055682458_l141x",
+      "createdAt": "2026-11-07T12:48:02.458Z",
+      "updatedAt": "2026-11-07T12:48:02.458Z",
+      "memberId": "user_1794055678590",
+      "provider": "samsung_health",
+      "status": "connected",
+      "isPrimary": true,
+      "connectedAt": "2026-11-07T12:48:02.446Z",
+      "lastSyncAt": "2026-11-07T12:48:02.446Z",
       "deviceModel": "Mobile Companion"
     }
   ],

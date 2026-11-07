@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const db = require('../data/dbStorage');
+const { findUserById } = require('../services/userService');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fit_health_secret_jwt_bca_2026_key';
 
@@ -59,7 +60,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     let user = null;
-    const stored = db.findById('users', decoded.id);
+    const stored = await findUserById(decoded.id);
     if (stored) {
       const { password, ...safeUser } = stored;
       user = safeUser;

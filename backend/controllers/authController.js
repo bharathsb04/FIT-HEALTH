@@ -5,6 +5,7 @@ const { JWT_SECRET, revokeToken } = require('../middleware/authMiddleware');
 const { defaultSplitWorkouts } = require('../data/seedData');
 const { sendOTPEmail } = require('../services/emailService');
 const { createAndStoreOTP, verifyOTP, isEmailVerified, consumeVerifiedOTP } = require('../services/otpService');
+const { findUserByEmail, findUserById, saveUser, updateUser } = require('../services/userService');
 
 // Helper to generate JWT Token
 const generateToken = (user) => jwt.sign({ id: user.id || user._id, email: user.email }, JWT_SECRET, { expiresIn: '30d' });
@@ -76,9 +77,9 @@ exports.register = async (req, res) => {
 
     // Verify OTP if supplied with registration payload
     if (codeOrOtp) {
-      let otpRes = verifyOTP(cleanEmail, codeOrOtp, 'registration');
+      let otpRes = await verifyOTP(cleanEmail, codeOrOtp, 'registration');
       if (!otpRes.success) {
-        otpRes = verifyOTP(cleanEmail, codeOrOtp, 'login');
+        otpRes = await verifyOTP(cleanEmail, codeOrOtp, 'login');
       }
       if (!otpRes.success) {
         return res.status(400).json({
@@ -87,17 +88,17 @@ exports.register = async (req, res) => {
         });
       }
       // Consume code to prevent replay attacks
-      consumeVerifiedOTP(cleanEmail, 'registration');
-      consumeVerifiedOTP(cleanEmail, 'login');
+      await consumeVerifiedOTP(cleanEmail, 'registration');
+      await consumeVerifiedOTP(cleanEmail, 'login');
     }
 
-    // Check if user already exists
-    const existingUser = db.findOne('users', u => u.email.toLowerCase() === cleanEmail);
+    // Check if user already exists in local DB or Cloud Firestore
+    const existingUser = await findUserByEmail(cleanEmail);
     if (existingUser) {
       // If email has verified OTP for registration or login, log in smoothly!
-      if (isEmailVerified(cleanEmail, 'registration') || isEmailVerified(cleanEmail, 'login') || codeOrOtp) {
-        consumeVerifiedOTP(cleanEmail, 'registration');
-        consumeVerifiedOTP(cleanEmail, 'login');
+      if (await isEmailVerified(cleanEmail, 'registration') || await isEmailVerified(cleanEmail, 'login') || codeOrOtp) {
+        await consumeVerifiedOTP(cleanEmail, 'registration');
+        await consumeVerifiedOTP(cleanEmail, 'login');
         const token = generateToken(existingUser);
         const { password: _, ...safeUser } = existingUser;
         return res.status(200).json({
@@ -168,7 +169,8 @@ exports.register = async (req, res) => {
       createdAt: new Date().toISOString()
     };
 
-    db.create('users', newUser);
+    // Save user record to local in-memory DB and Cloud Firestore (including hashed password for multi-container authentication)
+    await saveUser(newUser);
 
     // If regular member, register into gymMembers collection for admin dashboard visibility & editing
     if (userRole === 'member') {
@@ -189,20 +191,25 @@ exports.register = async (req, res) => {
         assignedTrainer: 'Coach Marcus Vance (CSCS, USAW-2)',
         notes: `Registered member (${primaryGoal || 'Fitness'})`
       });
-    }
 
-    // Sync user record to Firebase Cloud Firestore if active
-    const { getFirestore, isFirebaseActive } = require('../config/firebase');
-    if (isFirebaseActive()) {
+      // Sync gymMember to Firestore
       try {
+        const { getFirestore } = require('../config/firebase');
         const firestore = getFirestore();
-        const { password: _, ...firebaseUser } = newUser;
-        firestore.collection('users').doc(userId).set({
-          ...firebaseUser,
-          emailVerified: true,
-          createdAt: new Date()
-        }).catch(err => console.warn('[Firebase] User document sync warning:', err.message));
-      } catch {}
+        if (firestore) {
+          firestore.collection('gymMembers').doc(`mem_${userId}`).set({
+            id: `mem_${userId}`,
+            userId,
+            name,
+            email: cleanEmail,
+            membershipId: memberId,
+            plan: 'Monthly Pro Fitness',
+            status: 'Active',
+            joinedDate: new Date().toISOString().split('T')[0],
+            expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+          }).catch(() => {});
+        }
+      } catch (_) {}
     }
 
     // Seed User Initial Workout Plan
@@ -293,7 +300,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const user = db.findOne('users', u => u.email.toLowerCase() === email.toLowerCase());
+    const user = await findUserByEmail(email);
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -302,7 +309,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const isMatch = bcrypt.compareSync(password, user.password);
+    const isMatch = user.password ? bcrypt.compareSync(password, user.password) : false;
     if (!isMatch) {
       return res.status(401).json({
         success: false,
@@ -356,11 +363,11 @@ exports.forgotPassword = async (req, res) => {
     }
 
     const cleanEmail = email.toLowerCase().trim();
-    const user = db.findOne('users', u => u.email.toLowerCase() === cleanEmail);
+    const user = await findUserByEmail(cleanEmail);
     const targetRole = user?.role || (role === 'admin' || cleanEmail.includes('admin') ? 'admin' : 'member');
 
     // Create & store 6-digit OTP code for password reset
-    const otp = createAndStoreOTP(cleanEmail, 'password_reset');
+    const otp = await createAndStoreOTP(cleanEmail, 'password_reset');
 
     // Dispatch OTP verification email to the user's specific email address
     const emailResult = await sendOTPEmail(cleanEmail, otp, 'password_reset', targetRole);
@@ -395,18 +402,18 @@ exports.resetPassword = async (req, res) => {
     const cleanEmail = email.toLowerCase().trim();
 
     if (code) {
-      const verification = verifyOTP(cleanEmail, code, 'password_reset');
+      const verification = await verifyOTP(cleanEmail, code, 'password_reset');
       if (!verification.success) {
         return res.status(400).json({ success: false, message: verification.message });
       }
-      consumeVerifiedOTP(cleanEmail, 'password_reset');
+      await consumeVerifiedOTP(cleanEmail, 'password_reset');
     }
 
-    let user = db.findOne('users', u => u.email.toLowerCase() === cleanEmail);
+    let user = await findUserByEmail(cleanEmail);
     const hashedPassword = bcrypt.hashSync(newPassword, 10);
 
     if (user) {
-      db.update('users', user.id, { password: hashedPassword, isEmailVerified: true });
+      await updateUser(user.id, { password: hashedPassword, isEmailVerified: true });
     } else {
       // Provision account for this verified email address
       const targetRole = role === 'admin' || cleanEmail.includes('admin') ? 'admin' : 'member';
@@ -414,15 +421,19 @@ exports.resetPassword = async (req, res) => {
       const memberPin = targetRole === 'admin' ? null : String(Math.floor(1000 + Math.random() * 9000));
       const memberId = targetRole === 'admin' ? `FH-ADM-${Math.floor(1000 + Math.random() * 9000)}` : `FH-MEM-${memberPin || Math.floor(1000 + Math.random() * 9000)}`;
 
-      user = db.insert('users', {
+      user = {
+        id: `user_${Date.now()}`,
         name,
         email: cleanEmail,
         password: hashedPassword,
         role: targetRole,
+        membershipId: memberId,
         memberId,
         memberPin,
-        isEmailVerified: true
-      });
+        isEmailVerified: true,
+        createdAt: new Date().toISOString()
+      };
+      await saveUser(user);
 
       if (targetRole === 'member') {
         const existingMember = db.findOne('gymMembers', m => m.email?.toLowerCase() === cleanEmail);
@@ -463,10 +474,10 @@ exports.sendOTP = async (req, res) => {
     }
 
     const cleanEmail = email.toLowerCase().trim();
-    const existingUser = db.findOne('users', u => u.email.toLowerCase() === cleanEmail);
+    const existingUser = await findUserByEmail(cleanEmail);
     const resolvedRole = role || (existingUser ? existingUser.role : (cleanEmail.includes('admin') ? 'admin' : 'member'));
 
-    const otp = createAndStoreOTP(cleanEmail, purpose);
+    const otp = await createAndStoreOTP(cleanEmail, purpose);
     console.log(`[Email Service] Dispatched OTP code to ${cleanEmail} (${resolvedRole})`);
     const emailResult = await sendOTPEmail(cleanEmail, otp, purpose, resolvedRole);
 
@@ -512,12 +523,12 @@ exports.verifyOTP = async (req, res) => {
     }
 
     const cleanEmail = email.toLowerCase().trim();
-    let result = verifyOTP(cleanEmail, otp, purpose);
+    let result = await verifyOTP(cleanEmail, otp, purpose);
 
     // Cross-fallback: if generated for registration but verified for login, or vice-versa
     if (!result.success) {
       const altPurpose = purpose === 'registration' ? 'login' : 'registration';
-      const altResult = verifyOTP(cleanEmail, otp, altPurpose);
+      const altResult = await verifyOTP(cleanEmail, otp, altPurpose);
       if (altResult.success) {
         result = altResult;
       }
@@ -527,7 +538,7 @@ exports.verifyOTP = async (req, res) => {
       return res.status(400).json({ success: false, message: result.message });
     }
 
-    const existingUser = db.findOne('users', u => u.email.toLowerCase() === cleanEmail);
+    const existingUser = await findUserByEmail(cleanEmail);
 
     return res.status(200).json({
       success: true,
@@ -554,20 +565,59 @@ exports.loginWithOTP = async (req, res) => {
     }
 
     const cleanEmail = email.toLowerCase().trim();
-    let verification = verifyOTP(cleanEmail, otp, 'login');
+    let verification = await verifyOTP(cleanEmail, otp, 'login');
     if (!verification.success) {
-      verification = verifyOTP(cleanEmail, otp, 'registration');
+      verification = await verifyOTP(cleanEmail, otp, 'registration');
     }
 
     if (!verification.success) {
       return res.status(400).json({ success: false, message: verification.message });
     }
-    consumeVerifiedOTP(cleanEmail, 'login');
-    consumeVerifiedOTP(cleanEmail, 'registration');
+    await consumeVerifiedOTP(cleanEmail, 'login');
+    await consumeVerifiedOTP(cleanEmail, 'registration');
 
-    const user = db.findOne('users', u => u.email.toLowerCase() === cleanEmail);
+    let user = await findUserByEmail(cleanEmail);
     if (!user) {
-      return res.status(404).json({ success: false, message: 'No registered account found with that email address.' });
+      // Auto-provision verified user account on valid email OTP authentication
+      const userId = `user_${Date.now()}`;
+      const userRole = cleanEmail.includes('admin') ? 'admin' : 'member';
+      const memberPin = String(Math.floor(1000 + Math.random() * 9000));
+      const memberId = userRole === 'admin' ? `FH-ADM-${memberPin}` : `FH-MEM-${memberPin}`;
+      const defaultName = cleanEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+      user = {
+        id: userId,
+        name: defaultName,
+        email: cleanEmail,
+        password: bcrypt.hashSync(`fit_${Date.now()}`, 10),
+        age: 24,
+        gender: 'Male',
+        height: 175,
+        weight: 75,
+        targetWeight: 80,
+        fitnessLevel: 'Intermediate',
+        primaryGoal: 'General Fitness',
+        activityLevel: 'Moderately Active',
+        dietaryPreference: 'High Protein',
+        workoutExperience: '1-2 Years',
+        targetCalories: 2500,
+        targetProtein: 160,
+        targetCarbs: 260,
+        targetFat: 70,
+        waterTargetLiters: 3.5,
+        sleepTargetHours: 8.0,
+        streak: 1,
+        role: userRole,
+        linkedGymId: 'gym_1',
+        gymId: 'gym_1',
+        gymName: 'rsv gym and sports club',
+        membershipId: memberId,
+        membershipStatus: 'Active',
+        membershipPlan: userRole === 'admin' ? 'Gym Facility Master' : 'Monthly Pro Fitness',
+        emailVerified: true,
+        createdAt: new Date().toISOString()
+      };
+      await saveUser(user);
     }
 
     const token = generateToken(user);
@@ -594,7 +644,7 @@ exports.resendOTP = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Email address is required.' });
     }
 
-    const otp = createAndStoreOTP(email, purpose);
+    const otp = await createAndStoreOTP(email, purpose);
     console.log(`[Email Service] Dispatched fresh OTP verification code to ${email}`);
     const emailResult = await sendOTPEmail(email, otp, purpose);
     if (!emailResult.success) {

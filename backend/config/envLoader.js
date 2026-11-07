@@ -58,3 +58,4 @@ for (const [key, value] of Object.entries(DEFAULTS)) {
 module.exports = {
   isLoaded: true
 };
+
