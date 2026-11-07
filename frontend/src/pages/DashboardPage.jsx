@@ -167,8 +167,8 @@ export const DashboardPage = () => {
   };
 
   const activeDay = workoutPlan?.days?.[workoutPlan?.activeDayIndex || 0] || workoutPlan?.days?.[0];
-  const goal = user?.primaryGoal || 'Bulking';
-  const goalClass = goal.toLowerCase();
+  const goal = user?.primaryGoal || user?.goal || user?.fitnessGoal || 'Bulking';
+  const goalClass = goal.toLowerCase().replace(/\s+/g, '-');
   const membership = membershipStatus?.membership;
   const hasEnrolledMembership = Boolean(membership && membershipStatus?.hasMembership !== false);
   const nearestGym = membershipStatus?.nearestGym || nearbyGyms[0] || null;

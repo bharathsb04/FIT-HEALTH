@@ -1,5 +1,7 @@
 const db = require('../data/dbStorage');
 const { defaultGymFeePlans } = require('../data/seedData');
+const { updateUser } = require('../services/userService');
+const { getFirestore } = require('../config/firebase');
 
 // Haversine formula to compute great-circle distance between two points in km
 function calculateDistanceKm(lat1, lon1, lat2, lon2) {
@@ -1142,8 +1144,12 @@ exports.updateMemberDetails = async (req, res) => {
       status,
       expiryDate,
       emergencyContact,
-      fitnessGoal
+      fitnessGoal,
+      primaryGoal,
+      goal
     } = req.body;
+
+    const resolvedGoal = fitnessGoal || primaryGoal || goal;
 
     const updates = {
       ...(name && { name: name.trim() }),
@@ -1151,7 +1157,11 @@ exports.updateMemberDetails = async (req, res) => {
       ...(assignedTrainer !== undefined && { assignedTrainer: assignedTrainer.trim() }),
       ...(notes !== undefined && { notes: notes.trim() }),
       ...(emergencyContact !== undefined && { emergencyContact: emergencyContact.trim() }),
-      ...(fitnessGoal !== undefined && { fitnessGoal: fitnessGoal.trim() }),
+      ...(resolvedGoal && {
+        fitnessGoal: resolvedGoal.trim(),
+        primaryGoal: resolvedGoal.trim(),
+        goal: resolvedGoal.trim()
+      }),
       // Admin-only fields:
       ...(isAdmin && plan && { plan: plan.trim() }),
       ...(isAdmin && status && { status: status.trim() }),
@@ -1161,15 +1171,31 @@ exports.updateMemberDetails = async (req, res) => {
     db.update('gymMembers', m => (m.id === id || m.membershipId === id), updates);
     const updatedMember = (db.getCollection('gymMembers') || []).find(m => m.id === id || m.membershipId === id);
 
+    // Sync with Firestore gymMembers collection
+    try {
+      const firestore = getFirestore();
+      if (firestore && updatedMember) {
+        const memDocId = updatedMember.id || id;
+        firestore.collection('gymMembers').doc(memDocId).set(updates, { merge: true }).catch(() => {});
+      }
+    } catch (_) {}
+
     // Sync with user record if matches
     if (updatedMember && updatedMember.email) {
       const targetUser = db.find('users').find(u => u.email?.toLowerCase() === updatedMember.email.toLowerCase());
       if (targetUser) {
-        db.update('users', u => u.id === targetUser.id, {
+        const userSyncUpdates = {
           ...(updates.name && { name: updates.name }),
           ...(updates.phone && { phone: updates.phone }),
-          ...(updates.assignedTrainer && { assignedTrainer: updates.assignedTrainer })
-        });
+          ...(updates.assignedTrainer && { assignedTrainer: updates.assignedTrainer }),
+          ...(resolvedGoal && {
+            primaryGoal: resolvedGoal.trim(),
+            fitnessGoal: resolvedGoal.trim(),
+            goal: resolvedGoal.trim()
+          })
+        };
+        db.update('users', u => u.id === targetUser.id, userSyncUpdates);
+        updateUser(targetUser.id, userSyncUpdates).catch(() => {});
       }
     }
 

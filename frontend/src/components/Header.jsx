@@ -26,7 +26,8 @@ export const Header = ({ title, subtitle }) => {
       .toUpperCase();
   };
 
-  const goalClass = (user?.primaryGoal || 'Bulking').toLowerCase();
+  const currentGoal = user?.primaryGoal || user?.goal || user?.fitnessGoal || 'Bulking';
+  const goalClass = currentGoal.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <header className="app-header">
@@ -46,7 +47,7 @@ export const Header = ({ title, subtitle }) => {
               ) : (
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                   <span className={`badge badge-${goalClass}`}>
-                    {user?.primaryGoal || 'BULKING'}
+                    {currentGoal.toUpperCase()}
                   </span>
                   <span>• Day ready</span>
                 </span>

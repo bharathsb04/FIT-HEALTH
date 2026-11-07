@@ -191,7 +191,7 @@ export const GymMembersPage = ({ onNavigate }) => {
       expiryDate: member.expiryDate || '',
       notes: member.notes || '',
       emergencyContact: member.emergencyContact || '',
-      fitnessGoal: member.fitnessGoal || 'Strength & Conditioning'
+      fitnessGoal: member.fitnessGoal || member.primaryGoal || member.goal || 'Bulking'
     });
     setShowEditModal(true);
   };
@@ -205,7 +205,12 @@ export const GymMembersPage = ({ onNavigate }) => {
 
     try {
       setSavingEdit(true);
-      const res = await api.updateMemberDetails(editForm.id, editForm);
+      const payload = {
+        ...editForm,
+        primaryGoal: editForm.fitnessGoal,
+        goal: editForm.fitnessGoal
+      };
+      const res = await api.updateMemberDetails(editForm.id, payload);
       if (res && res.success) {
         showToast(res.message || 'Member profile updated successfully!', 'success');
         setShowEditModal(false);
@@ -669,9 +674,12 @@ export const GymMembersPage = ({ onNavigate }) => {
                       )}
                     </div>
 
-                    {(member.assignedTrainer || member.notes) && (
+                    {(member.assignedTrainer || member.fitnessGoal || member.primaryGoal || member.notes) && (
                       <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
                         Coach: <strong>{member.assignedTrainer || 'Marcus Vance'}</strong>
+                        {(member.fitnessGoal || member.primaryGoal || member.goal) ? (
+                          <span> • Goal: <strong style={{ color: 'var(--primary)' }}>{member.fitnessGoal || member.primaryGoal || member.goal}</strong></span>
+                        ) : null}
                         {member.notes ? ` • Note: ${member.notes}` : ''}
                       </div>
                     )}
@@ -882,7 +890,25 @@ export const GymMembersPage = ({ onNavigate }) => {
 
               <div>
                 <label className="form-label" style={{ fontSize: '11px', fontWeight: 700 }}>
-                  Fitness Goal / Special Notes
+                  Primary Fitness Goal
+                </label>
+                <select
+                  className="form-input"
+                  value={editForm.fitnessGoal}
+                  onChange={(e) => setEditForm({ ...editForm, fitnessGoal: e.target.value })}
+                  style={{ fontSize: '12px' }}
+                >
+                  <option value="Bulking">Bulking (Muscle Mass)</option>
+                  <option value="Cutting">Cutting (Fat Loss)</option>
+                  <option value="Strength">Strength & Conditioning</option>
+                  <option value="Maintenance">Maintenance</option>
+                  <option value="General fitness">General Fitness</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="form-label" style={{ fontSize: '11px', fontWeight: 700 }}>
+                  Special Notes & Workout Preferences
                 </label>
                 <textarea
                   rows={2}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useFitness } from '../contexts/FitnessContext';
@@ -74,10 +74,33 @@ export const ProfilePage = () => {
     weight: user?.weight || 78.5,
     targetWeight: user?.targetWeight || 84.0,
     fitnessLevel: user?.fitnessLevel || 'Intermediate',
-    primaryGoal: user?.primaryGoal || 'Bulking',
+    primaryGoal: user?.primaryGoal || user?.goal || user?.fitnessGoal || 'Bulking',
     activityLevel: user?.activityLevel || 'Moderately Active (3-5 days/week)',
     dietaryPreference: user?.dietaryPreference || 'High Protein'
   });
+
+  useEffect(() => {
+    if (user) {
+      const activeGoal = user.primaryGoal || user.goal || user.fitnessGoal || 'Bulking';
+      setEditForm({
+        name: user.name || '',
+        age: user.age || 24,
+        height: user.height || 178,
+        weight: user.weight || 78.5,
+        targetWeight: user.targetWeight || 84.0,
+        fitnessLevel: user.fitnessLevel || 'Intermediate',
+        primaryGoal: activeGoal,
+        activityLevel: user.activityLevel || 'Moderately Active (3-5 days/week)',
+        dietaryPreference: user.dietaryPreference || 'High Protein'
+      });
+      setMembershipForm(prev => ({
+        ...prev,
+        gymId: user.gymId || prev.gymId || 'gym_1',
+        trainer: user.assignedTrainer || prev.trainer || 'Coach Marcus Vance',
+        customCode: user.membershipId || prev.customCode || ''
+      }));
+    }
+  }, [user, showEditModal]);
 
   const handleSaveMembership = async (e) => {
     if (e) e.preventDefault();
@@ -132,7 +155,12 @@ export const ProfilePage = () => {
   const handleSaveProfile = async (e) => {
     e.preventDefault();
     try {
-      await updateUserProfile(editForm);
+      const payload = {
+        ...editForm,
+        goal: editForm.primaryGoal,
+        fitnessGoal: editForm.primaryGoal
+      };
+      await updateUserProfile(payload);
       setShowEditModal(false);
       showToast('Profile and biometric targets successfully updated!', 'success');
       triggerRefresh();
@@ -183,8 +211,8 @@ export const ProfilePage = () => {
               <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>{user?.email || ''}</p>
 
               <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginTop: '12px' }}>
-                <span className={`badge badge-${(user?.primaryGoal || 'Bulking').toLowerCase()}`}>
-                  {user?.primaryGoal || 'Bulking'}
+                <span className={`badge badge-${(user?.primaryGoal || user?.goal || user?.fitnessGoal || 'Bulking').toLowerCase().replace(/\s+/g, '-')}`}>
+                  {user?.primaryGoal || user?.goal || user?.fitnessGoal || 'Bulking'}
                 </span>
                 <span className="badge badge-fitness">
                   {user?.fitnessLevel || 'Intermediate'}
@@ -452,6 +480,7 @@ export const ProfilePage = () => {
                     <option value="Bulking">Bulking</option>
                     <option value="Cutting">Cutting</option>
                     <option value="Maintenance">Maintenance</option>
+                    <option value="Strength">Strength & Conditioning</option>
                     <option value="General fitness">General Fitness</option>
                   </select>
                 </div>

@@ -45,7 +45,7 @@ export const BulkingCuttingPage = () => {
   const handleApplyGoal = async (newGoal) => {
     try {
       setSelectedGoal(newGoal);
-      await updateUserProfile({ primaryGoal: newGoal });
+      await updateUserProfile({ primaryGoal: newGoal, goal: newGoal, fitnessGoal: newGoal });
       await api.resetSplit(newGoal);
       showToast(`Protocol switched to ${newGoal.toUpperCase()} MODE!`, 'success');
       fetchBulkingCuttingData();

@@ -1,6 +1,7 @@
 const db = require('../data/dbStorage');
 const { calculateMacroTargets } = require('./authController');
 const { findUserById, updateUser } = require('../services/userService');
+const { getFirestore } = require('../config/firebase');
 
 exports.getProfile = async (req, res) => {
   try {
@@ -46,7 +47,8 @@ exports.updateProfile = async (req, res) => {
     const updatedHeight = height !== undefined ? Number(height) : user.height;
     const updatedAge = age !== undefined ? Number(age) : user.age;
     const updatedGender = gender || user.gender;
-    const updatedGoal = primaryGoal || user.primaryGoal;
+    const resolvedGoal = primaryGoal || req.body.goal || req.body.fitnessGoal;
+    const updatedGoal = resolvedGoal || user.primaryGoal || user.fitnessGoal || user.goal;
     const updatedActivity = activityLevel || user.activityLevel;
 
     // Recalculate macros if biometrics or goal changed
@@ -68,7 +70,7 @@ exports.updateProfile = async (req, res) => {
       ...(weight !== undefined && { weight: Number(weight) }),
       ...(targetWeight !== undefined && { targetWeight: Number(targetWeight) }),
       ...(fitnessLevel && { fitnessLevel }),
-      ...(primaryGoal && { primaryGoal }),
+      ...(resolvedGoal && { primaryGoal: resolvedGoal, goal: resolvedGoal, fitnessGoal: resolvedGoal }),
       ...(activityLevel && { activityLevel }),
       ...(dietaryPreference && { dietaryPreference }),
       ...(workoutExperience && { workoutExperience }),
@@ -90,6 +92,33 @@ exports.updateProfile = async (req, res) => {
 
     const updated = (await updateUser(req.userId, updates)) || db.update('users', req.userId, updates) || { ...user, ...updates };
 
+    // Sync goal and biometrics with gymMembers roster
+    try {
+      const userEmail = (user.email || updated.email || '').toLowerCase();
+      const existingRosterMember = db.findOne('gymMembers', m => 
+        (m.email && m.email.toLowerCase() === userEmail) || 
+        (m.userId && m.userId === req.userId) || 
+        (user.membershipId && m.membershipId === user.membershipId)
+      );
+
+      if (existingRosterMember) {
+        const memberGoalUpdates = {
+          ...(resolvedGoal && { fitnessGoal: resolvedGoal, primaryGoal: resolvedGoal, goal: resolvedGoal }),
+          ...(updated.name && { name: updated.name }),
+          ...(updated.phone && { phone: updated.phone }),
+          ...(req.body.assignedTrainer && { assignedTrainer: req.body.assignedTrainer })
+        };
+        db.update('gymMembers', existingRosterMember.id, memberGoalUpdates);
+        
+        const firestore = getFirestore();
+        if (firestore) {
+          firestore.collection('gymMembers').doc(existingRosterMember.id).set(memberGoalUpdates, { merge: true }).catch(() => {});
+        }
+      }
+    } catch (syncErr) {
+      console.warn('Non-blocking gymMember goal sync warning:', syncErr.message);
+    }
+
     // If membership was added/updated to Active, sync with gymMembers roster
     if (req.body.membershipStatus === 'Active' && (req.body.membershipId || user.membershipId)) {
       const memId = req.body.membershipId || user.membershipId || `FH-MEM-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -106,6 +135,9 @@ exports.updateProfile = async (req, res) => {
         status: 'Active',
         gymId: req.body.gymId || 'gym_1',
         gymName: req.body.gymName || 'RSV Gym and Sports Club',
+        fitnessGoal: resolvedGoal || updated.primaryGoal || updated.fitnessGoal || 'Bulking',
+        primaryGoal: resolvedGoal || updated.primaryGoal || updated.fitnessGoal || 'Bulking',
+        goal: resolvedGoal || updated.primaryGoal || updated.fitnessGoal || 'Bulking',
         joinDate: new Date().toISOString().split('T')[0],
         expiryDate: req.body.membershipExpiry || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
       };
@@ -115,10 +147,20 @@ exports.updateProfile = async (req, res) => {
       } else {
         db.create('gymMembers', { id: `mem_${Date.now()}`, ...memberData });
       }
+
+      const firestore = getFirestore();
+      if (firestore) {
+        const memDocId = existingRosterMember?.id || `mem_${req.userId}`;
+        firestore.collection('gymMembers').doc(memDocId).set(memberData, { merge: true }).catch(() => {});
+      }
     } else if (req.body.membershipStatus === 'None') {
       const existingRosterMember = db.findOne('gymMembers', m => m.email?.toLowerCase() === user.email.toLowerCase());
       if (existingRosterMember) {
         db.update('gymMembers', existingRosterMember.id, { status: 'Expired' });
+        const firestore = getFirestore();
+        if (firestore) {
+          firestore.collection('gymMembers').doc(existingRosterMember.id).set({ status: 'Expired' }, { merge: true }).catch(() => {});
+        }
       }
     }
     const { password: _, ...safeUser } = updated;
