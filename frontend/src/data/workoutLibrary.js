@@ -1,6 +1,6 @@
 /**
  * Fit Health Comprehensive Multi-Level Workout Library
- * Includes 33 Dedicated Demonstration SVG visuals for the Intermediate 7-Day Plan
+ * 1-to-1 Strictly Mapped Exercise Demonstration Photographs
  */
 
 export const workoutLibrary = {
@@ -1477,14 +1477,12 @@ export const workoutLibrary = {
       "name": "Barbell Bench Press",
       "level": "intermediate",
       "targetMuscle": "Pectoralis Major & Triceps",
-      "equipment": "Olympic Barbell & Bench",
+      "equipment": "Olympic Barbell & Flat Bench",
       "sets": 4,
       "reps": "8-10",
       "restSeconds": 90,
       "suggestedLoad": "75 kg",
-      "imageUrl": "/exercises/intermediate/barbell_bench_press.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/gRVjAtPip0Y?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/barbell_bench_press.svg",
+      "imageUrl": "/images/workouts/chest/bench-press.jpg",
       "formCue": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
       "steps": [
         "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
@@ -1495,13 +1493,7 @@ export const workoutLibrary = {
         "Flaring elbows out to 90 degrees",
         "Bouncing the barbell off ribcage",
         "Lifting hips off the bench"
-      ],
-      "machine": {
-        "name": "Olympic Barbell & Bench",
-        "category": "Chest",
-        "imageUrl": "/exercises/intermediate/barbell_bench_press.svg",
-        "adjustmentNotes": "Optimal gym setup for Barbell Bench Press. Adjust load and bench/seat height to personal ergonomics."
-      }
+      ]
     },
     {
       "id": "e2",
@@ -1513,9 +1505,7 @@ export const workoutLibrary = {
       "reps": "8-12",
       "restSeconds": 90,
       "suggestedLoad": "26 kg",
-      "imageUrl": "/exercises/intermediate/incline_dumbbell_press.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/0G2_XX7nuAG?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/incline_dumbbell_press.svg",
+      "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
       "formCue": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
       "steps": [
         "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
@@ -1525,13 +1515,690 @@ export const workoutLibrary = {
       "commonMistakes": [
         "Setting bench angle too high (>45°) which shifts load to shoulders",
         "Touching dumbbells together at top and losing tension"
+      ]
+    },
+    {
+      "id": "e3",
+      "name": "Chest Fly",
+      "level": "intermediate",
+      "targetMuscle": "Sternal Pectoralis Adduction",
+      "equipment": "Flat Bench & Dumbbells (Pair)",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "16 kg",
+      "imageUrl": "/images/workouts/chest/chest-fly.jpg",
+      "formCue": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
+      "steps": [
+        "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
+        "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
+        "Breathing: Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center."
       ],
-      "machine": {
-        "name": "Adjustable Bench (30°) & Dumbbells",
-        "category": "Chest",
-        "imageUrl": "/exercises/intermediate/incline_dumbbell_press.svg",
-        "adjustmentNotes": "Optimal gym setup for Incline Dumbbell Press. Adjust load and bench/seat height to personal ergonomics."
-      }
+      "commonMistakes": [
+        "Bending elbows too much and turning it into a press",
+        "Going too heavy and hyperextending shoulders"
+      ]
+    },
+    {
+      "id": "e4",
+      "name": "Dumbbell Pullover",
+      "level": "intermediate",
+      "targetMuscle": "Upper Chest, Serratus & Lats",
+      "equipment": "Cross-Bench & Heavy Dumbbell",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "22 kg",
+      "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
+      "formCue": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
+      "steps": [
+        "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
+        "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
+        "Breathing: Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over."
+      ],
+      "commonMistakes": [
+        "Bending elbows excessively like a triceps extension",
+        "Allowing hips to rise up above bench height"
+      ]
+    },
+    {
+      "id": "e5",
+      "name": "Push-Ups",
+      "level": "intermediate",
+      "targetMuscle": "Chest, Anterior Delts & Core",
+      "equipment": "Bodyweight Floor Calisthenics",
+      "sets": 3,
+      "reps": "MAX",
+      "restSeconds": 60,
+      "suggestedLoad": "Bodyweight",
+      "imageUrl": "/images/workouts/chest/push-ups.jpg",
+      "formCue": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
+      "steps": [
+        "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
+        "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
+        "Breathing: Inhale descending; exhale driving up while bracing core."
+      ],
+      "commonMistakes": [
+        "Sagging lower back or piking hips in the air",
+        "Half reps without full chest depth"
+      ]
+    },
+    {
+      "id": "e6",
+      "name": "Overhead Press",
+      "level": "intermediate",
+      "targetMuscle": "Anterior & Lateral Deltoids",
+      "equipment": "Olympic Barbell & Power Rack",
+      "sets": 4,
+      "reps": "8-10",
+      "restSeconds": 90,
+      "suggestedLoad": "50 kg",
+      "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
+      "formCue": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
+      "steps": [
+        "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
+        "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
+        "Breathing: Inhale and brace core before pressing; exhale once past forehead level."
+      ],
+      "commonMistakes": [
+        "Excessive lower back arching",
+        "Pressing bar forward instead of vertical",
+        "Not locking out at top"
+      ]
+    },
+    {
+      "id": "e7",
+      "name": "Lateral Raise",
+      "level": "intermediate",
+      "targetMuscle": "Lateral Deltoid (Shoulder Width)",
+      "equipment": "Dumbbells (Pair)",
+      "sets": 4,
+      "reps": "10-15",
+      "restSeconds": 60,
+      "suggestedLoad": "12 kg",
+      "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
+      "formCue": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
+      "steps": [
+        "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
+        "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
+        "Breathing: Exhale as you raise outward; inhale on controlled descent."
+      ],
+      "commonMistakes": [
+        "Using torso momentum or swinging",
+        "Shrugging traps instead of isolating lateral delts"
+      ]
+    },
+    {
+      "id": "e8",
+      "name": "Front Raise",
+      "level": "intermediate",
+      "targetMuscle": "Anterior Deltoid Head",
+      "equipment": "Dumbbells (Pair)",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "12 kg",
+      "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
+      "formCue": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
+      "steps": [
+        "Stand upright holding dumbbells in front of thighs with overhand grip.",
+        "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
+        "Breathing: Exhale on upward lift; inhale lowering down."
+      ],
+      "commonMistakes": [
+        "Swinging hips to launch dumbbells",
+        "Raising far above shoulder level"
+      ]
+    },
+    {
+      "id": "e9",
+      "name": "Rear Delt Fly",
+      "level": "intermediate",
+      "targetMuscle": "Posterior Deltoids & Rhomboids",
+      "equipment": "Dumbbells & 45° Torso Hinge",
+      "sets": 3,
+      "reps": "12-15",
+      "restSeconds": 60,
+      "suggestedLoad": "10 kg",
+      "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
+      "formCue": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
+      "steps": [
+        "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
+        "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
+        "Breathing: Exhale raising wide; inhale returning under control."
+      ],
+      "commonMistakes": [
+        "Rounding lower back",
+        "Using heavy weights and turning it into a row"
+      ]
+    },
+    {
+      "id": "e10",
+      "name": "Shrugs",
+      "level": "intermediate",
+      "targetMuscle": "Upper Trapezius",
+      "equipment": "Heavy Dumbbells (Pair)",
+      "sets": 3,
+      "reps": "12-15",
+      "restSeconds": 60,
+      "suggestedLoad": "32 kg",
+      "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
+      "formCue": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
+      "steps": [
+        "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
+        "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
+        "Breathing: Exhale on shrug elevation; inhale on the eccentric stretch."
+      ],
+      "commonMistakes": [
+        "Rolling shoulders in circles (injures rotator cuffs)",
+        "Bending elbows to assist lift"
+      ]
+    },
+    {
+      "id": "e11",
+      "name": "Barbell Curl",
+      "level": "intermediate",
+      "targetMuscle": "Biceps Brachii (Short & Long Head)",
+      "equipment": "Olympic / EZ-Curl Barbell",
+      "sets": 4,
+      "reps": "8-10",
+      "restSeconds": 75,
+      "suggestedLoad": "35 kg",
+      "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
+      "formCue": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
+      "steps": [
+        "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
+        "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
+        "Breathing: Exhale curling upward; inhale lowering down."
+      ],
+      "commonMistakes": [
+        "Rocking torso back and forth",
+        "Flaring elbows away from sides",
+        "Letting bar drop freely"
+      ]
+    },
+    {
+      "id": "e12",
+      "name": "Dumbbell Curl",
+      "level": "intermediate",
+      "targetMuscle": "Biceps Brachii Supination",
+      "equipment": "Dumbbells (Pair)",
+      "sets": 4,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "16 kg",
+      "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
+      "formCue": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
+      "steps": [
+        "Hold dumbbells at sides with palms facing each other at bottom position.",
+        "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
+        "Breathing: Exhale as you curl and supinate; inhale during descent."
+      ],
+      "commonMistakes": [
+        "Swinging shoulders forward to assist",
+        "Failing to fully supinate wrist"
+      ]
+    },
+    {
+      "id": "e13",
+      "name": "Hammer Curl",
+      "level": "intermediate",
+      "targetMuscle": "Brachialis & Forearm Brachioradialis",
+      "equipment": "Dumbbells (Neutral Grip)",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "16 kg",
+      "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
+      "formCue": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
+      "steps": [
+        "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
+        "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
+        "Breathing: Exhale on contraction; inhale on descent."
+      ],
+      "commonMistakes": [
+        "Elbows moving forward past ribcage",
+        "Using excessive torso sway"
+      ]
+    },
+    {
+      "id": "e14",
+      "name": "Preacher Curl",
+      "level": "intermediate",
+      "targetMuscle": "Biceps Brachii (Isolated Short Head)",
+      "equipment": "Preacher Bench & EZ-Bar",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "28 kg",
+      "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
+      "formCue": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
+      "steps": [
+        "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
+        "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
+        "Breathing: Exhale curling bar up; inhale as you lower smoothly."
+      ],
+      "commonMistakes": [
+        "Hyperextending and locking out elbow violently at bottom",
+        "Lifting body off seat"
+      ]
+    },
+    {
+      "id": "e15",
+      "name": "Concentration Curl",
+      "level": "intermediate",
+      "targetMuscle": "Biceps Isolation Peak Contraction",
+      "equipment": "Flat Bench & Single Dumbbell",
+      "sets": 3,
+      "reps": "12",
+      "restSeconds": 45,
+      "suggestedLoad": "14 kg",
+      "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
+      "formCue": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
+      "steps": [
+        "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
+        "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
+        "Breathing: Exhale curling; inhale lowering."
+      ],
+      "commonMistakes": [
+        "Moving elbow along thigh during repetition",
+        "Using back momentum"
+      ]
+    },
+    {
+      "id": "e16",
+      "name": "Close Grip Bench Press",
+      "level": "intermediate",
+      "targetMuscle": "Triceps Lateral & Medial Heads",
+      "equipment": "Olympic Barbell & Flat Bench",
+      "sets": 4,
+      "reps": "8-10",
+      "restSeconds": 90,
+      "suggestedLoad": "65 kg",
+      "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
+      "formCue": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
+      "steps": [
+        "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
+        "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
+        "Breathing: Inhale lowering bar; exhale pressing up."
+      ],
+      "commonMistakes": [
+        "Hands too close together (<8 inches) which strains wrists",
+        "Elbows flaring outward"
+      ]
+    },
+    {
+      "id": "e17",
+      "name": "Rope Push Down",
+      "level": "intermediate",
+      "targetMuscle": "Triceps Lateral Head Peak Lockout",
+      "equipment": "High Cable Pulley & Rope Attachment",
+      "sets": 4,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "26 kg",
+      "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
+      "formCue": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
+      "steps": [
+        "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
+        "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
+        "Breathing: Exhale pushing down into lockout; inhale allowing rope to return to chest height."
+      ],
+      "commonMistakes": [
+        "Letting elbows drift forward and backward",
+        "Using body weight to press rope"
+      ]
+    },
+    {
+      "id": "e18",
+      "name": "Overhead Triceps Extension",
+      "level": "intermediate",
+      "targetMuscle": "Triceps Long Head (Full Stretch)",
+      "equipment": "Seated Bench & Heavy Dumbbell",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "24 kg",
+      "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
+      "formCue": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
+      "steps": [
+        "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
+        "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
+        "Breathing: Inhale descending behind neck; exhale extending overhead."
+      ],
+      "commonMistakes": [
+        "Elbows flaring excessively wide",
+        "Arching lower back off backrest"
+      ]
+    },
+    {
+      "id": "e19",
+      "name": "Dips",
+      "level": "intermediate",
+      "targetMuscle": "Triceps & Anterior Deltoids",
+      "equipment": "Parallel Bar Dips / Bench",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "Bodyweight",
+      "imageUrl": "/images/workouts/triceps/dips.jpg",
+      "formCue": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
+      "steps": [
+        "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+        "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
+        "Breathing: Inhale lowering hips; exhale pressing up."
+      ],
+      "commonMistakes": [
+        "Leaning too far forward (shifts load to chest)",
+        "Shrugging shoulders"
+      ]
+    },
+    {
+      "id": "e20",
+      "name": "Triceps Kickback",
+      "level": "intermediate",
+      "targetMuscle": "Triceps Lateral & Long Head Lockout",
+      "equipment": "Dumbbell & Flat Bench Support",
+      "sets": 3,
+      "reps": "12",
+      "restSeconds": 45,
+      "suggestedLoad": "10 kg",
+      "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+      "formCue": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
+      "steps": [
+        "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
+        "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
+        "Breathing: Exhale extending back; inhale returning forward."
+      ],
+      "commonMistakes": [
+        "Dropping elbow during movement",
+        "Swinging dumbbell with shoulder momentum"
+      ]
+    },
+    {
+      "id": "e21",
+      "name": "Pull-Ups",
+      "level": "intermediate",
+      "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+      "equipment": "Rigid Overhead Pull-Up Bar",
+      "sets": 4,
+      "reps": "6-10",
+      "restSeconds": 90,
+      "suggestedLoad": "Bodyweight",
+      "imageUrl": "/images/workouts/back/pull-ups.jpg",
+      "formCue": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
+      "steps": [
+        "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
+        "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
+        "Breathing: Exhale pulling up; inhale lowering into full dead-hang stretch."
+      ],
+      "commonMistakes": [
+        "Kicking legs or kipping body",
+        "Half reps without chin clearing bar or without full stretch"
+      ]
+    },
+    {
+      "id": "e22",
+      "name": "Barbell Row",
+      "level": "intermediate",
+      "targetMuscle": "Rhomboids, Lats & Mid-Back Thickness",
+      "equipment": "Olympic Barbell & 45° Torso Angle",
+      "sets": 4,
+      "reps": "8-12",
+      "restSeconds": 90,
+      "suggestedLoad": "70 kg",
+      "imageUrl": "/images/workouts/back/barbell-row.jpg",
+      "formCue": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
+      "steps": [
+        "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
+        "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
+        "Breathing: Exhale rowing upward; inhale lowering bar under control."
+      ],
+      "commonMistakes": [
+        "Rounding lumbar spine",
+        "Standing too upright and turning it into a shrug"
+      ]
+    },
+    {
+      "id": "e23",
+      "name": "Lat Pulldown",
+      "level": "intermediate",
+      "targetMuscle": "Latissimus Dorsi (Outer Sweep)",
+      "equipment": "Cable Lat Machine & Wide Curved Bar",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "65 kg",
+      "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
+      "formCue": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
+      "steps": [
+        "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
+        "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
+        "Breathing: Exhale pulling down; inhale returning bar overhead."
+      ],
+      "commonMistakes": [
+        "Pulling bar behind the neck (dangerous for rotator cuffs)",
+        "Swinging torso backward excessively"
+      ]
+    },
+    {
+      "id": "e24",
+      "name": "Seated Cable Row",
+      "level": "intermediate",
+      "targetMuscle": "Middle Traps, Rhomboids & Lower Lats",
+      "equipment": "Low Pulley Cable Row & V-Grip Handle",
+      "sets": 3,
+      "reps": "10-12",
+      "restSeconds": 60,
+      "suggestedLoad": "60 kg",
+      "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
+      "formCue": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
+      "steps": [
+        "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
+        "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
+        "Breathing: Exhale pulling into ribs; inhale extending arms forward."
+      ],
+      "commonMistakes": [
+        "Rounding lower back reaching forward",
+        "Leaning back excessively to jerk weight"
+      ]
+    },
+    {
+      "id": "e25",
+      "name": "Deadlift",
+      "level": "intermediate",
+      "targetMuscle": "Entire Posterior Chain, Erector Spinae & Glutes",
+      "equipment": "Olympic Barbell & Bumper Plates",
+      "sets": 3,
+      "reps": "6-8",
+      "restSeconds": 120,
+      "suggestedLoad": "115 kg",
+      "imageUrl": "/images/workouts/back/deadlift.jpg",
+      "formCue": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
+      "steps": [
+        "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
+        "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
+        "Breathing: Deep diaphragmatic breath and brace at bottom; exhale through lockout."
+      ],
+      "commonMistakes": [
+        "Rounding lower back",
+        "Squatting the bar instead of hinging",
+        "Hyperextending spine at lockout"
+      ]
+    },
+    {
+      "id": "e26",
+      "name": "Barbell Squat",
+      "level": "intermediate",
+      "targetMuscle": "Quadriceps, Glutes & Adductors",
+      "equipment": "Squat Rack & Olympic Barbell",
+      "sets": 4,
+      "reps": "8-10",
+      "restSeconds": 120,
+      "suggestedLoad": "95 kg",
+      "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
+      "formCue": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
+      "steps": [
+        "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
+        "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
+        "Breathing: Big breath into belly at top and hold; exhale as you pass sticking point on way up."
+      ],
+      "commonMistakes": [
+        "Knees caving inward (valgus collapse)",
+        "Heels lifting off floor",
+        "Butt wink/rounding lower back"
+      ]
+    },
+    {
+      "id": "e27",
+      "name": "Leg Press",
+      "level": "intermediate",
+      "targetMuscle": "Quadriceps & Gluteus Maximus",
+      "equipment": "45° Plate-Loaded Leg Press Sled",
+      "sets": 4,
+      "reps": "10-12",
+      "restSeconds": 90,
+      "suggestedLoad": "180 kg",
+      "imageUrl": "/images/workouts/legs/leg-press.jpg",
+      "formCue": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
+      "steps": [
+        "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
+        "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
+        "Breathing: Inhale lowering sled; exhale driving footplate away."
+      ],
+      "commonMistakes": [
+        "Allowing pelvis to curl off seat",
+        "Locking knees aggressively at top"
+      ]
+    },
+    {
+      "id": "e28",
+      "name": "Leg Extension",
+      "level": "intermediate",
+      "targetMuscle": "Quadriceps (Rectus Femoris Isolation)",
+      "equipment": "Leg Extension Machine & Shin Roller",
+      "sets": 3,
+      "reps": "10-15",
+      "restSeconds": 60,
+      "suggestedLoad": "50 kg",
+      "imageUrl": "/images/workouts/legs/leg-extension.jpg",
+      "formCue": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
+      "steps": [
+        "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
+        "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
+        "Breathing: Exhale extending upward; inhale lowering slowly."
+      ],
+      "commonMistakes": [
+        "Using momentum to swing pad",
+        "Allowing weight stack to slam between reps"
+      ]
+    },
+    {
+      "id": "e29",
+      "name": "Leg Curl",
+      "level": "intermediate",
+      "targetMuscle": "Hamstrings (Biceps Femoris)",
+      "equipment": "Prone Hamstring Curl Bench",
+      "sets": 3,
+      "reps": "10-15",
+      "restSeconds": 60,
+      "suggestedLoad": "45 kg",
+      "imageUrl": "/images/workouts/legs/leg-curl.jpg",
+      "formCue": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
+      "steps": [
+        "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
+        "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
+        "Breathing: Exhale curling heels up; inhale lowering under control."
+      ],
+      "commonMistakes": [
+        "Hips lifting off bench to assist curl",
+        "Incomplete range of motion"
+      ]
+    },
+    {
+      "id": "e30",
+      "name": "Calf Raise",
+      "level": "intermediate",
+      "targetMuscle": "Gastrocnemius & Soleus",
+      "equipment": "Elevated Block & Machine / Dumbbells",
+      "sets": 4,
+      "reps": "12-20",
+      "restSeconds": 45,
+      "suggestedLoad": "70 kg",
+      "imageUrl": "/images/workouts/legs/calf-raise.jpg",
+      "formCue": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
+      "steps": [
+        "Place balls of feet on edge of calf block, heels hanging free.",
+        "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
+        "Breathing: Inhale dropping heels; exhale pressing high onto toes."
+      ],
+      "commonMistakes": [
+        "Bouncing quickly without pauses",
+        "Bending knees and turning it into a squat"
+      ]
+    },
+    {
+      "id": "e31",
+      "name": "Walking",
+      "level": "intermediate",
+      "targetMuscle": "Cardiovascular & Lymphatic Flow",
+      "equipment": "Outdoor Path / Gentle Treadmill Pace",
+      "sets": 1,
+      "reps": "30 mins",
+      "restSeconds": 0,
+      "suggestedLoad": "Bodyweight",
+      "imageUrl": "/images/workouts/recovery/walking.jpg",
+      "formCue": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
+      "steps": [
+        "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
+        "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
+        "Breathing: Breathe rhythmically in and out through nose."
+      ],
+      "commonMistakes": [
+        "Walking too fast and turning it into high-intensity cardio"
+      ]
+    },
+    {
+      "id": "e32",
+      "name": "Full Body Stretching",
+      "level": "intermediate",
+      "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
+      "equipment": "Yoga Mat & Foam Roller",
+      "sets": 1,
+      "reps": "15-20 mins",
+      "restSeconds": 0,
+      "suggestedLoad": "Bodyweight",
+      "imageUrl": "/images/workouts/recovery/stretching.jpg",
+      "formCue": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
+      "steps": [
+        "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
+        "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
+        "Breathing: Deep diaphragmatic belly breathing."
+      ],
+      "commonMistakes": [
+        "Aggressively forcing into painful joint ranges"
+      ]
+    },
+    {
+      "id": "e33",
+      "name": "Mobility Exercises",
+      "level": "intermediate",
+      "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
+      "equipment": "3-4L Water, High Protein & 7-9h Sleep",
+      "sets": 1,
+      "reps": "Full Day Protocol",
+      "restSeconds": 0,
+      "suggestedLoad": "Recovery Target",
+      "imageUrl": "/images/workouts/recovery/mobility.jpg",
+      "formCue": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
+      "steps": [
+        "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
+        "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
+        "Breathing: Slow 4-7-8 relaxing breathing before sleep."
+      ],
+      "commonMistakes": [
+        "Skipping hydration or skimping on protein on rest days"
+      ]
     },
     {
       "id": "e3",
@@ -1561,66 +2228,6 @@ export const workoutLibrary = {
         "category": "Chest",
         "imageUrl": "/exercises/intermediate/dumbbell_chest_fly.svg",
         "adjustmentNotes": "Optimal gym setup for Dumbbell Chest Fly. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e4",
-      "name": "Dumbbell Pullover",
-      "level": "intermediate",
-      "targetMuscle": "Upper Chest, Serratus & Lats",
-      "equipment": "Cross-Bench & Heavy Dumbbell",
-      "sets": 3,
-      "reps": "10-12",
-      "restSeconds": 60,
-      "suggestedLoad": "22 kg",
-      "imageUrl": "/exercises/intermediate/dumbbell_pullover.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/5Y2i8PZ8Skw?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/dumbbell_pullover.svg",
-      "formCue": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
-      "steps": [
-        "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
-        "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
-        "Breathing: Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over."
-      ],
-      "commonMistakes": [
-        "Bending elbows excessively like a triceps extension",
-        "Allowing hips to rise up above bench height"
-      ],
-      "machine": {
-        "name": "Cross-Bench & Heavy Dumbbell",
-        "category": "Chest",
-        "imageUrl": "/exercises/intermediate/dumbbell_pullover.svg",
-        "adjustmentNotes": "Optimal gym setup for Dumbbell Pullover. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e5",
-      "name": "Push-Ups",
-      "level": "intermediate",
-      "targetMuscle": "Chest, Anterior Delts & Core",
-      "equipment": "Bodyweight Floor Calisthenics",
-      "sets": 3,
-      "reps": "MAX",
-      "restSeconds": 60,
-      "suggestedLoad": "Bodyweight",
-      "imageUrl": "/exercises/intermediate/push_ups.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/push_ups.svg",
-      "formCue": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
-      "steps": [
-        "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
-        "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
-        "Breathing: Inhale descending; exhale driving up while bracing core."
-      ],
-      "commonMistakes": [
-        "Sagging lower back or piking hips in the air",
-        "Half reps without full chest depth"
-      ],
-      "machine": {
-        "name": "Bodyweight Floor Calisthenics",
-        "category": "Chest",
-        "imageUrl": "/exercises/intermediate/push_ups.svg",
-        "adjustmentNotes": "Optimal gym setup for Push-Ups. Adjust load and bench/seat height to personal ergonomics."
       }
     },
     {
@@ -1715,36 +2322,6 @@ export const workoutLibrary = {
       }
     },
     {
-      "id": "e9",
-      "name": "Rear Delt Fly",
-      "level": "intermediate",
-      "targetMuscle": "Posterior Deltoids & Rhomboids",
-      "equipment": "Dumbbells & 45° Torso Hinge",
-      "sets": 3,
-      "reps": "12-15",
-      "restSeconds": 60,
-      "suggestedLoad": "10 kg",
-      "imageUrl": "/exercises/intermediate/rear_delt_fly.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/EA7u4Q_8HQ0?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/rear_delt_fly.svg",
-      "formCue": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
-      "steps": [
-        "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
-        "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
-        "Breathing: Exhale raising wide; inhale returning under control."
-      ],
-      "commonMistakes": [
-        "Rounding lower back",
-        "Using heavy weights and turning it into a row"
-      ],
-      "machine": {
-        "name": "Dumbbells & 45° Torso Hinge",
-        "category": "Shoulders",
-        "imageUrl": "/exercises/intermediate/rear_delt_fly.svg",
-        "adjustmentNotes": "Optimal gym setup for Rear Delt Fly. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
       "id": "e10",
       "name": "Dumbbell Shrugs",
       "level": "intermediate",
@@ -1772,157 +2349,6 @@ export const workoutLibrary = {
         "category": "Shoulders",
         "imageUrl": "/exercises/intermediate/dumbbell_shrugs.svg",
         "adjustmentNotes": "Optimal gym setup for Dumbbell Shrugs. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e11",
-      "name": "Barbell Curl",
-      "level": "intermediate",
-      "targetMuscle": "Biceps Brachii (Short & Long Head)",
-      "equipment": "Olympic / EZ-Curl Barbell",
-      "sets": 4,
-      "reps": "8-10",
-      "restSeconds": 75,
-      "suggestedLoad": "35 kg",
-      "imageUrl": "/exercises/intermediate/barbell_curl.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/kwG2ipFRgfo?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/barbell_curl.svg",
-      "formCue": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
-      "steps": [
-        "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
-        "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
-        "Breathing: Exhale curling upward; inhale lowering down."
-      ],
-      "commonMistakes": [
-        "Rocking torso back and forth",
-        "Flaring elbows away from sides",
-        "Letting bar drop freely"
-      ],
-      "machine": {
-        "name": "Olympic / EZ-Curl Barbell",
-        "category": "Biceps",
-        "imageUrl": "/exercises/intermediate/barbell_curl.svg",
-        "adjustmentNotes": "Optimal gym setup for Barbell Curl. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e12",
-      "name": "Dumbbell Curl",
-      "level": "intermediate",
-      "targetMuscle": "Biceps Brachii Supination",
-      "equipment": "Dumbbells (Pair)",
-      "sets": 4,
-      "reps": "10-12",
-      "restSeconds": 60,
-      "suggestedLoad": "16 kg",
-      "imageUrl": "/exercises/intermediate/dumbbell_curl.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/ykJmrZ5v0Oo?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/dumbbell_curl.svg",
-      "formCue": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
-      "steps": [
-        "Hold dumbbells at sides with palms facing each other at bottom position.",
-        "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
-        "Breathing: Exhale as you curl and supinate; inhale during descent."
-      ],
-      "commonMistakes": [
-        "Swinging shoulders forward to assist",
-        "Failing to fully supinate wrist"
-      ],
-      "machine": {
-        "name": "Dumbbells (Pair)",
-        "category": "Biceps",
-        "imageUrl": "/exercises/intermediate/dumbbell_curl.svg",
-        "adjustmentNotes": "Optimal gym setup for Dumbbell Curl. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e13",
-      "name": "Hammer Curl",
-      "level": "intermediate",
-      "targetMuscle": "Brachialis & Forearm Brachioradialis",
-      "equipment": "Dumbbells (Neutral Grip)",
-      "sets": 3,
-      "reps": "10-12",
-      "restSeconds": 60,
-      "suggestedLoad": "16 kg",
-      "imageUrl": "/exercises/intermediate/hammer_curl.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/zC3nLlEvin4?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/hammer_curl.svg",
-      "formCue": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
-      "steps": [
-        "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
-        "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
-        "Breathing: Exhale on contraction; inhale on descent."
-      ],
-      "commonMistakes": [
-        "Elbows moving forward past ribcage",
-        "Using excessive torso sway"
-      ],
-      "machine": {
-        "name": "Dumbbells (Neutral Grip)",
-        "category": "Biceps",
-        "imageUrl": "/exercises/intermediate/hammer_curl.svg",
-        "adjustmentNotes": "Optimal gym setup for Hammer Curl. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e14",
-      "name": "Preacher Curl",
-      "level": "intermediate",
-      "targetMuscle": "Biceps Brachii (Isolated Short Head)",
-      "equipment": "Preacher Bench & EZ-Bar",
-      "sets": 3,
-      "reps": "10-12",
-      "restSeconds": 60,
-      "suggestedLoad": "28 kg",
-      "imageUrl": "/exercises/intermediate/preacher_curl.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/fIWP-FRFNU0?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/preacher_curl.svg",
-      "formCue": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
-      "steps": [
-        "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
-        "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
-        "Breathing: Exhale curling bar up; inhale as you lower smoothly."
-      ],
-      "commonMistakes": [
-        "Hyperextending and locking out elbow violently at bottom",
-        "Lifting body off seat"
-      ],
-      "machine": {
-        "name": "Preacher Bench & EZ-Bar",
-        "category": "Biceps",
-        "imageUrl": "/exercises/intermediate/preacher_curl.svg",
-        "adjustmentNotes": "Optimal gym setup for Preacher Curl. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e15",
-      "name": "Concentration Curl",
-      "level": "intermediate",
-      "targetMuscle": "Biceps Isolation Peak Contraction",
-      "equipment": "Flat Bench & Single Dumbbell",
-      "sets": 3,
-      "reps": "12",
-      "restSeconds": 45,
-      "suggestedLoad": "14 kg",
-      "imageUrl": "/exercises/intermediate/concentration_curl.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/Jvj2wV0vOYU?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/concentration_curl.svg",
-      "formCue": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
-      "steps": [
-        "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
-        "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
-        "Breathing: Exhale curling; inhale lowering."
-      ],
-      "commonMistakes": [
-        "Moving elbow along thigh during repetition",
-        "Using back momentum"
-      ],
-      "machine": {
-        "name": "Flat Bench & Single Dumbbell",
-        "category": "Biceps",
-        "imageUrl": "/exercises/intermediate/concentration_curl.svg",
-        "adjustmentNotes": "Optimal gym setup for Concentration Curl. Adjust load and bench/seat height to personal ergonomics."
       }
     },
     {
@@ -2073,248 +2499,6 @@ export const workoutLibrary = {
         "category": "Triceps",
         "imageUrl": "/exercises/intermediate/cable_triceps_kickback.svg",
         "adjustmentNotes": "Optimal gym setup for Cable Triceps Kickback. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e21",
-      "name": "Pull-Ups",
-      "level": "intermediate",
-      "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
-      "equipment": "Rigid Overhead Pull-Up Bar",
-      "sets": 4,
-      "reps": "6-10",
-      "restSeconds": 90,
-      "suggestedLoad": "Bodyweight",
-      "imageUrl": "/exercises/intermediate/pull_ups.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/eGo4IYlbE5g?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/pull_ups.svg",
-      "formCue": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
-      "steps": [
-        "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
-        "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
-        "Breathing: Exhale pulling up; inhale lowering into full dead-hang stretch."
-      ],
-      "commonMistakes": [
-        "Kicking legs or kipping body",
-        "Half reps without chin clearing bar or without full stretch"
-      ],
-      "machine": {
-        "name": "Rigid Overhead Pull-Up Bar",
-        "category": "Back",
-        "imageUrl": "/exercises/intermediate/pull_ups.svg",
-        "adjustmentNotes": "Optimal gym setup for Pull-Ups. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e22",
-      "name": "Barbell Row",
-      "level": "intermediate",
-      "targetMuscle": "Rhomboids, Lats & Mid-Back Thickness",
-      "equipment": "Olympic Barbell & 45° Torso Angle",
-      "sets": 4,
-      "reps": "8-12",
-      "restSeconds": 90,
-      "suggestedLoad": "70 kg",
-      "imageUrl": "/exercises/intermediate/barbell_row.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/G8l_8chR5BE?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/barbell_row.svg",
-      "formCue": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
-      "steps": [
-        "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
-        "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
-        "Breathing: Exhale rowing upward; inhale lowering bar under control."
-      ],
-      "commonMistakes": [
-        "Rounding lumbar spine",
-        "Standing too upright and turning it into a shrug"
-      ],
-      "machine": {
-        "name": "Olympic Barbell & 45° Torso Angle",
-        "category": "Back",
-        "imageUrl": "/exercises/intermediate/barbell_row.svg",
-        "adjustmentNotes": "Optimal gym setup for Barbell Row. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e23",
-      "name": "Lat Pulldown",
-      "level": "intermediate",
-      "targetMuscle": "Latissimus Dorsi (Outer Sweep)",
-      "equipment": "Cable Lat Machine & Wide Curved Bar",
-      "sets": 3,
-      "reps": "10-12",
-      "restSeconds": 60,
-      "suggestedLoad": "65 kg",
-      "imageUrl": "/exercises/intermediate/lat_pulldown.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/CAwf7n6Luuc?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/lat_pulldown.svg",
-      "formCue": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
-      "steps": [
-        "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
-        "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
-        "Breathing: Exhale pulling down; inhale returning bar overhead."
-      ],
-      "commonMistakes": [
-        "Pulling bar behind the neck (dangerous for rotator cuffs)",
-        "Swinging torso backward excessively"
-      ],
-      "machine": {
-        "name": "Cable Lat Machine & Wide Curved Bar",
-        "category": "Back",
-        "imageUrl": "/exercises/intermediate/lat_pulldown.svg",
-        "adjustmentNotes": "Optimal gym setup for Lat Pulldown. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e24",
-      "name": "Seated Cable Row",
-      "level": "intermediate",
-      "targetMuscle": "Middle Traps, Rhomboids & Lower Lats",
-      "equipment": "Low Pulley Cable Row & V-Grip Handle",
-      "sets": 3,
-      "reps": "10-12",
-      "restSeconds": 60,
-      "suggestedLoad": "60 kg",
-      "imageUrl": "/exercises/intermediate/seated_cable_row.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/GZbfZ033f74?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/seated_cable_row.svg",
-      "formCue": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
-      "steps": [
-        "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
-        "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
-        "Breathing: Exhale pulling into ribs; inhale extending arms forward."
-      ],
-      "commonMistakes": [
-        "Rounding lower back reaching forward",
-        "Leaning back excessively to jerk weight"
-      ],
-      "machine": {
-        "name": "Low Pulley Cable Row & V-Grip Handle",
-        "category": "Back",
-        "imageUrl": "/exercises/intermediate/seated_cable_row.svg",
-        "adjustmentNotes": "Optimal gym setup for Seated Cable Row. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e25",
-      "name": "Deadlift",
-      "level": "intermediate",
-      "targetMuscle": "Entire Posterior Chain, Erector Spinae & Glutes",
-      "equipment": "Olympic Barbell & Bumper Plates",
-      "sets": 3,
-      "reps": "6-8",
-      "restSeconds": 120,
-      "suggestedLoad": "115 kg",
-      "imageUrl": "/exercises/intermediate/deadlift.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/op9kVnSso6Q?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/deadlift.svg",
-      "formCue": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
-      "steps": [
-        "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
-        "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
-        "Breathing: Deep diaphragmatic breath and brace at bottom; exhale through lockout."
-      ],
-      "commonMistakes": [
-        "Rounding lower back",
-        "Squatting the bar instead of hinging",
-        "Hyperextending spine at lockout"
-      ],
-      "machine": {
-        "name": "Olympic Barbell & Bumper Plates",
-        "category": "Back",
-        "imageUrl": "/exercises/intermediate/deadlift.svg",
-        "adjustmentNotes": "Optimal gym setup for Deadlift. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e26",
-      "name": "Barbell Squat",
-      "level": "intermediate",
-      "targetMuscle": "Quadriceps, Glutes & Adductors",
-      "equipment": "Squat Rack & Olympic Barbell",
-      "sets": 4,
-      "reps": "8-10",
-      "restSeconds": 120,
-      "suggestedLoad": "95 kg",
-      "imageUrl": "/exercises/intermediate/barbell_squat.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/MVMNk0HiTMg?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/barbell_squat.svg",
-      "formCue": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
-      "steps": [
-        "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
-        "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
-        "Breathing: Big breath into belly at top and hold; exhale as you pass sticking point on way up."
-      ],
-      "commonMistakes": [
-        "Knees caving inward (valgus collapse)",
-        "Heels lifting off floor",
-        "Butt wink/rounding lower back"
-      ],
-      "machine": {
-        "name": "Squat Rack & Olympic Barbell",
-        "category": "Legs",
-        "imageUrl": "/exercises/intermediate/barbell_squat.svg",
-        "adjustmentNotes": "Optimal gym setup for Barbell Squat. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e27",
-      "name": "Leg Press",
-      "level": "intermediate",
-      "targetMuscle": "Quadriceps & Gluteus Maximus",
-      "equipment": "45° Plate-Loaded Leg Press Sled",
-      "sets": 4,
-      "reps": "10-12",
-      "restSeconds": 90,
-      "suggestedLoad": "180 kg",
-      "imageUrl": "/exercises/intermediate/leg_press.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/IZxyjW7MPJQ?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/leg_press.svg",
-      "formCue": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
-      "steps": [
-        "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
-        "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
-        "Breathing: Inhale lowering sled; exhale driving footplate away."
-      ],
-      "commonMistakes": [
-        "Allowing pelvis to curl off seat",
-        "Locking knees aggressively at top"
-      ],
-      "machine": {
-        "name": "45° Plate-Loaded Leg Press Sled",
-        "category": "Legs",
-        "imageUrl": "/exercises/intermediate/leg_press.svg",
-        "adjustmentNotes": "Optimal gym setup for Leg Press. Adjust load and bench/seat height to personal ergonomics."
-      }
-    },
-    {
-      "id": "e28",
-      "name": "Leg Extension",
-      "level": "intermediate",
-      "targetMuscle": "Quadriceps (Rectus Femoris Isolation)",
-      "equipment": "Leg Extension Machine & Shin Roller",
-      "sets": 3,
-      "reps": "10-15",
-      "restSeconds": 60,
-      "suggestedLoad": "50 kg",
-      "imageUrl": "/exercises/intermediate/leg_extension.svg",
-      "videoUrl": "https://www.youtube-nocookie.com/embed/YyvSfVjQeL0?rel=0&modestbranding=1&playsinline=1",
-      "videoPoster": "/exercises/intermediate/leg_extension.svg",
-      "formCue": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
-      "steps": [
-        "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
-        "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
-        "Breathing: Exhale extending upward; inhale lowering slowly."
-      ],
-      "commonMistakes": [
-        "Using momentum to swing pad",
-        "Allowing weight stack to slam between reps"
-      ],
-      "machine": {
-        "name": "Leg Extension Machine & Shin Roller",
-        "category": "Legs",
-        "imageUrl": "/exercises/intermediate/leg_extension.svg",
-        "adjustmentNotes": "Optimal gym setup for Leg Extension. Adjust load and bench/seat height to personal ergonomics."
       }
     },
     {

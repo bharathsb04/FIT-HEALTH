@@ -3,7 +3,7 @@ import { api } from '../services/api';
 import { useFitness } from '../contexts/FitnessContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Header } from '../components/Header';
-import { WorkoutVideoDemonstrator, getExerciseMeta } from '../components/WorkoutVideoDemonstrator';
+import { getExerciseMeta } from '../components/WorkoutVideoDemonstrator';
 import {
   workoutLibrary,
   getExercisesByLevel,
@@ -25,10 +25,8 @@ import {
   SkipForward,
   Trophy,
   History,
-  Video,
   Eye,
   Zap,
-  Film,
   X,
   Image as ImageIcon,
   Sparkles,
@@ -74,15 +72,11 @@ export const WorkoutPlannerPage = () => {
   const [sessionActive, setSessionActive] = useState(false);
   const [sessionTimerSeconds, setSessionTimerSeconds] = useState(0);
 
-  // One-by-one Step mode state
-  const [plannerViewMode, setPlannerViewMode] = useState('list'); // 'step' (One-by-one) | 'list' (All cards)
+  // Dual View Mode: 'list' (All Exercise Cards) | 'step' (1-by-1 Step Focus)
+  const [plannerViewMode, setPlannerViewMode] = useState('list');
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [restCountdown, setRestCountdown] = useState(0);
   const [restTimerActive, setRestTimerActive] = useState(false);
-
-  // Video demonstrator state
-  const [showVideoModal, setShowVideoModal] = useState(false);
-  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
   // Instructions & technique toggle map
   const [openInstructions, setOpenInstructions] = useState({});
@@ -389,16 +383,14 @@ export const WorkoutPlannerPage = () => {
 
   const currentMuscleGroup = getCanonicalMuscle(currentDay?.targetGroup || currentDay?.dayName || 'Chest');
 
-  // Enriched exercises for currentDay with workoutLibrary metadata
+  // Enriched exercises for currentDay with local photo fallback
   const enrichedExercises = (currentDay?.exercises || []).map(ex => {
     const meta = getExerciseMeta(ex.name, ex.targetMuscle || currentMuscleGroup, ex.level || selectedLevel);
     return {
       ...meta,
       ...ex,
       level: ex.level || selectedLevel,
-      imageUrl: ex.imageUrl || meta.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`,
-      videoUrl: ex.videoUrl || meta.videoUrl,
-      videoPoster: ex.imageUrl || meta.videoPoster || meta.imageUrl,
+      imageUrl: ex.imageUrl || meta.imageUrl || '/exercises/fallback.svg',
       formCue: ex.technique || meta.formCue || ex.instructions,
       steps: ex.instructions ? [ex.instructions, ...(ex.technique ? [ex.technique] : [])] : (meta.steps || ['Perform with controlled form.']),
       commonMistakes: ex.commonMistakes || meta.commonMistakes || ['Avoid swinging weight', 'Keep core braced throughout']
@@ -421,46 +413,11 @@ export const WorkoutPlannerPage = () => {
     ? Math.round((totalWeeklyCompletedExercises / totalWeeklyExercises) * 100)
     : 0;
 
-  const handleLoadLevelRoutine = async (levelToLoad) => {
-    try {
-      setSelectedLevel(levelToLoad);
-      const canonicalMuscle = getCanonicalMuscle(currentDay?.targetGroup || currentDay?.dayName || 'Chest');
-      const curated = getExercisesByLevelAndMuscle(levelToLoad, canonicalMuscle);
-      if (!curated || curated.length === 0) return;
-
-      const formatted = curated.map((ex, idx) => ({
-        id: `ex_${levelToLoad}_${Date.now()}_${idx}`,
-        name: ex.name,
-        targetMuscle: ex.targetMuscle,
-        sets: ex.sets || (levelToLoad === 'beginner' ? 3 : levelToLoad === 'advanced' ? 5 : 4),
-        reps: ex.reps || (levelToLoad === 'beginner' ? '12-15' : levelToLoad === 'advanced' ? '6-8' : '8-12'),
-        weight: ex.suggestedLoad || 'Moderate',
-        restTime: ex.restSeconds || 60,
-        instructions: ex.formCue || ex.steps?.[0] || 'Perform with controlled form.',
-        completed: false,
-        completedSets: Array(ex.sets || 4).fill(false),
-        imageUrl: ex.imageUrl,
-        level: levelToLoad
-      }));
-
-      const updatedDays = [...days];
-      updatedDays[selectedDayIndex] = {
-        ...currentDay,
-        exercises: formatted
-      };
-      setWorkoutPlan(prev => ({ ...prev, days: updatedDays }));
-      setCurrentStepIndex(0);
-      showToast(`⚡ Activated ${levelToLoad.toUpperCase()} protocol (${formatted.length} exercises)!`, 'success');
-    } catch (e) {
-      console.warn('Could not load level routine:', e);
-    }
-  };
-
   const isRecoveryDay = selectedDayIndex === 6 || currentDay?.dayNumber === 7;
 
   return (
     <div style={{ minHeight: '100%' }}>
-      <Header title="Workout Planner" subtitle="Intermediate 7-Day Protocol & Progressive Overload" />
+      <Header title="Workout Planner" subtitle="Intermediate 7-Day Protocol & Strict Exercise Demonstration" />
 
       <div className="page-container" style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         
@@ -486,7 +443,7 @@ export const WorkoutPlannerPage = () => {
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f59e0b', animation: 'pulse 1.2s infinite' }} />
               <div>
                 <span style={{ fontSize: '11px', color: '#fef3c7', fontWeight: 800, letterSpacing: '0.5px' }}>
-                  ⚡ LIVE INTERMEDIATE WORKOUT IN PROGRESS
+                  ⚡ LIVE WORKOUT IN PROGRESS
                 </span>
                 <h4 style={{ fontSize: '22px', fontWeight: 900, fontFamily: 'monospace', color: '#ffffff', margin: 0 }}>
                   {formatTimer(sessionTimerSeconds)}
@@ -567,7 +524,7 @@ export const WorkoutPlannerPage = () => {
                 Welcome Back, {user?.name || 'Athlete'}! 💪
               </h2>
               <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
-                7-Day Intermediate Split &bull; Muscle Hypertrophy, Progressive Overload &amp; CNS Recovery
+                7-Day Intermediate Split &bull; Correct Demonstration Photos &bull; Muscle Growth &amp; Progressive Overload
               </p>
             </div>
 
@@ -586,7 +543,7 @@ export const WorkoutPlannerPage = () => {
                 }}
               >
                 <Maximize2 size={13} color="#f59e0b" />
-                <span>6-Day Blueprint Poster</span>
+                <span>6-Day Blueprint Reference</span>
               </button>
 
               <button
@@ -689,7 +646,7 @@ export const WorkoutPlannerPage = () => {
                 <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>of {totalWeeklyExercises} Sets</span>
               </div>
               <span style={{ fontSize: '11px', color: '#f59e0b', marginTop: '4px', display: 'block', fontWeight: 600 }}>
-                ⚡ Strict Form &amp; Tempo
+                ⚡ Real Photo Demonstrations
               </span>
             </div>
           </div>
@@ -907,10 +864,10 @@ export const WorkoutPlannerPage = () => {
               </p>
             </div>
 
-            {/* 3 Dedicated Recovery Cards */}
+            {/* 3 Dedicated Recovery Cards with Exact Local Images */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
               
-              {/* Card 1: Light Zone 2 Walk */}
+              {/* Card 1: Walking */}
               <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{
                   width: '100%',
@@ -921,8 +878,8 @@ export const WorkoutPlannerPage = () => {
                   border: '1px solid rgba(255,255,255,0.08)'
                 }}>
                   <img
-                    src="/exercises/intermediate/light_zone2_walk.svg"
-                    alt="Light Zone 2 Walk"
+                    src="/images/workouts/recovery/walking.jpg"
+                    alt="Walking"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
                   />
@@ -930,7 +887,7 @@ export const WorkoutPlannerPage = () => {
 
                 <div>
                   <div className="flex-between">
-                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>1. Light 30-min Zone 2 Walk</h4>
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>1. Walking</h4>
                     <span className="badge badge-success" style={{ fontSize: '10px' }}>Active Recovery</span>
                   </div>
                   <span style={{ fontSize: '11px', color: 'var(--cyan)', fontWeight: 600, display: 'block', marginTop: '2px' }}>
@@ -953,7 +910,7 @@ export const WorkoutPlannerPage = () => {
                 </div>
               </div>
 
-              {/* Card 2: Full Body Dynamic Stretching */}
+              {/* Card 2: Full Body Stretching */}
               <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{
                   width: '100%',
@@ -964,7 +921,7 @@ export const WorkoutPlannerPage = () => {
                   border: '1px solid rgba(255,255,255,0.08)'
                 }}>
                   <img
-                    src="/exercises/intermediate/full_body_stretching.svg"
+                    src="/images/workouts/recovery/stretching.jpg"
                     alt="Full Body Stretching"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
@@ -973,7 +930,7 @@ export const WorkoutPlannerPage = () => {
 
                 <div>
                   <div className="flex-between">
-                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>2. Stretching &amp; Mobility</h4>
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>2. Full Body Stretching</h4>
                     <span className="badge badge-primary" style={{ fontSize: '10px' }}>Joint Restoration</span>
                   </div>
                   <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 600, display: 'block', marginTop: '2px' }}>
@@ -996,7 +953,7 @@ export const WorkoutPlannerPage = () => {
                 </div>
               </div>
 
-              {/* Card 3: Hydration, Nutrition & Sleep */}
+              {/* Card 3: Mobility Exercises */}
               <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{
                   width: '100%',
@@ -1007,8 +964,8 @@ export const WorkoutPlannerPage = () => {
                   border: '1px solid rgba(255,255,255,0.08)'
                 }}>
                   <img
-                    src="/exercises/intermediate/hydration_nutrition_sleep.svg"
-                    alt="Hydration Nutrition Sleep"
+                    src="/images/workouts/recovery/mobility.jpg"
+                    alt="Mobility Exercises"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
                   />
@@ -1016,7 +973,7 @@ export const WorkoutPlannerPage = () => {
 
                 <div>
                   <div className="flex-between">
-                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>3. Hydration, Nutrition &amp; Sleep</h4>
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>3. Mobility Exercises</h4>
                     <span className="badge badge-warning" style={{ fontSize: '10px' }}>Recovery Triad</span>
                   </div>
                   <span style={{ fontSize: '11px', color: '#fef3c7', fontWeight: 600, display: 'block', marginTop: '2px' }}>
@@ -1087,19 +1044,6 @@ export const WorkoutPlannerPage = () => {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveVideoIndex(0);
-                      setShowVideoModal(true);
-                    }}
-                    className="btn btn-sm btn-outline"
-                    style={{ fontSize: '12px', padding: '7px 12px', gap: '6px' }}
-                  >
-                    <Video size={14} color="#f59e0b" />
-                    <span>Watch Demos</span>
-                  </button>
-
                   {!sessionActive ? (
                     <button
                       onClick={() => {
@@ -1196,7 +1140,7 @@ export const WorkoutPlannerPage = () => {
                     : `Day ${currentDay?.dayNumber} Workout Cards (${enrichedExercises.length || 0} Exercises)`}
                 </span>
                 <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>
-                  Each exercise features its individual biomechanical demonstration image, sets, reps &amp; cues.
+                  Each exercise features its own authentic demonstration photograph, target load, sets &amp; reps.
                 </span>
               </div>
 
@@ -1290,7 +1234,7 @@ export const WorkoutPlannerPage = () => {
                     </button>
                   </div>
 
-                  {/* Specific Demonstration Image (16:9 Responsive) */}
+                  {/* Correct Demonstration Image (Real Exercise Photo, 16:9 Aspect Ratio) */}
                   <div style={{
                     width: '100%',
                     aspectRatio: '16 / 9',
@@ -1301,40 +1245,11 @@ export const WorkoutPlannerPage = () => {
                     position: 'relative'
                   }}>
                     <img
-                      src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
+                      src={ex.imageUrl || '/exercises/fallback.svg'}
                       alt={ex.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
                     />
-
-                    {/* Quick Video Launcher Overlay */}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setActiveVideoIndex(currentStepIndex);
-                        setShowVideoModal(true);
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: '12px',
-                        right: '12px',
-                        background: 'rgba(8, 12, 20, 0.85)',
-                        border: '1px solid rgba(245, 158, 11, 0.5)',
-                        color: '#fde68a',
-                        padding: '6px 12px',
-                        borderRadius: '20px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        backdropFilter: 'blur(8px)'
-                      }}
-                    >
-                      <Video size={13} color="#f59e0b" />
-                      <span>Watch Demo Video</span>
-                    </button>
                   </div>
 
                   {/* 4. WORKOUT CARD PARAMETERS (Sets, Reps, Rest, Weight) */}
@@ -1585,27 +1500,8 @@ export const WorkoutPlannerPage = () => {
                           </div>
                         </div>
 
-                        {/* Top Right Buttons: Video Demo & Expand */}
+                        {/* Top Right Buttons: Step Focus */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setActiveVideoIndex(i);
-                              setShowVideoModal(true);
-                            }}
-                            className="btn btn-xs btn-outline"
-                            style={{
-                              fontSize: '11px',
-                              padding: '6px 10px',
-                              borderColor: 'rgba(245, 158, 11, 0.4)',
-                              color: '#fde68a',
-                              gap: '4px'
-                            }}
-                          >
-                            <Video size={13} color="#f59e0b" />
-                            <span>Demo</span>
-                          </button>
-
                           <button
                             type="button"
                             onClick={() => {
@@ -1613,7 +1509,7 @@ export const WorkoutPlannerPage = () => {
                               setPlannerViewMode('step');
                             }}
                             className="btn btn-xs btn-secondary"
-                            style={{ fontSize: '11px', padding: '6px 10px' }}
+                            style={{ fontSize: '11px', padding: '6px 12px' }}
                           >
                             Step Focus
                           </button>
@@ -1627,7 +1523,7 @@ export const WorkoutPlannerPage = () => {
                         gap: '14px',
                         alignItems: 'center'
                       }}>
-                        {/* 1. Exercise Demonstration Image (16:9) */}
+                        {/* 1. Exercise Demonstration Image (Real Photograph, 16:9) */}
                         <div style={{
                           width: '100%',
                           aspectRatio: '16 / 9',
@@ -1637,11 +1533,11 @@ export const WorkoutPlannerPage = () => {
                           border: '1px solid rgba(255, 255, 255, 0.08)'
                         }}>
                           <img
-                            src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
+                            src={ex.imageUrl || '/exercises/fallback.svg'}
                             alt={ex.name}
                             loading="lazy"
                             onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
-                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                           />
                         </div>
 
@@ -1862,37 +1758,6 @@ export const WorkoutPlannerPage = () => {
         </div>
       )}
 
-      {/* FULLSCREEN WORKOUT VIDEO DEMONSTRATION MODAL */}
-      {showVideoModal && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'rgba(0, 0, 0, 0.85)',
-          backdropFilter: 'blur(8px)',
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '16px'
-        }}>
-          <div style={{
-            width: '100%',
-            maxWidth: '680px',
-            maxHeight: '90vh',
-            overflowY: 'auto'
-          }}>
-            <WorkoutVideoDemonstrator
-              workoutDay={{ ...currentDay, exercises: enrichedExercises }}
-              initialExerciseIndex={activeVideoIndex}
-              isModal={true}
-              selectedLevel={selectedLevel}
-              onSelectLevel={handleLoadLevelRoutine}
-              onClose={() => setShowVideoModal(false)}
-            />
-          </div>
-        </div>
-      )}
-
       {/* 6-DAY WORKOUT PLAN FULL VISUAL POSTER MODAL */}
       {showPosterModal && (
         <div style={{
@@ -1925,10 +1790,10 @@ export const WorkoutPlannerPage = () => {
                 <ImageIcon size={20} color="#eab308" />
                 <div>
                   <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#fef08a' }}>
-                    6 DAY WORKOUT PLAN &bull; VISUAL BLUEPRINT
+                    6 DAY WORKOUT PLAN &bull; REFERENCE BLUEPRINT
                   </h3>
                   <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                    FOCUS. TRAIN. TRANSFORM. &bull; Official Workout Infographic
+                    FOCUS. TRAIN. TRANSFORM. &bull; Exact Muscle Split Reference
                   </span>
                 </div>
               </div>

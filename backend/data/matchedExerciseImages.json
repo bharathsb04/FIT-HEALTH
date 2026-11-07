@@ -1,0 +1,212 @@
+[
+  {
+    "category": "chest",
+    "file": "bench-press.jpg",
+    "name": "Barbell Bench Press",
+    "dbName": "Barbell Bench Press - Medium Grip",
+    "imagePath": "Barbell_Bench_Press_-_Medium_Grip/0.jpg"
+  },
+  {
+    "category": "chest",
+    "file": "incline-dumbbell-press.jpg",
+    "name": "Incline Dumbbell Press",
+    "dbName": "Incline Dumbbell Press",
+    "imagePath": "Incline_Dumbbell_Press/0.jpg"
+  },
+  {
+    "category": "chest",
+    "file": "chest-fly.jpg",
+    "name": "Chest Fly",
+    "dbName": "Dumbbell Flyes",
+    "imagePath": "Dumbbell_Flyes/0.jpg"
+  },
+  {
+    "category": "chest",
+    "file": "dumbbell-pullover.jpg",
+    "name": "Dumbbell Pullover",
+    "dbName": "Straight-Arm Dumbbell Pullover",
+    "imagePath": "Straight-Arm_Dumbbell_Pullover/0.jpg"
+  },
+  {
+    "category": "chest",
+    "file": "push-ups.jpg",
+    "name": "Push-Ups",
+    "dbName": "Pushups",
+    "imagePath": "Pushups/0.jpg"
+  },
+  {
+    "category": "shoulders",
+    "file": "overhead-press.jpg",
+    "name": "Overhead Press",
+    "dbName": "Standing Military Press",
+    "imagePath": "Standing_Military_Press/0.jpg"
+  },
+  {
+    "category": "shoulders",
+    "file": "lateral-raise.jpg",
+    "name": "Lateral Raise",
+    "dbName": "Side Lateral Raise",
+    "imagePath": "Side_Lateral_Raise/0.jpg"
+  },
+  {
+    "category": "shoulders",
+    "file": "front-raise.jpg",
+    "name": "Front Raise",
+    "dbName": "Front Dumbbell Raise",
+    "imagePath": "Front_Dumbbell_Raise/0.jpg"
+  },
+  {
+    "category": "shoulders",
+    "file": "rear-delt-fly.jpg",
+    "name": "Rear Delt Fly",
+    "dbName": "Bent Over Dumbbell Rear Delt Raise With Head On Bench",
+    "imagePath": "Bent_Over_Dumbbell_Rear_Delt_Raise_With_Head_On_Bench/0.jpg"
+  },
+  {
+    "category": "shoulders",
+    "file": "shrugs.jpg",
+    "name": "Shrugs",
+    "dbName": "Dumbbell Shrug",
+    "imagePath": "Dumbbell_Shrug/0.jpg"
+  },
+  {
+    "category": "biceps",
+    "file": "barbell-curl.jpg",
+    "name": "Barbell Curl",
+    "dbName": "Barbell Curl",
+    "imagePath": "Barbell_Curl/0.jpg"
+  },
+  {
+    "category": "biceps",
+    "file": "dumbbell-curl.jpg",
+    "name": "Dumbbell Curl",
+    "dbName": "Dumbbell Alternate Bicep Curl",
+    "imagePath": "Dumbbell_Alternate_Bicep_Curl/0.jpg"
+  },
+  {
+    "category": "biceps",
+    "file": "hammer-curl.jpg",
+    "name": "Hammer Curl",
+    "dbName": "Hammer Curls",
+    "imagePath": "Hammer_Curls/0.jpg"
+  },
+  {
+    "category": "biceps",
+    "file": "preacher-curl.jpg",
+    "name": "Preacher Curl",
+    "dbName": "Preacher Curl",
+    "imagePath": "Preacher_Curl/0.jpg"
+  },
+  {
+    "category": "biceps",
+    "file": "concentration-curl.jpg",
+    "name": "Concentration Curl",
+    "dbName": "Concentration Curls",
+    "imagePath": "Concentration_Curls/0.jpg"
+  },
+  {
+    "category": "triceps",
+    "file": "close-grip-bench-press.jpg",
+    "name": "Close Grip Bench Press",
+    "dbName": "Close-Grip Barbell Bench Press",
+    "imagePath": "Close-Grip_Barbell_Bench_Press/0.jpg"
+  },
+  {
+    "category": "triceps",
+    "file": "rope-pushdown.jpg",
+    "name": "Rope Push Down",
+    "dbName": "Triceps Pushdown - Rope Attachment",
+    "imagePath": "Triceps_Pushdown_-_Rope_Attachment/0.jpg"
+  },
+  {
+    "category": "triceps",
+    "file": "overhead-extension.jpg",
+    "name": "Overhead Triceps Extension",
+    "dbName": "Standing Dumbbell Triceps Extension",
+    "imagePath": "Standing_Dumbbell_Triceps_Extension/0.jpg"
+  },
+  {
+    "category": "triceps",
+    "file": "dips.jpg",
+    "name": "Dips",
+    "dbName": "Dips - Triceps Version",
+    "imagePath": "Dips_-_Triceps_Version/0.jpg"
+  },
+  {
+    "category": "triceps",
+    "file": "triceps-kickback.jpg",
+    "name": "Triceps Kickback",
+    "dbName": "Tricep Dumbbell Kickback",
+    "imagePath": "Tricep_Dumbbell_Kickback/0.jpg"
+  },
+  {
+    "category": "back",
+    "file": "pull-ups.jpg",
+    "name": "Pull-Ups",
+    "dbName": "Pullups",
+    "imagePath": "Pullups/0.jpg"
+  },
+  {
+    "category": "back",
+    "file": "barbell-row.jpg",
+    "name": "Barbell Row",
+    "dbName": "Bent Over Barbell Row",
+    "imagePath": "Bent_Over_Barbell_Row/0.jpg"
+  },
+  {
+    "category": "back",
+    "file": "lat-pulldown.jpg",
+    "name": "Lat Pulldown",
+    "dbName": "Wide-Grip Lat Pulldown",
+    "imagePath": "Wide-Grip_Lat_Pulldown/0.jpg"
+  },
+  {
+    "category": "back",
+    "file": "seated-cable-row.jpg",
+    "name": "Seated Cable Row",
+    "dbName": "Seated Cable Rows",
+    "imagePath": "Seated_Cable_Rows/0.jpg"
+  },
+  {
+    "category": "back",
+    "file": "deadlift.jpg",
+    "name": "Deadlift",
+    "dbName": "Barbell Deadlift",
+    "imagePath": "Barbell_Deadlift/0.jpg"
+  },
+  {
+    "category": "legs",
+    "file": "barbell-squat.jpg",
+    "name": "Barbell Squat",
+    "dbName": "Barbell Full Squat",
+    "imagePath": "Barbell_Full_Squat/0.jpg"
+  },
+  {
+    "category": "legs",
+    "file": "leg-press.jpg",
+    "name": "Leg Press",
+    "dbName": "Leg Press",
+    "imagePath": "Leg_Press/0.jpg"
+  },
+  {
+    "category": "legs",
+    "file": "leg-extension.jpg",
+    "name": "Leg Extension",
+    "dbName": "Leg Extensions",
+    "imagePath": "Leg_Extensions/0.jpg"
+  },
+  {
+    "category": "legs",
+    "file": "leg-curl.jpg",
+    "name": "Leg Curl",
+    "dbName": "Lying Leg Curls",
+    "imagePath": "Lying_Leg_Curls/0.jpg"
+  },
+  {
+    "category": "legs",
+    "file": "calf-raise.jpg",
+    "name": "Calf Raise",
+    "dbName": "Standing Calf Raises",
+    "imagePath": "Standing_Calf_Raises/0.jpg"
+  }
+]

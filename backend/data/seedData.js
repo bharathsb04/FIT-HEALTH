@@ -182,7 +182,7 @@ const defaultSplitWorkouts = {
         "id": "e1",
         "name": "Barbell Bench Press",
         "targetMuscle": "Pectoralis Major & Triceps",
-        "equipment": "Olympic Barbell & Bench",
+        "equipment": "Olympic Barbell & Flat Bench",
         "sets": 4,
         "reps": "8-10",
         "weight": "75 kg",
@@ -194,8 +194,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_bench_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/gRVjAtPip0Y?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/bench-press.jpg",
         "instructions": "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
         "technique": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
         "breathing": "Inhale deeply at the top and hold during descent; exhale forcefully past the sticking point.",
@@ -221,8 +220,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/incline_dumbbell_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/0G2_XX7nuAG?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
         "instructions": "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
         "technique": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
         "breathing": "Inhale on the lowering phase; exhale as you push the dumbbells upward.",
@@ -233,7 +231,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e3",
-        "name": "Dumbbell Chest Fly",
+        "name": "Chest Fly",
         "targetMuscle": "Sternal Pectoralis Adduction",
         "equipment": "Flat Bench & Dumbbells (Pair)",
         "sets": 3,
@@ -246,8 +244,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_chest_fly.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/eozdVDA78K0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/chest-fly.jpg",
         "instructions": "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
         "technique": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
         "breathing": "Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center.",
@@ -271,8 +268,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_pullover.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/5Y2i8PZ8Skw?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
         "instructions": "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
         "technique": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
         "breathing": "Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over.",
@@ -296,8 +292,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/push_ups.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/push-ups.jpg",
         "instructions": "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
         "technique": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
         "breathing": "Inhale descending; exhale driving up while bracing core.",
@@ -318,7 +313,7 @@ const defaultSplitWorkouts = {
     "exercises": [
       {
         "id": "e6",
-        "name": "Overhead Barbell Press",
+        "name": "Overhead Press",
         "targetMuscle": "Anterior & Lateral Deltoids",
         "equipment": "Olympic Barbell & Power Rack",
         "sets": 4,
@@ -332,8 +327,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/overhead_barbell_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/2yjwXTZQDDI?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
         "instructions": "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
         "technique": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
         "breathing": "Inhale and brace core before pressing; exhale once past forehead level.",
@@ -345,7 +339,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e7",
-        "name": "Dumbbell Lateral Raises",
+        "name": "Lateral Raise",
         "targetMuscle": "Lateral Deltoid (Shoulder Width)",
         "equipment": "Dumbbells (Pair)",
         "sets": 4,
@@ -359,8 +353,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_lateral_raises.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/3VcKaXpzqRo?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
         "instructions": "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
         "technique": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
         "breathing": "Exhale as you raise outward; inhale on controlled descent.",
@@ -371,7 +364,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e8",
-        "name": "Front Dumbbell Raises",
+        "name": "Front Raise",
         "targetMuscle": "Anterior Deltoid Head",
         "equipment": "Dumbbells (Pair)",
         "sets": 3,
@@ -384,8 +377,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/front_dumbbell_raises.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/-t7fuZ0KhDA?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
         "instructions": "Stand upright holding dumbbells in front of thighs with overhand grip.",
         "technique": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
         "breathing": "Exhale on upward lift; inhale lowering down.",
@@ -409,8 +401,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/rear_delt_fly.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/EA7u4Q_8HQ0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
         "instructions": "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
         "technique": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
         "breathing": "Exhale raising wide; inhale returning under control.",
@@ -421,7 +412,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e10",
-        "name": "Dumbbell Shrugs",
+        "name": "Shrugs",
         "targetMuscle": "Upper Trapezius",
         "equipment": "Heavy Dumbbells (Pair)",
         "sets": 3,
@@ -434,8 +425,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_shrugs.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/g6qbq4Zu1Dw?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
         "instructions": "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
         "technique": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
         "breathing": "Exhale on shrug elevation; inhale on the eccentric stretch.",
@@ -470,8 +460,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/kwG2ipFRgfo?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
         "instructions": "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
         "technique": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
         "breathing": "Exhale curling upward; inhale lowering down.",
@@ -497,8 +486,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/ykJmrZ5v0Oo?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
         "instructions": "Hold dumbbells at sides with palms facing each other at bottom position.",
         "technique": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
         "breathing": "Exhale as you curl and supinate; inhale during descent.",
@@ -522,8 +510,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/hammer_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/zC3nLlEvin4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
         "instructions": "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
         "technique": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
         "breathing": "Exhale on contraction; inhale on descent.",
@@ -547,8 +534,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/preacher_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/fIWP-FRFNU0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
         "instructions": "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
         "technique": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
         "breathing": "Exhale curling bar up; inhale as you lower smoothly.",
@@ -572,8 +558,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/concentration_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/Jvj2wV0vOYU?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
         "instructions": "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
         "technique": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
         "breathing": "Exhale curling; inhale lowering.",
@@ -594,7 +579,7 @@ const defaultSplitWorkouts = {
     "exercises": [
       {
         "id": "e16",
-        "name": "Close-Grip Bench Press",
+        "name": "Close Grip Bench Press",
         "targetMuscle": "Triceps Lateral & Medial Heads",
         "equipment": "Olympic Barbell & Flat Bench",
         "sets": 4,
@@ -608,8 +593,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/close_grip_bench_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/nEF0bY8VHYQ?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
         "instructions": "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
         "technique": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
         "breathing": "Inhale lowering bar; exhale pressing up.",
@@ -620,7 +604,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e17",
-        "name": "Rope Pushdown",
+        "name": "Rope Push Down",
         "targetMuscle": "Triceps Lateral Head Peak Lockout",
         "equipment": "High Cable Pulley & Rope Attachment",
         "sets": 4,
@@ -634,8 +618,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/rope_pushdown.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/vB5OHsJ3EME?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
         "instructions": "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
         "technique": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
         "breathing": "Exhale pushing down into lockout; inhale allowing rope to return to chest height.",
@@ -646,7 +629,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e18",
-        "name": "Overhead Dumbbell Triceps Extension",
+        "name": "Overhead Triceps Extension",
         "targetMuscle": "Triceps Long Head (Full Stretch)",
         "equipment": "Seated Bench & Heavy Dumbbell",
         "sets": 3,
@@ -659,8 +642,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/overhead_dumbbell_triceps_ext.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/_gsUck-7M74?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
         "instructions": "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
         "technique": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
         "breathing": "Inhale descending behind neck; exhale extending overhead.",
@@ -671,9 +653,9 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e19",
-        "name": "Bench Dips",
+        "name": "Dips",
         "targetMuscle": "Triceps & Anterior Deltoids",
-        "equipment": "Flat Bench (Bodyweight / Weighted)",
+        "equipment": "Parallel Bar Dips / Bench",
         "sets": 3,
         "reps": "10-12",
         "weight": "Bodyweight",
@@ -684,21 +666,20 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/bench_dips.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/0326dy_-CzM?rel=0&modestbranding=1&playsinline=1",
-        "instructions": "Place hands shoulder-width apart on bench edge behind hips, legs extended forward.",
-        "technique": "Lower hips close to bench until elbows reach 90 degrees. Press through palms to full lockout.",
+        "imageUrl": "/images/workouts/triceps/dips.jpg",
+        "instructions": "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+        "technique": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
         "breathing": "Inhale lowering hips; exhale pressing up.",
         "commonMistakes": [
-          "Drifting hips too far away from bench (strains anterior capsule)",
+          "Leaning too far forward (shifts load to chest)",
           "Shrugging shoulders"
         ]
       },
       {
         "id": "e20",
-        "name": "Cable Triceps Kickback",
+        "name": "Triceps Kickback",
         "targetMuscle": "Triceps Lateral & Long Head Lockout",
-        "equipment": "Low Cable Pulley & Single Handle",
+        "equipment": "Dumbbell & Flat Bench Support",
         "sets": 3,
         "reps": "12",
         "weight": "10 kg",
@@ -709,14 +690,13 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/cable_triceps_kickback.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/6SS6K3lAwZ8?rel=0&modestbranding=1&playsinline=1",
-        "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding cable.",
+        "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+        "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
         "technique": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
         "breathing": "Exhale extending back; inhale returning forward.",
         "commonMistakes": [
           "Dropping elbow during movement",
-          "Swinging cable with shoulder momentum"
+          "Swinging dumbbell with shoulder momentum"
         ]
       }
     ]
@@ -745,8 +725,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/pull_ups.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/eGo4IYlbE5g?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/pull-ups.jpg",
         "instructions": "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
         "technique": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
         "breathing": "Exhale pulling up; inhale lowering into full dead-hang stretch.",
@@ -771,8 +750,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_row.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/G8l_8chR5BE?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/barbell-row.jpg",
         "instructions": "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
         "technique": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
         "breathing": "Exhale rowing upward; inhale lowering bar under control.",
@@ -796,8 +774,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/lat_pulldown.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/CAwf7n6Luuc?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
         "instructions": "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
         "technique": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
         "breathing": "Exhale pulling down; inhale returning bar overhead.",
@@ -821,8 +798,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/seated_cable_row.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/GZbfZ033f74?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
         "instructions": "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
         "technique": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
         "breathing": "Exhale pulling into ribs; inhale extending arms forward.",
@@ -846,8 +822,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/deadlift.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/op9kVnSso6Q?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/deadlift.jpg",
         "instructions": "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
         "technique": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
         "breathing": "Deep diaphragmatic breath and brace at bottom; exhale through lockout.",
@@ -883,8 +858,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_squat.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/MVMNk0HiTMg?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
         "instructions": "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
         "technique": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
         "breathing": "Big breath into belly at top and hold; exhale as you pass sticking point on way up.",
@@ -910,8 +884,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/leg_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IZxyjW7MPJQ?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/leg-press.jpg",
         "instructions": "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
         "technique": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
         "breathing": "Inhale lowering sled; exhale driving footplate away.",
@@ -935,8 +908,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/leg_extension.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/YyvSfVjQeL0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/leg-extension.jpg",
         "instructions": "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
         "technique": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
         "breathing": "Exhale extending upward; inhale lowering slowly.",
@@ -947,7 +919,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e29",
-        "name": "Lying Leg Curl",
+        "name": "Leg Curl",
         "targetMuscle": "Hamstrings (Biceps Femoris)",
         "equipment": "Prone Hamstring Curl Bench",
         "sets": 3,
@@ -960,8 +932,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/lying_leg_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/1Tq3QdYUuHs?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/leg-curl.jpg",
         "instructions": "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
         "technique": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
         "breathing": "Exhale curling heels up; inhale lowering under control.",
@@ -972,7 +943,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e30",
-        "name": "Standing Calf Raises",
+        "name": "Calf Raise",
         "targetMuscle": "Gastrocnemius & Soleus",
         "equipment": "Elevated Block & Machine / Dumbbells",
         "sets": 4,
@@ -986,8 +957,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/standing_calf_raises.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/gwLzBJYoWlI?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/calf-raise.jpg",
         "instructions": "Place balls of feet on edge of calf block, heels hanging free.",
         "technique": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
         "breathing": "Inhale dropping heels; exhale pressing high onto toes.",
@@ -1008,7 +978,7 @@ const defaultSplitWorkouts = {
     "exercises": [
       {
         "id": "e31",
-        "name": "Light 30-min Zone 2 Walk",
+        "name": "Walking",
         "targetMuscle": "Cardiovascular & Lymphatic Flow",
         "equipment": "Outdoor Path / Gentle Treadmill Pace",
         "sets": 1,
@@ -1019,8 +989,7 @@ const defaultSplitWorkouts = {
         "completedSets": [
           false
         ],
-        "imageUrl": "/exercises/intermediate/light_zone2_walk.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/recovery/walking.jpg",
         "instructions": "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
         "technique": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
         "breathing": "Breathe rhythmically in and out through nose.",
@@ -1030,7 +999,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e32",
-        "name": "Full Body Dynamic Stretching",
+        "name": "Full Body Stretching",
         "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
         "equipment": "Yoga Mat & Foam Roller",
         "sets": 1,
@@ -1041,8 +1010,7 @@ const defaultSplitWorkouts = {
         "completedSets": [
           false
         ],
-        "imageUrl": "/exercises/intermediate/full_body_stretching.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/recovery/stretching.jpg",
         "instructions": "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
         "technique": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
         "breathing": "Deep diaphragmatic belly breathing.",
@@ -1052,19 +1020,18 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e33",
-        "name": "Rest, Hydration & 7-9h Sleep",
+        "name": "Mobility Exercises",
         "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
         "equipment": "3-4L Water, High Protein & 7-9h Sleep",
         "sets": 1,
         "reps": "Full Day Protocol",
-        "weight": "Nutrition Target",
+        "weight": "Recovery Target",
         "restTime": 0,
         "completed": false,
         "completedSets": [
           false
         ],
-        "imageUrl": "/exercises/intermediate/hydration_nutrition_sleep.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/recovery/mobility.jpg",
         "instructions": "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
         "technique": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
         "breathing": "Slow 4-7-8 relaxing breathing before sleep.",
@@ -1088,7 +1055,7 @@ const defaultSplitWorkouts = {
         "id": "e1",
         "name": "Barbell Bench Press",
         "targetMuscle": "Pectoralis Major & Triceps",
-        "equipment": "Olympic Barbell & Bench",
+        "equipment": "Olympic Barbell & Flat Bench",
         "sets": 4,
         "reps": "8-10",
         "weight": "75 kg",
@@ -1100,8 +1067,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_bench_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/gRVjAtPip0Y?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/bench-press.jpg",
         "instructions": "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
         "technique": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
         "breathing": "Inhale deeply at the top and hold during descent; exhale forcefully past the sticking point.",
@@ -1127,8 +1093,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/incline_dumbbell_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/0G2_XX7nuAG?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
         "instructions": "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
         "technique": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
         "breathing": "Inhale on the lowering phase; exhale as you push the dumbbells upward.",
@@ -1139,7 +1104,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e3",
-        "name": "Dumbbell Chest Fly",
+        "name": "Chest Fly",
         "targetMuscle": "Sternal Pectoralis Adduction",
         "equipment": "Flat Bench & Dumbbells (Pair)",
         "sets": 3,
@@ -1152,8 +1117,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_chest_fly.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/eozdVDA78K0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/chest-fly.jpg",
         "instructions": "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
         "technique": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
         "breathing": "Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center.",
@@ -1177,8 +1141,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_pullover.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/5Y2i8PZ8Skw?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
         "instructions": "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
         "technique": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
         "breathing": "Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over.",
@@ -1202,8 +1165,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/push_ups.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/chest/push-ups.jpg",
         "instructions": "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
         "technique": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
         "breathing": "Inhale descending; exhale driving up while bracing core.",
@@ -1224,7 +1186,7 @@ const defaultSplitWorkouts = {
     "exercises": [
       {
         "id": "e6",
-        "name": "Overhead Barbell Press",
+        "name": "Overhead Press",
         "targetMuscle": "Anterior & Lateral Deltoids",
         "equipment": "Olympic Barbell & Power Rack",
         "sets": 4,
@@ -1238,8 +1200,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/overhead_barbell_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/2yjwXTZQDDI?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
         "instructions": "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
         "technique": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
         "breathing": "Inhale and brace core before pressing; exhale once past forehead level.",
@@ -1251,7 +1212,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e7",
-        "name": "Dumbbell Lateral Raises",
+        "name": "Lateral Raise",
         "targetMuscle": "Lateral Deltoid (Shoulder Width)",
         "equipment": "Dumbbells (Pair)",
         "sets": 4,
@@ -1265,8 +1226,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_lateral_raises.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/3VcKaXpzqRo?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
         "instructions": "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
         "technique": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
         "breathing": "Exhale as you raise outward; inhale on controlled descent.",
@@ -1277,7 +1237,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e8",
-        "name": "Front Dumbbell Raises",
+        "name": "Front Raise",
         "targetMuscle": "Anterior Deltoid Head",
         "equipment": "Dumbbells (Pair)",
         "sets": 3,
@@ -1290,8 +1250,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/front_dumbbell_raises.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/-t7fuZ0KhDA?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
         "instructions": "Stand upright holding dumbbells in front of thighs with overhand grip.",
         "technique": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
         "breathing": "Exhale on upward lift; inhale lowering down.",
@@ -1315,8 +1274,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/rear_delt_fly.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/EA7u4Q_8HQ0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
         "instructions": "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
         "technique": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
         "breathing": "Exhale raising wide; inhale returning under control.",
@@ -1327,7 +1285,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e10",
-        "name": "Dumbbell Shrugs",
+        "name": "Shrugs",
         "targetMuscle": "Upper Trapezius",
         "equipment": "Heavy Dumbbells (Pair)",
         "sets": 3,
@@ -1340,8 +1298,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_shrugs.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/g6qbq4Zu1Dw?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
         "instructions": "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
         "technique": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
         "breathing": "Exhale on shrug elevation; inhale on the eccentric stretch.",
@@ -1376,8 +1333,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/kwG2ipFRgfo?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
         "instructions": "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
         "technique": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
         "breathing": "Exhale curling upward; inhale lowering down.",
@@ -1403,8 +1359,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/dumbbell_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/ykJmrZ5v0Oo?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
         "instructions": "Hold dumbbells at sides with palms facing each other at bottom position.",
         "technique": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
         "breathing": "Exhale as you curl and supinate; inhale during descent.",
@@ -1428,8 +1383,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/hammer_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/zC3nLlEvin4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
         "instructions": "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
         "technique": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
         "breathing": "Exhale on contraction; inhale on descent.",
@@ -1453,8 +1407,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/preacher_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/fIWP-FRFNU0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
         "instructions": "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
         "technique": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
         "breathing": "Exhale curling bar up; inhale as you lower smoothly.",
@@ -1478,8 +1431,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/concentration_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/Jvj2wV0vOYU?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
         "instructions": "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
         "technique": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
         "breathing": "Exhale curling; inhale lowering.",
@@ -1500,7 +1452,7 @@ const defaultSplitWorkouts = {
     "exercises": [
       {
         "id": "e16",
-        "name": "Close-Grip Bench Press",
+        "name": "Close Grip Bench Press",
         "targetMuscle": "Triceps Lateral & Medial Heads",
         "equipment": "Olympic Barbell & Flat Bench",
         "sets": 4,
@@ -1514,8 +1466,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/close_grip_bench_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/nEF0bY8VHYQ?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
         "instructions": "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
         "technique": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
         "breathing": "Inhale lowering bar; exhale pressing up.",
@@ -1526,7 +1477,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e17",
-        "name": "Rope Pushdown",
+        "name": "Rope Push Down",
         "targetMuscle": "Triceps Lateral Head Peak Lockout",
         "equipment": "High Cable Pulley & Rope Attachment",
         "sets": 4,
@@ -1540,8 +1491,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/rope_pushdown.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/vB5OHsJ3EME?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
         "instructions": "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
         "technique": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
         "breathing": "Exhale pushing down into lockout; inhale allowing rope to return to chest height.",
@@ -1552,7 +1502,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e18",
-        "name": "Overhead Dumbbell Triceps Extension",
+        "name": "Overhead Triceps Extension",
         "targetMuscle": "Triceps Long Head (Full Stretch)",
         "equipment": "Seated Bench & Heavy Dumbbell",
         "sets": 3,
@@ -1565,8 +1515,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/overhead_dumbbell_triceps_ext.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/_gsUck-7M74?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
         "instructions": "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
         "technique": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
         "breathing": "Inhale descending behind neck; exhale extending overhead.",
@@ -1577,9 +1526,9 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e19",
-        "name": "Bench Dips",
+        "name": "Dips",
         "targetMuscle": "Triceps & Anterior Deltoids",
-        "equipment": "Flat Bench (Bodyweight / Weighted)",
+        "equipment": "Parallel Bar Dips / Bench",
         "sets": 3,
         "reps": "10-12",
         "weight": "Bodyweight",
@@ -1590,21 +1539,20 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/bench_dips.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/0326dy_-CzM?rel=0&modestbranding=1&playsinline=1",
-        "instructions": "Place hands shoulder-width apart on bench edge behind hips, legs extended forward.",
-        "technique": "Lower hips close to bench until elbows reach 90 degrees. Press through palms to full lockout.",
+        "imageUrl": "/images/workouts/triceps/dips.jpg",
+        "instructions": "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+        "technique": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
         "breathing": "Inhale lowering hips; exhale pressing up.",
         "commonMistakes": [
-          "Drifting hips too far away from bench (strains anterior capsule)",
+          "Leaning too far forward (shifts load to chest)",
           "Shrugging shoulders"
         ]
       },
       {
         "id": "e20",
-        "name": "Cable Triceps Kickback",
+        "name": "Triceps Kickback",
         "targetMuscle": "Triceps Lateral & Long Head Lockout",
-        "equipment": "Low Cable Pulley & Single Handle",
+        "equipment": "Dumbbell & Flat Bench Support",
         "sets": 3,
         "reps": "12",
         "weight": "10 kg",
@@ -1615,14 +1563,13 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/cable_triceps_kickback.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/6SS6K3lAwZ8?rel=0&modestbranding=1&playsinline=1",
-        "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding cable.",
+        "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+        "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
         "technique": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
         "breathing": "Exhale extending back; inhale returning forward.",
         "commonMistakes": [
           "Dropping elbow during movement",
-          "Swinging cable with shoulder momentum"
+          "Swinging dumbbell with shoulder momentum"
         ]
       }
     ]
@@ -1651,8 +1598,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/pull_ups.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/eGo4IYlbE5g?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/pull-ups.jpg",
         "instructions": "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
         "technique": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
         "breathing": "Exhale pulling up; inhale lowering into full dead-hang stretch.",
@@ -1677,8 +1623,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_row.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/G8l_8chR5BE?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/barbell-row.jpg",
         "instructions": "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
         "technique": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
         "breathing": "Exhale rowing upward; inhale lowering bar under control.",
@@ -1702,8 +1647,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/lat_pulldown.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/CAwf7n6Luuc?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
         "instructions": "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
         "technique": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
         "breathing": "Exhale pulling down; inhale returning bar overhead.",
@@ -1727,8 +1671,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/seated_cable_row.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/GZbfZ033f74?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
         "instructions": "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
         "technique": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
         "breathing": "Exhale pulling into ribs; inhale extending arms forward.",
@@ -1752,8 +1695,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/deadlift.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/op9kVnSso6Q?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/back/deadlift.jpg",
         "instructions": "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
         "technique": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
         "breathing": "Deep diaphragmatic breath and brace at bottom; exhale through lockout.",
@@ -1789,8 +1731,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/barbell_squat.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/MVMNk0HiTMg?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
         "instructions": "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
         "technique": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
         "breathing": "Big breath into belly at top and hold; exhale as you pass sticking point on way up.",
@@ -1816,8 +1757,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/leg_press.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IZxyjW7MPJQ?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/leg-press.jpg",
         "instructions": "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
         "technique": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
         "breathing": "Inhale lowering sled; exhale driving footplate away.",
@@ -1841,8 +1781,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/leg_extension.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/YyvSfVjQeL0?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/leg-extension.jpg",
         "instructions": "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
         "technique": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
         "breathing": "Exhale extending upward; inhale lowering slowly.",
@@ -1853,7 +1792,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e29",
-        "name": "Lying Leg Curl",
+        "name": "Leg Curl",
         "targetMuscle": "Hamstrings (Biceps Femoris)",
         "equipment": "Prone Hamstring Curl Bench",
         "sets": 3,
@@ -1866,8 +1805,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/lying_leg_curl.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/1Tq3QdYUuHs?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/leg-curl.jpg",
         "instructions": "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
         "technique": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
         "breathing": "Exhale curling heels up; inhale lowering under control.",
@@ -1878,7 +1816,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e30",
-        "name": "Standing Calf Raises",
+        "name": "Calf Raise",
         "targetMuscle": "Gastrocnemius & Soleus",
         "equipment": "Elevated Block & Machine / Dumbbells",
         "sets": 4,
@@ -1892,8 +1830,7 @@ const defaultSplitWorkouts = {
           false,
           false
         ],
-        "imageUrl": "/exercises/intermediate/standing_calf_raises.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/gwLzBJYoWlI?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/legs/calf-raise.jpg",
         "instructions": "Place balls of feet on edge of calf block, heels hanging free.",
         "technique": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
         "breathing": "Inhale dropping heels; exhale pressing high onto toes.",
@@ -1914,7 +1851,7 @@ const defaultSplitWorkouts = {
     "exercises": [
       {
         "id": "e31",
-        "name": "Light 30-min Zone 2 Walk",
+        "name": "Walking",
         "targetMuscle": "Cardiovascular & Lymphatic Flow",
         "equipment": "Outdoor Path / Gentle Treadmill Pace",
         "sets": 1,
@@ -1925,8 +1862,7 @@ const defaultSplitWorkouts = {
         "completedSets": [
           false
         ],
-        "imageUrl": "/exercises/intermediate/light_zone2_walk.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/recovery/walking.jpg",
         "instructions": "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
         "technique": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
         "breathing": "Breathe rhythmically in and out through nose.",
@@ -1936,7 +1872,7 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e32",
-        "name": "Full Body Dynamic Stretching",
+        "name": "Full Body Stretching",
         "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
         "equipment": "Yoga Mat & Foam Roller",
         "sets": 1,
@@ -1947,8 +1883,7 @@ const defaultSplitWorkouts = {
         "completedSets": [
           false
         ],
-        "imageUrl": "/exercises/intermediate/full_body_stretching.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/recovery/stretching.jpg",
         "instructions": "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
         "technique": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
         "breathing": "Deep diaphragmatic belly breathing.",
@@ -1958,19 +1893,18 @@ const defaultSplitWorkouts = {
       },
       {
         "id": "e33",
-        "name": "Rest, Hydration & 7-9h Sleep",
+        "name": "Mobility Exercises",
         "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
         "equipment": "3-4L Water, High Protein & 7-9h Sleep",
         "sets": 1,
         "reps": "Full Day Protocol",
-        "weight": "Nutrition Target",
+        "weight": "Recovery Target",
         "restTime": 0,
         "completed": false,
         "completedSets": [
           false
         ],
-        "imageUrl": "/exercises/intermediate/hydration_nutrition_sleep.svg",
-        "videoUrl": "https://www.youtube-nocookie.com/embed/IODxDxX7oi4?rel=0&modestbranding=1&playsinline=1",
+        "imageUrl": "/images/workouts/recovery/mobility.jpg",
         "instructions": "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
         "technique": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
         "breathing": "Slow 4-7-8 relaxing breathing before sleep.",
