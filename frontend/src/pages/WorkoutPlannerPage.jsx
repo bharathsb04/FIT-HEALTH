@@ -13,6 +13,7 @@ import confetti from 'canvas-confetti';
 import {
   Dumbbell,
   Play,
+  Pause,
   CheckCircle2,
   Plus,
   RotateCcw,
@@ -40,7 +41,18 @@ import {
   Moon,
   TrendingUp,
   Info,
-  Award
+  Award,
+  AlertTriangle,
+  ShieldCheck,
+  Activity,
+  Compass,
+  Gauge,
+  Calendar,
+  Footprints,
+  BedDouble,
+  Target,
+  ArrowRight,
+  ArrowLeft
 } from 'lucide-react';
 
 export const WorkoutPlannerPage = () => {
@@ -63,7 +75,7 @@ export const WorkoutPlannerPage = () => {
   const [sessionTimerSeconds, setSessionTimerSeconds] = useState(0);
 
   // One-by-one Step mode state
-  const [plannerViewMode, setPlannerViewMode] = useState('step'); // 'step' (One-by-one) | 'list' (All)
+  const [plannerViewMode, setPlannerViewMode] = useState('list'); // 'step' (One-by-one) | 'list' (All cards)
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [restCountdown, setRestCountdown] = useState(0);
   const [restTimerActive, setRestTimerActive] = useState(false);
@@ -72,8 +84,24 @@ export const WorkoutPlannerPage = () => {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
-  // Instructions toggle map
+  // Instructions & technique toggle map
   const [openInstructions, setOpenInstructions] = useState({});
+
+  // Warm-up & Cooldown interactive state
+  const [showWarmupGuide, setShowWarmupGuide] = useState(false);
+  const [warmupTimerActive, setWarmupTimerActive] = useState(false);
+  const [warmupCountdown, setWarmupCountdown] = useState(300); // 5 mins
+
+  // Day 7 Recovery State: Hydration & Stretch Timer
+  const [waterGlasses, setWaterGlasses] = useState(() => {
+    try {
+      return Number(localStorage.getItem('fit_health_water_recovery') || 4);
+    } catch (e) {
+      return 4;
+    }
+  });
+  const [stretchTimerActive, setStretchTimerActive] = useState(false);
+  const [stretchCountdown, setStretchCountdown] = useState(45); // 45s per stretch
 
   // Add custom exercise modal
   const [showAddModal, setShowAddModal] = useState(false);
@@ -84,7 +112,7 @@ export const WorkoutPlannerPage = () => {
     reps: '10-12',
     weight: '25 kg',
     restTime: 60,
-    instructions: 'Keep core engaged and execute deliberate concentric contraction.'
+    instructions: ''
   });
 
   // History modal
@@ -130,7 +158,7 @@ export const WorkoutPlannerPage = () => {
         setRestCountdown(prev => {
           if (prev <= 1) {
             setRestTimerActive(false);
-            showToast('⏰ Rest period over! Ready for next set.', 'success');
+            showToast('⏰ Rest period over! Ready for your next set.', 'success');
             return 0;
           }
           return prev - 1;
@@ -141,6 +169,42 @@ export const WorkoutPlannerPage = () => {
     }
     return () => clearInterval(interval);
   }, [restTimerActive, restCountdown]);
+
+  // Warmup timer
+  useEffect(() => {
+    let interval = null;
+    if (warmupTimerActive && warmupCountdown > 0) {
+      interval = setInterval(() => {
+        setWarmupCountdown(prev => {
+          if (prev <= 1) {
+            setWarmupTimerActive(false);
+            showToast('🔥 Warm-up complete! CNS primed for working sets.', 'success');
+            return 300;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [warmupTimerActive, warmupCountdown]);
+
+  // Stretch timer
+  useEffect(() => {
+    let interval = null;
+    if (stretchTimerActive && stretchCountdown > 0) {
+      interval = setInterval(() => {
+        setStretchCountdown(prev => {
+          if (prev <= 1) {
+            setStretchTimerActive(false);
+            showToast('🧘 Stretch hold complete! Switch to next side or pose.', 'success');
+            return 45;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [stretchTimerActive, stretchCountdown]);
 
   const handleStartRest = (seconds = 60) => {
     setRestCountdown(seconds);
@@ -156,19 +220,58 @@ export const WorkoutPlannerPage = () => {
 
   const handleToggleComplete = async (exerciseId, currentStatus) => {
     try {
+      const ex = currentDay?.exercises?.find(e => e.id === exerciseId);
+      const totalSets = Number(ex?.sets) || 4;
+      const nextStatus = !currentStatus;
+      const updatedSets = Array(totalSets).fill(nextStatus);
+
       const res = await api.updateWorkout(exerciseId, {
-        completed: !currentStatus,
+        completed: nextStatus,
+        completedSets: updatedSets,
         dayIndex: selectedDayIndex
       });
       if (res.success) {
-        // Update local state
         setWorkoutPlan(res.plan);
-        if (!currentStatus) {
-          showToast('Set recorded! Keep the intensity high.', 'success');
+        if (nextStatus) {
+          showToast('✅ Exercise completed! Great discipline.', 'success');
         }
       }
     } catch (err) {
-      showToast('Error updating exercise', 'error');
+      showToast('Error updating exercise status', 'error');
+    }
+  };
+
+  const handleToggleSet = async (exerciseId, setIdx, currentVal) => {
+    try {
+      const ex = currentDay?.exercises?.find(e => e.id === exerciseId);
+      if (!ex) return;
+      const totalSets = Number(ex.sets) || 4;
+      const currentSets = (ex.completedSets && ex.completedSets.length === totalSets)
+        ? [...ex.completedSets]
+        : Array(totalSets).fill(false);
+      
+      currentSets[setIdx] = !currentVal;
+      const allDone = currentSets.every(Boolean);
+
+      // Trigger rest timer when finishing a set
+      if (!currentVal && ex.restTime) {
+        handleStartRest(Number(ex.restTime) || 60);
+      }
+
+      const res = await api.updateWorkout(exerciseId, {
+        dayIndex: selectedDayIndex,
+        completedSets: currentSets,
+        completed: allDone
+      });
+
+      if (res.success) {
+        setWorkoutPlan(res.plan);
+        if (!currentVal) {
+          showToast(`Set ${setIdx + 1} of ${totalSets} recorded! Rest timer started.`, 'success');
+        }
+      }
+    } catch (err) {
+      showToast('Could not record set', 'error');
     }
   };
 
@@ -182,7 +285,7 @@ export const WorkoutPlannerPage = () => {
         setWorkoutPlan(res.plan);
       }
     } catch (err) {
-      // ignore quick debounce
+      // debounce ignore
     }
   };
 
@@ -234,8 +337,8 @@ export const WorkoutPlannerPage = () => {
 
         // Confetti celebration
         confetti({
-          particleCount: 80,
-          spread: 70,
+          particleCount: 85,
+          spread: 75,
           origin: { y: 0.6 }
         });
 
@@ -253,11 +356,20 @@ export const WorkoutPlannerPage = () => {
       if (res.success) {
         setWorkoutPlan(res.plan);
         setSelectedDayIndex(0);
-        showToast(`Split updated to ${goal} protocol!`, 'success');
+        showToast(`Split updated to ${goal} 7-day protocol!`, 'success');
       }
     } catch (err) {
       showToast('Failed to switch split', 'error');
     }
+  };
+
+  const handleAddWater = () => {
+    setWaterGlasses(prev => {
+      const next = Math.min(16, prev + 1);
+      try { localStorage.setItem('fit_health_water_recovery', next); } catch (e) {}
+      showToast(`💧 ${next * 250}ml of 3,500ml hydration goal logged!`, 'info');
+      return next;
+    });
   };
 
   const days = workoutPlan?.days || [];
@@ -284,18 +396,30 @@ export const WorkoutPlannerPage = () => {
       ...meta,
       ...ex,
       level: ex.level || selectedLevel,
-      imageUrl: meta.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`,
-      videoUrl: meta.videoUrl,
-      videoPoster: meta.videoPoster || meta.imageUrl,
-      formCue: meta.formCue,
-      steps: meta.steps || [ex.instructions || 'Perform with controlled form and full muscular contraction.'],
-      commonMistakes: meta.commonMistakes || ['Avoid jerking or swinging weight', 'Keep core braced throughout']
+      imageUrl: ex.imageUrl || meta.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`,
+      videoUrl: ex.videoUrl || meta.videoUrl,
+      videoPoster: ex.imageUrl || meta.videoPoster || meta.imageUrl,
+      formCue: ex.technique || meta.formCue || ex.instructions,
+      steps: ex.instructions ? [ex.instructions, ...(ex.technique ? [ex.technique] : [])] : (meta.steps || ['Perform with controlled form.']),
+      commonMistakes: ex.commonMistakes || meta.commonMistakes || ['Avoid swinging weight', 'Keep core braced throughout']
     };
   });
 
   const completedExercises = enrichedExercises.filter(e => e.completed)?.length || 0;
   const totalExercises = enrichedExercises.length;
   const progressPercent = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
+
+  // Weekly Dashboard calculations (Training Days: Days 1-6)
+  const trainingDays = days.slice(0, 6);
+  const completedDaysCount = trainingDays.filter(day => 
+    day.exercises && day.exercises.length > 0 && day.exercises.every(e => e.completed)
+  ).length;
+  const remainingDaysCount = Math.max(0, 6 - completedDaysCount);
+  const totalWeeklyExercises = trainingDays.reduce((acc, d) => acc + (d.exercises?.length || 0), 0);
+  const totalWeeklyCompletedExercises = trainingDays.reduce((acc, d) => acc + (d.exercises?.filter(e => e.completed)?.length || 0), 0);
+  const weeklyProgressPercent = totalWeeklyExercises > 0
+    ? Math.round((totalWeeklyCompletedExercises / totalWeeklyExercises) * 100)
+    : 0;
 
   const handleLoadLevelRoutine = async (levelToLoad) => {
     try {
@@ -314,6 +438,8 @@ export const WorkoutPlannerPage = () => {
         restTime: ex.restSeconds || 60,
         instructions: ex.formCue || ex.steps?.[0] || 'Perform with controlled form.',
         completed: false,
+        completedSets: Array(ex.sets || 4).fill(false),
+        imageUrl: ex.imageUrl,
         level: levelToLoad
       }));
 
@@ -330,18 +456,21 @@ export const WorkoutPlannerPage = () => {
     }
   };
 
+  const isRecoveryDay = selectedDayIndex === 6 || currentDay?.dayNumber === 7;
+
   return (
     <div style={{ minHeight: '100%' }}>
-      <Header title="Workout Planner" subtitle="6-Day Split Progression & Set Logging" />
+      <Header title="Workout Planner" subtitle="Intermediate 7-Day Protocol & Progressive Overload" />
 
-      <div className="page-container" style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+      <div className="page-container" style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        
         {/* Active Session Timer Floating Bar */}
         {sessionActive && (
           <div
             className="card"
             style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15))',
-              borderColor: 'var(--primary)',
+              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(15, 23, 42, 0.95))',
+              borderColor: '#f59e0b',
               padding: '14px 20px',
               display: 'flex',
               alignItems: 'center',
@@ -349,1003 +478,1370 @@ export const WorkoutPlannerPage = () => {
               position: 'sticky',
               top: '64px',
               zIndex: 35,
-              backdropFilter: 'blur(12px)'
+              backdropFilter: 'blur(12px)',
+              boxShadow: '0 8px 30px rgba(245, 158, 11, 0.2)'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--primary)', animation: 'pulse 1.5s infinite' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f59e0b', animation: 'pulse 1.2s infinite' }} />
               <div>
-                <span style={{ fontSize: '11px', color: 'var(--primary)', fontWeight: 800 }}>LIVE WORKOUT IN PROGRESS</span>
-                <h4 style={{ fontSize: '20px', fontWeight: 800, fontFamily: 'monospace' }}>{formatTimer(sessionTimerSeconds)}</h4>
+                <span style={{ fontSize: '11px', color: '#fef3c7', fontWeight: 800, letterSpacing: '0.5px' }}>
+                  ⚡ LIVE INTERMEDIATE WORKOUT IN PROGRESS
+                </span>
+                <h4 style={{ fontSize: '22px', fontWeight: 900, fontFamily: 'monospace', color: '#ffffff', margin: 0 }}>
+                  {formatTimer(sessionTimerSeconds)}
+                </h4>
               </div>
-            </div>
-
-            <button
-              onClick={handleFinishWorkout}
-              className="btn btn-sm btn-primary"
-              style={{ fontSize: '12px', padding: '8px 16px' }}
-            >
-              Finish & Log
-            </button>
-          </div>
-        )}
-
-        {/* Top Control Bar: Goal Switcher & History Button */}
-        <div className="flex-between" style={{ marginBottom: '-6px' }}>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            {['Bulking', 'Cutting', 'Maintenance'].map(g => (
-              <button
-                key={g}
-                onClick={() => handleGoalSplitReset(g)}
-                className={`chip ${workoutPlan?.goal?.toLowerCase() === g.toLowerCase() ? 'active' : ''}`}
-                style={{ fontSize: '11px', padding: '4px 10px' }}
-              >
-                {g}
-              </button>
-            ))}
-          </div>
-
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <button
-              onClick={() => setShowPosterModal(true)}
-              className="btn btn-sm btn-primary"
-              style={{
-                fontSize: '11px',
-                padding: '5px 12px',
-                background: 'linear-gradient(135deg, #eab308, #ca8a04)',
-                color: '#0b0f19',
-                fontWeight: 800,
-                border: 'none',
-                gap: '5px'
-              }}
-            >
-              <ImageIcon size={13} />
-              <span>Visual Chart</span>
-            </button>
-
-            <button
-              onClick={() => setShowHistory(true)}
-              className="btn btn-sm btn-secondary"
-              style={{ fontSize: '11px', padding: '5px 10px' }}
-            >
-              <History size={13} />
-              <span>History</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Visual 6-Day Workout Blueprint Showcase Card */}
-        <div
-          className="card"
-          style={{
-            padding: '16px 20px',
-            background: 'linear-gradient(135deg, rgba(234, 179, 8, 0.12) 0%, rgba(15, 23, 42, 0.95) 100%)',
-            border: '1px solid rgba(234, 179, 8, 0.35)',
-            boxShadow: '0 8px 24px rgba(234, 179, 8, 0.1)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
-          }}
-        >
-          <div className="flex-between" style={{ flexWrap: 'wrap', gap: '8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{
-                width: '38px',
-                height: '38px',
-                borderRadius: '8px',
-                background: 'rgba(234, 179, 8, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <Sparkles size={20} color="#eab308" />
-              </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#fef08a', letterSpacing: '0.5px' }}>
-                    6 DAY WORKOUT PLAN • BE GREAT
-                  </h3>
-                  <span className="badge" style={{ background: '#eab308', color: '#0b0f19', fontSize: '9px', fontWeight: 900 }}>
-                    VISUAL BLUEPRINT
-                  </span>
-                </div>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: '2px 0 0' }}>
-                  FOCUS. TRAIN. TRANSFORM. &bull; Complete Muscle Group Breakdown & Daily Rep Targets
-                </p>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setShowPosterModal(true)}
-              className="btn btn-sm btn-outline"
-              style={{
-                fontSize: '11px',
-                padding: '6px 12px',
-                borderColor: '#eab308',
-                color: '#fef08a',
-                fontWeight: 700,
-                gap: '5px'
-              }}
-            >
-              <Maximize2 size={12} />
-              <span>Full Visual Infographic</span>
-            </button>
-          </div>
-
-          {/* Quick Day Chips on the Poster Banner */}
-          <div className="horizontal-scroll-row" style={{ gap: '6px' }}>
-            {[
-              { num: 1, name: 'Chest', icon: '🏋️‍♂️' },
-              { num: 2, name: 'Shoulder', icon: '👑' },
-              { num: 3, name: 'Biceps', icon: '💪' },
-              { num: 4, name: 'Triceps', icon: '⚡' },
-              { num: 5, name: 'Back', icon: '🧗‍♂️' },
-              { num: 6, name: 'Legs', icon: '🦵' },
-              { num: 7, name: 'Recovery', icon: '🧘‍♂️' }
-            ].map((d, i) => (
-              <button
-                key={d.num}
-                type="button"
-                onClick={() => {
-                  setSelectedDayIndex(i);
-                  setCurrentStepIndex(0);
-                }}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '8px',
-                  background: selectedDayIndex === i ? '#eab308' : 'rgba(255, 255, 255, 0.05)',
-                  border: selectedDayIndex === i ? '1px solid #eab308' : '1px solid rgba(255, 255, 255, 0.1)',
-                  color: selectedDayIndex === i ? '#0b0f19' : 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  fontSize: '11px',
-                  fontWeight: selectedDayIndex === i ? 800 : 600,
-                  whiteSpace: 'nowrap',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                <span>{d.icon}</span>
-                <span>Day {d.num}: {d.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Four Pillars of Transformation Widget (from visual plan) */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '10px'
-        }}>
-          <div className="card" style={{ padding: '12px 14px', borderLeft: '3px solid var(--primary)', background: 'rgba(16, 185, 129, 0.08)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <TrendingUp size={15} color="var(--primary)" />
-              <b style={{ fontSize: '11px', color: 'var(--primary)', letterSpacing: '0.4px' }}>STAY CONSISTENT</b>
-            </div>
-            <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: 0 }}>
-              Consistency is the key to see results.
-            </p>
-          </div>
-
-          <div className="card" style={{ padding: '12px 14px', borderLeft: '3px solid var(--cyan)', background: 'rgba(6, 182, 212, 0.08)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <Utensils size={15} color="var(--cyan)" />
-              <b style={{ fontSize: '11px', color: 'var(--cyan)', letterSpacing: '0.4px' }}>EAT CLEAN</b>
-            </div>
-            <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: 0 }}>
-              Eat enough protein & healthy foods to fuel your body.
-            </p>
-          </div>
-
-          <div className="card" style={{ padding: '12px 14px', borderLeft: '3px solid #38bdf8', background: 'rgba(56, 189, 248, 0.08)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <Droplet size={15} color="#38bdf8" />
-              <b style={{ fontSize: '11px', color: '#38bdf8', letterSpacing: '0.4px' }}>STAY HYDRATED</b>
-            </div>
-            <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: 0 }}>
-              Drink plenty of water throughout the day.
-            </p>
-          </div>
-
-          <div className="card" style={{ padding: '12px 14px', borderLeft: '3px solid var(--amber)', background: 'rgba(245, 158, 11, 0.08)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <Moon size={15} color="var(--amber)" />
-              <b style={{ fontSize: '11px', color: 'var(--amber)', letterSpacing: '0.4px' }}>GET ENOUGH SLEEP</b>
-            </div>
-            <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: 0 }}>
-              7-8 hours of sleep is essential for muscle recovery.
-            </p>
-          </div>
-        </div>
-
-        {/* 6-Day Split Carousel Tabs */}
-        <div className="horizontal-scroll-row">
-          {days.map((day, idx) => (
-            <button
-              key={day.dayNumber || idx}
-              onClick={() => {
-                setSelectedDayIndex(idx);
-                setCurrentStepIndex(0);
-              }}
-              className="card"
-              style={{
-                flexShrink: 0,
-                padding: '10px 14px',
-                minWidth: '110px',
-                textAlign: 'center',
-                borderColor: selectedDayIndex === idx ? 'var(--primary)' : 'var(--border-color)',
-                background: selectedDayIndex === idx ? 'var(--bg-surface)' : 'var(--bg-secondary)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              <span style={{ fontSize: '10px', fontWeight: 800, color: selectedDayIndex === idx ? 'var(--primary)' : 'var(--text-muted)' }}>
-                DAY {day.dayNumber}
-              </span>
-              <h5 style={{ fontSize: '12px', fontWeight: 700, marginTop: '2px', whiteSpace: 'nowrap' }}>
-                {day.dayName.split('—')[1]?.trim() || day.dayName}
-              </h5>
-            </button>
-          ))}
-        </div>
-
-        {/* Current Day Routine Banner */}
-        <div className="card" style={{ padding: '18px 20px' }}>
-          <div className="card-header" style={{ marginBottom: '8px' }}>
-            <div>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-                6-DAY SPLIT • DAY {currentDay?.dayNumber}
-              </span>
-              <h3 style={{ fontSize: '20px', fontWeight: 800, marginTop: '2px' }}>{currentDay?.dayName}</h3>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <button
-                type="button"
-                onClick={() => {
-                  setActiveVideoIndex(0);
-                  setShowVideoModal(true);
-                }}
+                onClick={() => setSessionActive(false)}
                 className="btn btn-sm btn-outline"
-                style={{ fontSize: '12px', padding: '7px 12px', gap: '6px' }}
+                style={{ fontSize: '12px', padding: '6px 12px', borderColor: 'rgba(255,255,255,0.2)' }}
               >
-                <Video size={14} color="var(--primary)" />
-                <span>Video Guide</span>
+                <Pause size={14} />
+                <span>Pause</span>
               </button>
 
-              {!sessionActive ? (
-                <button
-                  onClick={() => {
-                    setSessionActive(true);
-                    showToast('Workout session started! Timer running.', 'info');
-                  }}
-                  className="btn btn-sm btn-primary"
-                  style={{ fontSize: '12px', padding: '8px 16px', gap: '6px' }}
-                >
-                  <Play size={14} fill="#fff" />
-                  <span>Start Workout</span>
-                </button>
-              ) : (
-                <span className="badge badge-fitness">Session Live</span>
-              )}
+              <button
+                onClick={handleFinishWorkout}
+                className="btn btn-sm btn-primary"
+                style={{ fontSize: '12px', padding: '8px 16px', background: '#f59e0b', color: '#080c14', fontWeight: 800 }}
+              >
+                Finish &amp; Log
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* 6. WEEKLY DASHBOARD (Top of Workout Page) */}
+        <div
+          className="card"
+          style={{
+            background: 'linear-gradient(135deg, #0f172a 0%, #080c14 100%)',
+            border: '1px solid rgba(245, 158, 11, 0.35)',
+            boxShadow: '0 12px 36px rgba(0, 0, 0, 0.5)',
+            padding: '22px 24px',
+            borderRadius: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '18px'
+          }}
+        >
+          {/* Header Row: Welcome Member & Intermediate Badge */}
+          <div className="flex-between" style={{ flexWrap: 'wrap', gap: '14px' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                <span style={{
+                  background: 'rgba(245, 158, 11, 0.15)',
+                  border: '1px solid rgba(245, 158, 11, 0.4)',
+                  color: '#fbbf24',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  letterSpacing: '0.8px',
+                  padding: '4px 10px',
+                  borderRadius: '20px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  <Flame size={13} color="#f59e0b" />
+                  INTERMEDIATE TRAINING LEVEL
+                </span>
+
+                <span style={{
+                  background: 'rgba(16, 185, 129, 0.12)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  color: '#6ee7b7',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  padding: '4px 10px',
+                  borderRadius: '20px'
+                }}>
+                  Current: Week 1 of 4
+                </span>
+              </div>
+
+              <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#ffffff', margin: '8px 0 2px' }}>
+                Welcome Back, {user?.name || 'Athlete'}! 💪
+              </h2>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                7-Day Intermediate Split &bull; Muscle Hypertrophy, Progressive Overload &amp; CNS Recovery
+              </p>
+            </div>
+
+            {/* Quick Actions */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button
+                onClick={() => setShowPosterModal(true)}
+                className="btn btn-sm btn-outline"
+                style={{
+                  fontSize: '11px',
+                  padding: '8px 14px',
+                  borderColor: 'rgba(245, 158, 11, 0.4)',
+                  color: '#fde68a',
+                  fontWeight: 700,
+                  gap: '6px'
+                }}
+              >
+                <Maximize2 size={13} color="#f59e0b" />
+                <span>6-Day Blueprint Poster</span>
+              </button>
 
               <button
-                id="btn-complete-workout"
+                onClick={() => setShowHistory(true)}
                 className="btn btn-sm btn-secondary"
-                style={{ fontSize: '12px', padding: '8px 14px', gap: '6px' }}
-                onClick={handleFinishWorkout}
+                style={{ fontSize: '11px', padding: '8px 12px', gap: '6px' }}
               >
-                <Trophy size={14} />
-                <span>Complete & Log</span>
+                <History size={13} />
+                <span>Log History</span>
               </button>
             </div>
           </div>
 
-          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '0 0 12px' }}>
-            Focus: {currentDay?.focus || 'Compound lifting with optimal rest intervals'}
-          </p>
+          {/* Key Metric Cards: Weekly Progress, Completed Days, Remaining Days, Completed Exercises */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+            gap: '12px'
+          }}>
+            {/* Metric 1: Weekly Progress % */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.8)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '12px',
+              padding: '12px 14px'
+            }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700, display: 'block' }}>
+                WEEKLY WORKOUT PROGRESS
+              </span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '4px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 900, color: '#f59e0b' }}>
+                  {weeklyProgressPercent}%
+                </span>
+                <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Completed</span>
+              </div>
+              <div className="progress-bar-bg" style={{ height: '6px', marginTop: '8px' }}>
+                <div
+                  className="progress-bar-fill"
+                  style={{ width: `${weeklyProgressPercent}%`, background: 'linear-gradient(90deg, #f59e0b, #eab308)' }}
+                />
+              </div>
+            </div>
 
-          {/* Day Completion Progress Bar */}
-          <div className="flex-between" style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '6px' }}>
-            <span>Exercises Completed: <b style={{ color: 'var(--primary)' }}>{completedExercises} of {totalExercises}</b></span>
-            <span>{progressPercent}% Complete</span>
+            {/* Metric 2: Completed Training Days */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.8)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '12px',
+              padding: '12px 14px'
+            }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700, display: 'block' }}>
+                COMPLETED TRAINING DAYS
+              </span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '4px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 900, color: '#10b981' }}>
+                  {completedDaysCount}
+                </span>
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>of 6 Days Target</span>
+              </div>
+              <span style={{ fontSize: '11px', color: completedDaysCount >= 6 ? '#10b981' : 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                {completedDaysCount >= 6 ? '✨ Week Completed!' : `${6 - completedDaysCount} days left`}
+              </span>
+            </div>
+
+            {/* Metric 3: Remaining Training Days */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.8)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '12px',
+              padding: '12px 14px'
+            }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700, display: 'block' }}>
+                REMAINING TRAINING DAYS
+              </span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '4px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 900, color: '#38bdf8' }}>
+                  {remainingDaysCount}
+                </span>
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Days Left</span>
+              </div>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                + 1 Dedicated Rest Day
+              </span>
+            </div>
+
+            {/* Metric 4: Total Completed Exercises */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.8)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '12px',
+              padding: '12px 14px'
+            }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700, display: 'block' }}>
+                TOTAL COMPLETED EXERCISES
+              </span>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '4px' }}>
+                <span style={{ fontSize: '24px', fontWeight: 900, color: '#fef08a' }}>
+                  {totalWeeklyCompletedExercises}
+                </span>
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>of {totalWeeklyExercises} Sets</span>
+              </div>
+              <span style={{ fontSize: '11px', color: '#f59e0b', marginTop: '4px', display: 'block', fontWeight: 600 }}>
+                ⚡ Strict Form &amp; Tempo
+              </span>
+            </div>
           </div>
-          <div className="progress-bar-bg" style={{ height: '7px' }}>
-            <div
-              className="progress-bar-fill"
-              style={{ width: `${progressPercent}%`, background: 'var(--primary)' }}
-            />
+
+          {/* 7-DAY INTERACTIVE WEEKLY NAVIGATION LAYOUT */}
+          <div>
+            <div className="flex-between" style={{ marginBottom: '8px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#fde68a', letterSpacing: '0.4px' }}>
+                📅 7-DAY SCHEDULE &bull; SELECT WORKOUT DAY:
+              </span>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                Active: Day {selectedDayIndex + 1} ({currentDay?.targetGroup})
+              </span>
+            </div>
+
+            <div className="horizontal-scroll-row" style={{ gap: '8px', paddingBottom: '4px' }}>
+              {days.map((day, idx) => {
+                const isSelected = selectedDayIndex === idx;
+                const isRecovery = idx === 6 || day.dayNumber === 7;
+                const isCompleted = !isRecovery && day.exercises && day.exercises.length > 0 && day.exercises.every(e => e.completed);
+                const isUpcoming = !isCompleted && !isSelected && !isRecovery;
+
+                return (
+                  <button
+                    key={day.dayNumber || idx}
+                    type="button"
+                    onClick={() => {
+                      setSelectedDayIndex(idx);
+                      setCurrentStepIndex(0);
+                    }}
+                    style={{
+                      flex: '1 0 125px',
+                      padding: '10px 12px',
+                      borderRadius: '12px',
+                      background: isSelected
+                        ? (isRecovery ? 'rgba(56, 189, 248, 0.15)' : 'rgba(245, 158, 11, 0.18)')
+                        : 'rgba(255, 255, 255, 0.03)',
+                      border: isSelected
+                        ? (isRecovery ? '2px solid #38bdf8' : '2px solid #f59e0b')
+                        : '1px solid rgba(255, 255, 255, 0.08)',
+                      boxShadow: isSelected ? '0 0 16px rgba(245, 158, 11, 0.25)' : 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px',
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    <div className="flex-between" style={{ width: '100%' }}>
+                      <span style={{
+                        fontSize: '10px',
+                        fontWeight: 900,
+                        color: isSelected ? (isRecovery ? '#38bdf8' : '#f59e0b') : 'var(--text-muted)'
+                      }}>
+                        DAY {day.dayNumber || idx + 1}
+                      </span>
+
+                      {/* Visual Indicators: Completed / Today / Upcoming / Recovery */}
+                      {isCompleted && (
+                        <span style={{ fontSize: '9px', color: '#10b981', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '2px' }}>
+                          <Check size={11} strokeWidth={3} /> Done
+                        </span>
+                      )}
+                      {isSelected && !isCompleted && (
+                        <span style={{ fontSize: '9px', color: isRecovery ? '#38bdf8' : '#f59e0b', fontWeight: 800 }}>
+                          ● Today
+                        </span>
+                      )}
+                      {isUpcoming && (
+                        <span style={{ fontSize: '9px', color: '#64748b' }}>
+                          Upcoming
+                        </span>
+                      )}
+                      {isRecovery && (
+                        <span style={{ fontSize: '9px', color: '#38bdf8', fontWeight: 700 }}>
+                          🧘 Rest
+                        </span>
+                      )}
+                    </div>
+
+                    <h4 style={{
+                      fontSize: '13px',
+                      fontWeight: 800,
+                      color: isSelected ? '#ffffff' : 'var(--text-secondary)',
+                      margin: 0,
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis'
+                    }}>
+                      {day.dayName?.split('—')[1]?.trim() || day.dayName || day.targetGroup}
+                    </h4>
+
+                    <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
+                      {isRecovery ? 'Rest & Repair' : `${day.exercises?.length || 5} Exercises`}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* WORKOUT DETAILS (Sequential full-width layout after Day Splits & Banner) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '4px' }}>
-          
-          {/* Level Selector: Beginner / Intermediate / Advanced */}
-          <div className="card" style={{
-            padding: '14px 18px',
-            background: 'var(--bg-surface)',
-            borderRadius: '14px',
-            border: '1px solid var(--border-color)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px'
-          }}>
-            <div className="flex-between" style={{ flexWrap: 'wrap', gap: '10px' }}>
-              <div>
-                <span style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
-                  TRAINING INTENSITY &amp; EXPERIENCE LEVEL
-                </span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px', flexWrap: 'wrap' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: 900, margin: 0, textTransform: 'capitalize' }}>
-                    {selectedLevel} Protocol
-                  </h3>
-                  <span className={`badge ${selectedLevel === 'beginner' ? 'badge-success' : selectedLevel === 'intermediate' ? 'badge-primary' : 'badge-warning'}`} style={{ fontSize: '10px' }}>
-                    {selectedLevel === 'beginner' && '🟢 Machines & Bodyweight • 12-15 Reps • 60-90s Rest'}
-                    {selectedLevel === 'intermediate' && '🔵 Free Weights & Dumbbells • 8-12 Reps • 60-90s Rest'}
-                    {selectedLevel === 'advanced' && '🔴 Heavy Barbell Compounds & Supersets • 6-10 Reps • 90-120s Rest'}
-                  </span>
+        {/* 8. WARM-UP & SAFETY GUIDE BANNER */}
+        {!isRecoveryDay && (
+          <div
+            className="card"
+            style={{
+              background: 'rgba(245, 158, 11, 0.05)',
+              border: '1px solid rgba(245, 158, 11, 0.25)',
+              padding: '14px 18px',
+              borderRadius: '12px'
+            }}
+          >
+            <div className="flex-between" style={{ flexWrap: 'wrap', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Flame size={18} color="#f59e0b" />
+                <div>
+                  <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#fef08a', margin: 0 }}>
+                    5–10 MIN DYNAMIC WARM-UP &bull; INJURY PREVENTION
+                  </h4>
+                  <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: '2px 0 0' }}>
+                    {currentDay?.warmup || 'Perform arm circles, band pull-aparts, rotator cuff activations and 2 progressive warm-up sets.'}
+                  </p>
                 </div>
               </div>
 
-              {/* 3 Level Selector Buttons */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={() => setWarmupTimerActive(!warmupTimerActive)}
+                  className="btn btn-xs btn-outline"
+                  style={{
+                    fontSize: '11px',
+                    padding: '4px 10px',
+                    borderColor: '#f59e0b',
+                    color: '#f59e0b',
+                    fontWeight: 700,
+                    gap: '4px'
+                  }}
+                >
+                  <Clock size={12} />
+                  <span>{warmupTimerActive ? `Timer: ${formatTimer(warmupCountdown)}` : 'Start 5m Warmup'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowWarmupGuide(!showWarmupGuide)}
+                  className="btn btn-xs btn-secondary"
+                  style={{ fontSize: '11px', padding: '4px 8px' }}
+                >
+                  {showWarmupGuide ? 'Hide Steps' : 'View Protocol'}
+                </button>
+              </div>
+            </div>
+
+            {showWarmupGuide && (
+              <div style={{
+                marginTop: '12px',
+                paddingTop: '10px',
+                borderTop: '1px solid rgba(255,255,255,0.08)',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: '8px',
+                fontSize: '11px',
+                color: 'var(--text-secondary)'
+              }}>
+                <div>1. <b>Light Cardio (3 mins):</b> Treadmill, bike, or jumping jacks.</div>
+                <div>2. <b>Joint Mobility (2 mins):</b> Arm circles, hip 90/90s, and cat-cow.</div>
+                <div>3. <b>Band Activation (2 mins):</b> Band pull-aparts and face-pulls.</div>
+                <div>4. <b>Pyramid Sets (3 mins):</b> 50% &amp; 70% working weight for 5 reps.</div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* =========================================================================
+            DAY 7: DEDICATED REST AND RECOVERY SCREEN
+            ========================================================================= */}
+        {isRecoveryDay ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {/* Banner */}
+            <div
+              className="card"
+              style={{
+                background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                border: '1px solid rgba(56, 189, 248, 0.35)',
+                padding: '20px 22px',
+                borderRadius: '16px'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                <div style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: 'rgba(56, 189, 248, 0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <Heart size={20} color="#38bdf8" />
+                </div>
+                <div>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#38bdf8', letterSpacing: '0.5px' }}>
+                    RECOVERY &bull; DAY 7 OF 7
+                  </span>
+                  <h3 style={{ fontSize: '20px', fontWeight: 900, color: '#ffffff', margin: 0 }}>
+                    Rest, Repair &amp; CNS Restoration
+                  </h3>
+                </div>
+              </div>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                No intense weight training today. True muscle hypertrophy and strength adaptations take place during rest. Follow the 3 recovery pillars below to ensure full tissue repair, glycogen restocking, and CNS reset.
+              </p>
+            </div>
+
+            {/* 3 Dedicated Recovery Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
+              
+              {/* Card 1: Light Zone 2 Walk */}
+              <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  background: '#070b13',
+                  border: '1px solid rgba(255,255,255,0.08)'
+                }}>
+                  <img
+                    src="/exercises/intermediate/light_zone2_walk.svg"
+                    alt="Light Zone 2 Walk"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                  />
+                </div>
+
+                <div>
+                  <div className="flex-between">
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>1. Light 30-min Zone 2 Walk</h4>
+                    <span className="badge badge-success" style={{ fontSize: '10px' }}>Active Recovery</span>
+                  </div>
+                  <span style={{ fontSize: '11px', color: 'var(--cyan)', fontWeight: 600, display: 'block', marginTop: '2px' }}>
+                    Target: Lymphatic Flow &bull; 60-70% Max Heart Rate
+                  </span>
+                  <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '8px 0 12px' }}>
+                    A brisk outdoor or treadmill walk stimulates blood circulation and flushes lactic waste without draining glycogen or stressing joints.
+                  </p>
+                </div>
+
+                <div className="card-footer" style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <button
+                    type="button"
+                    onClick={() => handleStartRest(1800)}
+                    className="btn btn-sm btn-primary"
+                    style={{ width: '100%', background: '#10b981', color: '#080c14', fontWeight: 800 }}
+                  >
+                    Start 30-Min Walk Timer
+                  </button>
+                </div>
+              </div>
+
+              {/* Card 2: Full Body Dynamic Stretching */}
+              <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  background: '#070b13',
+                  border: '1px solid rgba(255,255,255,0.08)'
+                }}>
+                  <img
+                    src="/exercises/intermediate/full_body_stretching.svg"
+                    alt="Full Body Stretching"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                  />
+                </div>
+
+                <div>
+                  <div className="flex-between">
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>2. Stretching &amp; Mobility</h4>
+                    <span className="badge badge-primary" style={{ fontSize: '10px' }}>Joint Restoration</span>
+                  </div>
+                  <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 600, display: 'block', marginTop: '2px' }}>
+                    Target: Thoracic Spine, Hip Flexors, Hamstrings &amp; Fascia
+                  </span>
+                  <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '8px 0 12px' }}>
+                    Perform 5 guided mobility poses: hip 90/90s, world's greatest stretch, kneeling quad stretch, and deep diaphragmatic belly breathing.
+                  </p>
+                </div>
+
+                <div className="card-footer" style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <button
+                    type="button"
+                    onClick={() => setStretchTimerActive(!stretchTimerActive)}
+                    className="btn btn-sm btn-outline"
+                    style={{ width: '100%', borderColor: '#f59e0b', color: '#f59e0b', fontWeight: 800 }}
+                  >
+                    {stretchTimerActive ? `Pose Timer: ${stretchCountdown}s` : 'Start 45s Stretch Timer'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Card 3: Hydration, Nutrition & Sleep */}
+              <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  background: '#070b13',
+                  border: '1px solid rgba(255,255,255,0.08)'
+                }}>
+                  <img
+                    src="/exercises/intermediate/hydration_nutrition_sleep.svg"
+                    alt="Hydration Nutrition Sleep"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                  />
+                </div>
+
+                <div>
+                  <div className="flex-between">
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>3. Hydration, Nutrition &amp; Sleep</h4>
+                    <span className="badge badge-warning" style={{ fontSize: '10px' }}>Recovery Triad</span>
+                  </div>
+                  <span style={{ fontSize: '11px', color: '#fef3c7', fontWeight: 600, display: 'block', marginTop: '2px' }}>
+                    Target: 3–4L Water &bull; 2.0g/kg Protein &bull; 7–9h REM Sleep
+                  </span>
+                  
+                  {/* Interactive Water Logger */}
+                  <div style={{
+                    margin: '10px 0',
+                    background: 'rgba(56, 189, 248, 0.08)',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(56, 189, 248, 0.2)'
+                  }}>
+                    <div className="flex-between" style={{ fontSize: '11px', fontWeight: 700 }}>
+                      <span>Hydration Tracker:</span>
+                      <span style={{ color: '#38bdf8' }}>{waterGlasses * 250}ml / 3,500ml</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '4px', marginTop: '6px', flexWrap: 'wrap' }}>
+                      {Array.from({ length: 14 }).map((_, i) => (
+                        <span
+                          key={i}
+                          style={{
+                            fontSize: '14px',
+                            cursor: 'pointer',
+                            opacity: i < waterGlasses ? 1 : 0.25
+                          }}
+                          onClick={handleAddWater}
+                          title={`Glass ${i + 1} (250ml)`}
+                        >
+                          💧
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="card-footer" style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <button
+                    type="button"
+                    onClick={handleAddWater}
+                    className="btn btn-sm btn-primary"
+                    style={{ width: '100%', background: '#38bdf8', color: '#080c14', fontWeight: 800 }}
+                  >
+                    + Log 250ml Water Glass
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        ) : (
+          /* =========================================================================
+              DAYS 1–6: LIFTING WORKOUT ROUTINE & EXERCISE CARDS
+              ========================================================================= */
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            
+            {/* Current Day Routine Banner */}
+            <div className="card" style={{ padding: '18px 20px', borderLeft: '4px solid #f59e0b' }}>
+              <div className="card-header" style={{ marginBottom: '8px' }}>
+                <div>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#f59e0b', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    INTERMEDIATE SPLIT &bull; DAY {currentDay?.dayNumber} &bull; {currentDay?.targetGroup?.toUpperCase()}
+                  </span>
+                  <h3 style={{ fontSize: '20px', fontWeight: 900, marginTop: '2px', color: '#ffffff' }}>
+                    {currentDay?.dayName}
+                  </h3>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveVideoIndex(0);
+                      setShowVideoModal(true);
+                    }}
+                    className="btn btn-sm btn-outline"
+                    style={{ fontSize: '12px', padding: '7px 12px', gap: '6px' }}
+                  >
+                    <Video size={14} color="#f59e0b" />
+                    <span>Watch Demos</span>
+                  </button>
+
+                  {!sessionActive ? (
+                    <button
+                      onClick={() => {
+                        setSessionActive(true);
+                        showToast('Workout session started! Timer running.', 'info');
+                      }}
+                      className="btn btn-sm btn-primary"
+                      style={{ fontSize: '12px', padding: '8px 16px', gap: '6px', background: '#f59e0b', color: '#080c14', fontWeight: 800 }}
+                    >
+                      <Play size={14} fill="#080c14" />
+                      <span>Start Workout</span>
+                    </button>
+                  ) : (
+                    <span className="badge badge-fitness">Session Live</span>
+                  )}
+
+                  <button
+                    id="btn-complete-workout"
+                    className="btn btn-sm btn-secondary"
+                    style={{ fontSize: '12px', padding: '8px 14px', gap: '6px' }}
+                    onClick={handleFinishWorkout}
+                  >
+                    <Trophy size={14} />
+                    <span>Complete &amp; Log</span>
+                  </button>
+                </div>
+              </div>
+
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '0 0 12px' }}>
+                Focus: {currentDay?.focus || 'Compound strength & muscle hypertrophy with strict tempo.'}
+              </p>
+
+              {/* Day Completion Progress Bar */}
+              <div className="flex-between" style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '6px' }}>
+                <span>Exercises Completed: <b style={{ color: '#f59e0b' }}>{completedExercises} of {totalExercises}</b></span>
+                <span>{progressPercent}% Complete</span>
+              </div>
+              <div className="progress-bar-bg" style={{ height: '7px' }}>
+                <div
+                  className="progress-bar-fill"
+                  style={{ width: `${progressPercent}%`, background: '#f59e0b' }}
+                />
+              </div>
+            </div>
+
+            {/* Rest Interval Countdown Banner (When Active) */}
+            {restTimerActive && (
+              <div
+                className="card"
+                style={{
+                  padding: '12px 18px',
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(15, 23, 42, 0.9))',
+                  border: '1px solid #f59e0b',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Clock size={18} color="#f59e0b" />
+                  <div>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#fef3c7' }}>REST INTERVAL ACTIVE</span>
+                    <h4 style={{ fontSize: '18px', fontWeight: 900, fontFamily: 'monospace', color: '#ffffff', margin: 0 }}>
+                      {restCountdown}s remaining
+                    </h4>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '6px' }}>
+                  <button
+                    onClick={() => setRestCountdown(prev => prev + 30)}
+                    className="btn btn-xs btn-outline"
+                    style={{ fontSize: '10px' }}
+                  >
+                    +30s
+                  </button>
+                  <button
+                    onClick={() => setRestTimerActive(false)}
+                    className="btn btn-xs btn-secondary"
+                    style={{ fontSize: '10px' }}
+                  >
+                    Skip
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* View Mode Toggle: All List vs 1-by-1 Step */}
+            <div className="flex-between" style={{ flexWrap: 'wrap', gap: '8px' }}>
+              <div>
+                <span style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>
+                  {plannerViewMode === 'step'
+                    ? `Step-by-Step Focus: Exercise ${currentStepIndex + 1} of ${enrichedExercises.length || 0}`
+                    : `Day ${currentDay?.dayNumber} Workout Cards (${enrichedExercises.length || 0} Exercises)`}
+                </span>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>
+                  Each exercise features its individual biomechanical demonstration image, sets, reps &amp; cues.
+                </span>
+              </div>
+
               <div style={{
                 display: 'flex',
                 background: 'var(--bg-secondary)',
                 padding: '3px',
-                borderRadius: '10px',
+                borderRadius: '8px',
+                border: '1px solid var(--border-color)',
                 gap: '4px'
               }}>
-                {[
-                  { id: 'beginner', label: 'Beginner', icon: '🟢' },
-                  { id: 'intermediate', label: 'Intermediate', icon: '🔵' },
-                  { id: 'advanced', label: 'Advanced', icon: '🔴' }
-                ].map(lvl => {
-                  const isSelected = selectedLevel === lvl.id;
-                  return (
-                    <button
-                      key={lvl.id}
-                      type="button"
-                      onClick={() => handleLoadLevelRoutine(lvl.id)}
-                      style={{
-                        padding: '6px 14px',
-                        borderRadius: '8px',
-                        border: 'none',
-                        background: isSelected ? 'var(--primary)' : 'transparent',
-                        color: isSelected ? '#080c14' : 'var(--text-secondary)',
-                        fontSize: '12px',
-                        fontWeight: 800,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      <span>{lvl.icon}</span>
-                      <span>{lvl.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-between">
-            <div>
-              <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
-                {plannerViewMode === 'step'
-                  ? `Workout Details: Exercise ${currentStepIndex + 1} of ${enrichedExercises.length || 0}`
-                  : `All Workout Exercises (${enrichedExercises.length || 0})`}
-              </span>
-              <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>
-                {plannerViewMode === 'step' ? 'Step-by-step guided focus with video demonstrations' : 'Full workout overview'}
-              </span>
-            </div>
-
-            {/* View Switcher: Step (One by One) vs All */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <div style={{
-                  display: 'flex',
-                  background: 'var(--bg-surface)',
-                  borderRadius: '10px',
-                  padding: '3px',
-                  border: '1px solid var(--border-color)'
-                }}>
-                  <button
-                    type="button"
-                    onClick={() => setPlannerViewMode('step')}
-                    style={{
-                      padding: '5px 10px', borderRadius: '7px', border: 'none',
-                      background: plannerViewMode === 'step' ? 'var(--primary)' : 'transparent',
-                      color: plannerViewMode === 'step' ? '#0b0f19' : 'var(--text-muted)',
-                      fontSize: '11px', fontWeight: 800, cursor: 'pointer'
-                    }}
-                  >
-                    1-by-1 Step
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPlannerViewMode('list')}
-                    style={{
-                      padding: '5px 10px', borderRadius: '7px', border: 'none',
-                      background: plannerViewMode === 'list' ? 'var(--primary)' : 'transparent',
-                      color: plannerViewMode === 'list' ? '#0b0f19' : 'var(--text-muted)',
-                      fontSize: '11px', fontWeight: 800, cursor: 'pointer'
-                    }}
-                  >
-                    All List
-                  </button>
-                </div>
-
                 <button
-                  onClick={() => setShowAddModal(true)}
-                  className="btn btn-sm btn-outline"
-                  style={{ fontSize: '11px', padding: '5px 10px' }}
+                  type="button"
+                  onClick={() => setPlannerViewMode('list')}
+                  style={{
+                    padding: '5px 12px',
+                    borderRadius: '6px',
+                    border: 'none',
+                    background: plannerViewMode === 'list' ? '#f59e0b' : 'transparent',
+                    color: plannerViewMode === 'list' ? '#080c14' : 'var(--text-secondary)',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    cursor: 'pointer'
+                  }}
                 >
-                  <Plus size={13} />
+                  All Cards
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPlannerViewMode('step')}
+                  style={{
+                    padding: '5px 12px',
+                    borderRadius: '6px',
+                    border: 'none',
+                    background: plannerViewMode === 'step' ? '#f59e0b' : 'transparent',
+                    color: plannerViewMode === 'step' ? '#080c14' : 'var(--text-secondary)',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    cursor: 'pointer'
+                  }}
+                >
+                  1-by-1 Step
                 </button>
               </div>
             </div>
 
-            {/* ══════════════════════════════════════════════════
-               MODE 1: ONE-BY-ONE STEP DETAIL VIEW
-               ══════════════════════════════════════════════════ */}
-            {plannerViewMode === 'step' && enrichedExercises.length > 0 && (() => {
-              const ex = enrichedExercises[currentStepIndex] || enrichedExercises[0];
+            {/* =========================================================================
+                VIEW MODE: 1-BY-1 STEP VIEW
+                ========================================================================= */}
+            {plannerViewMode === 'step' && enrichedExercises[currentStepIndex] && (() => {
+              const ex = enrichedExercises[currentStepIndex];
               const isFirst = currentStepIndex === 0;
-              const isLast = currentStepIndex === (enrichedExercises.length - 1);
-              const exLevel = ex.level || selectedLevel;
+              const isLast = currentStepIndex === enrichedExercises.length - 1;
+              const totalSetsCount = Number(ex.sets) || 4;
 
               return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                  {/* Step Stepper Header Chips */}
-                  <div style={{
-                    display: 'flex', alignItems: 'center', gap: '6px',
-                    overflowX: 'auto', paddingBottom: '4px'
-                  }}>
-                    {enrichedExercises.map((item, idx) => {
-                      const isActive = currentStepIndex === idx;
-                      const itemLevel = item.level || selectedLevel;
-                      return (
-                        <button
-                          key={item.id || idx}
-                          onClick={() => setCurrentStepIndex(idx)}
-                          style={{
-                            padding: '6px 12px',
-                            borderRadius: '10px',
-                            border: isActive
-                              ? '2px solid var(--primary)'
-                              : item.completed
-                              ? '1px solid rgba(16,185,129,0.4)'
-                              : '1px solid var(--border-color)',
-                            background: isActive
-                              ? 'rgba(16,185,129,0.18)'
-                              : item.completed
-                              ? 'rgba(16,185,129,0.08)'
-                              : 'var(--bg-surface)',
-                            color: isActive
-                              ? 'var(--primary)'
-                              : item.completed
-                              ? 'var(--primary)'
-                              : 'var(--text-muted)',
-                            fontWeight: 800,
-                            fontSize: '11px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            whiteSpace: 'nowrap',
-                            transition: 'all 0.15s ease'
-                          }}
-                        >
-                          <span style={{
-                            fontSize: '9px',
-                            padding: '1px 5px',
-                            borderRadius: '3px',
-                            background: itemLevel === 'beginner' ? 'rgba(16,185,129,0.2)' : itemLevel === 'intermediate' ? 'rgba(6,182,212,0.2)' : 'rgba(245,158,11,0.2)',
-                            color: itemLevel === 'beginner' ? 'var(--primary)' : itemLevel === 'intermediate' ? 'var(--cyan)' : 'var(--amber)',
-                            fontWeight: 900
-                          }}>
-                            {itemLevel.slice(0, 3).toUpperCase()}
-                          </span>
-                          {item.completed ? (
-                            <CheckCircle2 size={12} color="var(--primary)" />
-                          ) : (
-                            <span>{idx + 1}.</span>
-                          )}
-                          <span>{item.name.length > 15 ? item.name.slice(0, 15) + '...' : item.name}</span>
-                        </button>
-                      );
-                    })}
+                <div
+                  className="card"
+                  style={{
+                    padding: '20px',
+                    background: 'linear-gradient(135deg, #0f172a 0%, #080c14 100%)',
+                    border: '1px solid rgba(245, 158, 11, 0.3)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '16px'
+                  }}
+                >
+                  {/* Step Header */}
+                  <div className="flex-between">
+                    <div>
+                      <span style={{ fontSize: '11px', fontWeight: 800, color: '#f59e0b', textTransform: 'uppercase' }}>
+                        EXERCISE {currentStepIndex + 1} OF {enrichedExercises.length}
+                      </span>
+                      <h3 style={{ fontSize: '22px', fontWeight: 900, color: '#ffffff', margin: '2px 0 0' }}>
+                        {ex.name}
+                      </h3>
+                      <span style={{ fontSize: '12px', color: 'var(--cyan)', fontWeight: 700 }}>
+                        Target: {ex.targetMuscle} &bull; ⚙️ {ex.equipment || 'Equipment'}
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleToggleComplete(ex.id, ex.completed)}
+                      className={`btn btn-sm ${ex.completed ? 'btn-success' : 'btn-outline'}`}
+                      style={{ fontSize: '12px', padding: '6px 14px', gap: '6px' }}
+                    >
+                      <CheckCircle2 size={16} />
+                      <span>{ex.completed ? 'Completed' : 'Mark Completed'}</span>
+                    </button>
                   </div>
 
-                  {/* 2-Column Responsive Desktop Grid for Focused Exercise */}
-                  <div className="laptop-2-cols" style={{ alignItems: 'flex-start', gap: '16px' }}>
-                    {/* Left Column: Embedded Visual Video Demonstrator */}
-                    <div>
-                      <WorkoutVideoDemonstrator
-                        workoutDay={{ ...currentDay, exercises: enrichedExercises }}
-                        initialExerciseIndex={currentStepIndex}
-                        selectedLevel={selectedLevel}
-                        onSelectLevel={handleLoadLevelRoutine}
+                  {/* Specific Demonstration Image (16:9 Responsive) */}
+                  <div style={{
+                    width: '100%',
+                    aspectRatio: '16 / 9',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    background: '#070b13',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    position: 'relative'
+                  }}>
+                    <img
+                      src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
+                      alt={ex.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                    />
+
+                    {/* Quick Video Launcher Overlay */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveVideoIndex(currentStepIndex);
+                        setShowVideoModal(true);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '12px',
+                        right: '12px',
+                        background: 'rgba(8, 12, 20, 0.85)',
+                        border: '1px solid rgba(245, 158, 11, 0.5)',
+                        color: '#fde68a',
+                        padding: '6px 12px',
+                        borderRadius: '20px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        backdropFilter: 'blur(8px)'
+                      }}
+                    >
+                      <Video size={13} color="#f59e0b" />
+                      <span>Watch Demo Video</span>
+                    </button>
+                  </div>
+
+                  {/* 4. WORKOUT CARD PARAMETERS (Sets, Reps, Rest, Weight) */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                    gap: '10px'
+                  }}>
+                    <div style={{ background: 'var(--bg-secondary)', padding: '10px 14px', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>SETS</span>
+                      <span style={{ fontSize: '18px', fontWeight: 900, color: '#f59e0b' }}>{ex.sets} Sets</span>
+                    </div>
+
+                    <div style={{ background: 'var(--bg-secondary)', padding: '10px 14px', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>REPETITIONS</span>
+                      <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff' }}>{ex.reps}</span>
+                    </div>
+
+                    <div
+                      style={{ background: 'var(--bg-secondary)', padding: '10px 14px', borderRadius: '10px', cursor: 'pointer' }}
+                      onClick={() => handleStartRest(Number(ex.restTime) || 60)}
+                      title="Click to start rest timer"
+                    >
+                      <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>REST INTERVAL</span>
+                      <span style={{ fontSize: '18px', fontWeight: 900, color: '#38bdf8' }}>⏱️ {ex.restTime || 60}s</span>
+                    </div>
+
+                    <div style={{ background: 'var(--bg-secondary)', padding: '10px 14px', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>WORKING LOAD</span>
+                      <input
+                        type="text"
+                        value={ex.weight || ''}
+                        onChange={(e) => handleUpdateExerciseValue(ex.id, 'weight', e.target.value)}
+                        placeholder="e.g. 75 kg"
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          color: '#fef08a',
+                          fontSize: '16px',
+                          fontWeight: 800,
+                          width: '100%',
+                          outline: 'none',
+                          padding: 0
+                        }}
                       />
                     </div>
+                  </div>
 
-                    {/* Right Column: Rest Timer & Set Execution Controls */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                      {/* Rest Countdown Timer Bar */}
-                      <div className="card" style={{
-                        padding: '14px 16px',
-                        background: restTimerActive ? 'rgba(6, 182, 212, 0.12)' : 'var(--bg-surface)',
-                        borderColor: restTimerActive ? 'var(--cyan)' : 'var(--border-color)'
-                      }}>
-                        <div className="flex-between" style={{ marginBottom: '6px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Clock size={16} color={restTimerActive ? 'var(--cyan)' : 'var(--text-muted)'} />
-                            <span style={{ fontSize: '12px', fontWeight: 800, color: restTimerActive ? 'var(--cyan)' : 'var(--text-primary)' }}>
-                              {restTimerActive ? `Resting: ${restCountdown}s Remaining` : `Rest Interval: ${ex.restTime || 60}s`}
-                            </span>
-                          </div>
-
-                          {/* Quick Rest Presets */}
-                          <div style={{ display: 'flex', gap: '4px' }}>
-                            {[45, 60, 90, 120].map(sec => (
-                              <button
-                                key={sec}
-                                onClick={() => handleStartRest(sec)}
-                                className="btn btn-sm"
-                                style={{
-                                  padding: '3px 7px', fontSize: '10px', fontWeight: 700,
-                                  background: restCountdown === sec && restTimerActive ? 'var(--cyan)' : 'var(--bg-secondary)',
-                                  color: restCountdown === sec && restTimerActive ? '#0b0f19' : 'var(--text-secondary)'
-                                }}
-                              >
-                                {sec}s
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: 0 }}>
-                          Rest between heavy sets to replenish muscle ATP and optimize mechanical tension.
-                        </p>
-                      </div>
-
-                      {/* Exercise Set Controls & Completion */}
-                      <div className="card" style={{ padding: '16px' }}>
-                        <div className="flex-between" style={{ marginBottom: '12px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <button
-                              onClick={() => handleToggleComplete(ex.id, ex.completed)}
-                              style={{
-                                width: '28px',
-                                height: '28px',
-                                borderRadius: '8px',
-                                border: `2px solid ${ex.completed ? 'var(--primary)' : 'var(--border-color)'}`,
-                                background: ex.completed ? 'var(--primary)' : 'transparent',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer'
-                              }}
-                            >
-                              {ex.completed && <CheckCircle2 size={18} color="#0b0f19" strokeWidth={3} />}
-                            </button>
-                            <div>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-                                <h4 style={{ fontSize: '15px', fontWeight: 800, margin: 0, color: ex.completed ? 'var(--text-muted)' : 'var(--text-primary)', textDecoration: ex.completed ? 'line-through' : 'none' }}>
-                                  {ex.name}
-                                </h4>
-                                <span style={{
-                                  fontSize: '9px',
-                                  padding: '2px 6px',
-                                  borderRadius: '4px',
-                                  background: exLevel === 'beginner' ? 'rgba(16,185,129,0.2)' : exLevel === 'intermediate' ? 'rgba(6,182,212,0.2)' : 'rgba(245,158,11,0.2)',
-                                  color: exLevel === 'beginner' ? 'var(--primary)' : exLevel === 'intermediate' ? 'var(--cyan)' : 'var(--amber)',
-                                  fontWeight: 900
-                                }}>
-                                  {exLevel.toUpperCase()}
-                                </span>
-                              </div>
-                              <span style={{ fontSize: '11px', color: 'var(--cyan)', fontWeight: 700 }}>
-                                Target: {ex.targetMuscle} &bull; {ex.equipment || 'Exercise'}
-                              </span>
-                            </div>
-                          </div>
-
-                          <span className={`badge ${ex.completed ? 'badge-completed' : 'badge-fitness'}`}>
-                            {ex.completed ? '✅ Completed' : 'Pending Sets'}
-                          </span>
-                        </div>
-
-                        {/* Cover Image & Form Cue */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '8px 0 12px', background: 'var(--bg-secondary)', padding: '8px 10px', borderRadius: '10px' }}>
-                          <img
-                            src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
-                            alt={ex.name}
-                            loading="lazy"
-                            onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
-                            style={{ width: '46px', height: '46px', borderRadius: '8px', objectFit: 'cover', background: '#0a0e1a', flexShrink: 0 }}
-                          />
-                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.35 }}>
-                            <strong style={{ color: 'var(--text-primary)' }}>Form Cue: </strong>
-                            {ex.formCue || 'Maintain steady tempo and full joint control throughout set.'}
-                          </div>
-                        </div>
-
-                        {/* Inputs */}
-                        <div className="grid-3" style={{ gap: '8px', marginBottom: '14px' }}>
-                          <div style={{ background: 'var(--bg-surface)', padding: '8px 10px', borderRadius: '10px' }}>
-                            <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block', fontWeight: 700 }}>Sets</span>
-                            <input
-                              type="number"
-                              value={ex.sets}
-                              onChange={(e) => handleUpdateExerciseValue(ex.id, 'sets', e.target.value)}
-                              style={{ background: 'transparent', border: 'none', width: '100%', fontSize: '14px', fontWeight: 800, outline: 'none' }}
-                            />
-                          </div>
-                          <div style={{ background: 'var(--bg-surface)', padding: '8px 10px', borderRadius: '10px' }}>
-                            <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block', fontWeight: 700 }}>Target Reps</span>
-                            <input
-                              type="text"
-                              value={ex.reps}
-                              onChange={(e) => handleUpdateExerciseValue(ex.id, 'reps', e.target.value)}
-                              style={{ background: 'transparent', border: 'none', width: '100%', fontSize: '14px', fontWeight: 800, outline: 'none' }}
-                            />
-                          </div>
-                          <div style={{ background: 'var(--bg-surface)', padding: '8px 10px', borderRadius: '10px' }}>
-                            <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block', fontWeight: 700 }}>Working Load</span>
-                            <input
-                              type="text"
-                              value={ex.weight}
-                              onChange={(e) => handleUpdateExerciseValue(ex.id, 'weight', e.target.value)}
-                              style={{ background: 'transparent', border: 'none', width: '100%', fontSize: '14px', fontWeight: 800, outline: 'none' }}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Navigation Buttons: Previous / Mark Done & Next / Next */}
-                        <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: '8px' }}>
+                  {/* 5. INTERACTIVE SET-BY-SET COMPLETION TRACKING */}
+                  <div style={{
+                    background: 'rgba(255, 255, 255, 0.02)',
+                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    borderRadius: '12px',
+                    padding: '12px 14px'
+                  }}>
+                    <span style={{ fontSize: '11px', color: '#fde68a', fontWeight: 800, letterSpacing: '0.5px', display: 'block', marginBottom: '8px' }}>
+                      ⚡ LOG WORKING SETS (Tap set when completed to trigger rest timer):
+                    </span>
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                      {Array.from({ length: totalSetsCount }).map((_, sIdx) => {
+                        const isSetDone = ex.completedSets ? !!ex.completedSets[sIdx] : ex.completed;
+                        return (
                           <button
-                            onClick={() => setCurrentStepIndex(prev => Math.max(0, prev - 1))}
-                            disabled={isFirst}
-                            className="btn btn-outline"
+                            key={sIdx}
+                            type="button"
+                            onClick={() => handleToggleSet(ex.id, sIdx, isSetDone)}
                             style={{
-                              padding: '0 14px', height: '44px', fontSize: '12px', fontWeight: 700,
-                              opacity: isFirst ? 0.4 : 1, cursor: isFirst ? 'default' : 'pointer'
+                              flex: '1 0 85px',
+                              padding: '8px 12px',
+                              borderRadius: '8px',
+                              border: isSetDone ? '1px solid #10b981' : '1px solid rgba(255, 255, 255, 0.15)',
+                              background: isSetDone ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+                              color: isSetDone ? '#6ee7b7' : 'var(--text-secondary)',
+                              fontWeight: 800,
+                              fontSize: '12px',
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: '6px',
+                              transition: 'all 0.15s ease'
                             }}
                           >
-                            ⬅️ Previous
+                            <CheckCircle2 size={14} color={isSetDone ? '#10b981' : 'currentColor'} />
+                            <span>Set {sIdx + 1} {isSetDone ? '✓' : ''}</span>
                           </button>
-
-                          <button
-                            onClick={async () => {
-                              if (!ex.completed) {
-                                await handleToggleComplete(ex.id, false);
-                              }
-                              if (!isLast) {
-                                setCurrentStepIndex(prev => prev + 1);
-                                handleStartRest(ex.restTime || 60);
-                              } else {
-                                showToast('🎉 All exercises completed in this split! You can log your workout now.', 'success');
-                              }
-                            }}
-                            className="btn btn-primary"
-                            style={{ height: '44px', fontSize: '13px', fontWeight: 800, gap: '6px' }}
-                          >
-                            <CheckCircle2 size={16} />
-                            <span>{isLast ? 'Complete Last Exercise' : 'Mark Done & Next ➡️'}</span>
-                          </button>
-
-                          <button
-                            onClick={() => setCurrentStepIndex(prev => Math.min(enrichedExercises.length - 1, prev + 1))}
-                            disabled={isLast}
-                            className="btn btn-outline"
-                            style={{
-                              padding: '0 14px', height: '44px', fontSize: '12px', fontWeight: 700,
-                              opacity: isLast ? 0.4 : 1, cursor: isLast ? 'default' : 'pointer'
-                            }}
-                          >
-                            Next ➡️
-                          </button>
-                        </div>
-                      </div>
+                        );
+                      })}
                     </div>
+                  </div>
+
+                  {/* 8. PROPER TECHNIQUE, INSTRUCTIONS & BREATHING CUE */}
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                    fontSize: '12px',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.45
+                  }}>
+                    <div style={{ background: 'var(--bg-secondary)', padding: '10px 14px', borderRadius: '10px' }}>
+                      <strong style={{ color: '#ffffff', display: 'block', marginBottom: '2px' }}>Proper Technique:</strong>
+                      {ex.technique || ex.instructions || 'Perform with controlled 3-second descent and explosive contraction.'}
+                    </div>
+
+                    <div style={{ background: 'rgba(56, 189, 248, 0.06)', padding: '8px 12px', borderRadius: '8px', borderLeft: '3px solid #38bdf8' }}>
+                      <strong style={{ color: '#38bdf8' }}>Breathing Cue: </strong>
+                      {ex.breathing || 'Exhale forcefully past the sticking point; inhale deeply during the eccentric return.'}
+                    </div>
+
+                    {ex.commonMistakes && ex.commonMistakes.length > 0 && (
+                      <div style={{ background: 'rgba(239, 68, 68, 0.06)', padding: '8px 12px', borderRadius: '8px', borderLeft: '3px solid #ef4444' }}>
+                        <strong style={{ color: '#ef4444' }}>Mistakes to Avoid: </strong>
+                        {ex.commonMistakes.join(' • ')}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Previous / Next Step Navigation */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: '10px', marginTop: '6px' }}>
+                    <button
+                      onClick={() => setCurrentStepIndex(prev => Math.max(0, prev - 1))}
+                      disabled={isFirst}
+                      className="btn btn-outline"
+                      style={{
+                        padding: '0 16px', height: '46px', fontSize: '13px', fontWeight: 700,
+                        opacity: isFirst ? 0.35 : 1, cursor: isFirst ? 'default' : 'pointer'
+                      }}
+                    >
+                      <ArrowLeft size={16} />
+                      <span>Previous</span>
+                    </button>
+
+                    <button
+                      onClick={async () => {
+                        if (!ex.completed) {
+                          await handleToggleComplete(ex.id, false);
+                        }
+                        if (!isLast) {
+                          setCurrentStepIndex(prev => prev + 1);
+                        } else {
+                          showToast('🎉 All exercises in routine completed!', 'success');
+                        }
+                      }}
+                      className="btn btn-primary"
+                      style={{
+                        height: '46px',
+                        fontSize: '13px',
+                        fontWeight: 800,
+                        background: '#f59e0b',
+                        color: '#080c14'
+                      }}
+                    >
+                      <span>{ex.completed ? 'Next Exercise' : 'Log Done & Next'}</span>
+                      <ArrowRight size={16} />
+                    </button>
+
+                    <button
+                      onClick={() => setCurrentStepIndex(prev => Math.min(enrichedExercises.length - 1, prev + 1))}
+                      disabled={isLast}
+                      className="btn btn-outline"
+                      style={{
+                        padding: '0 16px', height: '46px', fontSize: '13px', fontWeight: 700,
+                        opacity: isLast ? 0.35 : 1, cursor: isLast ? 'default' : 'pointer'
+                      }}
+                    >
+                      <span>Next</span>
+                      <ArrowRight size={16} />
+                    </button>
                   </div>
                 </div>
               );
             })()}
 
-            {/* ══════════════════════════════════════════════════
-               MODE 2: ALL EXERCISES LIST OVERVIEW
-               ══════════════════════════════════════════════════ */}
+            {/* =========================================================================
+                VIEW MODE: ALL CARDS LIST VIEW
+                ========================================================================= */}
             {plannerViewMode === 'list' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {enrichedExercises.map((ex, i) => {
-                  const isOpen = openInstructions[ex.id];
-                  const itemLevel = ex.level || selectedLevel;
+                  const isExpanded = !!openInstructions[ex.id];
+                  const totalSetsCount = Number(ex.sets) || 4;
+
                   return (
                     <div
                       key={ex.id || i}
                       className="card"
                       style={{
-                        padding: '14px',
-                        borderColor: ex.completed ? 'rgba(16, 185, 129, 0.4)' : 'var(--border-color)',
-                        background: ex.completed ? 'rgba(16, 185, 129, 0.04)' : 'var(--bg-secondary)'
+                        padding: '18px 20px',
+                        background: 'linear-gradient(135deg, #0f172a 0%, #080c14 100%)',
+                        borderColor: ex.completed ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.08)',
+                        boxShadow: ex.completed ? '0 4px 16px rgba(16, 185, 129, 0.1)' : '0 4px 16px rgba(0, 0, 0, 0.4)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '14px',
+                        borderRadius: '14px'
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                      {/* Top Header: Exercise Name, Muscle, Completed Status & Controls */}
+                      <div className="flex-between" style={{ flexWrap: 'wrap', gap: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                           <button
+                            type="button"
                             onClick={() => handleToggleComplete(ex.id, ex.completed)}
                             style={{
-                              width: '26px',
-                              height: '26px',
+                              width: '28px',
+                              height: '28px',
                               borderRadius: '8px',
-                              border: `2px solid ${ex.completed ? 'var(--primary)' : 'var(--border-color)'}`,
-                              background: ex.completed ? 'var(--primary)' : 'transparent',
+                              border: `2px solid ${ex.completed ? '#10b981' : 'rgba(255,255,255,0.2)'}`,
+                              background: ex.completed ? '#10b981' : 'transparent',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              marginTop: '2px',
                               cursor: 'pointer'
                             }}
                           >
-                            {ex.completed && <CheckCircle2 size={16} color="#0b0f19" strokeWidth={3} />}
+                            {ex.completed && <Check size={18} color="#080c14" strokeWidth={3} />}
                           </button>
 
-                          {/* Exercise Thumbnail Cover Image */}
-                          <div style={{
-                            width: '56px',
-                            height: '56px',
-                            borderRadius: '10px',
-                            overflow: 'hidden',
-                            background: '#070b13',
-                            border: '1px solid var(--border-color)',
-                            flexShrink: 0
-                          }}>
-                            <img
-                              src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
-                              alt={ex.name}
-                              loading="lazy"
-                              onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
-                          </div>
-
                           <div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                               <h4 style={{
-                                fontSize: '14px',
+                                fontSize: '16px',
                                 fontWeight: 800,
                                 margin: 0,
-                                color: ex.completed ? 'var(--text-muted)' : 'var(--text-primary)',
+                                color: ex.completed ? 'var(--text-muted)' : '#ffffff',
                                 textDecoration: ex.completed ? 'line-through' : 'none'
                               }}>
-                                {ex.name}
+                                {i + 1}. {ex.name}
                               </h4>
+
                               <span style={{
-                                fontSize: '9px',
-                                padding: '2px 6px',
+                                fontSize: '10px',
+                                padding: '2px 8px',
                                 borderRadius: '4px',
-                                background: itemLevel === 'beginner' ? 'rgba(16,185,129,0.2)' : itemLevel === 'intermediate' ? 'rgba(6,182,212,0.2)' : 'rgba(245,158,11,0.2)',
-                                color: itemLevel === 'beginner' ? 'var(--primary)' : itemLevel === 'intermediate' ? 'var(--cyan)' : 'var(--amber)',
-                                fontWeight: 900,
+                                background: 'rgba(245, 158, 11, 0.15)',
+                                color: '#f59e0b',
+                                fontWeight: 800,
                                 textTransform: 'uppercase'
                               }}>
-                                {itemLevel.toUpperCase()}
+                                INTERMEDIATE
                               </span>
                             </div>
 
-                            <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              <span>Target: <b style={{ color: 'var(--cyan)' }}>{ex.targetMuscle}</b></span>
-                              <span>•</span>
-                              <span>{ex.equipment || 'Exercise'}</span>
-                            </div>
+                            <span style={{ fontSize: '11px', color: 'var(--cyan)', fontWeight: 600, display: 'block', marginTop: '2px' }}>
+                              Target: {ex.targetMuscle} &bull; ⚙️ {ex.equipment || 'Exercise'}
+                            </span>
                           </div>
                         </div>
 
+                        {/* Top Right Buttons: Video Demo & Expand */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveVideoIndex(i);
+                              setShowVideoModal(true);
+                            }}
+                            className="btn btn-xs btn-outline"
+                            style={{
+                              fontSize: '11px',
+                              padding: '6px 10px',
+                              borderColor: 'rgba(245, 158, 11, 0.4)',
+                              color: '#fde68a',
+                              gap: '4px'
+                            }}
+                          >
+                            <Video size={13} color="#f59e0b" />
+                            <span>Demo</span>
+                          </button>
+
                           <button
                             type="button"
                             onClick={() => {
                               setCurrentStepIndex(i);
                               setPlannerViewMode('step');
                             }}
-                            className="btn btn-sm"
+                            className="btn btn-xs btn-secondary"
+                            style={{ fontSize: '11px', padding: '6px 10px' }}
+                          >
+                            Step Focus
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Main Card Content: Specific Demonstration Image + Details */}
+                      <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                        gap: '14px',
+                        alignItems: 'center'
+                      }}>
+                        {/* 1. Exercise Demonstration Image (16:9) */}
+                        <div style={{
+                          width: '100%',
+                          aspectRatio: '16 / 9',
+                          borderRadius: '10px',
+                          overflow: 'hidden',
+                          background: '#070b13',
+                          border: '1px solid rgba(255, 255, 255, 0.08)'
+                        }}>
+                          <img
+                            src={ex.imageUrl || `/exercises/${selectedLevel}/${currentMuscleGroup.toLowerCase()}.svg`}
+                            alt={ex.name}
+                            loading="lazy"
+                            onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                          />
+                        </div>
+
+                        {/* 2. Sets, Reps, Rest, Weight & Technique */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+                            gap: '8px'
+                          }}>
+                            <div style={{ background: 'var(--bg-secondary)', padding: '8px 10px', borderRadius: '8px' }}>
+                              <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>SETS</span>
+                              <span style={{ fontSize: '16px', fontWeight: 900, color: '#f59e0b' }}>{ex.sets} Sets</span>
+                            </div>
+
+                            <div style={{ background: 'var(--bg-secondary)', padding: '8px 10px', borderRadius: '8px' }}>
+                              <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>TARGET REPS</span>
+                              <span style={{ fontSize: '16px', fontWeight: 900, color: '#ffffff' }}>{ex.reps}</span>
+                            </div>
+
+                            <div
+                              style={{ background: 'var(--bg-secondary)', padding: '8px 10px', borderRadius: '8px', cursor: 'pointer' }}
+                              onClick={() => handleStartRest(Number(ex.restTime) || 60)}
+                              title="Click to start rest timer"
+                            >
+                              <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>REST TIME</span>
+                              <span style={{ fontSize: '16px', fontWeight: 900, color: '#38bdf8' }}>⏱️ {ex.restTime || 60}s</span>
+                            </div>
+
+                            <div style={{ background: 'var(--bg-secondary)', padding: '8px 10px', borderRadius: '8px' }}>
+                              <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 800, display: 'block' }}>WORKING LOAD</span>
+                              <input
+                                type="text"
+                                value={ex.weight || ''}
+                                onChange={(e) => handleUpdateExerciseValue(ex.id, 'weight', e.target.value)}
+                                placeholder="Weight"
+                                style={{
+                                  background: 'transparent',
+                                  border: 'none',
+                                  color: '#fef08a',
+                                  fontSize: '14px',
+                                  fontWeight: 800,
+                                  width: '100%',
+                                  outline: 'none',
+                                  padding: 0
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          {/* Interactive Set-by-Set Pills */}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700 }}>Sets:</span>
+                            {Array.from({ length: totalSetsCount }).map((_, sIdx) => {
+                              const isSetDone = ex.completedSets ? !!ex.completedSets[sIdx] : ex.completed;
+                              return (
+                                <button
+                                  key={sIdx}
+                                  type="button"
+                                  onClick={() => handleToggleSet(ex.id, sIdx, isSetDone)}
+                                  style={{
+                                    padding: '4px 8px',
+                                    borderRadius: '6px',
+                                    border: isSetDone ? '1px solid #10b981' : '1px solid rgba(255, 255, 255, 0.15)',
+                                    background: isSetDone ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                                    color: isSetDone ? '#6ee7b7' : 'var(--text-secondary)',
+                                    fontWeight: 800,
+                                    fontSize: '11px',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '4px'
+                                  }}
+                                >
+                                  <span>Set {sIdx + 1}</span>
+                                  {isSetDone ? '✓' : ''}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Instructions, Technique & Breathing Details Toggle */}
+                      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '10px' }}>
+                        <div className="flex-between">
+                          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: 0 }}>
+                            <strong style={{ color: '#ffffff' }}>Technique: </strong>
+                            {ex.technique || ex.instructions || 'Perform with controlled form and full range of motion.'}
+                          </p>
+
+                          <button
+                            type="button"
+                            onClick={() => setOpenInstructions(prev => ({ ...prev, [ex.id]: !prev[ex.id] }))}
                             style={{
-                              padding: '5px 10px',
+                              background: 'transparent',
+                              border: 'none',
+                              color: '#f59e0b',
                               fontSize: '11px',
-                              background: 'rgba(16, 185, 129, 0.12)',
-                              border: '1px solid rgba(16, 185, 129, 0.3)',
-                              color: 'var(--primary)',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
                               gap: '4px',
-                              borderRadius: '8px',
-                              fontWeight: 800
+                              flexShrink: 0,
+                              marginLeft: '8px'
                             }}
                           >
-                            <Video size={13} />
-                            <span>Watch Demo</span>
-                          </button>
-
-                          <button
-                            onClick={() => setOpenInstructions(prev => ({ ...prev, [ex.id]: !prev[ex.id] }))}
-                            className="icon-btn"
-                            style={{ width: '28px', height: '28px' }}
-                            title="View form guide"
-                          >
-                            {isOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                          </button>
-                          <button
-                            onClick={() => handleDeleteExercise(ex.id)}
-                            className="icon-btn"
-                            style={{ width: '28px', height: '28px', color: 'var(--rose)' }}
-                            title="Delete exercise"
-                          >
-                            <Trash2 size={13} />
+                            <span>{isExpanded ? 'Less' : 'Form Guide'}</span>
+                            {isExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
                           </button>
                         </div>
-                      </div>
 
-                      <div className="grid-3" style={{ marginTop: '12px', gap: '8px' }}>
-                        <div style={{ background: 'var(--bg-surface)', padding: '6px 8px', borderRadius: 'var(--radius-sm)' }}>
-                          <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block' }}>Sets</span>
-                          <input
-                            type="number"
-                            value={ex.sets}
-                            onChange={(e) => handleUpdateExerciseValue(ex.id, 'sets', e.target.value)}
-                            style={{ background: 'transparent', border: 'none', width: '100%', fontSize: '13px', fontWeight: 700, outline: 'none' }}
-                          />
-                        </div>
-                        <div style={{ background: 'var(--bg-surface)', padding: '6px 8px', borderRadius: 'var(--radius-sm)' }}>
-                          <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block' }}>Target Reps</span>
-                          <input
-                            type="text"
-                            value={ex.reps}
-                            onChange={(e) => handleUpdateExerciseValue(ex.id, 'reps', e.target.value)}
-                            style={{ background: 'transparent', border: 'none', width: '100%', fontSize: '13px', fontWeight: 700, outline: 'none' }}
-                          />
-                        </div>
-                        <div style={{ background: 'var(--bg-surface)', padding: '6px 8px', borderRadius: 'var(--radius-sm)' }}>
-                          <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block' }}>Load / Weight</span>
-                          <input
-                            type="text"
-                            value={ex.weight}
-                            onChange={(e) => handleUpdateExerciseValue(ex.id, 'weight', e.target.value)}
-                            style={{ background: 'transparent', border: 'none', width: '100%', fontSize: '13px', fontWeight: 700, outline: 'none' }}
-                          />
-                        </div>
-                      </div>
-
-                      {isOpen && (
-                        <div style={{ marginTop: '10px', padding: '12px 14px', background: 'var(--bg-surface)', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px', color: 'var(--primary)', fontWeight: 800 }}>
-                            <Sparkles size={14} />
-                            <span>Precision Form Cues &amp; Execution</span>
-                          </div>
-                          <p style={{ margin: '0 0 8px', color: 'var(--text-primary)', fontWeight: 600 }}>
-                            {ex.formCue || ex.instructions}
-                          </p>
-                          {ex.steps && ex.steps.length > 0 && (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '6px' }}>
-                              {ex.steps.map((st, sidx) => (
-                                <div key={sidx} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '11px' }}>
-                                  <span style={{ color: 'var(--cyan)', fontWeight: 900 }}>•</span>
-                                  <span>{st}</span>
-                                </div>
-                              ))}
+                        {isExpanded && (
+                          <div style={{
+                            marginTop: '10px',
+                            padding: '10px 12px',
+                            background: 'var(--bg-secondary)',
+                            borderRadius: '8px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '6px',
+                            fontSize: '11px',
+                            color: 'var(--text-secondary)'
+                          }}>
+                            <div>
+                              <strong style={{ color: '#38bdf8' }}>Breathing Technique: </strong>
+                              {ex.breathing || 'Exhale on concentric effort; inhale on eccentric return.'}
                             </div>
-                          )}
-                        </div>
-                      )}
+                            {ex.commonMistakes && ex.commonMistakes.length > 0 && (
+                              <div>
+                                <strong style={{ color: '#ef4444' }}>Common Mistakes: </strong>
+                                {ex.commonMistakes.join(' • ')}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
               </div>
             )}
           </div>
-        </div>
+        )}
 
-      {/* Add Custom Exercise Modal */}
-      {showAddModal && (
-        <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
-          <div className="modal-sheet" onClick={(e) => e.stopPropagation()}>
-            <div className="sheet-handle" />
+      </div>
 
-            <div className="flex-between" style={{ marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800 }}>Add Custom Exercise</h3>
-              <button onClick={() => setShowAddModal(false)} className="icon-btn" style={{ width: '32px', height: '32px' }}>
-                <X size={16} />
-              </button>
-            </div>
-
-            <form onSubmit={handleAddCustomExercise}>
-              <div className="form-group">
-                <label className="form-label">Exercise Name</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="e.g. Incline Dumbbell Hammer Curl"
-                  value={customEx.name}
-                  onChange={(e) => setCustomEx({ ...customEx, name: e.target.value })}
-                  required
-                />
-              </div>
-
-              <div className="grid-2">
-                <div className="form-group">
-                  <label className="form-label">Target Muscle</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    placeholder="e.g. Upper Chest / Lats"
-                    value={customEx.targetMuscle}
-                    onChange={(e) => setCustomEx({ ...customEx, targetMuscle: e.target.value })}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Working Weight</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    placeholder="e.g. 30 kg"
-                    value={customEx.weight}
-                    onChange={(e) => setCustomEx({ ...customEx, weight: e.target.value })}
-                  />
-                </div>
-              </div>
-
-              <div className="grid-2">
-                <div className="form-group">
-                  <label className="form-label">Sets</label>
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={customEx.sets}
-                    onChange={(e) => setCustomEx({ ...customEx, sets: e.target.value })}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Target Reps</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    value={customEx.reps}
-                    onChange={(e) => setCustomEx({ ...customEx, reps: e.target.value })}
-                  />
-                </div>
-              </div>
-
-              <button type="submit" className="btn btn-primary btn-full" style={{ height: '46px', marginTop: '12px' }}>
-                Save Exercise to Routine
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Workout History Modal */}
+      {/* WORKOUT SESSION HISTORY MODAL */}
       {showHistory && (
-        <div className="modal-overlay" onClick={() => setShowHistory(false)}>
-          <div className="modal-sheet" onClick={(e) => e.stopPropagation()}>
-            <div className="sheet-handle" />
-
-            <div className="flex-between" style={{ marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800 }}>Workout History</h3>
-              <button onClick={() => setShowHistory(false)} className="icon-btn" style={{ width: '32px', height: '32px' }}>
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.85)',
+          backdropFilter: 'blur(8px)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px'
+        }}>
+          <div
+            className="card"
+            style={{
+              width: '100%',
+              maxWidth: '520px',
+              maxHeight: '85vh',
+              overflowY: 'auto',
+              background: '#0a0e1a',
+              border: '1px solid var(--border-color)',
+              padding: '20px'
+            }}
+          >
+            <div className="flex-between" style={{ marginBottom: '16px', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <History size={18} color="var(--primary)" />
+                <h3 style={{ fontSize: '16px', fontWeight: 800 }}>Workout Session History</h3>
+              </div>
+              <button
+                onClick={() => setShowHistory(false)}
+                className="icon-btn"
+                style={{ width: '28px', height: '28px' }}
+              >
                 <X size={16} />
               </button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {(workoutPlan?.history || []).map((hist, idx) => (
-                <div key={idx} className="card" style={{ padding: '12px 16px', background: 'var(--bg-surface)' }}>
+                <div
+                  key={idx}
+                  style={{
+                    padding: '12px 14px',
+                    borderRadius: '10px',
+                    background: 'var(--bg-secondary)',
+                    border: '1px solid var(--border-color)'
+                  }}
+                >
                   <div className="flex-between">
-                    <h4 style={{ fontSize: '14px', fontWeight: 700 }}>{hist.dayName}</h4>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--text-primary)' }}>{hist.dayName}</span>
                     <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{hist.date}</span>
                   </div>
                   <div className="grid-3" style={{ marginTop: '8px', fontSize: '11px', color: 'var(--text-secondary)' }}>
@@ -1429,7 +1925,7 @@ export const WorkoutPlannerPage = () => {
                 <ImageIcon size={20} color="#eab308" />
                 <div>
                   <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#fef08a' }}>
-                    6 DAY WORKOUT PLAN • VISUAL BLUEPRINT
+                    6 DAY WORKOUT PLAN &bull; VISUAL BLUEPRINT
                   </h3>
                   <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                     FOCUS. TRAIN. TRANSFORM. &bull; Official Workout Infographic
@@ -1482,7 +1978,8 @@ export const WorkoutPlannerPage = () => {
                   { num: 3, name: 'Day 3: Biceps', icon: '💪' },
                   { num: 4, name: 'Day 4: Triceps', icon: '⚡' },
                   { num: 5, name: 'Day 5: Back', icon: '🧗‍♂️' },
-                  { num: 6, name: 'Day 6: Legs', icon: '🦵' }
+                  { num: 6, name: 'Day 6: Legs', icon: '🦵' },
+                  { num: 7, name: 'Day 7: Recovery', icon: '🧘‍♂️' }
                 ].map((d, i) => (
                   <button
                     key={d.num}

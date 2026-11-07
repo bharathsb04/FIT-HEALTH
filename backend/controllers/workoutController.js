@@ -26,12 +26,12 @@ exports.getWorkouts = async (req, res) => {
     if (!plan) {
       const user = db.findById('users', req.userId);
       const goal = user?.primaryGoal || 'Bulking';
-      const days = defaultSplitWorkouts[goal.toLowerCase()] || defaultSplitWorkouts.bulking;
+      const days = defaultSplitWorkouts[user?.fitnessLevel?.toLowerCase()] || defaultSplitWorkouts[goal.toLowerCase()] || defaultSplitWorkouts.intermediate || defaultSplitWorkouts.bulking;
 
       plan = db.create('workoutPlans', {
         userId: req.userId,
         goal,
-        splitName: `6-Day ${goal} Split`,
+        splitName: `7-Day Intermediate Workout Plan`,
         activeDayIndex: 0,
         days: JSON.parse(JSON.stringify(days)),
         history: []
@@ -91,7 +91,7 @@ exports.createWorkout = async (req, res) => {
 exports.updateWorkout = async (req, res) => {
   try {
     const { id } = req.params; // Exercise id or plan day
-    const { dayIndex, completed, weight, reps, sets } = req.body;
+    const { dayIndex, completed, weight, reps, sets, completedSets } = req.body;
     let plan = db.findOne('workoutPlans', p => p.userId === req.userId);
 
     if (!plan) {
@@ -106,6 +106,7 @@ exports.updateWorkout = async (req, res) => {
           if (weight !== undefined) ex.weight = weight;
           if (reps !== undefined) ex.reps = reps;
           if (sets !== undefined) ex.sets = Number(sets);
+          if (completedSets !== undefined) ex.completedSets = completedSets;
           updatedExercise = ex;
         }
       });
@@ -218,8 +219,8 @@ exports.completeWorkout = async (req, res) => {
 
 exports.resetSplit = async (req, res) => {
   try {
-    const { goal = 'Bulking' } = req.body;
-    const baseSplit = defaultSplitWorkouts[goal.toLowerCase()] || defaultSplitWorkouts.bulking;
+    const { goal = 'Intermediate' } = req.body;
+    const baseSplit = defaultSplitWorkouts[goal.toLowerCase()] || defaultSplitWorkouts.intermediate || defaultSplitWorkouts.bulking;
 
     let plan = db.findOne('workoutPlans', p => p.userId === req.userId);
     const freshDays = JSON.parse(JSON.stringify(baseSplit));
@@ -227,7 +228,7 @@ exports.resetSplit = async (req, res) => {
     if (plan) {
       db.update('workoutPlans', plan.id, {
         goal,
-        splitName: `6-Day ${goal} Split`,
+        splitName: `7-Day ${goal} Split`,
         activeDayIndex: 0,
         days: freshDays
       });
@@ -236,7 +237,7 @@ exports.resetSplit = async (req, res) => {
       plan = db.create('workoutPlans', {
         userId: req.userId,
         goal,
-        splitName: `6-Day ${goal} Split`,
+        splitName: `7-Day ${goal} Split`,
         activeDayIndex: 0,
         days: freshDays,
         history: []
@@ -245,7 +246,7 @@ exports.resetSplit = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: `Workout split reset to ${goal} 6-day cycle.`,
+      message: `Workout split reset to ${goal} 7-day cycle.`,
       plan
     });
   } catch (error) {

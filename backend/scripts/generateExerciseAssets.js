@@ -52,3 +52,4 @@ levels.forEach(level => {
 });
 
 console.log('Successfully generated local SVG assets for all 3 levels and 7 muscle groups!');
+
