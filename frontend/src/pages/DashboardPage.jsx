@@ -41,6 +41,7 @@ import {
   Key,
   Users,
   Image as ImageIcon,
+  Camera,
   Utensils,
   Maximize2,
   Edit3,
@@ -638,8 +639,8 @@ export const DashboardPage = () => {
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <Video size={12} />
-                    <span>Video Demo</span>
+                    <Camera size={12} />
+                    <span>Exercise Demo</span>
                   </button>
                   <button
                     type="button"
@@ -761,7 +762,7 @@ export const DashboardPage = () => {
                             {ex.name}
                           </span>
                           <span style={{ fontSize: '10px', color: 'var(--cyan)', display: 'block' }}>
-                            Click to watch visual video demo
+                            Click to view exercise demonstration
                           </span>
                         </div>
                       </div>
@@ -769,7 +770,7 @@ export const DashboardPage = () => {
                         <span style={{ color: 'var(--text-muted)', fontSize: '12px' }}>
                           {ex.sets} × {ex.reps} @ {ex.weight}
                         </span>
-                        <Video size={14} color="var(--primary)" />
+                        <Camera size={14} color="var(--primary)" />
                       </div>
                     </div>
                   ))}
@@ -819,7 +820,7 @@ export const DashboardPage = () => {
                     <h4 style={{ fontSize: '13px', fontWeight: 800, margin: 0 }}>6-Day Split Workout Planner Excluded</h4>
                     <span style={{ fontSize: '9px', padding: '1px 6px', borderRadius: '6px', background: 'rgba(239, 68, 68, 0.18)', color: '#f87171', fontWeight: 800 }}>✕ EXCLUDED</span>
                   </div>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Daily routine and exercise video demos are hidden per your 3-choice selection.</span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Daily routine and exercise demonstrations are hidden per your 3-choice selection.</span>
                 </div>
               </div>
               <button

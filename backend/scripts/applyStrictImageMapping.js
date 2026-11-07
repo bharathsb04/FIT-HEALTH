@@ -725,3 +725,4 @@ export function findExerciseById(id) {
 `;
 fs.writeFileSync(frontendJsPath, libraryCode, 'utf8');
 console.log('Successfully updated workoutLibrary.js and workoutLibrary.json!');
+

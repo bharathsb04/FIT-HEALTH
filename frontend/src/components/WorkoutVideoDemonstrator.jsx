@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useFitness } from '../contexts/FitnessContext';
 import {
@@ -7,12 +7,125 @@ import {
   findExerciseById
 } from '../data/workoutLibrary';
 import {
-  Play, Pause, RotateCcw, Volume2, VolumeX, Maximize2,
-  ChevronLeft, ChevronRight, CheckCircle2, Flame, Sparkles,
+  ChevronLeft, ChevronRight, CheckCircle2, Sparkles,
   Zap, Info, Activity, ShieldCheck, Eye, Compass, Gauge,
-  Film, Layers, Award, Check, Heart, Radio, MapPin, Wrench,
-  Target, ArrowRight, Video, Camera, Dumbbell, AlertTriangle
+  Layers, Award, Check, Heart, MapPin, Wrench,
+  Target, ArrowRight, Camera, Dumbbell, AlertTriangle,
+  Maximize2, X, CheckCircle, Clock
 } from 'lucide-react';
+
+/**
+ * Strict 1-to-1 Image Mapping for Intermediate Workout Split & All Gym Exercises
+ */
+export const STRICT_EXERCISE_IMAGES = {
+  // DAY 1 — CHEST
+  'barbell bench press': '/images/workouts/chest/bench-press.jpg',
+  'bench press': '/images/workouts/chest/bench-press.jpg',
+  'flat barbell bench press': '/images/workouts/chest/bench-press.jpg',
+  'flat bench press': '/images/workouts/chest/bench-press.jpg',
+  'incline dumbbell press': '/images/workouts/chest/incline-dumbbell-press.jpg',
+  'incline bench press': '/images/workouts/chest/incline-dumbbell-press.jpg',
+  'chest fly': '/images/workouts/chest/chest-fly.jpg',
+  'dumbbell chest fly': '/images/workouts/chest/chest-fly.jpg',
+  'dumbbell fly': '/images/workouts/chest/chest-fly.jpg',
+  'dumbbell pullover': '/images/workouts/chest/dumbbell-pullover.jpg',
+  'pullover': '/images/workouts/chest/dumbbell-pullover.jpg',
+  'push-ups': '/images/workouts/chest/push-ups.jpg',
+  'push ups': '/images/workouts/chest/push-ups.jpg',
+  'pushup': '/images/workouts/chest/push-ups.jpg',
+  'pushups': '/images/workouts/chest/push-ups.jpg',
+
+  // DAY 2 — SHOULDERS
+  'overhead press': '/images/workouts/shoulders/overhead-press.jpg',
+  'overhead barbell press': '/images/workouts/shoulders/overhead-press.jpg',
+  'barbell overhead press': '/images/workouts/shoulders/overhead-press.jpg',
+  'military press': '/images/workouts/shoulders/overhead-press.jpg',
+  'lateral raise': '/images/workouts/shoulders/lateral-raise.jpg',
+  'dumbbell lateral raise': '/images/workouts/shoulders/lateral-raise.jpg',
+  'dumbbell lateral raises': '/images/workouts/shoulders/lateral-raise.jpg',
+  'lateral raises': '/images/workouts/shoulders/lateral-raise.jpg',
+  'front raise': '/images/workouts/shoulders/front-raise.jpg',
+  'front dumbbell raise': '/images/workouts/shoulders/front-raise.jpg',
+  'front dumbbell raises': '/images/workouts/shoulders/front-raise.jpg',
+  'rear delt fly': '/images/workouts/shoulders/rear-delt-fly.jpg',
+  'rear delt dumbbell fly': '/images/workouts/shoulders/rear-delt-fly.jpg',
+  'rear deltoid fly': '/images/workouts/shoulders/rear-delt-fly.jpg',
+  'shrugs': '/images/workouts/shoulders/shrugs.jpg',
+  'dumbbell shrugs': '/images/workouts/shoulders/shrugs.jpg',
+  'barbell shrugs': '/images/workouts/shoulders/shrugs.jpg',
+
+  // DAY 3 — BICEPS
+  'barbell curl': '/images/workouts/biceps/barbell-curl.jpg',
+  'standing barbell curl': '/images/workouts/biceps/barbell-curl.jpg',
+  'dumbbell curl': '/images/workouts/biceps/dumbbell-curl.jpg',
+  'standing dumbbell curl': '/images/workouts/biceps/dumbbell-curl.jpg',
+  'hammer curl': '/images/workouts/biceps/hammer-curl.jpg',
+  'dumbbell hammer curl': '/images/workouts/biceps/hammer-curl.jpg',
+  'preacher curl': '/images/workouts/biceps/preacher-curl.jpg',
+  'ez bar preacher curl': '/images/workouts/biceps/preacher-curl.jpg',
+  'concentration curl': '/images/workouts/biceps/concentration-curl.jpg',
+  'dumbbell concentration curl': '/images/workouts/biceps/concentration-curl.jpg',
+
+  // DAY 4 — TRICEPS
+  'close grip bench press': '/images/workouts/triceps/close-grip-bench-press.jpg',
+  'close-grip bench press': '/images/workouts/triceps/close-grip-bench-press.jpg',
+  'close grip barbell bench press': '/images/workouts/triceps/close-grip-bench-press.jpg',
+  'rope push down': '/images/workouts/triceps/rope-pushdown.jpg',
+  'rope pushdown': '/images/workouts/triceps/rope-pushdown.jpg',
+  'cable rope pushdown': '/images/workouts/triceps/rope-pushdown.jpg',
+  'overhead triceps extension': '/images/workouts/triceps/overhead-extension.jpg',
+  'overhead dumbbell triceps extension': '/images/workouts/triceps/overhead-extension.jpg',
+  'dumbbell overhead triceps extension': '/images/workouts/triceps/overhead-extension.jpg',
+  'dips': '/images/workouts/triceps/dips.jpg',
+  'bench dips': '/images/workouts/triceps/dips.jpg',
+  'tricep dips': '/images/workouts/triceps/dips.jpg',
+  'triceps kickback': '/images/workouts/triceps/triceps-kickback.jpg',
+  'cable triceps kickback': '/images/workouts/triceps/triceps-kickback.jpg',
+  'dumbbell triceps kickback': '/images/workouts/triceps/triceps-kickback.jpg',
+
+  // DAY 5 — BACK
+  'pull-ups': '/images/workouts/back/pull-ups.jpg',
+  'pull ups': '/images/workouts/back/pull-ups.jpg',
+  'pullup': '/images/workouts/back/pull-ups.jpg',
+  'bodyweight pull-ups': '/images/workouts/back/pull-ups.jpg',
+  'barbell row': '/images/workouts/back/barbell-row.jpg',
+  'bent-over barbell row': '/images/workouts/back/barbell-row.jpg',
+  'bent over barbell row': '/images/workouts/back/barbell-row.jpg',
+  'lat pulldown': '/images/workouts/back/lat-pulldown.jpg',
+  'wide-grip lat pulldown': '/images/workouts/back/lat-pulldown.jpg',
+  'seated cable row': '/images/workouts/back/seated-cable-row.jpg',
+  'cable row': '/images/workouts/back/seated-cable-row.jpg',
+  'seated row': '/images/workouts/back/seated-cable-row.jpg',
+  'deadlift': '/images/workouts/back/deadlift.jpg',
+  'barbell deadlift': '/images/workouts/back/deadlift.jpg',
+  'conventional deadlift': '/images/workouts/back/deadlift.jpg',
+
+  // DAY 6 — LEGS
+  'barbell squat': '/images/workouts/legs/barbell-squat.jpg',
+  'back squat': '/images/workouts/legs/barbell-squat.jpg',
+  'squat': '/images/workouts/legs/barbell-squat.jpg',
+  'leg press': '/images/workouts/legs/leg-press.jpg',
+  '45-degree leg press': '/images/workouts/legs/leg-press.jpg',
+  'leg extension': '/images/workouts/legs/leg-extension.jpg',
+  'seated leg extension': '/images/workouts/legs/leg-extension.jpg',
+  'leg curl': '/images/workouts/legs/leg-curl.jpg',
+  'lying leg curl': '/images/workouts/legs/leg-curl.jpg',
+  'hamstring curl': '/images/workouts/legs/leg-curl.jpg',
+  'calf raise': '/images/workouts/legs/calf-raise.jpg',
+  'standing calf raise': '/images/workouts/legs/calf-raise.jpg',
+  'standing barbell calf raise': '/images/workouts/legs/calf-raise.jpg',
+
+  // DAY 7 — REST AND RECOVERY
+  'walking': '/images/workouts/recovery/walking.jpg',
+  'light walking': '/images/workouts/recovery/walking.jpg',
+  'brisk walking': '/images/workouts/recovery/walking.jpg',
+  'full body stretching': '/images/workouts/recovery/stretching.jpg',
+  'stretching': '/images/workouts/recovery/stretching.jpg',
+  'static stretching': '/images/workouts/recovery/stretching.jpg',
+  'mobility exercises': '/images/workouts/recovery/mobility.jpg',
+  'mobility work': '/images/workouts/recovery/mobility.jpg',
+  'joint mobility': '/images/workouts/recovery/mobility.jpg'
+};
 
 /**
  * Resolves comprehensive metadata for any exercise name, target muscle, or level.
@@ -34,7 +147,7 @@ export function getExerciseMeta(exerciseName = '', targetMuscle = '', preferredL
   // 2. Search other levels
   if (!match) {
     for (const lvl of ['beginner', 'intermediate', 'advanced']) {
-      match = workoutLibrary[lvl].find(ex => 
+      match = workoutLibrary[lvl]?.find(ex => 
         ex.name.toLowerCase() === cleanName || 
         cleanName.includes(ex.name.toLowerCase()) || 
         ex.name.toLowerCase().includes(cleanName)
@@ -50,11 +163,18 @@ export function getExerciseMeta(exerciseName = '', targetMuscle = '', preferredL
   }
 
   // 4. Default fallback
-  const base = match || currentList[0];
+  const base = match || currentList[0] || {};
+
+  // Check strict image lookup dictionary
+  const strictImg = STRICT_EXERCISE_IMAGES[cleanName] || 
+    Object.keys(STRICT_EXERCISE_IMAGES).find(key => cleanName.includes(key) || key.includes(cleanName)) ? 
+    STRICT_EXERCISE_IMAGES[Object.keys(STRICT_EXERCISE_IMAGES).find(key => cleanName.includes(key) || key.includes(cleanName))] : null;
+
   return {
     ...base,
-    name: exerciseName || base.name,
-    targetMuscle: targetMuscle || base.targetMuscle
+    name: exerciseName || base.name || 'Exercise',
+    targetMuscle: targetMuscle || base.targetMuscle || 'General',
+    imageUrl: strictImg || base.imageUrl || '/exercises/fallback.svg'
   };
 }
 
@@ -81,70 +201,68 @@ export const WorkoutVideoDemonstrator = ({
 
   const exercises = workoutDay?.exercises || [];
   const [currentIndex, setCurrentIndex] = useState(initialExerciseIndex);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [isMuted, setIsMuted] = useState(true);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const videoRef = useRef(null);
+  const [completedExercises, setCompletedExercises] = useState({});
+  const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
 
-  // Tab View Modes: Video vs AI Form Guide vs Gym Machine
-  const [mediaSource, setMediaSource] = useState('video'); // 'video' | 'guide' | 'machine'
+  // Tab View Modes: Image Demonstration vs AI Form Guide vs Gym Machine
+  const [mediaSource, setMediaSource] = useState('image'); // 'image' | 'guide' | 'machine'
 
   // Sync index when parent changes active exercise step
   useEffect(() => {
     if (initialExerciseIndex !== undefined && initialExerciseIndex >= 0 && initialExerciseIndex < (exercises.length || 1)) {
       setCurrentIndex(initialExerciseIndex);
-      setIsPlaying(true);
     }
   }, [initialExerciseIndex]);
 
   const currentExercise = exercises[currentIndex] || {
-    name: 'Barbell Flat Bench Press',
+    name: 'Barbell Bench Press',
     targetMuscle: 'Chest',
     sets: 4,
     reps: '8-10',
-    weight: '70 kg',
-    instructions: 'Arch lower back slightly, retract scapulae, lower bar under control to mid-chest, drive up explosively.'
+    weight: '75 kg',
+    instructions: 'Arch lower back slightly, retract scapulae, lower bar under control to lower sternum, drive up explosively.'
   };
 
-  // Get rich metadata from workoutLibrary
+  // Get rich metadata from workoutLibrary & strict image mapping
   const visualMeta = getExerciseMeta(currentExercise.name, currentExercise.targetMuscle, activeLevel);
+  
+  // Strict exercise demonstration image resolution
+  const cleanCurrentName = (currentExercise.name || '').toLowerCase().trim();
+  const demonstrationImage = STRICT_EXERCISE_IMAGES[cleanCurrentName] || 
+    visualMeta.imageUrl || 
+    '/images/workouts/chest/bench-press.jpg';
+
   const machine = visualMeta.machine || {
-    name: 'Standard Exercise Station',
+    name: `${visualMeta.equipment || 'Exercise'} Station`,
     type: 'Gym Machine / Free Weights',
-    gymZone: 'Zone A • Main Floor',
-    setupGuide: 'Adjust seat and pin resistance according to working sets.',
-    equipmentChecklist: ['Towel', 'Spring collars'],
+    gymZone: 'Zone A • Main Gym Floor',
+    setupGuide: 'Adjust seat and pin resistance according to target working sets.',
+    equipmentChecklist: ['Workout Towel', 'Appropriate Weights'],
     alternatives: []
   };
 
   const handleNextEx = () => {
     if (currentIndex < exercises.length - 1) {
       setCurrentIndex(prev => prev + 1);
-      setIsPlaying(true);
     }
   };
 
   const handlePrevEx = () => {
     if (currentIndex > 0) {
       setCurrentIndex(prev => prev - 1);
-      setIsPlaying(true);
     }
   };
 
-  const handleSpeedChange = (speed) => {
-    setPlaybackSpeed(speed);
-    if (videoRef.current) {
-      videoRef.current.playbackRate = speed;
+  const toggleExerciseComplete = () => {
+    const key = `${workoutDay?.day || 1}-${currentIndex}`;
+    const nextState = !completedExercises[key];
+    setCompletedExercises(prev => ({ ...prev, [key]: nextState }));
+    if (nextState && showToast) {
+      showToast(`Completed ${currentExercise.name}! Great form!`, 'success');
     }
   };
 
-  const handleLevelChange = (newLevel) => {
-    setActiveLevel(newLevel);
-    if (onSelectLevel) {
-      onSelectLevel(newLevel);
-    }
-  };
+  const isCurrentCompleted = !!completedExercises[`${workoutDay?.day || 1}-${currentIndex}`];
 
   const levelColor = activeLevel === 'beginner' 
     ? '#10b981' 
@@ -152,232 +270,300 @@ export const WorkoutVideoDemonstrator = ({
     ? '#06b6d4' 
     : '#f59e0b';
 
-  const isYouTube = visualMeta.videoUrl && (visualMeta.videoUrl.includes('youtube') || visualMeta.videoUrl.includes('youtu.be'));
-
   /* ─────────────────────────────────────────────────────────────
-     RENDER 1: RESPONSIVE REAL DEMONSTRATION VIDEO PLAYER
+     RENDER 1: HIGH-QUALITY STATIC EXERCISE DEMONSTRATION IMAGE VIEWER
+     (Completely replaces video player with responsive 16:9 image viewer)
      ───────────────────────────────────────────────────────────── */
-  const renderVideoStream = () => {
+  const renderImageDemonstration = () => {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          aspectRatio: '16 / 9',
-          borderRadius: '14px',
-          overflow: 'hidden',
-          background: '#070b13',
-          border: `1px solid rgba(255, 255, 255, 0.1)`,
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45)'
-        }}>
-          {/* Header Badge Overlay: Level, Target Muscle & Equipment */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {/* Main 16:9 Image Showcase Container */}
+        <div 
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16 / 9',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            background: '#070b13',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 12px 32px rgba(0, 0, 0, 0.55)',
+            userSelect: 'none'
+          }}
+        >
+          {/* Static Demonstration Photograph */}
+          <img
+            key={`${demonstrationImage}-${currentIndex}`}
+            src={demonstrationImage}
+            alt={`${currentExercise.name} Real Demonstration`}
+            loading="lazy"
+            onError={(e) => {
+              // Graceful fallback to svg or default image
+              e.target.onerror = null;
+              e.target.src = '/exercises/fallback.svg';
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+              transition: 'opacity 0.25s ease'
+            }}
+          />
+
+          {/* Top Subtle Vignette Gradient for Overlay Contrast */}
           <div style={{
             position: 'absolute',
-            top: '10px',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '80px',
+            background: 'linear-gradient(to bottom, rgba(7, 11, 19, 0.85) 0%, rgba(7, 11, 19, 0) 100%)',
+            pointerEvents: 'none',
+            zIndex: 5
+          }} />
+
+          {/* Bottom Vignette Gradient */}
+          <div style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '90px',
+            background: 'linear-gradient(to top, rgba(7, 11, 19, 0.92) 0%, rgba(7, 11, 19, 0.4) 50%, rgba(7, 11, 19, 0) 100%)',
+            pointerEvents: 'none',
+            zIndex: 5
+          }} />
+
+          {/* Top Left Overlay: Exercise Difficulty & Name */}
+          <div style={{
+            position: 'absolute',
+            top: '12px',
             left: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            zIndex: 10,
+            flexWrap: 'wrap'
+          }}>
+            <span style={{
+              background: levelColor,
+              color: '#080c14',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              fontSize: '10px',
+              fontWeight: 900,
+              letterSpacing: '0.5px',
+              textTransform: 'uppercase',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.4)'
+            }}>
+              {activeLevel.toUpperCase()}
+            </span>
+
+            <span style={{
+              background: 'rgba(8, 12, 20, 0.88)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              color: '#ffffff',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 800,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.4)'
+            }}>
+              {currentExercise.name}
+            </span>
+          </div>
+
+          {/* Top Right Overlay: Target Muscle, Equipment & Sets/Reps */}
+          <div style={{
+            position: 'absolute',
+            top: '12px',
             right: '12px',
             display: 'flex',
             alignItems: 'center',
+            gap: '6px',
+            zIndex: 10,
+            flexWrap: 'wrap',
+            justifyContent: 'flex-end'
+          }}>
+            <span style={{
+              background: 'rgba(8, 12, 20, 0.88)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              color: '#cbd5e1',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 700,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+            }}>
+              {visualMeta.targetMuscle} • {visualMeta.equipment || 'Gym Equipment'}
+            </span>
+
+            <span style={{
+              background: 'rgba(8, 12, 20, 0.92)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(16, 185, 129, 0.4)',
+              color: 'var(--primary)',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 900,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.4)'
+            }}>
+              🎯 {currentExercise.sets || visualMeta.sets || 4} Sets × {currentExercise.reps || visualMeta.reps || '8-12'}
+            </span>
+          </div>
+
+          {/* Bottom Overlay Info & Fullscreen Button */}
+          <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            left: '12px',
+            right: '12px',
+            display: 'flex',
+            alignItems: 'flex-end',
             justifyContent: 'space-between',
             zIndex: 10,
-            pointerEvents: 'none'
+            pointerEvents: 'auto'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{
-                background: levelColor,
-                color: '#080c14',
-                padding: '3px 8px',
-                borderRadius: '6px',
-                fontSize: '10px',
-                fontWeight: 900,
-                letterSpacing: '0.5px',
-                textTransform: 'uppercase',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
-              }}>
-                {activeLevel.toUpperCase()}
-              </span>
-
               <span style={{
                 background: 'rgba(8, 12, 20, 0.85)',
                 backdropFilter: 'blur(6px)',
                 border: '1px solid rgba(255,255,255,0.15)',
-                color: '#f8fafc',
+                color: '#94a3b8',
                 padding: '3px 8px',
                 borderRadius: '6px',
                 fontSize: '10px',
-                fontWeight: 700
+                fontWeight: 700,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
               }}>
-                {visualMeta.targetMuscle} • {visualMeta.equipment || 'Exercise'}
+                <Camera size={11} color="var(--primary)" />
+                Static Form Demonstration
               </span>
             </div>
 
-            <span style={{
-              background: 'rgba(8, 12, 20, 0.85)',
-              backdropFilter: 'blur(6px)',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
-              color: 'var(--primary)',
-              padding: '3px 8px',
-              borderRadius: '6px',
-              fontSize: '10px',
-              fontWeight: 800
-            }}>
-              🎯 {currentExercise.sets || visualMeta.sets} Sets × {currentExercise.reps || visualMeta.reps}
-            </span>
-          </div>
-
-          {/* Video or Fallback Poster */}
-          {visualMeta.videoUrl ? (
-            isYouTube ? (
-              <iframe
-                key={`${visualMeta.id}-${currentIndex}-${playbackSpeed}`}
-                src={`${visualMeta.videoUrl}${visualMeta.videoUrl.includes('?') ? '&' : '?'}enablejsapi=1&autoplay=${isPlaying ? 1 : 0}&mute=${isMuted ? 1 : 0}&controls=1&modestbranding=1&rel=0&playsinline=1`}
-                title={`${currentExercise.name} Real Form Demonstration`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  border: 'none',
-                  display: 'block'
-                }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                loading="lazy"
-              />
-            ) : (
-              <video
-                ref={videoRef}
-                src={visualMeta.videoUrl}
-                poster={visualMeta.videoPoster || visualMeta.imageUrl}
-                playsInline
-                preload="metadata"
-                autoPlay={isPlaying}
-                muted={isMuted}
-                loop
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-                onLoadedData={() => setVideoLoaded(true)}
-              />
-            )
-          ) : (
-            /* Visual Poster Image with Placeholder Badge */
-            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-              <img
-                src={visualMeta.imageUrl || `/exercises/${activeLevel}/${visualMeta.targetMuscle?.toLowerCase()}.svg`}
-                alt={currentExercise.name}
-                loading="lazy"
-                onError={(e) => { e.target.src = '/exercises/fallback.svg'; }}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  filter: 'brightness(0.7)'
-                }}
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                flexDirection: 'column',
+            <button
+              type="button"
+              onClick={() => setIsZoomModalOpen(true)}
+              style={{
+                background: 'rgba(8, 12, 20, 0.85)',
+                backdropFilter: 'blur(6px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                color: '#f8fafc',
+                padding: '5px 10px',
+                borderRadius: '7px',
+                fontSize: '11px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                background: 'rgba(8,12,20,0.6)',
-                padding: '16px',
-                textAlign: 'center'
-              }}>
-                <Dumbbell size={32} color="var(--primary)" style={{ marginBottom: '8px' }} />
-                <h4 style={{ fontSize: '15px', fontWeight: 800, margin: '0 0 4px', color: '#fff' }}>
-                  {currentExercise.name}
-                </h4>
-                <span className="badge badge-fitness" style={{ fontSize: '11px' }}>
-                  📹 Video demonstration coming soon &bull; Form guide available below
-                </span>
-              </div>
-            </div>
-          )}
+                gap: '5px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.4)'
+              }}
+              title="Expand image fullscreen"
+            >
+              <Maximize2 size={12} />
+              <span>Zoom</span>
+            </button>
+          </div>
         </div>
 
-        {/* Video Control Bar: Play/Pause, Replay, Speeds */}
+        {/* Clean Exercise Control Bar (Replaces Video Player Controls) */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           background: 'var(--bg-surface)',
-          padding: '8px 12px',
-          borderRadius: '10px',
+          padding: '10px 14px',
+          borderRadius: '12px',
           border: '1px solid var(--border-color)',
           flexWrap: 'wrap',
-          gap: '8px'
+          gap: '10px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Previous / Next Quick Stepper */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <button
               type="button"
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="btn btn-sm btn-primary"
-              style={{ padding: '6px 12px', fontSize: '11px', gap: '4px', fontWeight: 800 }}
-              title={isPlaying ? 'Pause Demonstration' : 'Play Demonstration'}
-            >
-              {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-              <span>{isPlaying ? 'Pause' : 'Play'}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                if (videoRef.current) {
-                  videoRef.current.currentTime = 0;
-                  videoRef.current.play();
-                  setIsPlaying(true);
-                } else {
-                  setIsPlaying(false);
-                  setTimeout(() => setIsPlaying(true), 150);
-                }
-              }}
+              onClick={handlePrevEx}
+              disabled={currentIndex === 0}
               className="btn btn-sm btn-secondary"
-              style={{ padding: '6px 10px', fontSize: '11px', gap: '4px' }}
-              title="Replay from start"
+              style={{
+                padding: '6px 12px',
+                fontSize: '11px',
+                fontWeight: 800,
+                gap: '4px',
+                opacity: currentIndex === 0 ? 0.35 : 1
+              }}
             >
-              <RotateCcw size={12} />
-              <span>Replay</span>
+              <ChevronLeft size={13} />
+              <span>Previous</span>
             </button>
 
             <button
               type="button"
-              onClick={() => setIsMuted(!isMuted)}
-              className="icon-btn"
-              style={{ width: '30px', height: '30px' }}
-              title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+              onClick={handleNextEx}
+              disabled={currentIndex >= exercises.length - 1}
+              className="btn btn-sm btn-secondary"
+              style={{
+                padding: '6px 12px',
+                fontSize: '11px',
+                fontWeight: 800,
+                gap: '4px',
+                opacity: currentIndex >= exercises.length - 1 ? 0.35 : 1
+              }}
             >
-              {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+              <span>Next</span>
+              <ChevronRight size={13} />
             </button>
+
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700, marginLeft: '6px' }}>
+              Step {currentIndex + 1} / {exercises.length || 1}
+            </span>
           </div>
 
-          {/* Speed Presets: 0.5x, 1x, 1.5x */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 700, marginRight: '2px' }}>
-              SPEED:
+          {/* Mark Complete Checkbox / Target Load Pill */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{
+              fontSize: '11px',
+              color: 'var(--text-secondary)',
+              background: 'var(--bg-secondary)',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              fontWeight: 700,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <Clock size={11} color="var(--cyan)" />
+              {visualMeta.restSeconds || 90}s Rest
             </span>
-            {[0.5, 1, 1.5].map(spd => (
-              <button
-                key={spd}
-                type="button"
-                onClick={() => handleSpeedChange(spd)}
-                style={{
-                  padding: '3px 8px',
-                  borderRadius: '6px',
-                  border: 'none',
-                  background: playbackSpeed === spd ? 'var(--primary)' : 'var(--bg-secondary)',
-                  color: playbackSpeed === spd ? '#080c14' : 'var(--text-secondary)',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                {spd}x
-              </button>
-            ))}
+
+            <button
+              type="button"
+              onClick={toggleExerciseComplete}
+              style={{
+                padding: '6px 12px',
+                borderRadius: '8px',
+                border: 'none',
+                background: isCurrentCompleted ? 'var(--primary)' : 'rgba(255,255,255,0.08)',
+                color: isCurrentCompleted ? '#080c14' : 'var(--text-primary)',
+                fontSize: '11px',
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <CheckCircle2 size={13} />
+              <span>{isCurrentCompleted ? 'Completed' : 'Mark Done'}</span>
+            </button>
           </div>
         </div>
 
@@ -386,14 +572,14 @@ export const WorkoutVideoDemonstrator = ({
           <div style={{
             background: 'rgba(6, 182, 212, 0.08)',
             border: '1px solid rgba(6, 182, 212, 0.25)',
-            borderRadius: '10px',
-            padding: '10px 14px',
+            borderRadius: '12px',
+            padding: '12px 14px',
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             gap: '10px'
           }}>
-            <Sparkles size={16} color="var(--cyan)" style={{ flexShrink: 0 }} />
-            <div style={{ fontSize: '12px', color: 'var(--text-primary)', lineHeight: 1.4 }}>
+            <Sparkles size={16} color="var(--cyan)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div style={{ fontSize: '12px', color: 'var(--text-primary)', lineHeight: 1.45 }}>
               <strong style={{ color: 'var(--cyan)' }}>Form Cue: </strong>
               {visualMeta.formCue}
             </div>
@@ -622,7 +808,7 @@ export const WorkoutVideoDemonstrator = ({
 
   return (
     <div className="workout-video-demonstrator-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      {/* Exercise Title & Navigation Bar */}
+      {/* Exercise Title & Navigation Header Bar */}
       <div className="flex-between" style={{ alignItems: 'center' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -646,7 +832,7 @@ export const WorkoutVideoDemonstrator = ({
           </h3>
         </div>
 
-        {/* Stepper buttons */}
+        {/* Stepper Navigation Buttons (< >) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
           <button
             type="button"
@@ -671,7 +857,7 @@ export const WorkoutVideoDemonstrator = ({
         </div>
       </div>
 
-      {/* Media Source Tab Selector: Video vs AI Form Guide vs Gym Machine */}
+      {/* Media Source Tab Selector: Demonstration Image vs AI Form Guide vs Gym Machine */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -683,14 +869,14 @@ export const WorkoutVideoDemonstrator = ({
       }}>
         <button
           type="button"
-          onClick={() => setMediaSource('video')}
+          onClick={() => setMediaSource('image')}
           style={{
             flex: 1,
             padding: '8px 12px',
             borderRadius: '8px',
             border: 'none',
-            background: mediaSource === 'video' ? 'var(--primary)' : 'transparent',
-            color: mediaSource === 'video' ? '#080c14' : 'var(--text-secondary)',
+            background: mediaSource === 'image' ? 'var(--primary)' : 'transparent',
+            color: mediaSource === 'image' ? '#080c14' : 'var(--text-secondary)',
             fontSize: '12px',
             fontWeight: 800,
             cursor: 'pointer',
@@ -701,8 +887,8 @@ export const WorkoutVideoDemonstrator = ({
             transition: 'all 0.15s ease'
           }}
         >
-          <Film size={14} />
-          <span>Demonstration Video</span>
+          <Camera size={14} />
+          <span>Exercise Demonstration</span>
         </button>
 
         <button
@@ -755,9 +941,84 @@ export const WorkoutVideoDemonstrator = ({
       </div>
 
       {/* Tab Content Display */}
-      {mediaSource === 'video' && renderVideoStream()}
+      {mediaSource === 'image' && renderImageDemonstration()}
       {mediaSource === 'guide' && renderAIFormGuide()}
       {mediaSource === 'machine' && renderGymMachineGuide()}
+
+      {/* Fullscreen Lightbox Zoom Modal */}
+      {isZoomModalOpen && (
+        <div 
+          onClick={() => setIsZoomModalOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(4, 7, 13, 0.94)',
+            backdropFilter: 'blur(10px)',
+            zIndex: 99999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '900px',
+              width: '100%',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              background: '#070b13',
+              border: '1px solid rgba(255,255,255,0.15)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.8)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '14px 18px',
+              borderBottom: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <div>
+                <h3 style={{ fontSize: '16px', fontWeight: 900, margin: 0, color: '#fff' }}>
+                  {currentExercise.name}
+                </h3>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                  {visualMeta.targetMuscle} • {visualMeta.equipment}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsZoomModalOpen(false)}
+                className="icon-btn"
+                style={{ width: '32px', height: '32px' }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div style={{ width: '100%', maxHeight: '70vh', overflow: 'hidden', background: '#000' }}>
+              <img
+                src={demonstrationImage}
+                alt={currentExercise.name}
+                style={{ width: '100%', height: 'auto', maxHeight: '70vh', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+
+            {visualMeta.formCue && (
+              <div style={{ padding: '14px 18px', background: 'var(--bg-surface)' }}>
+                <strong style={{ color: 'var(--cyan)', fontSize: '12px' }}>Form Cue: </strong>
+                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{visualMeta.formCue}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
+export default WorkoutVideoDemonstrator;
