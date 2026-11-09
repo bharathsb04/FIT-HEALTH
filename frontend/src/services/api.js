@@ -62,11 +62,29 @@ export const api = {
     return handleResponse(res);
   },
 
-  login: async (email, password, role = 'member') => {
+  registerAdmin: async (payload) => {
+    const res = await fetch(`${BASE_URL}/auth/register-admin`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return handleResponse(res);
+  },
+
+  checkAvailability: async (email, mobileNumber) => {
+    const res = await fetch(`${BASE_URL}/auth/check-availability`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, mobileNumber })
+    });
+    return handleResponse(res);
+  },
+
+  login: async (identifier, password, role = 'member') => {
     const res = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, role })
+      body: JSON.stringify({ identifier, email: identifier, password, role })
     });
     return handleResponse(res);
   },
@@ -86,9 +104,27 @@ export const api = {
     return handleResponse(res);
   },
 
-  // SMTP Email OTP Endpoints
-  sendOTP: async (email, purpose = 'registration', role = 'member') => {
+  // Email & Mobile SMS OTP Endpoints
+  sendOTP: async (identifier, purpose = 'registration', role = 'member') => {
     const res = await fetch(`${BASE_URL}/auth/send-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ identifier, email: identifier, phone: identifier, purpose, role })
+    });
+    return handleResponse(res);
+  },
+
+  verifyOTP: async (identifier, otp, purpose = 'registration') => {
+    const res = await fetch(`${BASE_URL}/auth/verify-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ identifier, email: identifier, phone: identifier, otp, purpose })
+    });
+    return handleResponse(res);
+  },
+
+  sendEmailOTP: async (email, purpose = 'registration', role = 'member') => {
+    const res = await fetch(`${BASE_URL}/auth/send-email-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, purpose, role })
@@ -96,11 +132,29 @@ export const api = {
     return handleResponse(res);
   },
 
-  verifyOTP: async (email, otp, purpose = 'registration') => {
-    const res = await fetch(`${BASE_URL}/auth/verify-otp`, {
+  verifyEmailOTP: async (email, otp, purpose = 'registration') => {
+    const res = await fetch(`${BASE_URL}/auth/verify-email-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, otp, purpose })
+    });
+    return handleResponse(res);
+  },
+
+  sendMobileOTP: async (phone, purpose = 'registration', role = 'member') => {
+    const res = await fetch(`${BASE_URL}/auth/send-mobile-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, mobileNumber: phone, purpose, role })
+    });
+    return handleResponse(res);
+  },
+
+  verifyMobileOTP: async (phone, otp, purpose = 'registration') => {
+    const res = await fetch(`${BASE_URL}/auth/verify-mobile-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, mobileNumber: phone, otp, purpose })
     });
     return handleResponse(res);
   },

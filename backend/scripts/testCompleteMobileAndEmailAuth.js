@@ -227,3 +227,4 @@ const req = http.get(`${BASE_URL}/health`, async (res) => {
     }
   });
 });
+

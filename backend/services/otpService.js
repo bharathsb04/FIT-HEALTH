@@ -106,10 +106,11 @@ const createAndStoreOTP = async (identifier, purpose = 'registration', clientIp 
 
   const plainOtp = generateOTP();
   const hashed = hashOtp(normalizedEmail, plainOtp);
-  const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+  const safeId = normalizedEmail.replace(/[^a-zA-Z0-9]/g, '_');
+  const docId = `otp_${safeId}_${purpose}`;
 
   const otpRecord = {
-    id: `otp_${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`,
+    id: docId,
     email: normalizedEmail,
     purpose,
     otpHash: hashed,           // Stored in HASHED form only
@@ -219,13 +220,19 @@ const verifyOTP = async (email, otp, purpose = 'registration') => {
     try {
       const firestore = getFirestore();
       if (firestore) {
-        const docId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+        const safeId = normalizedEmail.replace(/[^a-zA-Z0-9]/g, '_');
+        const docId = `otp_${safeId}_${purpose}`;
         let docSnap = await firestore.collection('otps').doc(docId).get();
+
+        if (!docSnap.exists) {
+          const legacyDocId = `${normalizedEmail.replace(/[@.]/g, '_')}_${purpose}`;
+          docSnap = await firestore.collection('otps').doc(legacyDocId).get();
+        }
 
         // Check alternate purpose if direct purpose didn't hit
         if (!docSnap.exists) {
           const altPurpose = purpose === 'registration' ? 'login' : 'registration';
-          const altDocId = `${normalizedEmail.replace(/[@.]/g, '_')}_${altPurpose}`;
+          const altDocId = `otp_${safeId}_${altPurpose}`;
           docSnap = await firestore.collection('otps').doc(altDocId).get();
         }
 
@@ -436,6 +443,7 @@ module.exports = {
   createAndStoreOTP,
   verifyOTP,
   isEmailVerified,
+  isContactVerified: isEmailVerified,
   consumeVerifiedOTP,
   getOtpConfig,
   hashOtp

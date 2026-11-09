@@ -90,7 +90,11 @@ exports.updateProfile = async (req, res) => {
       targetFat
     };
 
-    const updated = (await updateUser(req.userId, updates)) || db.update('users', req.userId, updates) || { ...user, ...updates };
+    let updated = await updateUser(req.userId, updates);
+    if (!updated) {
+      const { saveUser } = require('../services/userService');
+      updated = await saveUser({ ...user, ...updates, id: req.userId, userId: req.userId });
+    }
 
     // Sync goal and biometrics with gymMembers roster
     try {

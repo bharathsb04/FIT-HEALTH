@@ -733,8 +733,9 @@ class JSONDatabase {
   }
 
   findById(collectionName, id) {
+    if (!id) return null;
     const col = this.getCollection(collectionName);
-    return col.find(item => item.id === id || item._id === id) || null;
+    return col.find(item => item.id === id || item._id === id || item.userId === id) || null;
   }
 
   create(collectionName, record) {
@@ -765,7 +766,7 @@ class JSONDatabase {
     const col = this.getCollection(collectionName);
     const index = typeof idOrPredicate === 'function'
       ? col.findIndex(idOrPredicate)
-      : col.findIndex(item => item.id === idOrPredicate || item._id === idOrPredicate);
+      : col.findIndex(item => item.id === idOrPredicate || item._id === idOrPredicate || item.userId === idOrPredicate);
     if (index === -1) return null;
 
     col[index] = {
@@ -792,7 +793,7 @@ class JSONDatabase {
     const col = this.getCollection(collectionName);
     const index = typeof idOrPredicate === 'function'
       ? col.findIndex(idOrPredicate)
-      : col.findIndex(item => item.id === idOrPredicate || item._id === idOrPredicate);
+      : col.findIndex(item => item.id === idOrPredicate || item._id === idOrPredicate || item.userId === idOrPredicate);
     if (index === -1) return false;
 
     const removedItem = col.splice(index, 1)[0];

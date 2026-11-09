@@ -1180,9 +1180,14 @@ exports.updateMemberDetails = async (req, res) => {
       }
     } catch (_) {}
 
-    // Sync with user record if matches
-    if (updatedMember && updatedMember.email) {
-      const targetUser = db.find('users').find(u => u.email?.toLowerCase() === updatedMember.email.toLowerCase());
+    // Sync with user record if matches (by email, userId, or membershipId)
+    if (updatedMember) {
+      const memberEmail = (updatedMember.email || '').toLowerCase().trim();
+      const targetUser = db.findOne('users', u => 
+        (memberEmail && u.email?.toLowerCase() === memberEmail) ||
+        (updatedMember.userId && (u.id === updatedMember.userId || u.userId === updatedMember.userId)) ||
+        (updatedMember.membershipId && u.membershipId === updatedMember.membershipId)
+      );
       if (targetUser) {
         const userSyncUpdates = {
           ...(updates.name && { name: updates.name }),
@@ -1194,8 +1199,8 @@ exports.updateMemberDetails = async (req, res) => {
             goal: resolvedGoal.trim()
           })
         };
-        db.update('users', u => u.id === targetUser.id, userSyncUpdates);
-        updateUser(targetUser.id, userSyncUpdates).catch(() => {});
+        db.update('users', u => u.id === targetUser.id || u.userId === targetUser.id, userSyncUpdates);
+        updateUser(targetUser.id || targetUser.userId, userSyncUpdates).catch(() => {});
       }
     }
 

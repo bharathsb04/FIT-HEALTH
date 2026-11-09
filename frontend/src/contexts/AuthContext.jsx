@@ -77,6 +77,17 @@ export const AuthProvider = ({ children }) => {
     throw new Error(res.message || 'Registration failed');
   };
 
+  const registerAdmin = async (adminData) => {
+    const res = await api.registerAdmin(adminData);
+    if (res.success && res.token) {
+      localStorage.setItem('fit_health_token', res.token);
+      setToken(res.token);
+      setUser(res.user);
+      return res;
+    }
+    throw new Error(res.message || 'Admin registration failed');
+  };
+
   const logout = async () => {
     try {
       if (token) await api.logout();
@@ -106,6 +117,7 @@ export const AuthProvider = ({ children }) => {
       login,
       loginWithOTP,
       register,
+      registerAdmin,
       logout,
       updateUserProfile
     }}>
