@@ -18,6 +18,7 @@ import {
   Dumbbell,
   Check,
   Eye,
+  EyeOff,
   RefreshCw,
   QrCode,
   Sparkles,
@@ -273,12 +274,22 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
     dayPassPrice: 299
   });
 
+  // Member Credentials Card / Modal State
+  const [enrolledCredentials, setEnrolledCredentials] = useState(null);
+  const [showCredentialsModal, setShowCredentialsModal] = useState(false);
+  const [showPasswordText, setShowPasswordText] = useState(false);
+  const [copiedCreds, setCopiedCreds] = useState(false);
+
+  // Helper function to generate clean initial member password
+  const generateInitialPassword = () => `Fit@${Math.floor(1000 + Math.random() * 9000)}`;
+
   // Add Member Modal
   const [showAddModal, setShowAddModal] = useState(false);
   const [newMemberForm, setNewMemberForm] = useState({
     name: '',
     email: '',
     phone: '',
+    password: `Fit@${Math.floor(1000 + Math.random() * 9000)}`,
     plan: 'Elite Gold Annual All-Access',
     planId: 'plan_annual',
     assignedTrainer: 'Coach Marcus Vance',
@@ -427,6 +438,10 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
         setVerificationResult(res);
         showToast(res.message || 'Member verified and enrolled successfully!', 'success');
         setMemberVerificationCode('');
+        if (res.credentials) {
+          setEnrolledCredentials(res.credentials);
+          setShowCredentialsModal(true);
+        }
         if (typeof confetti === 'function') {
           confetti({
             particleCount: 50,
@@ -903,10 +918,22 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
       if (res.success) {
         showToast(`Member ${res.member.name} registered successfully!`, 'success');
         setShowAddModal(false);
+        const creds = res.credentials || {
+          name: res.member.name,
+          email: res.member.email,
+          password: newMemberForm.password || res.member.temporaryPassword || 'Fit@2026',
+          membershipId: res.member.membershipId,
+          plan: res.member.plan,
+          expiryDate: res.member.expiryDate,
+          gymName: res.member.gymName || 'rsv gym and sports club'
+        };
+        setEnrolledCredentials(creds);
+        setShowCredentialsModal(true);
         setNewMemberForm({
           name: '',
           email: '',
           phone: '',
+          password: generateInitialPassword(),
           plan: 'Elite Gold Annual',
           assignedTrainer: 'Coach Marcus Vance',
           notes: ''
@@ -2371,6 +2398,28 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
                       >
                         <Clock size={11} />
                         <span>Check-In</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEnrolledCredentials({
+                            name: member.name,
+                            email: member.email,
+                            password: member.temporaryPassword || member.initialPassword || `Fit@${member.membershipId?.replace(/\D/g, '')?.slice(-4) || '7829'}`,
+                            membershipId: member.membershipId,
+                            plan: member.plan,
+                            expiryDate: member.expiryDate,
+                            gymName: member.gymName || 'rsv gym and sports club'
+                          });
+                          setShowCredentialsModal(true);
+                        }}
+                        className="btn btn-sm btn-secondary"
+                        style={{ fontSize: '11px', height: '30px', padding: '0 8px', gap: '4px', borderColor: 'rgba(6, 182, 212, 0.4)', color: 'var(--cyan)' }}
+                        title="View member login password & details"
+                      >
+                        <Key size={11} />
+                        <span>Credentials</span>
                       </button>
 
                       <button
@@ -4503,6 +4552,221 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
 
       </div>
 
+      {/* MEMBER ACCOUNT CREDENTIALS & HANDOFF MODAL */}
+      {showCredentialsModal && enrolledCredentials && (
+        <div className="modal-overlay" onClick={() => setShowCredentialsModal(false)}>
+          <div
+            className="modal-sheet"
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: '540px', maxHeight: '90vh', overflowY: 'auto' }}
+          >
+            <div className="sheet-handle" />
+
+            {/* Modal Header */}
+            <div className="flex-between" style={{ marginBottom: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, var(--primary), var(--cyan))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#080c14'
+                }}>
+                  <Key size={20} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '17px', fontWeight: 900, margin: 0, color: 'var(--text-primary)' }}>
+                    Member Login Credentials
+                  </h3>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    Roster enrollment confirmed • Share details with member
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowCredentialsModal(false)}
+                className="icon-btn"
+                style={{ width: '32px', height: '32px' }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Member Details Showcase Box */}
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.08) 100%)',
+              border: '1.5px solid rgba(16, 185, 129, 0.35)',
+              borderRadius: '14px',
+              padding: '16px',
+              marginBottom: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '10px' }}>
+                <div>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 800 }}>
+                    Member Full Name
+                  </span>
+                  <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)', marginTop: '2px' }}>
+                    {enrolledCredentials.name}
+                  </div>
+                </div>
+                <span className="badge badge-success" style={{ fontSize: '11px', fontWeight: 800 }}>
+                  Active Member
+                </span>
+              </div>
+
+              {/* Email / Username */}
+              <div style={{
+                background: 'rgba(8, 12, 20, 0.6)',
+                borderRadius: '8px',
+                padding: '10px 12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '8px'
+              }}>
+                <div>
+                  <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>
+                    Login Email / User ID
+                  </span>
+                  <div style={{ fontSize: '13px', fontFamily: 'monospace', fontWeight: 700, color: 'var(--cyan)' }}>
+                    {enrolledCredentials.email}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(enrolledCredentials.email);
+                    showToast('Email copied to clipboard!', 'info');
+                  }}
+                  className="btn btn-sm btn-secondary"
+                  style={{ fontSize: '11px', padding: '4px 8px', gap: '4px' }}
+                >
+                  <Copy size={11} /> Copy
+                </button>
+              </div>
+
+              {/* Password */}
+              <div style={{
+                background: 'rgba(8, 12, 20, 0.6)',
+                border: '1px solid rgba(245, 158, 11, 0.3)',
+                borderRadius: '8px',
+                padding: '10px 12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '8px'
+              }}>
+                <div>
+                  <span style={{ fontSize: '10px', color: 'var(--amber)', fontWeight: 800, textTransform: 'uppercase' }}>
+                    Member Login Password
+                  </span>
+                  <div style={{ fontSize: '14px', fontFamily: 'monospace', fontWeight: 800, color: '#f8fafc', letterSpacing: '1px' }}>
+                    {showPasswordText ? enrolledCredentials.password : '••••••••••••'}
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswordText(!showPasswordText)}
+                    className="icon-btn"
+                    style={{ width: '28px', height: '28px' }}
+                    title={showPasswordText ? 'Hide Password' : 'Show Password'}
+                  >
+                    {showPasswordText ? <EyeOff size={13} /> : <Eye size={13} />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(enrolledCredentials.password);
+                      showToast('Password copied to clipboard!', 'success');
+                    }}
+                    className="btn btn-sm btn-secondary"
+                    style={{ fontSize: '11px', padding: '4px 8px', gap: '4px', color: 'var(--amber)', borderColor: 'rgba(245, 158, 11, 0.4)' }}
+                  >
+                    <Copy size={11} /> Copy
+                  </button>
+                </div>
+              </div>
+
+              {/* Membership ID & Plan Info */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                <div style={{ background: 'rgba(8, 12, 20, 0.4)', borderRadius: '8px', padding: '8px 10px' }}>
+                  <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 700 }}>Membership ID</span>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    {enrolledCredentials.membershipId}
+                  </div>
+                </div>
+                <div style={{ background: 'rgba(8, 12, 20, 0.4)', borderRadius: '8px', padding: '8px 10px' }}>
+                  <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 700 }}>Plan / Expiry</span>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--primary)' }}>
+                    {enrolledCredentials.plan} ({enrolledCredentials.expiryDate})
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Critical Security Concern Notice */}
+            <div style={{
+              background: 'rgba(239, 68, 68, 0.08)',
+              border: '1px solid rgba(239, 68, 68, 0.25)',
+              borderRadius: '12px',
+              padding: '12px 14px',
+              marginBottom: '16px',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '10px'
+            }}>
+              <ShieldAlert size={18} color="#ef4444" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <div>
+                <strong style={{ fontSize: '12px', color: '#f87171', display: 'block', marginBottom: '2px' }}>
+                  Security &amp; Access Policy
+                </strong>
+                <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45 }}>
+                  These credentials belong exclusively to the gym member. As a security measure, <strong>administrators cannot log in using member credentials on the Admin Portal</strong>. The member should take this email &amp; password and log in through the <strong>Member Login</strong> portal to access their workouts, nutrition, and gym privileges.
+                </p>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  const summary = `Fit Health - Member Login Credentials\nMember: ${enrolledCredentials.name}\nGym: ${enrolledCredentials.gymName || 'rsv gym and sports club'}\nEmail: ${enrolledCredentials.email}\nPassword: ${enrolledCredentials.password}\nMembership ID: ${enrolledCredentials.membershipId}\nPlan: ${enrolledCredentials.plan}\nValid Until: ${enrolledCredentials.expiryDate}\n\nLogin at: Select 'Member Login' on the Fit Health sign-in page.`;
+                  navigator.clipboard.writeText(summary);
+                  setCopiedCreds(true);
+                  showToast('Complete credentials card copied to clipboard!', 'success');
+                  setTimeout(() => setCopiedCreds(false), 3000);
+                }}
+                className="btn btn-primary"
+                style={{ flex: 1, height: '42px', fontSize: '12px', fontWeight: 800, gap: '6px' }}
+              >
+                {copiedCreds ? <Check size={14} /> : <Copy size={14} />}
+                <span>{copiedCreds ? 'Copied to Clipboard!' : 'Copy Login Details for Member'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowCredentialsModal(false)}
+                className="btn btn-secondary"
+                style={{ padding: '0 20px', height: '42px', fontSize: '12px', fontWeight: 700 }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 1. ADD MEMBER MODAL (LINKED TO FEE PLANS) */}
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
@@ -4571,6 +4835,75 @@ export const AdminDashboardPage = ({ initialSubTab }) => {
                     onChange={(e) => setNewMemberForm(prev => ({ ...prev, phone: e.target.value }))}
                   />
                 </div>
+              </div>
+
+              {/* Member Account Password Assignment */}
+              <div style={{
+                background: 'rgba(6, 182, 212, 0.08)',
+                border: '1px solid rgba(6, 182, 212, 0.25)',
+                borderRadius: '10px',
+                padding: '12px'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <label className="form-label" style={{ fontWeight: 700, margin: 0, color: 'var(--cyan)' }}>
+                    Member Account Password *
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setNewMemberForm(prev => ({ ...prev, password: generateInitialPassword() }))}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'var(--primary)',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <RefreshCw size={11} /> Generate New
+                  </button>
+                </div>
+
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type={showPasswordText ? 'text' : 'password'}
+                    className="form-input"
+                    value={newMemberForm.password}
+                    onChange={(e) => setNewMemberForm(prev => ({ ...prev, password: e.target.value }))}
+                    placeholder="Enter or auto-generate password"
+                    required
+                    style={{
+                      height: '38px',
+                      fontFamily: showPasswordText ? 'monospace' : 'inherit',
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      paddingRight: '38px',
+                      borderColor: 'rgba(6, 182, 212, 0.35)'
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswordText(!showPasswordText)}
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '10px',
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'var(--text-muted)',
+                      cursor: 'pointer'
+                    }}
+                    title={showPasswordText ? 'Hide password' : 'Show password'}
+                  >
+                    {showPasswordText ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
+                <span style={{ fontSize: '10.5px', color: 'var(--text-secondary)', display: 'block', marginTop: '4px' }}>
+                  🔒 Provide this password to the member. Members can take their email &amp; password later to log in. Admins cannot log into the admin portal using member passwords.
+                </span>
               </div>
 
               {/* Linked Fee Plan Selector */}

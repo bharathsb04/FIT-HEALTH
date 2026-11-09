@@ -123,7 +123,9 @@ class JSONDatabase {
         const validPin = /^\d{4}$/.test(pinFromId) ? pinFromId : String(7820 + i);
         return {
           ...m,
-          checkInPin: m.checkInPin || validPin
+          checkInPin: m.checkInPin || validPin,
+          temporaryPassword: m.temporaryPassword || m.initialPassword || `Fit@${validPin}`,
+          initialPassword: m.initialPassword || m.temporaryPassword || `Fit@${validPin}`
         };
       });
     }

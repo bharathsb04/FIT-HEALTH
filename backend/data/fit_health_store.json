@@ -1175,6 +1175,212 @@
       "membershipStatus": "Active",
       "membershipPlan": "Gym Facility Master",
       "emailVerified": true
+    },
+    {
+      "id": "usr_1794196039775",
+      "createdAt": "2026-11-09T03:46:34.595Z",
+      "updatedAt": "2026-11-09T03:47:19.775Z",
+      "name": "Rohit Sharma",
+      "email": "athlete_1794195994508@testgym.io",
+      "phone": "+91 98765 12345",
+      "password": "$2a$10$bh4dQqd.I8cP9NkMRmnfYeC5g1e51jEXHe13mOmxdFkdt4o5h8Mn6",
+      "role": "member",
+      "gymStatus": "Active",
+      "gymMembership": "Active",
+      "membershipStatus": "Active",
+      "membershipId": "FH-MEM-3359",
+      "membershipPlan": "Monthly Pro Fitness",
+      "gymName": "rsv gym and sports club",
+      "gymLocation": "442 Fitness Boulevard, Downtown Metro",
+      "membershipExpiry": "2026-12-09",
+      "joinedDate": "2026-11-09",
+      "primaryGoal": "General fitness",
+      "fitnessLevel": "Intermediate",
+      "isEmailVerified": true
+    },
+    {
+      "id": "usr_1794196365299",
+      "createdAt": "2026-11-09T03:52:44.587Z",
+      "updatedAt": "2026-11-09T03:52:45.299Z",
+      "name": "Rohit Sharma",
+      "email": "athlete_1794196364518@testgym.io",
+      "phone": "+91 98765 12345",
+      "password": "$2a$10$CuJe7hmbHR6oE4r0J1ThVuwaVzDg2RwUyivYfPOmeDLPbMql65wIG",
+      "role": "member",
+      "gymStatus": "Active",
+      "gymMembership": "Active",
+      "membershipStatus": "Active",
+      "membershipId": "FH-MEM-1776",
+      "membershipPlan": "Monthly Pro Fitness",
+      "gymName": "rsv gym and sports club",
+      "gymLocation": "442 Fitness Boulevard, Downtown Metro",
+      "membershipExpiry": "2026-12-09",
+      "joinedDate": "2026-11-09",
+      "primaryGoal": "General fitness",
+      "fitnessLevel": "Intermediate",
+      "isEmailVerified": true
+    },
+    {
+      "id": "usr_1794196365820",
+      "createdAt": "2026-11-09T03:52:45.700Z",
+      "updatedAt": "2026-11-09T03:52:45.820Z",
+      "name": "Kavya Nair",
+      "email": "autouser_1794196365635@testgym.io",
+      "phone": "+91 91234 56789",
+      "password": "$2a$10$RGohEKBI9gq.lYOoEjs1DOPpzc7RKGTmxbvWZWDhmJ48gfzJnTNnK",
+      "role": "member",
+      "gymStatus": "Active",
+      "gymMembership": "Active",
+      "membershipStatus": "Active",
+      "membershipId": "FH-MEM-2359",
+      "membershipPlan": "Quarterly Strength",
+      "gymName": "rsv gym and sports club",
+      "gymLocation": "442 Fitness Boulevard, Downtown Metro",
+      "membershipExpiry": "2026-12-09",
+      "joinedDate": "2026-11-09",
+      "primaryGoal": "General fitness",
+      "fitnessLevel": "Intermediate",
+      "isEmailVerified": true
+    },
+    {
+      "id": "user_1794198433031",
+      "createdAt": "2026-11-09T04:27:13.031Z",
+      "updatedAt": "2026-11-09T04:27:13.031Z",
+      "name": "Mobile Athlete Bharath",
+      "email": "919988776655@mobile.fithealth.io",
+      "phone": "+91 99887 76655",
+      "password": "$2a$10$AB.5M31cxFN2h/K8UccpFOARlD.AlTyMrtZ8CKYM5x7ZTd16RA2eO",
+      "age": 24,
+      "gender": "Male",
+      "height": 175,
+      "weight": 75,
+      "targetWeight": 80,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "General fitness",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 2507,
+      "targetProtein": 150,
+      "targetCarbs": 319,
+      "targetFat": 70,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1,
+      "role": "member",
+      "linkedGymId": "gym_1",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "Downtown Flagship Center",
+      "membershipId": "FH-MEM-2043",
+      "membershipStatus": "Active",
+      "membershipPlan": "Monthly Pro Fitness",
+      "emailVerified": true
+    },
+    {
+      "id": "user_1794198435737",
+      "createdAt": "2026-11-09T04:27:15.738Z",
+      "updatedAt": "2026-11-09T04:27:15.738Z",
+      "name": "Admin Coach Marcus",
+      "email": "919911223344@mobile.fithealth.io",
+      "phone": "+91 99112 23344",
+      "password": "$2a$10$q6MkYRBtAIh/fSqPiXClwOf/IdPvt8T9n3wTarR93FIqPmaQZJqc.",
+      "age": 24,
+      "gender": "Male",
+      "height": 175,
+      "weight": 75,
+      "targetWeight": 80,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Bulking",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 2907,
+      "targetProtein": 165,
+      "targetCarbs": 380,
+      "targetFat": 81,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1,
+      "role": "admin",
+      "linkedGymId": "gym_1",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "Downtown Flagship Center",
+      "membershipId": "FH-ADM-3091",
+      "membershipStatus": "Active",
+      "membershipPlan": "Gym Facility Master",
+      "emailVerified": true
+    },
+    {
+      "id": "user_1794198440187",
+      "createdAt": "2026-11-09T04:27:20.187Z",
+      "updatedAt": "2026-11-09T04:27:20.187Z",
+      "name": "Email Athlete",
+      "email": "athlete_1794198429398@testfithealth.io",
+      "phone": "",
+      "password": "$2a$10$sAP/2q8mUmbG1vETM2n.Wegdq5ZbTZgPD.rV84uTcjm.HMmIvf7c.",
+      "age": 24,
+      "gender": "Male",
+      "height": 175,
+      "weight": 75,
+      "targetWeight": 80,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Bulking",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 2907,
+      "targetProtein": 165,
+      "targetCarbs": 380,
+      "targetFat": 81,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1,
+      "role": "member",
+      "linkedGymId": "gym_1",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "Downtown Flagship Center",
+      "membershipId": "FH-MEM-8848",
+      "membershipStatus": "Active",
+      "membershipPlan": "Monthly Pro Fitness",
+      "emailVerified": true
+    },
+    {
+      "id": "user_1794198487662",
+      "createdAt": "2026-11-09T04:28:07.662Z",
+      "updatedAt": "2026-11-09T04:28:07.663Z",
+      "name": "Email Athlete",
+      "email": "athlete_1794198476020@testfithealth.io",
+      "phone": "",
+      "password": "$2a$10$VgQwApbkpXr6LtgORQz57uXJ9WxFqKBSnnV9MT43UBLr8yVugVBJe",
+      "age": 24,
+      "gender": "Male",
+      "height": 175,
+      "weight": 75,
+      "targetWeight": 80,
+      "fitnessLevel": "Intermediate",
+      "primaryGoal": "Bulking",
+      "activityLevel": "Moderately Active (3-5 days/week)",
+      "dietaryPreference": "High Protein",
+      "workoutExperience": "1-2 Years",
+      "targetCalories": 2907,
+      "targetProtein": 165,
+      "targetCarbs": 380,
+      "targetFat": 81,
+      "waterTargetLiters": 3.5,
+      "sleepTargetHours": 8,
+      "streak": 1,
+      "role": "member",
+      "linkedGymId": "gym_1",
+      "gymId": "gym_1",
+      "gymName": "rsv gym and sports club",
+      "gymBranch": "Downtown Flagship Center",
+      "membershipId": "FH-MEM-6442",
+      "membershipStatus": "Active",
+      "membershipPlan": "Monthly Pro Fitness",
+      "emailVerified": true
     }
   ],
   "gyms": [
@@ -18589,6 +18795,3538 @@
         }
       ],
       "history": []
+    },
+    {
+      "id": "wor_1794198433183_tpvcu",
+      "createdAt": "2026-11-09T04:27:13.183Z",
+      "updatedAt": "2026-11-09T04:27:13.183Z",
+      "userId": "user_1794198433031",
+      "goal": "General fitness",
+      "splitName": "6-Day General fitness Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Pectoral Hypertrophy, Upper Chest Density & Push Power",
+          "targetGroup": "Chest",
+          "warmup": "5-10 min dynamic shoulder circles, band pull-aparts & 2 warm-up sets of light bench press.",
+          "cooldown": "5 min doorway chest stretch & overhead triceps mobility.",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Barbell Bench Press",
+              "targetMuscle": "Pectoralis Major & Triceps",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "75 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/bench-press.jpg",
+              "instructions": "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
+              "technique": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
+              "breathing": "Inhale deeply at the top and hold during descent; exhale forcefully past the sticking point.",
+              "commonMistakes": [
+                "Flaring elbows out to 90 degrees",
+                "Bouncing the barbell off ribcage",
+                "Lifting hips off the bench"
+              ]
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Pectoralis",
+              "equipment": "Adjustable Bench (30°) & Dumbbells",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "26 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
+              "instructions": "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
+              "technique": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
+              "breathing": "Inhale on the lowering phase; exhale as you push the dumbbells upward.",
+              "commonMistakes": [
+                "Setting bench angle too high (>45°) which shifts load to shoulders",
+                "Touching dumbbells together at top and losing tension"
+              ]
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Pectoralis Adduction",
+              "equipment": "Flat Bench & Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/chest-fly.jpg",
+              "instructions": "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
+              "technique": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
+              "breathing": "Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center.",
+              "commonMistakes": [
+                "Bending elbows too much and turning it into a press",
+                "Going too heavy and hyperextending shoulders"
+              ]
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest, Serratus & Lats",
+              "equipment": "Cross-Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
+              "instructions": "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
+              "technique": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
+              "breathing": "Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over.",
+              "commonMistakes": [
+                "Bending elbows excessively like a triceps extension",
+                "Allowing hips to rise up above bench height"
+              ]
+            },
+            {
+              "id": "e5",
+              "name": "Push-Ups",
+              "targetMuscle": "Chest, Anterior Delts & Core",
+              "equipment": "Bodyweight Floor Calisthenics",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/push-ups.jpg",
+              "instructions": "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
+              "technique": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
+              "breathing": "Inhale descending; exhale driving up while bracing core.",
+              "commonMistakes": [
+                "Sagging lower back or piking hips in the air",
+                "Half reps without full chest depth"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDERS",
+          "focus": "3D Deltoid Mass, Overhead Power & Upper Trapezius",
+          "targetGroup": "Shoulders",
+          "warmup": "5-10 min shoulder pass-throughs, face pulls & rotator cuff warm-up.",
+          "cooldown": "Cross-body shoulder stretch & gentle neck lateral stretches.",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "equipment": "Olympic Barbell & Power Rack",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
+              "instructions": "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
+              "technique": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
+              "breathing": "Inhale and brace core before pressing; exhale once past forehead level.",
+              "commonMistakes": [
+                "Excessive lower back arching",
+                "Pressing bar forward instead of vertical",
+                "Not locking out at top"
+              ]
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoid (Shoulder Width)",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
+              "instructions": "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
+              "technique": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
+              "breathing": "Exhale as you raise outward; inhale on controlled descent.",
+              "commonMistakes": [
+                "Using torso momentum or swinging",
+                "Shrugging traps instead of isolating lateral delts"
+              ]
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
+              "instructions": "Stand upright holding dumbbells in front of thighs with overhand grip.",
+              "technique": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
+              "breathing": "Exhale on upward lift; inhale lowering down.",
+              "commonMistakes": [
+                "Swinging hips to launch dumbbells",
+                "Raising far above shoulder level"
+              ]
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids & Rhomboids",
+              "equipment": "Dumbbells & 45° Torso Hinge",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
+              "instructions": "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
+              "technique": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
+              "breathing": "Exhale raising wide; inhale returning under control.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Using heavy weights and turning it into a row"
+              ]
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "equipment": "Heavy Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
+              "instructions": "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
+              "technique": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
+              "breathing": "Exhale on shrug elevation; inhale on the eccentric stretch.",
+              "commonMistakes": [
+                "Rolling shoulders in circles (injures rotator cuffs)",
+                "Bending elbows to assist lift"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Bicep Peak Hypertrophy & Brachialis Density",
+          "targetGroup": "Biceps",
+          "warmup": "5 min wrist rotations, light band curls & forearm stretches.",
+          "cooldown": "Biceps wall stretch & forearm flexor/extensor stretches.",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Short & Long Head)",
+              "equipment": "Olympic / EZ-Curl Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
+              "instructions": "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
+              "technique": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
+              "breathing": "Exhale curling upward; inhale lowering down.",
+              "commonMistakes": [
+                "Rocking torso back and forth",
+                "Flaring elbows away from sides",
+                "Letting bar drop freely"
+              ]
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Brachii Supination",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
+              "instructions": "Hold dumbbells at sides with palms facing each other at bottom position.",
+              "technique": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
+              "breathing": "Exhale as you curl and supinate; inhale during descent.",
+              "commonMistakes": [
+                "Swinging shoulders forward to assist",
+                "Failing to fully supinate wrist"
+              ]
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearm Brachioradialis",
+              "equipment": "Dumbbells (Neutral Grip)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
+              "instructions": "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
+              "technique": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
+              "breathing": "Exhale on contraction; inhale on descent.",
+              "commonMistakes": [
+                "Elbows moving forward past ribcage",
+                "Using excessive torso sway"
+              ]
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Brachii (Isolated Short Head)",
+              "equipment": "Preacher Bench & EZ-Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
+              "instructions": "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
+              "technique": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
+              "breathing": "Exhale curling bar up; inhale as you lower smoothly.",
+              "commonMistakes": [
+                "Hyperextending and locking out elbow violently at bottom",
+                "Lifting body off seat"
+              ]
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak Contraction",
+              "equipment": "Flat Bench & Single Dumbbell",
+              "sets": 3,
+              "reps": "12",
+              "weight": "14 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
+              "instructions": "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
+              "technique": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
+              "breathing": "Exhale curling; inhale lowering.",
+              "commonMistakes": [
+                "Moving elbow along thigh during repetition",
+                "Using back momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "warmup": "5 min arm circles, light cable pushdowns & elbow mobility.",
+          "cooldown": "Overhead triceps stretch & cross-body arm stretch.",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
+              "instructions": "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
+              "technique": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
+              "breathing": "Inhale lowering bar; exhale pressing up.",
+              "commonMistakes": [
+                "Hands too close together (<8 inches) which strains wrists",
+                "Elbows flaring outward"
+              ]
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral Head Peak Lockout",
+              "equipment": "High Cable Pulley & Rope Attachment",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "26 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
+              "instructions": "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
+              "technique": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
+              "breathing": "Exhale pushing down into lockout; inhale allowing rope to return to chest height.",
+              "commonMistakes": [
+                "Letting elbows drift forward and backward",
+                "Using body weight to press rope"
+              ]
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Extension",
+              "targetMuscle": "Triceps Long Head (Full Stretch)",
+              "equipment": "Seated Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
+              "instructions": "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
+              "technique": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
+              "breathing": "Inhale descending behind neck; exhale extending overhead.",
+              "commonMistakes": [
+                "Elbows flaring excessively wide",
+                "Arching lower back off backrest"
+              ]
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Anterior Deltoids",
+              "equipment": "Parallel Bar Dips / Bench",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/dips.jpg",
+              "instructions": "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+              "technique": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
+              "breathing": "Inhale lowering hips; exhale pressing up.",
+              "commonMistakes": [
+                "Leaning too far forward (shifts load to chest)",
+                "Shrugging shoulders"
+              ]
+            },
+            {
+              "id": "e20",
+              "name": "Triceps Kickback",
+              "targetMuscle": "Triceps Lateral & Long Head Lockout",
+              "equipment": "Dumbbell & Flat Bench Support",
+              "sets": 3,
+              "reps": "12",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+              "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
+              "technique": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
+              "breathing": "Exhale extending back; inhale returning forward.",
+              "commonMistakes": [
+                "Dropping elbow during movement",
+                "Swinging dumbbell with shoulder momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Posterior Chain Power",
+          "targetGroup": "Back",
+          "warmup": "5-10 min band dislocates, light lat pulldowns & cat-cow spinal flexions.",
+          "cooldown": "Dead hang from pull-up bar for 60 seconds & child's pose.",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull-Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "equipment": "Rigid Overhead Pull-Up Bar",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/pull-ups.jpg",
+              "instructions": "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
+              "technique": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
+              "breathing": "Exhale pulling up; inhale lowering into full dead-hang stretch.",
+              "commonMistakes": [
+                "Kicking legs or kipping body",
+                "Half reps without chin clearing bar or without full stretch"
+              ]
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back Thickness",
+              "equipment": "Olympic Barbell & 45° Torso Angle",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/barbell-row.jpg",
+              "instructions": "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
+              "technique": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
+              "breathing": "Exhale rowing upward; inhale lowering bar under control.",
+              "commonMistakes": [
+                "Rounding lumbar spine",
+                "Standing too upright and turning it into a shrug"
+              ]
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Latissimus Dorsi (Outer Sweep)",
+              "equipment": "Cable Lat Machine & Wide Curved Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
+              "instructions": "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
+              "technique": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
+              "breathing": "Exhale pulling down; inhale returning bar overhead.",
+              "commonMistakes": [
+                "Pulling bar behind the neck (dangerous for rotator cuffs)",
+                "Swinging torso backward excessively"
+              ]
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Middle Traps, Rhomboids & Lower Lats",
+              "equipment": "Low Pulley Cable Row & V-Grip Handle",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
+              "instructions": "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
+              "technique": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
+              "breathing": "Exhale pulling into ribs; inhale extending arms forward.",
+              "commonMistakes": [
+                "Rounding lower back reaching forward",
+                "Leaning back excessively to jerk weight"
+              ]
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Entire Posterior Chain, Erector Spinae & Glutes",
+              "equipment": "Olympic Barbell & Bumper Plates",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "115 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/deadlift.jpg",
+              "instructions": "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
+              "technique": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
+              "breathing": "Deep diaphragmatic breath and brace at bottom; exhale through lockout.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Squatting the bar instead of hinging",
+                "Hyperextending spine at lockout"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop Hypertrophy, Hamstring Sweep & Calf Density",
+          "targetGroup": "Legs",
+          "warmup": "5-10 min stationary bike, bodyweight air squats & hip 90/90 mobility.",
+          "cooldown": "Standing quad stretch, seated hamstring stretch & calf wall stretch.",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps, Glutes & Adductors",
+              "equipment": "Squat Rack & Olympic Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "95 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
+              "instructions": "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
+              "technique": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
+              "breathing": "Big breath into belly at top and hold; exhale as you pass sticking point on way up.",
+              "commonMistakes": [
+                "Knees caving inward (valgus collapse)",
+                "Heels lifting off floor",
+                "Butt wink/rounding lower back"
+              ]
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Gluteus Maximus",
+              "equipment": "45° Plate-Loaded Leg Press Sled",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "180 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-press.jpg",
+              "instructions": "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
+              "technique": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
+              "breathing": "Inhale lowering sled; exhale driving footplate away.",
+              "commonMistakes": [
+                "Allowing pelvis to curl off seat",
+                "Locking knees aggressively at top"
+              ]
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quadriceps (Rectus Femoris Isolation)",
+              "equipment": "Leg Extension Machine & Shin Roller",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-extension.jpg",
+              "instructions": "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
+              "technique": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
+              "breathing": "Exhale extending upward; inhale lowering slowly.",
+              "commonMistakes": [
+                "Using momentum to swing pad",
+                "Allowing weight stack to slam between reps"
+              ]
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings (Biceps Femoris)",
+              "equipment": "Prone Hamstring Curl Bench",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "45 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-curl.jpg",
+              "instructions": "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
+              "technique": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
+              "breathing": "Exhale curling heels up; inhale lowering under control.",
+              "commonMistakes": [
+                "Hips lifting off bench to assist curl",
+                "Incomplete range of motion"
+              ]
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "equipment": "Elevated Block & Machine / Dumbbells",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/calf-raise.jpg",
+              "instructions": "Place balls of feet on edge of calf block, heels hanging free.",
+              "technique": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
+              "breathing": "Inhale dropping heels; exhale pressing high onto toes.",
+              "commonMistakes": [
+                "Bouncing quickly without pauses",
+                "Bending knees and turning it into a squat"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — REST AND RECOVERY",
+          "focus": "CNS Restoration, Active Mobility, Hydration & Sleep Repair",
+          "targetGroup": "Recovery",
+          "warmup": "Light breathing exercises & diaphragmatic expansion.",
+          "cooldown": "Full rest & 7-9 hours restorative deep sleep.",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Walking",
+              "targetMuscle": "Cardiovascular & Lymphatic Flow",
+              "equipment": "Outdoor Path / Gentle Treadmill Pace",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/walking.jpg",
+              "instructions": "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
+              "technique": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
+              "breathing": "Breathe rhythmically in and out through nose.",
+              "commonMistakes": [
+                "Walking too fast and turning it into high-intensity cardio"
+              ]
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Stretching",
+              "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
+              "equipment": "Yoga Mat & Foam Roller",
+              "sets": 1,
+              "reps": "15-20 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/stretching.jpg",
+              "instructions": "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
+              "technique": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
+              "breathing": "Deep diaphragmatic belly breathing.",
+              "commonMistakes": [
+                "Aggressively forcing into painful joint ranges"
+              ]
+            },
+            {
+              "id": "e33",
+              "name": "Mobility Exercises",
+              "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
+              "equipment": "3-4L Water, High Protein & 7-9h Sleep",
+              "sets": 1,
+              "reps": "Full Day Protocol",
+              "weight": "Recovery Target",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/mobility.jpg",
+              "instructions": "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
+              "technique": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
+              "breathing": "Slow 4-7-8 relaxing breathing before sleep.",
+              "commonMistakes": [
+                "Skipping hydration or skimping on protein on rest days"
+              ]
+            }
+          ]
+        }
+      ],
+      "history": []
+    },
+    {
+      "id": "wor_1794198435836_g8079",
+      "createdAt": "2026-11-09T04:27:15.836Z",
+      "updatedAt": "2026-11-09T04:27:15.836Z",
+      "userId": "user_1794198435737",
+      "goal": "Bulking",
+      "splitName": "6-Day Bulking Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Pectoral Hypertrophy, Upper Chest Density & Push Power",
+          "targetGroup": "Chest",
+          "warmup": "5-10 min dynamic shoulder circles, band pull-aparts & 2 warm-up sets of light bench press.",
+          "cooldown": "5 min doorway chest stretch & overhead triceps mobility.",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Barbell Bench Press",
+              "targetMuscle": "Pectoralis Major & Triceps",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "75 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/bench-press.jpg",
+              "instructions": "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
+              "technique": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
+              "breathing": "Inhale deeply at the top and hold during descent; exhale forcefully past the sticking point.",
+              "commonMistakes": [
+                "Flaring elbows out to 90 degrees",
+                "Bouncing the barbell off ribcage",
+                "Lifting hips off the bench"
+              ]
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Pectoralis",
+              "equipment": "Adjustable Bench (30°) & Dumbbells",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "26 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
+              "instructions": "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
+              "technique": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
+              "breathing": "Inhale on the lowering phase; exhale as you push the dumbbells upward.",
+              "commonMistakes": [
+                "Setting bench angle too high (>45°) which shifts load to shoulders",
+                "Touching dumbbells together at top and losing tension"
+              ]
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Pectoralis Adduction",
+              "equipment": "Flat Bench & Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/chest-fly.jpg",
+              "instructions": "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
+              "technique": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
+              "breathing": "Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center.",
+              "commonMistakes": [
+                "Bending elbows too much and turning it into a press",
+                "Going too heavy and hyperextending shoulders"
+              ]
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest, Serratus & Lats",
+              "equipment": "Cross-Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
+              "instructions": "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
+              "technique": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
+              "breathing": "Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over.",
+              "commonMistakes": [
+                "Bending elbows excessively like a triceps extension",
+                "Allowing hips to rise up above bench height"
+              ]
+            },
+            {
+              "id": "e5",
+              "name": "Push-Ups",
+              "targetMuscle": "Chest, Anterior Delts & Core",
+              "equipment": "Bodyweight Floor Calisthenics",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/push-ups.jpg",
+              "instructions": "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
+              "technique": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
+              "breathing": "Inhale descending; exhale driving up while bracing core.",
+              "commonMistakes": [
+                "Sagging lower back or piking hips in the air",
+                "Half reps without full chest depth"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDERS",
+          "focus": "3D Deltoid Mass, Overhead Power & Upper Trapezius",
+          "targetGroup": "Shoulders",
+          "warmup": "5-10 min shoulder pass-throughs, face pulls & rotator cuff warm-up.",
+          "cooldown": "Cross-body shoulder stretch & gentle neck lateral stretches.",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "equipment": "Olympic Barbell & Power Rack",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
+              "instructions": "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
+              "technique": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
+              "breathing": "Inhale and brace core before pressing; exhale once past forehead level.",
+              "commonMistakes": [
+                "Excessive lower back arching",
+                "Pressing bar forward instead of vertical",
+                "Not locking out at top"
+              ]
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoid (Shoulder Width)",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
+              "instructions": "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
+              "technique": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
+              "breathing": "Exhale as you raise outward; inhale on controlled descent.",
+              "commonMistakes": [
+                "Using torso momentum or swinging",
+                "Shrugging traps instead of isolating lateral delts"
+              ]
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
+              "instructions": "Stand upright holding dumbbells in front of thighs with overhand grip.",
+              "technique": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
+              "breathing": "Exhale on upward lift; inhale lowering down.",
+              "commonMistakes": [
+                "Swinging hips to launch dumbbells",
+                "Raising far above shoulder level"
+              ]
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids & Rhomboids",
+              "equipment": "Dumbbells & 45° Torso Hinge",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
+              "instructions": "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
+              "technique": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
+              "breathing": "Exhale raising wide; inhale returning under control.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Using heavy weights and turning it into a row"
+              ]
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "equipment": "Heavy Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
+              "instructions": "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
+              "technique": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
+              "breathing": "Exhale on shrug elevation; inhale on the eccentric stretch.",
+              "commonMistakes": [
+                "Rolling shoulders in circles (injures rotator cuffs)",
+                "Bending elbows to assist lift"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Bicep Peak Hypertrophy & Brachialis Density",
+          "targetGroup": "Biceps",
+          "warmup": "5 min wrist rotations, light band curls & forearm stretches.",
+          "cooldown": "Biceps wall stretch & forearm flexor/extensor stretches.",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Short & Long Head)",
+              "equipment": "Olympic / EZ-Curl Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
+              "instructions": "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
+              "technique": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
+              "breathing": "Exhale curling upward; inhale lowering down.",
+              "commonMistakes": [
+                "Rocking torso back and forth",
+                "Flaring elbows away from sides",
+                "Letting bar drop freely"
+              ]
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Brachii Supination",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
+              "instructions": "Hold dumbbells at sides with palms facing each other at bottom position.",
+              "technique": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
+              "breathing": "Exhale as you curl and supinate; inhale during descent.",
+              "commonMistakes": [
+                "Swinging shoulders forward to assist",
+                "Failing to fully supinate wrist"
+              ]
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearm Brachioradialis",
+              "equipment": "Dumbbells (Neutral Grip)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
+              "instructions": "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
+              "technique": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
+              "breathing": "Exhale on contraction; inhale on descent.",
+              "commonMistakes": [
+                "Elbows moving forward past ribcage",
+                "Using excessive torso sway"
+              ]
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Brachii (Isolated Short Head)",
+              "equipment": "Preacher Bench & EZ-Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
+              "instructions": "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
+              "technique": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
+              "breathing": "Exhale curling bar up; inhale as you lower smoothly.",
+              "commonMistakes": [
+                "Hyperextending and locking out elbow violently at bottom",
+                "Lifting body off seat"
+              ]
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak Contraction",
+              "equipment": "Flat Bench & Single Dumbbell",
+              "sets": 3,
+              "reps": "12",
+              "weight": "14 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
+              "instructions": "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
+              "technique": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
+              "breathing": "Exhale curling; inhale lowering.",
+              "commonMistakes": [
+                "Moving elbow along thigh during repetition",
+                "Using back momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "warmup": "5 min arm circles, light cable pushdowns & elbow mobility.",
+          "cooldown": "Overhead triceps stretch & cross-body arm stretch.",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
+              "instructions": "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
+              "technique": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
+              "breathing": "Inhale lowering bar; exhale pressing up.",
+              "commonMistakes": [
+                "Hands too close together (<8 inches) which strains wrists",
+                "Elbows flaring outward"
+              ]
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral Head Peak Lockout",
+              "equipment": "High Cable Pulley & Rope Attachment",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "26 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
+              "instructions": "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
+              "technique": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
+              "breathing": "Exhale pushing down into lockout; inhale allowing rope to return to chest height.",
+              "commonMistakes": [
+                "Letting elbows drift forward and backward",
+                "Using body weight to press rope"
+              ]
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Extension",
+              "targetMuscle": "Triceps Long Head (Full Stretch)",
+              "equipment": "Seated Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
+              "instructions": "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
+              "technique": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
+              "breathing": "Inhale descending behind neck; exhale extending overhead.",
+              "commonMistakes": [
+                "Elbows flaring excessively wide",
+                "Arching lower back off backrest"
+              ]
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Anterior Deltoids",
+              "equipment": "Parallel Bar Dips / Bench",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/dips.jpg",
+              "instructions": "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+              "technique": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
+              "breathing": "Inhale lowering hips; exhale pressing up.",
+              "commonMistakes": [
+                "Leaning too far forward (shifts load to chest)",
+                "Shrugging shoulders"
+              ]
+            },
+            {
+              "id": "e20",
+              "name": "Triceps Kickback",
+              "targetMuscle": "Triceps Lateral & Long Head Lockout",
+              "equipment": "Dumbbell & Flat Bench Support",
+              "sets": 3,
+              "reps": "12",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+              "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
+              "technique": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
+              "breathing": "Exhale extending back; inhale returning forward.",
+              "commonMistakes": [
+                "Dropping elbow during movement",
+                "Swinging dumbbell with shoulder momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Posterior Chain Power",
+          "targetGroup": "Back",
+          "warmup": "5-10 min band dislocates, light lat pulldowns & cat-cow spinal flexions.",
+          "cooldown": "Dead hang from pull-up bar for 60 seconds & child's pose.",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull-Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "equipment": "Rigid Overhead Pull-Up Bar",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/pull-ups.jpg",
+              "instructions": "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
+              "technique": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
+              "breathing": "Exhale pulling up; inhale lowering into full dead-hang stretch.",
+              "commonMistakes": [
+                "Kicking legs or kipping body",
+                "Half reps without chin clearing bar or without full stretch"
+              ]
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back Thickness",
+              "equipment": "Olympic Barbell & 45° Torso Angle",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/barbell-row.jpg",
+              "instructions": "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
+              "technique": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
+              "breathing": "Exhale rowing upward; inhale lowering bar under control.",
+              "commonMistakes": [
+                "Rounding lumbar spine",
+                "Standing too upright and turning it into a shrug"
+              ]
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Latissimus Dorsi (Outer Sweep)",
+              "equipment": "Cable Lat Machine & Wide Curved Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
+              "instructions": "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
+              "technique": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
+              "breathing": "Exhale pulling down; inhale returning bar overhead.",
+              "commonMistakes": [
+                "Pulling bar behind the neck (dangerous for rotator cuffs)",
+                "Swinging torso backward excessively"
+              ]
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Middle Traps, Rhomboids & Lower Lats",
+              "equipment": "Low Pulley Cable Row & V-Grip Handle",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
+              "instructions": "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
+              "technique": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
+              "breathing": "Exhale pulling into ribs; inhale extending arms forward.",
+              "commonMistakes": [
+                "Rounding lower back reaching forward",
+                "Leaning back excessively to jerk weight"
+              ]
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Entire Posterior Chain, Erector Spinae & Glutes",
+              "equipment": "Olympic Barbell & Bumper Plates",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "115 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/deadlift.jpg",
+              "instructions": "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
+              "technique": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
+              "breathing": "Deep diaphragmatic breath and brace at bottom; exhale through lockout.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Squatting the bar instead of hinging",
+                "Hyperextending spine at lockout"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop Hypertrophy, Hamstring Sweep & Calf Density",
+          "targetGroup": "Legs",
+          "warmup": "5-10 min stationary bike, bodyweight air squats & hip 90/90 mobility.",
+          "cooldown": "Standing quad stretch, seated hamstring stretch & calf wall stretch.",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps, Glutes & Adductors",
+              "equipment": "Squat Rack & Olympic Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "95 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
+              "instructions": "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
+              "technique": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
+              "breathing": "Big breath into belly at top and hold; exhale as you pass sticking point on way up.",
+              "commonMistakes": [
+                "Knees caving inward (valgus collapse)",
+                "Heels lifting off floor",
+                "Butt wink/rounding lower back"
+              ]
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Gluteus Maximus",
+              "equipment": "45° Plate-Loaded Leg Press Sled",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "180 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-press.jpg",
+              "instructions": "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
+              "technique": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
+              "breathing": "Inhale lowering sled; exhale driving footplate away.",
+              "commonMistakes": [
+                "Allowing pelvis to curl off seat",
+                "Locking knees aggressively at top"
+              ]
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quadriceps (Rectus Femoris Isolation)",
+              "equipment": "Leg Extension Machine & Shin Roller",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-extension.jpg",
+              "instructions": "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
+              "technique": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
+              "breathing": "Exhale extending upward; inhale lowering slowly.",
+              "commonMistakes": [
+                "Using momentum to swing pad",
+                "Allowing weight stack to slam between reps"
+              ]
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings (Biceps Femoris)",
+              "equipment": "Prone Hamstring Curl Bench",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "45 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-curl.jpg",
+              "instructions": "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
+              "technique": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
+              "breathing": "Exhale curling heels up; inhale lowering under control.",
+              "commonMistakes": [
+                "Hips lifting off bench to assist curl",
+                "Incomplete range of motion"
+              ]
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "equipment": "Elevated Block & Machine / Dumbbells",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/calf-raise.jpg",
+              "instructions": "Place balls of feet on edge of calf block, heels hanging free.",
+              "technique": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
+              "breathing": "Inhale dropping heels; exhale pressing high onto toes.",
+              "commonMistakes": [
+                "Bouncing quickly without pauses",
+                "Bending knees and turning it into a squat"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — REST AND RECOVERY",
+          "focus": "CNS Restoration, Active Mobility, Hydration & Sleep Repair",
+          "targetGroup": "Recovery",
+          "warmup": "Light breathing exercises & diaphragmatic expansion.",
+          "cooldown": "Full rest & 7-9 hours restorative deep sleep.",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Walking",
+              "targetMuscle": "Cardiovascular & Lymphatic Flow",
+              "equipment": "Outdoor Path / Gentle Treadmill Pace",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/walking.jpg",
+              "instructions": "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
+              "technique": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
+              "breathing": "Breathe rhythmically in and out through nose.",
+              "commonMistakes": [
+                "Walking too fast and turning it into high-intensity cardio"
+              ]
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Stretching",
+              "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
+              "equipment": "Yoga Mat & Foam Roller",
+              "sets": 1,
+              "reps": "15-20 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/stretching.jpg",
+              "instructions": "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
+              "technique": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
+              "breathing": "Deep diaphragmatic belly breathing.",
+              "commonMistakes": [
+                "Aggressively forcing into painful joint ranges"
+              ]
+            },
+            {
+              "id": "e33",
+              "name": "Mobility Exercises",
+              "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
+              "equipment": "3-4L Water, High Protein & 7-9h Sleep",
+              "sets": 1,
+              "reps": "Full Day Protocol",
+              "weight": "Recovery Target",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/mobility.jpg",
+              "instructions": "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
+              "technique": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
+              "breathing": "Slow 4-7-8 relaxing breathing before sleep.",
+              "commonMistakes": [
+                "Skipping hydration or skimping on protein on rest days"
+              ]
+            }
+          ]
+        }
+      ],
+      "history": []
+    },
+    {
+      "id": "wor_1794198440298_rbnbc",
+      "createdAt": "2026-11-09T04:27:20.298Z",
+      "updatedAt": "2026-11-09T04:27:20.298Z",
+      "userId": "user_1794198440187",
+      "goal": "Bulking",
+      "splitName": "6-Day Bulking Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Pectoral Hypertrophy, Upper Chest Density & Push Power",
+          "targetGroup": "Chest",
+          "warmup": "5-10 min dynamic shoulder circles, band pull-aparts & 2 warm-up sets of light bench press.",
+          "cooldown": "5 min doorway chest stretch & overhead triceps mobility.",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Barbell Bench Press",
+              "targetMuscle": "Pectoralis Major & Triceps",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "75 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/bench-press.jpg",
+              "instructions": "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
+              "technique": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
+              "breathing": "Inhale deeply at the top and hold during descent; exhale forcefully past the sticking point.",
+              "commonMistakes": [
+                "Flaring elbows out to 90 degrees",
+                "Bouncing the barbell off ribcage",
+                "Lifting hips off the bench"
+              ]
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Pectoralis",
+              "equipment": "Adjustable Bench (30°) & Dumbbells",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "26 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
+              "instructions": "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
+              "technique": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
+              "breathing": "Inhale on the lowering phase; exhale as you push the dumbbells upward.",
+              "commonMistakes": [
+                "Setting bench angle too high (>45°) which shifts load to shoulders",
+                "Touching dumbbells together at top and losing tension"
+              ]
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Pectoralis Adduction",
+              "equipment": "Flat Bench & Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/chest-fly.jpg",
+              "instructions": "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
+              "technique": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
+              "breathing": "Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center.",
+              "commonMistakes": [
+                "Bending elbows too much and turning it into a press",
+                "Going too heavy and hyperextending shoulders"
+              ]
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest, Serratus & Lats",
+              "equipment": "Cross-Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
+              "instructions": "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
+              "technique": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
+              "breathing": "Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over.",
+              "commonMistakes": [
+                "Bending elbows excessively like a triceps extension",
+                "Allowing hips to rise up above bench height"
+              ]
+            },
+            {
+              "id": "e5",
+              "name": "Push-Ups",
+              "targetMuscle": "Chest, Anterior Delts & Core",
+              "equipment": "Bodyweight Floor Calisthenics",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/push-ups.jpg",
+              "instructions": "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
+              "technique": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
+              "breathing": "Inhale descending; exhale driving up while bracing core.",
+              "commonMistakes": [
+                "Sagging lower back or piking hips in the air",
+                "Half reps without full chest depth"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDERS",
+          "focus": "3D Deltoid Mass, Overhead Power & Upper Trapezius",
+          "targetGroup": "Shoulders",
+          "warmup": "5-10 min shoulder pass-throughs, face pulls & rotator cuff warm-up.",
+          "cooldown": "Cross-body shoulder stretch & gentle neck lateral stretches.",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "equipment": "Olympic Barbell & Power Rack",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
+              "instructions": "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
+              "technique": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
+              "breathing": "Inhale and brace core before pressing; exhale once past forehead level.",
+              "commonMistakes": [
+                "Excessive lower back arching",
+                "Pressing bar forward instead of vertical",
+                "Not locking out at top"
+              ]
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoid (Shoulder Width)",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
+              "instructions": "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
+              "technique": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
+              "breathing": "Exhale as you raise outward; inhale on controlled descent.",
+              "commonMistakes": [
+                "Using torso momentum or swinging",
+                "Shrugging traps instead of isolating lateral delts"
+              ]
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
+              "instructions": "Stand upright holding dumbbells in front of thighs with overhand grip.",
+              "technique": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
+              "breathing": "Exhale on upward lift; inhale lowering down.",
+              "commonMistakes": [
+                "Swinging hips to launch dumbbells",
+                "Raising far above shoulder level"
+              ]
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids & Rhomboids",
+              "equipment": "Dumbbells & 45° Torso Hinge",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
+              "instructions": "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
+              "technique": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
+              "breathing": "Exhale raising wide; inhale returning under control.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Using heavy weights and turning it into a row"
+              ]
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "equipment": "Heavy Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
+              "instructions": "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
+              "technique": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
+              "breathing": "Exhale on shrug elevation; inhale on the eccentric stretch.",
+              "commonMistakes": [
+                "Rolling shoulders in circles (injures rotator cuffs)",
+                "Bending elbows to assist lift"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Bicep Peak Hypertrophy & Brachialis Density",
+          "targetGroup": "Biceps",
+          "warmup": "5 min wrist rotations, light band curls & forearm stretches.",
+          "cooldown": "Biceps wall stretch & forearm flexor/extensor stretches.",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Short & Long Head)",
+              "equipment": "Olympic / EZ-Curl Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
+              "instructions": "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
+              "technique": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
+              "breathing": "Exhale curling upward; inhale lowering down.",
+              "commonMistakes": [
+                "Rocking torso back and forth",
+                "Flaring elbows away from sides",
+                "Letting bar drop freely"
+              ]
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Brachii Supination",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
+              "instructions": "Hold dumbbells at sides with palms facing each other at bottom position.",
+              "technique": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
+              "breathing": "Exhale as you curl and supinate; inhale during descent.",
+              "commonMistakes": [
+                "Swinging shoulders forward to assist",
+                "Failing to fully supinate wrist"
+              ]
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearm Brachioradialis",
+              "equipment": "Dumbbells (Neutral Grip)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
+              "instructions": "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
+              "technique": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
+              "breathing": "Exhale on contraction; inhale on descent.",
+              "commonMistakes": [
+                "Elbows moving forward past ribcage",
+                "Using excessive torso sway"
+              ]
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Brachii (Isolated Short Head)",
+              "equipment": "Preacher Bench & EZ-Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
+              "instructions": "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
+              "technique": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
+              "breathing": "Exhale curling bar up; inhale as you lower smoothly.",
+              "commonMistakes": [
+                "Hyperextending and locking out elbow violently at bottom",
+                "Lifting body off seat"
+              ]
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak Contraction",
+              "equipment": "Flat Bench & Single Dumbbell",
+              "sets": 3,
+              "reps": "12",
+              "weight": "14 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
+              "instructions": "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
+              "technique": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
+              "breathing": "Exhale curling; inhale lowering.",
+              "commonMistakes": [
+                "Moving elbow along thigh during repetition",
+                "Using back momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "warmup": "5 min arm circles, light cable pushdowns & elbow mobility.",
+          "cooldown": "Overhead triceps stretch & cross-body arm stretch.",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
+              "instructions": "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
+              "technique": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
+              "breathing": "Inhale lowering bar; exhale pressing up.",
+              "commonMistakes": [
+                "Hands too close together (<8 inches) which strains wrists",
+                "Elbows flaring outward"
+              ]
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral Head Peak Lockout",
+              "equipment": "High Cable Pulley & Rope Attachment",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "26 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
+              "instructions": "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
+              "technique": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
+              "breathing": "Exhale pushing down into lockout; inhale allowing rope to return to chest height.",
+              "commonMistakes": [
+                "Letting elbows drift forward and backward",
+                "Using body weight to press rope"
+              ]
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Extension",
+              "targetMuscle": "Triceps Long Head (Full Stretch)",
+              "equipment": "Seated Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
+              "instructions": "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
+              "technique": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
+              "breathing": "Inhale descending behind neck; exhale extending overhead.",
+              "commonMistakes": [
+                "Elbows flaring excessively wide",
+                "Arching lower back off backrest"
+              ]
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Anterior Deltoids",
+              "equipment": "Parallel Bar Dips / Bench",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/dips.jpg",
+              "instructions": "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+              "technique": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
+              "breathing": "Inhale lowering hips; exhale pressing up.",
+              "commonMistakes": [
+                "Leaning too far forward (shifts load to chest)",
+                "Shrugging shoulders"
+              ]
+            },
+            {
+              "id": "e20",
+              "name": "Triceps Kickback",
+              "targetMuscle": "Triceps Lateral & Long Head Lockout",
+              "equipment": "Dumbbell & Flat Bench Support",
+              "sets": 3,
+              "reps": "12",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+              "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
+              "technique": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
+              "breathing": "Exhale extending back; inhale returning forward.",
+              "commonMistakes": [
+                "Dropping elbow during movement",
+                "Swinging dumbbell with shoulder momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Posterior Chain Power",
+          "targetGroup": "Back",
+          "warmup": "5-10 min band dislocates, light lat pulldowns & cat-cow spinal flexions.",
+          "cooldown": "Dead hang from pull-up bar for 60 seconds & child's pose.",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull-Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "equipment": "Rigid Overhead Pull-Up Bar",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/pull-ups.jpg",
+              "instructions": "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
+              "technique": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
+              "breathing": "Exhale pulling up; inhale lowering into full dead-hang stretch.",
+              "commonMistakes": [
+                "Kicking legs or kipping body",
+                "Half reps without chin clearing bar or without full stretch"
+              ]
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back Thickness",
+              "equipment": "Olympic Barbell & 45° Torso Angle",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/barbell-row.jpg",
+              "instructions": "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
+              "technique": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
+              "breathing": "Exhale rowing upward; inhale lowering bar under control.",
+              "commonMistakes": [
+                "Rounding lumbar spine",
+                "Standing too upright and turning it into a shrug"
+              ]
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Latissimus Dorsi (Outer Sweep)",
+              "equipment": "Cable Lat Machine & Wide Curved Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
+              "instructions": "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
+              "technique": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
+              "breathing": "Exhale pulling down; inhale returning bar overhead.",
+              "commonMistakes": [
+                "Pulling bar behind the neck (dangerous for rotator cuffs)",
+                "Swinging torso backward excessively"
+              ]
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Middle Traps, Rhomboids & Lower Lats",
+              "equipment": "Low Pulley Cable Row & V-Grip Handle",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
+              "instructions": "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
+              "technique": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
+              "breathing": "Exhale pulling into ribs; inhale extending arms forward.",
+              "commonMistakes": [
+                "Rounding lower back reaching forward",
+                "Leaning back excessively to jerk weight"
+              ]
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Entire Posterior Chain, Erector Spinae & Glutes",
+              "equipment": "Olympic Barbell & Bumper Plates",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "115 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/deadlift.jpg",
+              "instructions": "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
+              "technique": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
+              "breathing": "Deep diaphragmatic breath and brace at bottom; exhale through lockout.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Squatting the bar instead of hinging",
+                "Hyperextending spine at lockout"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop Hypertrophy, Hamstring Sweep & Calf Density",
+          "targetGroup": "Legs",
+          "warmup": "5-10 min stationary bike, bodyweight air squats & hip 90/90 mobility.",
+          "cooldown": "Standing quad stretch, seated hamstring stretch & calf wall stretch.",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps, Glutes & Adductors",
+              "equipment": "Squat Rack & Olympic Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "95 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
+              "instructions": "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
+              "technique": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
+              "breathing": "Big breath into belly at top and hold; exhale as you pass sticking point on way up.",
+              "commonMistakes": [
+                "Knees caving inward (valgus collapse)",
+                "Heels lifting off floor",
+                "Butt wink/rounding lower back"
+              ]
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Gluteus Maximus",
+              "equipment": "45° Plate-Loaded Leg Press Sled",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "180 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-press.jpg",
+              "instructions": "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
+              "technique": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
+              "breathing": "Inhale lowering sled; exhale driving footplate away.",
+              "commonMistakes": [
+                "Allowing pelvis to curl off seat",
+                "Locking knees aggressively at top"
+              ]
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quadriceps (Rectus Femoris Isolation)",
+              "equipment": "Leg Extension Machine & Shin Roller",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-extension.jpg",
+              "instructions": "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
+              "technique": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
+              "breathing": "Exhale extending upward; inhale lowering slowly.",
+              "commonMistakes": [
+                "Using momentum to swing pad",
+                "Allowing weight stack to slam between reps"
+              ]
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings (Biceps Femoris)",
+              "equipment": "Prone Hamstring Curl Bench",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "45 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-curl.jpg",
+              "instructions": "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
+              "technique": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
+              "breathing": "Exhale curling heels up; inhale lowering under control.",
+              "commonMistakes": [
+                "Hips lifting off bench to assist curl",
+                "Incomplete range of motion"
+              ]
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "equipment": "Elevated Block & Machine / Dumbbells",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/calf-raise.jpg",
+              "instructions": "Place balls of feet on edge of calf block, heels hanging free.",
+              "technique": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
+              "breathing": "Inhale dropping heels; exhale pressing high onto toes.",
+              "commonMistakes": [
+                "Bouncing quickly without pauses",
+                "Bending knees and turning it into a squat"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — REST AND RECOVERY",
+          "focus": "CNS Restoration, Active Mobility, Hydration & Sleep Repair",
+          "targetGroup": "Recovery",
+          "warmup": "Light breathing exercises & diaphragmatic expansion.",
+          "cooldown": "Full rest & 7-9 hours restorative deep sleep.",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Walking",
+              "targetMuscle": "Cardiovascular & Lymphatic Flow",
+              "equipment": "Outdoor Path / Gentle Treadmill Pace",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/walking.jpg",
+              "instructions": "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
+              "technique": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
+              "breathing": "Breathe rhythmically in and out through nose.",
+              "commonMistakes": [
+                "Walking too fast and turning it into high-intensity cardio"
+              ]
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Stretching",
+              "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
+              "equipment": "Yoga Mat & Foam Roller",
+              "sets": 1,
+              "reps": "15-20 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/stretching.jpg",
+              "instructions": "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
+              "technique": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
+              "breathing": "Deep diaphragmatic belly breathing.",
+              "commonMistakes": [
+                "Aggressively forcing into painful joint ranges"
+              ]
+            },
+            {
+              "id": "e33",
+              "name": "Mobility Exercises",
+              "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
+              "equipment": "3-4L Water, High Protein & 7-9h Sleep",
+              "sets": 1,
+              "reps": "Full Day Protocol",
+              "weight": "Recovery Target",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/mobility.jpg",
+              "instructions": "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
+              "technique": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
+              "breathing": "Slow 4-7-8 relaxing breathing before sleep.",
+              "commonMistakes": [
+                "Skipping hydration or skimping on protein on rest days"
+              ]
+            }
+          ]
+        }
+      ],
+      "history": []
+    },
+    {
+      "id": "wor_1794198487780_flvvx",
+      "createdAt": "2026-11-09T04:28:07.780Z",
+      "updatedAt": "2026-11-09T04:28:07.780Z",
+      "userId": "user_1794198487662",
+      "goal": "Bulking",
+      "splitName": "6-Day Bulking Split",
+      "activeDayIndex": 0,
+      "days": [
+        {
+          "dayNumber": 1,
+          "dayName": "Day 1 — CHEST",
+          "focus": "Pectoral Hypertrophy, Upper Chest Density & Push Power",
+          "targetGroup": "Chest",
+          "warmup": "5-10 min dynamic shoulder circles, band pull-aparts & 2 warm-up sets of light bench press.",
+          "cooldown": "5 min doorway chest stretch & overhead triceps mobility.",
+          "exercises": [
+            {
+              "id": "e1",
+              "name": "Barbell Bench Press",
+              "targetMuscle": "Pectoralis Major & Triceps",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "75 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/bench-press.jpg",
+              "instructions": "Lie flat on bench with eyes under barbell. Grip slightly wider than shoulder width, arch lower back slightly, and retract scapulae.",
+              "technique": "Lower bar in a controlled 3-second descent touching lower sternum. Drive upward explosively without flaring elbows.",
+              "breathing": "Inhale deeply at the top and hold during descent; exhale forcefully past the sticking point.",
+              "commonMistakes": [
+                "Flaring elbows out to 90 degrees",
+                "Bouncing the barbell off ribcage",
+                "Lifting hips off the bench"
+              ]
+            },
+            {
+              "id": "e2",
+              "name": "Incline Dumbbell Press",
+              "targetMuscle": "Upper Clavicular Pectoralis",
+              "equipment": "Adjustable Bench (30°) & Dumbbells",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "26 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/incline-dumbbell-press.jpg",
+              "instructions": "Set bench to 30 degrees. Kick dumbbells up to shoulder level with knees, plant feet firmly, and press up over upper chest.",
+              "technique": "Keep elbows at 45 degrees to torso. Lower until you feel a deep stretch in upper pecs, then drive inward.",
+              "breathing": "Inhale on the lowering phase; exhale as you push the dumbbells upward.",
+              "commonMistakes": [
+                "Setting bench angle too high (>45°) which shifts load to shoulders",
+                "Touching dumbbells together at top and losing tension"
+              ]
+            },
+            {
+              "id": "e3",
+              "name": "Chest Fly",
+              "targetMuscle": "Sternal Pectoralis Adduction",
+              "equipment": "Flat Bench & Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/chest-fly.jpg",
+              "instructions": "Lie supine holding dumbbells above chest with neutral grip and slight bend in elbows.",
+              "technique": "Open arms in a wide hugging arc until chest is stretched. Squeeze pecs hard to bring dumbbells back together.",
+              "breathing": "Inhale as you open wide into the chest stretch; exhale as you adduct arms back to center.",
+              "commonMistakes": [
+                "Bending elbows too much and turning it into a press",
+                "Going too heavy and hyperextending shoulders"
+              ]
+            },
+            {
+              "id": "e4",
+              "name": "Dumbbell Pullover",
+              "targetMuscle": "Upper Chest, Serratus & Lats",
+              "equipment": "Cross-Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "22 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/dumbbell-pullover.jpg",
+              "instructions": "Rest upper back perpendicular across a flat bench, hips slightly lowered. Hold one dumbbell with both hands in diamond grip.",
+              "technique": "Lower dumbbell behind head in an arc until a deep ribcage stretch is achieved. Pull back over chest focusing on serratus and pecs.",
+              "breathing": "Take a deep diaphragmatic breath expanding the ribcage as the weight lowers; exhale as you pull over.",
+              "commonMistakes": [
+                "Bending elbows excessively like a triceps extension",
+                "Allowing hips to rise up above bench height"
+              ]
+            },
+            {
+              "id": "e5",
+              "name": "Push-Ups",
+              "targetMuscle": "Chest, Anterior Delts & Core",
+              "equipment": "Bodyweight Floor Calisthenics",
+              "sets": 3,
+              "reps": "MAX",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/chest/push-ups.jpg",
+              "instructions": "Place hands shoulder-width apart on floor, feet together, body in rigid plank.",
+              "technique": "Lower chest to 1 inch off the floor with elbows tracking 45 degrees back. Press up to full arm extension.",
+              "breathing": "Inhale descending; exhale driving up while bracing core.",
+              "commonMistakes": [
+                "Sagging lower back or piking hips in the air",
+                "Half reps without full chest depth"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "dayName": "Day 2 — SHOULDERS",
+          "focus": "3D Deltoid Mass, Overhead Power & Upper Trapezius",
+          "targetGroup": "Shoulders",
+          "warmup": "5-10 min shoulder pass-throughs, face pulls & rotator cuff warm-up.",
+          "cooldown": "Cross-body shoulder stretch & gentle neck lateral stretches.",
+          "exercises": [
+            {
+              "id": "e6",
+              "name": "Overhead Press",
+              "targetMuscle": "Anterior & Lateral Deltoids",
+              "equipment": "Olympic Barbell & Power Rack",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "50 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/overhead-press.jpg",
+              "instructions": "Stand with feet shoulder-width, bar resting across clavicles. Squeeze glutes and brace core.",
+              "technique": "Press bar vertically, tilting head slightly back to clear chin, then pushing head through window at top lockout.",
+              "breathing": "Inhale and brace core before pressing; exhale once past forehead level.",
+              "commonMistakes": [
+                "Excessive lower back arching",
+                "Pressing bar forward instead of vertical",
+                "Not locking out at top"
+              ]
+            },
+            {
+              "id": "e7",
+              "name": "Lateral Raise",
+              "targetMuscle": "Lateral Deltoid (Shoulder Width)",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-15",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/lateral-raise.jpg",
+              "instructions": "Stand tall with slight forward hinge, dumbbells at thighs with elbows slightly bent.",
+              "technique": "Raise arms laterally leading with elbows until parallel to floor. Pour the pitcher slightly with thumbs angled down.",
+              "breathing": "Exhale as you raise outward; inhale on controlled descent.",
+              "commonMistakes": [
+                "Using torso momentum or swinging",
+                "Shrugging traps instead of isolating lateral delts"
+              ]
+            },
+            {
+              "id": "e8",
+              "name": "Front Raise",
+              "targetMuscle": "Anterior Deltoid Head",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "12 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/front-raise.jpg",
+              "instructions": "Stand upright holding dumbbells in front of thighs with overhand grip.",
+              "technique": "Raise dumbbells straight forward to eye level with strict control. Pause for a split second, then lower slowly.",
+              "breathing": "Exhale on upward lift; inhale lowering down.",
+              "commonMistakes": [
+                "Swinging hips to launch dumbbells",
+                "Raising far above shoulder level"
+              ]
+            },
+            {
+              "id": "e9",
+              "name": "Rear Delt Fly",
+              "targetMuscle": "Posterior Deltoids & Rhomboids",
+              "equipment": "Dumbbells & 45° Torso Hinge",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "10 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/rear-delt-fly.jpg",
+              "instructions": "Hinge at hips to a 45-degree angle with flat spine and soft knees. Let dumbbells hang below shoulders.",
+              "technique": "Sweep arms out wide and slightly back like wings, squeezing the back of your shoulders at the peak.",
+              "breathing": "Exhale raising wide; inhale returning under control.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Using heavy weights and turning it into a row"
+              ]
+            },
+            {
+              "id": "e10",
+              "name": "Shrugs",
+              "targetMuscle": "Upper Trapezius",
+              "equipment": "Heavy Dumbbells (Pair)",
+              "sets": 3,
+              "reps": "12-15",
+              "weight": "32 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/shoulders/shrugs.jpg",
+              "instructions": "Hold heavy dumbbells at your sides with neutral grip, arms straight and shoulders back.",
+              "technique": "Elevate shoulders straight upward towards your ears. Hold the peak contraction for 1-2 seconds, then lower under control.",
+              "breathing": "Exhale on shrug elevation; inhale on the eccentric stretch.",
+              "commonMistakes": [
+                "Rolling shoulders in circles (injures rotator cuffs)",
+                "Bending elbows to assist lift"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "dayName": "Day 3 — BICEPS",
+          "focus": "Arm Thickness, Bicep Peak Hypertrophy & Brachialis Density",
+          "targetGroup": "Biceps",
+          "warmup": "5 min wrist rotations, light band curls & forearm stretches.",
+          "cooldown": "Biceps wall stretch & forearm flexor/extensor stretches.",
+          "exercises": [
+            {
+              "id": "e11",
+              "name": "Barbell Curl",
+              "targetMuscle": "Biceps Brachii (Short & Long Head)",
+              "equipment": "Olympic / EZ-Curl Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "35 kg",
+              "restTime": 75,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/barbell-curl.jpg",
+              "instructions": "Stand tall holding barbell with shoulder-width supinated grip, elbows tucked against ribcage.",
+              "technique": "Curl bar upward in a smooth arc to upper chest. Squeeze biceps hard at peak, then take 3 seconds to lower.",
+              "breathing": "Exhale curling upward; inhale lowering down.",
+              "commonMistakes": [
+                "Rocking torso back and forth",
+                "Flaring elbows away from sides",
+                "Letting bar drop freely"
+              ]
+            },
+            {
+              "id": "e12",
+              "name": "Dumbbell Curl",
+              "targetMuscle": "Biceps Brachii Supination",
+              "equipment": "Dumbbells (Pair)",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/dumbbell-curl.jpg",
+              "instructions": "Hold dumbbells at sides with palms facing each other at bottom position.",
+              "technique": "Curl up while rotating wrist (supination) so palm faces ceiling by mid-repetition. Squeeze at top.",
+              "breathing": "Exhale as you curl and supinate; inhale during descent.",
+              "commonMistakes": [
+                "Swinging shoulders forward to assist",
+                "Failing to fully supinate wrist"
+              ]
+            },
+            {
+              "id": "e13",
+              "name": "Hammer Curl",
+              "targetMuscle": "Brachialis & Forearm Brachioradialis",
+              "equipment": "Dumbbells (Neutral Grip)",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "16 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/hammer-curl.jpg",
+              "instructions": "Hold dumbbells with palms facing each other (neutral grip) throughout entire rep.",
+              "technique": "Curl straight up toward shoulders maintaining neutral palms. Great for widening arm profile and forearms.",
+              "breathing": "Exhale on contraction; inhale on descent.",
+              "commonMistakes": [
+                "Elbows moving forward past ribcage",
+                "Using excessive torso sway"
+              ]
+            },
+            {
+              "id": "e14",
+              "name": "Preacher Curl",
+              "targetMuscle": "Biceps Brachii (Isolated Short Head)",
+              "equipment": "Preacher Bench & EZ-Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "28 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/preacher-curl.jpg",
+              "instructions": "Sit at preacher bench with upper arms flat against 45-degree pad, gripping inner EZ-bar knurling.",
+              "technique": "Curl bar toward chin without lifting elbows off pad. Lower under strict control to 95% extension.",
+              "breathing": "Exhale curling bar up; inhale as you lower smoothly.",
+              "commonMistakes": [
+                "Hyperextending and locking out elbow violently at bottom",
+                "Lifting body off seat"
+              ]
+            },
+            {
+              "id": "e15",
+              "name": "Concentration Curl",
+              "targetMuscle": "Biceps Isolation Peak Contraction",
+              "equipment": "Flat Bench & Single Dumbbell",
+              "sets": 3,
+              "reps": "12",
+              "weight": "14 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/biceps/concentration-curl.jpg",
+              "instructions": "Sit on bench with legs spread. Brace back of elbow against inner thigh of same side.",
+              "technique": "Curl dumbbell up smoothly towards your face, keeping torso steady. Peak squeeze at top for 1 second.",
+              "breathing": "Exhale curling; inhale lowering.",
+              "commonMistakes": [
+                "Moving elbow along thigh during repetition",
+                "Using back momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 4,
+          "dayName": "Day 4 — TRICEPS",
+          "focus": "Tricep Horseshoe, Lockout Power & Density",
+          "targetGroup": "Triceps",
+          "warmup": "5 min arm circles, light cable pushdowns & elbow mobility.",
+          "cooldown": "Overhead triceps stretch & cross-body arm stretch.",
+          "exercises": [
+            {
+              "id": "e16",
+              "name": "Close Grip Bench Press",
+              "targetMuscle": "Triceps Lateral & Medial Heads",
+              "equipment": "Olympic Barbell & Flat Bench",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "65 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/close-grip-bench-press.jpg",
+              "instructions": "Grip barbell shoulder-width apart (approx 12-14 inches). Keep elbows tucked close to ribcage.",
+              "technique": "Lower bar to lower ribcage under control, drive up forcefully locking out triceps.",
+              "breathing": "Inhale lowering bar; exhale pressing up.",
+              "commonMistakes": [
+                "Hands too close together (<8 inches) which strains wrists",
+                "Elbows flaring outward"
+              ]
+            },
+            {
+              "id": "e17",
+              "name": "Rope Push Down",
+              "targetMuscle": "Triceps Lateral Head Peak Lockout",
+              "equipment": "High Cable Pulley & Rope Attachment",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "26 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/rope-pushdown.jpg",
+              "instructions": "Grip rope attachment with palms facing inward, slight forward hinge at hips, elbows pinned to sides.",
+              "technique": "Push rope downward and flare rope ends apart at full lockout, squeezing triceps for 1 second.",
+              "breathing": "Exhale pushing down into lockout; inhale allowing rope to return to chest height.",
+              "commonMistakes": [
+                "Letting elbows drift forward and backward",
+                "Using body weight to press rope"
+              ]
+            },
+            {
+              "id": "e18",
+              "name": "Overhead Triceps Extension",
+              "targetMuscle": "Triceps Long Head (Full Stretch)",
+              "equipment": "Seated Bench & Heavy Dumbbell",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "24 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/overhead-extension.jpg",
+              "instructions": "Sit upright gripping one dumbbell with both hands in diamond grip overhead.",
+              "technique": "Lower dumbbell behind neck keeping elbows pointing upward. Extend arms back overhead to full lockout.",
+              "breathing": "Inhale descending behind neck; exhale extending overhead.",
+              "commonMistakes": [
+                "Elbows flaring excessively wide",
+                "Arching lower back off backrest"
+              ]
+            },
+            {
+              "id": "e19",
+              "name": "Dips",
+              "targetMuscle": "Triceps & Anterior Deltoids",
+              "equipment": "Parallel Bar Dips / Bench",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "Bodyweight",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/dips.jpg",
+              "instructions": "Mount parallel dip bars with arms straight and shoulders depressed down. Torso upright.",
+              "technique": "Lower body by bending elbows until arms form 90 degrees. Press through palms to lock out.",
+              "breathing": "Inhale lowering hips; exhale pressing up.",
+              "commonMistakes": [
+                "Leaning too far forward (shifts load to chest)",
+                "Shrugging shoulders"
+              ]
+            },
+            {
+              "id": "e20",
+              "name": "Triceps Kickback",
+              "targetMuscle": "Triceps Lateral & Long Head Lockout",
+              "equipment": "Dumbbell & Flat Bench Support",
+              "sets": 3,
+              "reps": "12",
+              "weight": "10 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/triceps/triceps-kickback.jpg",
+              "instructions": "Hinge torso parallel to floor, pin upper arm alongside ribcage, holding dumbbell.",
+              "technique": "Extend forearm straight back into full elbow lockout, squeezing tricep hard before returning to 90 degrees.",
+              "breathing": "Exhale extending back; inhale returning forward.",
+              "commonMistakes": [
+                "Dropping elbow during movement",
+                "Swinging dumbbell with shoulder momentum"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 5,
+          "dayName": "Day 5 — BACK",
+          "focus": "V-Taper Lats, Mid-Back Thickness & Deadlift Posterior Chain Power",
+          "targetGroup": "Back",
+          "warmup": "5-10 min band dislocates, light lat pulldowns & cat-cow spinal flexions.",
+          "cooldown": "Dead hang from pull-up bar for 60 seconds & child's pose.",
+          "exercises": [
+            {
+              "id": "e21",
+              "name": "Pull-Ups",
+              "targetMuscle": "Latissimus Dorsi (V-Taper Width)",
+              "equipment": "Rigid Overhead Pull-Up Bar",
+              "sets": 4,
+              "reps": "6-10",
+              "weight": "Bodyweight",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/pull-ups.jpg",
+              "instructions": "Grip pull-up bar slightly wider than shoulder width with overhand grip from a full dead-hang.",
+              "technique": "Drive elbows down toward your hips and pull upper chest up to touch the bar. Lower under control.",
+              "breathing": "Exhale pulling up; inhale lowering into full dead-hang stretch.",
+              "commonMistakes": [
+                "Kicking legs or kipping body",
+                "Half reps without chin clearing bar or without full stretch"
+              ]
+            },
+            {
+              "id": "e22",
+              "name": "Barbell Row",
+              "targetMuscle": "Rhomboids, Lats & Mid-Back Thickness",
+              "equipment": "Olympic Barbell & 45° Torso Angle",
+              "sets": 4,
+              "reps": "8-12",
+              "weight": "70 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/barbell-row.jpg",
+              "instructions": "Hinge forward at 45 degrees with flat spine and knees soft. Grip bar slightly wider than shoulders.",
+              "technique": "Pull bar towards your navel, driving elbows back and pinching shoulder blades together tightly.",
+              "breathing": "Exhale rowing upward; inhale lowering bar under control.",
+              "commonMistakes": [
+                "Rounding lumbar spine",
+                "Standing too upright and turning it into a shrug"
+              ]
+            },
+            {
+              "id": "e23",
+              "name": "Lat Pulldown",
+              "targetMuscle": "Latissimus Dorsi (Outer Sweep)",
+              "equipment": "Cable Lat Machine & Wide Curved Bar",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "65 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/lat-pulldown.jpg",
+              "instructions": "Lock thighs firmly under pads. Grip wide curved bar with overhand grip, slight lean back.",
+              "technique": "Pull bar down smoothly to upper collarbone while expanding chest. Slowly control ascent back up.",
+              "breathing": "Exhale pulling down; inhale returning bar overhead.",
+              "commonMistakes": [
+                "Pulling bar behind the neck (dangerous for rotator cuffs)",
+                "Swinging torso backward excessively"
+              ]
+            },
+            {
+              "id": "e24",
+              "name": "Seated Cable Row",
+              "targetMuscle": "Middle Traps, Rhomboids & Lower Lats",
+              "equipment": "Low Pulley Cable Row & V-Grip Handle",
+              "sets": 3,
+              "reps": "10-12",
+              "weight": "60 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/seated-cable-row.jpg",
+              "instructions": "Sit upright with feet braced against footplates and knees softly bent. Grasp V-grip handle.",
+              "technique": "Pull handle into lower abdomen while keeping spine tall. Squeeze back muscles for 1 second.",
+              "breathing": "Exhale pulling into ribs; inhale extending arms forward.",
+              "commonMistakes": [
+                "Rounding lower back reaching forward",
+                "Leaning back excessively to jerk weight"
+              ]
+            },
+            {
+              "id": "e25",
+              "name": "Deadlift",
+              "targetMuscle": "Entire Posterior Chain, Erector Spinae & Glutes",
+              "equipment": "Olympic Barbell & Bumper Plates",
+              "sets": 3,
+              "reps": "6-8",
+              "weight": "115 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/back/deadlift.jpg",
+              "instructions": "Bar over midfoot, feet hip-width. Hinge down and take double-overhand or mixed grip. Pull chest proud and lock lats.",
+              "technique": "Push the floor away through midfoot, keeping bar glued to shins and thighs until hips lock out tall.",
+              "breathing": "Deep diaphragmatic breath and brace at bottom; exhale through lockout.",
+              "commonMistakes": [
+                "Rounding lower back",
+                "Squatting the bar instead of hinging",
+                "Hyperextending spine at lockout"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 6,
+          "dayName": "Day 6 — LEGS",
+          "focus": "Quad Teardrop Hypertrophy, Hamstring Sweep & Calf Density",
+          "targetGroup": "Legs",
+          "warmup": "5-10 min stationary bike, bodyweight air squats & hip 90/90 mobility.",
+          "cooldown": "Standing quad stretch, seated hamstring stretch & calf wall stretch.",
+          "exercises": [
+            {
+              "id": "e26",
+              "name": "Barbell Squat",
+              "targetMuscle": "Quadriceps, Glutes & Adductors",
+              "equipment": "Squat Rack & Olympic Barbell",
+              "sets": 4,
+              "reps": "8-10",
+              "weight": "95 kg",
+              "restTime": 120,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/barbell-squat.jpg",
+              "instructions": "Rest bar across upper traps (high bar). Feet shoulder-width apart, toes turned out 15 degrees. Brace core 360 degrees.",
+              "technique": "Descend by breaking at hips and knees until hip crease is parallel or below knees. Drive up through midfoot.",
+              "breathing": "Big breath into belly at top and hold; exhale as you pass sticking point on way up.",
+              "commonMistakes": [
+                "Knees caving inward (valgus collapse)",
+                "Heels lifting off floor",
+                "Butt wink/rounding lower back"
+              ]
+            },
+            {
+              "id": "e27",
+              "name": "Leg Press",
+              "targetMuscle": "Quadriceps & Gluteus Maximus",
+              "equipment": "45° Plate-Loaded Leg Press Sled",
+              "sets": 4,
+              "reps": "10-12",
+              "weight": "180 kg",
+              "restTime": 90,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-press.jpg",
+              "instructions": "Sit firmly in seat with lower back and hips pressed against pad. Place feet shoulder-width on footplate.",
+              "technique": "Release safety levers. Lower sled until knees reach 90 degrees without rounding tailbone. Press back up without knee lockout.",
+              "breathing": "Inhale lowering sled; exhale driving footplate away.",
+              "commonMistakes": [
+                "Allowing pelvis to curl off seat",
+                "Locking knees aggressively at top"
+              ]
+            },
+            {
+              "id": "e28",
+              "name": "Leg Extension",
+              "targetMuscle": "Quadriceps (Rectus Femoris Isolation)",
+              "equipment": "Leg Extension Machine & Shin Roller",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "50 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-extension.jpg",
+              "instructions": "Align knee joint with machine pivot axis. Pad rests against lower shins just above ankles.",
+              "technique": "Extend legs fully, squeeze quads hard at the top for 1 full second, then take 3 seconds to lower.",
+              "breathing": "Exhale extending upward; inhale lowering slowly.",
+              "commonMistakes": [
+                "Using momentum to swing pad",
+                "Allowing weight stack to slam between reps"
+              ]
+            },
+            {
+              "id": "e29",
+              "name": "Leg Curl",
+              "targetMuscle": "Hamstrings (Biceps Femoris)",
+              "equipment": "Prone Hamstring Curl Bench",
+              "sets": 3,
+              "reps": "10-15",
+              "weight": "45 kg",
+              "restTime": 60,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/leg-curl.jpg",
+              "instructions": "Lie face down with roller pad positioned just below calf muscles. Hold side handles.",
+              "technique": "Curl heels up toward glutes while keeping hips pinned to pad. Squeeze hamstrings, then control return.",
+              "breathing": "Exhale curling heels up; inhale lowering under control.",
+              "commonMistakes": [
+                "Hips lifting off bench to assist curl",
+                "Incomplete range of motion"
+              ]
+            },
+            {
+              "id": "e30",
+              "name": "Calf Raise",
+              "targetMuscle": "Gastrocnemius & Soleus",
+              "equipment": "Elevated Block & Machine / Dumbbells",
+              "sets": 4,
+              "reps": "12-20",
+              "weight": "70 kg",
+              "restTime": 45,
+              "completed": false,
+              "completedSets": [
+                false,
+                false,
+                false,
+                false
+              ],
+              "imageUrl": "/images/workouts/legs/calf-raise.jpg",
+              "instructions": "Place balls of feet on edge of calf block, heels hanging free.",
+              "technique": "Lower heels into a deep calf stretch for 1 second, then explode up onto toes and hold peak squeeze for 2 seconds.",
+              "breathing": "Inhale dropping heels; exhale pressing high onto toes.",
+              "commonMistakes": [
+                "Bouncing quickly without pauses",
+                "Bending knees and turning it into a squat"
+              ]
+            }
+          ]
+        },
+        {
+          "dayNumber": 7,
+          "dayName": "Day 7 — REST AND RECOVERY",
+          "focus": "CNS Restoration, Active Mobility, Hydration & Sleep Repair",
+          "targetGroup": "Recovery",
+          "warmup": "Light breathing exercises & diaphragmatic expansion.",
+          "cooldown": "Full rest & 7-9 hours restorative deep sleep.",
+          "exercises": [
+            {
+              "id": "e31",
+              "name": "Walking",
+              "targetMuscle": "Cardiovascular & Lymphatic Flow",
+              "equipment": "Outdoor Path / Gentle Treadmill Pace",
+              "sets": 1,
+              "reps": "30 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/walking.jpg",
+              "instructions": "Perform a gentle brisk walk at nasal breathing pace (60-70% max heart rate).",
+              "technique": "Stimulates lymphatic drainage, clears metabolic waste, enhances muscle recovery without systemic fatigue.",
+              "breathing": "Breathe rhythmically in and out through nose.",
+              "commonMistakes": [
+                "Walking too fast and turning it into high-intensity cardio"
+              ]
+            },
+            {
+              "id": "e32",
+              "name": "Full Body Stretching",
+              "targetMuscle": "Joint Mobility, Fascia & Hip Openers",
+              "equipment": "Yoga Mat & Foam Roller",
+              "sets": 1,
+              "reps": "15-20 mins",
+              "weight": "Bodyweight",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/stretching.jpg",
+              "instructions": "Guided mobility circuit covering thoracic spine rotation, world's greatest stretch, hip flexors, and hamstrings.",
+              "technique": "Hold each stretch for 30-45 seconds without bouncing. Focus on relaxing tight connective tissue.",
+              "breathing": "Deep diaphragmatic belly breathing.",
+              "commonMistakes": [
+                "Aggressively forcing into painful joint ranges"
+              ]
+            },
+            {
+              "id": "e33",
+              "name": "Mobility Exercises",
+              "targetMuscle": "Cellular Repair, Protein Synthesis & CNS",
+              "equipment": "3-4L Water, High Protein & 7-9h Sleep",
+              "sets": 1,
+              "reps": "Full Day Protocol",
+              "weight": "Recovery Target",
+              "restTime": 0,
+              "completed": false,
+              "completedSets": [
+                false
+              ],
+              "imageUrl": "/images/workouts/recovery/mobility.jpg",
+              "instructions": "Drink 3-4 liters of water with electrolytes, hit 2.0g/kg protein goal, and prioritize 7-9 hours of uninterrupted sleep.",
+              "technique": "Rest is when hypertrophy occurs. Keep room dark, cool, and stay off screens 45 mins before bedtime.",
+              "breathing": "Slow 4-7-8 relaxing breathing before sleep.",
+              "commonMistakes": [
+                "Skipping hydration or skimping on protein on rest days"
+              ]
+            }
+          ]
+        }
+      ],
+      "history": []
     }
   ],
   "dietPlans": [
@@ -18870,6 +22608,38 @@
       "updatedAt": "2026-11-07T14:29:12.418Z",
       "userId": "user_1794061752266",
       "date": "2026-11-07",
+      "meals": []
+    },
+    {
+      "id": "die_1794198433195_vcnve",
+      "createdAt": "2026-11-09T04:27:13.195Z",
+      "updatedAt": "2026-11-09T04:27:13.195Z",
+      "userId": "user_1794198433031",
+      "date": "2026-11-09",
+      "meals": []
+    },
+    {
+      "id": "die_1794198435860_scsl0",
+      "createdAt": "2026-11-09T04:27:15.860Z",
+      "updatedAt": "2026-11-09T04:27:15.860Z",
+      "userId": "user_1794198435737",
+      "date": "2026-11-09",
+      "meals": []
+    },
+    {
+      "id": "die_1794198440317_z1utv",
+      "createdAt": "2026-11-09T04:27:20.317Z",
+      "updatedAt": "2026-11-09T04:27:20.317Z",
+      "userId": "user_1794198440187",
+      "date": "2026-11-09",
+      "meals": []
+    },
+    {
+      "id": "die_1794198487794_7k3ea",
+      "createdAt": "2026-11-09T04:28:07.794Z",
+      "updatedAt": "2026-11-09T04:28:07.794Z",
+      "userId": "user_1794198487662",
+      "date": "2026-11-09",
       "meals": []
     }
   ],
@@ -19751,6 +23521,110 @@
       "isWearableConnected": false,
       "wearableDevice": "Not Connected",
       "lastSyncTimestamp": "2026-11-07T14:29:12.445Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1794198433248_yosix",
+      "createdAt": "2026-11-09T04:27:13.248Z",
+      "updatedAt": "2026-11-09T04:27:13.248Z",
+      "userId": "user_1794198433031",
+      "date": "2026-11-09",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-11-09T04:27:13.248Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1794198435891_5ccc9",
+      "createdAt": "2026-11-09T04:27:15.891Z",
+      "updatedAt": "2026-11-09T04:27:15.891Z",
+      "userId": "user_1794198435737",
+      "date": "2026-11-09",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-11-09T04:27:15.891Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1794198440350_r1x23",
+      "createdAt": "2026-11-09T04:27:20.350Z",
+      "updatedAt": "2026-11-09T04:27:20.350Z",
+      "userId": "user_1794198440187",
+      "date": "2026-11-09",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-11-09T04:27:20.350Z",
+      "cardioZones": {
+        "warmUpMinutes": 10,
+        "fatBurnMinutes": 15,
+        "cardioMinutes": 5,
+        "peakMinutes": 0
+      }
+    },
+    {
+      "id": "vit_1794198487836_3yv69",
+      "createdAt": "2026-11-09T04:28:07.836Z",
+      "updatedAt": "2026-11-09T04:28:07.836Z",
+      "userId": "user_1794198487662",
+      "date": "2026-11-09",
+      "heartRateBpm": 72,
+      "restingHeartRate": 62,
+      "maxHeartRate": 155,
+      "steps": 1200,
+      "stepGoal": 10000,
+      "activeCaloriesBurned": 110,
+      "sleepHours": 7.5,
+      "sleepTargetHours": 8,
+      "recoveryScore": 84,
+      "syncSource": "Manual",
+      "isWearableConnected": false,
+      "wearableDevice": "Not Connected",
+      "lastSyncTimestamp": "2026-11-09T04:28:07.836Z",
       "cardioZones": {
         "warmUpMinutes": 10,
         "fatBurnMinutes": 15,
@@ -21295,6 +25169,66 @@
           "amountMl": 500
         }
       ]
+    },
+    {
+      "id": "hyd_1794198433237_lz1st",
+      "createdAt": "2026-11-09T04:27:13.237Z",
+      "updatedAt": "2026-11-09T04:27:13.237Z",
+      "userId": "user_1794198433031",
+      "date": "2026-11-09",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "09:57 am",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1794198435873_gvdrd",
+      "createdAt": "2026-11-09T04:27:15.873Z",
+      "updatedAt": "2026-11-09T04:27:15.873Z",
+      "userId": "user_1794198435737",
+      "date": "2026-11-09",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "09:57 am",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1794198440341_qxck1",
+      "createdAt": "2026-11-09T04:27:20.341Z",
+      "updatedAt": "2026-11-09T04:27:20.341Z",
+      "userId": "user_1794198440187",
+      "date": "2026-11-09",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "09:57 am",
+          "amountMl": 500
+        }
+      ]
+    },
+    {
+      "id": "hyd_1794198487827_1jfzw",
+      "createdAt": "2026-11-09T04:28:07.827Z",
+      "updatedAt": "2026-11-09T04:28:07.827Z",
+      "userId": "user_1794198487662",
+      "date": "2026-11-09",
+      "consumedLiters": 0.5,
+      "targetLiters": 3.5,
+      "logs": [
+        {
+          "time": "09:58 am",
+          "amountMl": 500
+        }
+      ]
     }
   ],
   "dayPassBookings": [
@@ -21695,7 +25629,9 @@
       "lastCheckIn": "Today, 08:30 AM",
       "assignedTrainer": "Elena Rostova",
       "notes": "Powerlifting prep",
-      "checkInPin": "8104"
+      "checkInPin": "8104",
+      "temporaryPassword": "Fit@8104",
+      "initialPassword": "Fit@8104"
     },
     {
       "id": "mem_103",
@@ -21711,7 +25647,9 @@
       "lastCheckIn": "Yesterday, 06:45 PM",
       "assignedTrainer": "None",
       "notes": "Cardio & functional turf focus",
-      "checkInPin": "6492"
+      "checkInPin": "6492",
+      "temporaryPassword": "Fit@6492",
+      "initialPassword": "Fit@6492"
     },
     {
       "id": "mem_104",
@@ -21727,7 +25665,9 @@
       "lastCheckIn": "Today, 09:00 AM",
       "assignedTrainer": "Self (Certified Coach)",
       "notes": "Olympic weightlifting specialist",
-      "checkInPin": "5321"
+      "checkInPin": "5321",
+      "temporaryPassword": "Fit@5321",
+      "initialPassword": "Fit@5321"
     },
     {
       "id": "mem_105",
@@ -21743,7 +25683,9 @@
       "lastCheckIn": "2 weeks ago",
       "assignedTrainer": "Coach Marcus Vance",
       "notes": "Requested 1-month travel pause",
-      "checkInPin": "9921"
+      "checkInPin": "9921",
+      "temporaryPassword": "Fit@9921",
+      "initialPassword": "Fit@9921"
     },
     {
       "id": "mem_106",
@@ -21759,7 +25701,9 @@
       "lastCheckIn": "Sep 28, 2026",
       "assignedTrainer": "None",
       "notes": "Renewal notice sent via email",
-      "checkInPin": "4112"
+      "checkInPin": "4112",
+      "temporaryPassword": "Fit@4112",
+      "initialPassword": "Fit@4112"
     },
     {
       "id": "mem_user_1793372330179",
@@ -21778,7 +25722,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@4704",
+      "initialPassword": "Fit@4704"
     },
     {
       "id": "mem_user_1793372719621",
@@ -21797,7 +25743,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@6560",
+      "initialPassword": "Fit@6560"
     },
     {
       "id": "mem_user_1793372879982",
@@ -21816,7 +25764,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@5540",
+      "initialPassword": "Fit@5540"
     },
     {
       "id": "mem_user_1793372890583",
@@ -21835,7 +25785,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@3278",
+      "initialPassword": "Fit@3278"
     },
     {
       "id": "mem_user_1793373364321",
@@ -21854,7 +25806,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@6521",
+      "initialPassword": "Fit@6521"
     },
     {
       "id": "mem_user_1793373536725",
@@ -21873,7 +25827,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (General fitness)"
+      "notes": "Registered member (General fitness)",
+      "temporaryPassword": "Fit@9653",
+      "initialPassword": "Fit@9653"
     },
     {
       "id": "mem_user_1793592906900",
@@ -21892,7 +25848,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@4451",
+      "initialPassword": "Fit@4451"
     },
     {
       "id": "mem_user_1793593054980",
@@ -21911,7 +25869,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@6343",
+      "initialPassword": "Fit@6343"
     },
     {
       "id": "mem_user_1793593360041",
@@ -21930,7 +25890,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (General fitness)"
+      "notes": "Registered member (General fitness)",
+      "temporaryPassword": "Fit@4503",
+      "initialPassword": "Fit@4503"
     },
     {
       "id": "mem_1793593550719",
@@ -21961,7 +25923,9 @@
       "verificationCode": "FH-VER-6615",
       "verifiedAt": "2026-11-02T04:25:50.719Z",
       "verifiedByAdmin": "Gym Admin Desk",
-      "checkInPin": "6674"
+      "checkInPin": "6674",
+      "temporaryPassword": "Fit@6674",
+      "initialPassword": "Fit@6674"
     },
     {
       "id": "mem_user_1793594445035",
@@ -21980,7 +25944,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@6584",
+      "initialPassword": "Fit@6584"
     },
     {
       "id": "mem_user_1793595441599",
@@ -21999,7 +25965,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@7314",
+      "initialPassword": "Fit@7314"
     },
     {
       "id": "mem_user_1793597847061",
@@ -22018,7 +25986,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (General fitness)"
+      "notes": "Registered member (General fitness)",
+      "temporaryPassword": "Fit@2489",
+      "initialPassword": "Fit@2489"
     },
     {
       "id": "mem_user_1793598692991",
@@ -22037,7 +26007,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@7506",
+      "initialPassword": "Fit@7506"
     },
     {
       "id": "mem_user_1793599589252",
@@ -22056,7 +26028,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@3952",
+      "initialPassword": "Fit@3952"
     },
     {
       "id": "mem_user_1793600389326",
@@ -22075,7 +26049,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (General fitness)"
+      "notes": "Registered member (General fitness)",
+      "temporaryPassword": "Fit@5500",
+      "initialPassword": "Fit@5500"
     },
     {
       "id": "mem_user_1793603643985",
@@ -22094,7 +26070,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@7605",
+      "initialPassword": "Fit@7605"
     },
     {
       "id": "mem_user_1793681305559",
@@ -22113,7 +26091,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@3217",
+      "initialPassword": "Fit@3217"
     },
     {
       "id": "mem_user_1793690880321",
@@ -22132,7 +26112,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (General fitness)"
+      "notes": "Registered member (General fitness)",
+      "temporaryPassword": "Fit@2278",
+      "initialPassword": "Fit@2278"
     },
     {
       "id": "mem_user_1793693897279",
@@ -22151,7 +26133,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@5959",
+      "initialPassword": "Fit@5959"
     },
     {
       "id": "mem_user_1793694029049",
@@ -22170,7 +26154,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@3791",
+      "initialPassword": "Fit@3791"
     },
     {
       "id": "mem_user_1793694147631",
@@ -22189,7 +26175,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@4137",
+      "initialPassword": "Fit@4137"
     },
     {
       "id": "mem_user_1793695385188",
@@ -22208,7 +26196,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@2579",
+      "initialPassword": "Fit@2579"
     },
     {
       "id": "mem_user_1793696017001",
@@ -22227,7 +26217,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@4450",
+      "initialPassword": "Fit@4450"
     },
     {
       "id": "mem_user_1793696046672",
@@ -22246,7 +26238,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@2904",
+      "initialPassword": "Fit@2904"
     },
     {
       "id": "mem_user_1793696081641",
@@ -22265,7 +26259,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@9774",
+      "initialPassword": "Fit@9774"
     },
     {
       "id": "mem_user_1793776973862",
@@ -22284,7 +26280,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@1464",
+      "initialPassword": "Fit@1464"
     },
     {
       "id": "mem_user_1793803551433",
@@ -22303,7 +26301,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@3269",
+      "initialPassword": "Fit@3269"
     },
     {
       "id": "mem_user_1793810776062",
@@ -22322,7 +26322,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@1809",
+      "initialPassword": "Fit@1809"
     },
     {
       "id": "mem_user_1793812736552",
@@ -22341,7 +26343,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@6473",
+      "initialPassword": "Fit@6473"
     },
     {
       "id": "mem_user_1794055678590",
@@ -22360,7 +26364,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@5368",
+      "initialPassword": "Fit@5368"
     },
     {
       "id": "mem_user_1794056446861",
@@ -22379,7 +26385,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@1415",
+      "initialPassword": "Fit@1415"
     },
     {
       "id": "mem_test_1794056479757",
@@ -22395,7 +26403,9 @@
       "primaryGoal": "Bulking",
       "goal": "Bulking",
       "notes": "Focusing on mass gain",
-      "checkInPin": "7788"
+      "checkInPin": "7788",
+      "temporaryPassword": "Fit@7788",
+      "initialPassword": "Fit@7788"
     },
     {
       "id": "mem_user_1794057879924",
@@ -22414,7 +26424,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@5262",
+      "initialPassword": "Fit@5262"
     },
     {
       "id": "mem_user_1794060987176",
@@ -22433,7 +26445,9 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
-      "notes": "Registered member (Bulking)"
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@7015",
+      "initialPassword": "Fit@7015"
     },
     {
       "id": "mem_user_1794061750083",
@@ -22452,6 +26466,127 @@
       "checkInsThisMonth": 0,
       "lastCheckIn": "Never",
       "assignedTrainer": "Coach Marcus Vance (CSCS, USAW-2)",
+      "notes": "Registered member (Bulking)",
+      "temporaryPassword": "Fit@2289",
+      "initialPassword": "Fit@2289"
+    },
+    {
+      "id": "mem_1794196365484",
+      "createdAt": "2026-11-09T03:52:45.484Z",
+      "updatedAt": "2026-11-09T03:52:45.484Z",
+      "userId": "usr_1794196365299",
+      "name": "Rohit Sharma",
+      "email": "athlete_1794196364518@testgym.io",
+      "phone": "+91 98765 12345",
+      "membershipId": "FH-MEM-1776",
+      "checkInPin": "1776",
+      "temporaryPassword": "Fit@Secure9988!",
+      "initialPassword": "Fit@Secure9988!",
+      "plan": "Monthly Pro Fitness",
+      "planId": "plan_monthly",
+      "durationDays": 30,
+      "status": "Active",
+      "joinedDate": "2026-11-09",
+      "expiryDate": "2026-12-09",
+      "amountPaid": 1999,
+      "amountDue": 0,
+      "totalFee": 500,
+      "paymentMode": "Desk UPI / Cash",
+      "receiptNumber": "REC-2026-8291",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "Coach Marcus Vance",
+      "notes": ""
+    },
+    {
+      "id": "mem_1794196365908",
+      "createdAt": "2026-11-09T03:52:45.908Z",
+      "updatedAt": "2026-11-09T03:52:45.908Z",
+      "userId": "usr_1794196365820",
+      "name": "Kavya Nair",
+      "email": "autouser_1794196365635@testgym.io",
+      "phone": "+91 91234 56789",
+      "membershipId": "FH-MEM-2359",
+      "checkInPin": "2359",
+      "temporaryPassword": "Fit@3873",
+      "initialPassword": "Fit@3873",
+      "plan": "Quarterly Strength",
+      "planId": "custom",
+      "durationDays": 30,
+      "status": "Active",
+      "joinedDate": "2026-11-09",
+      "expiryDate": "2026-12-09",
+      "amountPaid": 1999,
+      "amountDue": 0,
+      "totalFee": 1999,
+      "paymentMode": "Desk UPI / Cash",
+      "receiptNumber": "REC-2026-1045",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "None",
+      "notes": ""
+    },
+    {
+      "id": "mem_user_1794198433031",
+      "createdAt": "2026-11-09T04:27:13.176Z",
+      "updatedAt": "2026-11-09T04:27:13.176Z",
+      "userId": "user_1794198433031",
+      "name": "Mobile Athlete Bharath",
+      "email": "919988776655@mobile.fithealth.io",
+      "phone": "+91 99887 76655",
+      "membershipId": "FH-MEM-2043",
+      "checkInPin": "2043",
+      "temporaryPassword": "MemberSecurePass#123",
+      "initialPassword": "MemberSecurePass#123",
+      "plan": "Monthly Pro Fitness",
+      "status": "Active",
+      "joinedDate": "2026-11-09",
+      "expiryDate": "2026-12-09",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "Coach Marcus Vance",
+      "notes": "Registered member (General fitness)"
+    },
+    {
+      "id": "mem_user_1794198440187",
+      "createdAt": "2026-11-09T04:27:20.286Z",
+      "updatedAt": "2026-11-09T04:27:20.286Z",
+      "userId": "user_1794198440187",
+      "name": "Email Athlete",
+      "email": "athlete_1794198429398@testfithealth.io",
+      "phone": "",
+      "membershipId": "FH-MEM-8848",
+      "checkInPin": "8848",
+      "temporaryPassword": "AthletePass#456",
+      "initialPassword": "AthletePass#456",
+      "plan": "Monthly Pro Fitness",
+      "status": "Active",
+      "joinedDate": "2026-11-09",
+      "expiryDate": "2026-12-09",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "Coach Marcus Vance",
+      "notes": "Registered member (Bulking)"
+    },
+    {
+      "id": "mem_user_1794198487662",
+      "createdAt": "2026-11-09T04:28:07.770Z",
+      "updatedAt": "2026-11-09T04:28:07.770Z",
+      "userId": "user_1794198487662",
+      "name": "Email Athlete",
+      "email": "athlete_1794198476020@testfithealth.io",
+      "phone": "",
+      "membershipId": "FH-MEM-6442",
+      "checkInPin": "6442",
+      "temporaryPassword": "AthletePass#456",
+      "initialPassword": "AthletePass#456",
+      "plan": "Monthly Pro Fitness",
+      "status": "Active",
+      "joinedDate": "2026-11-09",
+      "expiryDate": "2026-12-09",
+      "checkInsThisMonth": 0,
+      "lastCheckIn": "Never",
+      "assignedTrainer": "Coach Marcus Vance",
       "notes": "Registered member (Bulking)"
     }
   ],
@@ -23189,6 +27324,46 @@
       "paymentStatus": "Paid",
       "transactionDate": "2026-11-02T04:25:50.719Z",
       "expiryDate": "2026-12-02"
+    },
+    {
+      "id": "txn_1794196365496",
+      "createdAt": "2026-11-09T03:52:45.496Z",
+      "updatedAt": "2026-11-09T03:52:45.496Z",
+      "receiptNumber": "REC-2026-8291",
+      "memberId": "mem_1794196365484",
+      "membershipId": "FH-MEM-1776",
+      "memberName": "Rohit Sharma",
+      "memberEmail": "athlete_1794196364518@testgym.io",
+      "gymName": "rsv gym and sports club",
+      "planName": "Monthly Pro Fitness",
+      "durationLabel": "30 Days",
+      "totalAmount": 500,
+      "amountPaid": 1999,
+      "amountDue": 0,
+      "paymentMode": "Desk UPI / Cash",
+      "paymentStatus": "Paid",
+      "transactionDate": "2026-11-09T03:52:44.587Z",
+      "expiryDate": "2026-12-09"
+    },
+    {
+      "id": "txn_1794196365916",
+      "createdAt": "2026-11-09T03:52:45.916Z",
+      "updatedAt": "2026-11-09T03:52:45.916Z",
+      "receiptNumber": "REC-2026-1045",
+      "memberId": "mem_1794196365908",
+      "membershipId": "FH-MEM-2359",
+      "memberName": "Kavya Nair",
+      "memberEmail": "autouser_1794196365635@testgym.io",
+      "gymName": "rsv gym and sports club",
+      "planName": "Quarterly Strength",
+      "durationLabel": "30 Days",
+      "totalAmount": 1999,
+      "amountPaid": 1999,
+      "amountDue": 0,
+      "paymentMode": "Desk UPI / Cash",
+      "paymentStatus": "Paid",
+      "transactionDate": "2026-11-09T03:52:45.700Z",
+      "expiryDate": "2026-12-09"
     }
   ],
   "gymTerms": {
@@ -24822,6 +28997,23 @@
       "attempts": 0,
       "maxAttempts": 5,
       "verified": false
+    },
+    {
+      "id": "otp_sbabubharath1976_gmail_com_registration",
+      "createdAt": "2026-11-09T04:04:29.665Z",
+      "updatedAt": "2026-11-09T04:04:30.535Z",
+      "email": "sbabubharath1976@gmail.com",
+      "purpose": "registration",
+      "otpHash": "c78b9130e24e66a31302cced7cc7649e10b367104e2e4242864bd1a3fa3f31c9",
+      "hash": "c78b9130e24e66a31302cced7cc7649e10b367104e2e4242864bd1a3fa3f31c9",
+      "expiresAt": "2026-11-09T04:14:29.665Z",
+      "expiresAtMs": 1794197669665,
+      "resendAfter": "2026-11-09T04:05:29.665Z",
+      "resendAfterMs": 1794197129665,
+      "attempts": 0,
+      "maxAttempts": 5,
+      "verified": true,
+      "verifiedAt": "2026-11-09T04:04:30.535Z"
     }
   ]
 }

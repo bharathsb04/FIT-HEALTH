@@ -49,18 +49,24 @@ export const LoginPage = ({
 
   // Main Portal Mode: 'signin' | 'signup'
   const [authMode, setAuthMode] = useState('signin'); // 'signin' | 'signup'
+  const [signupContactType, setSignupContactType] = useState('mobile'); // 'mobile' | 'email'
   const [signupName, setSignupName] = useState('');
+  const [signupMobile, setSignupMobile] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [signupVerificationCode, setSignupVerificationCode] = useState('');
-  const [signupStep, setSignupStep] = useState(1); // 1 = details (name, email, password), 2 = verification code
+  const [signupCodeHint, setSignupCodeHint] = useState('');
+  const [signupStep, setSignupStep] = useState(1); // 1 = details (name, mobile/email, password), 2 = authentication section
   const [signupSendingCode, setSignupSendingCode] = useState(false);
   const [signupVerifying, setSignupVerifying] = useState(false);
 
   const [authMethod, setAuthMethod] = useState('password'); // 'password' | 'otp'
+  const [loginContactType, setLoginContactType] = useState('mobile'); // 'mobile' | 'email'
+  const [loginMobile, setLoginMobile] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [otpCode, setOtpCode] = useState('');
+  const [loginCodeHint, setLoginCodeHint] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [sendingOtp, setSendingOtp] = useState(false);
   const [destinationTab, setDestinationTab] = useState('nutrition');
@@ -69,31 +75,47 @@ export const LoginPage = ({
 
   const handleQuickSignupFromLogin = () => {
     setAuthMode('signup');
-    const cleanEmail = (email || '').trim();
-    setSignupEmail(cleanEmail);
-    setSignupPassword(password || '');
-    if (!signupName && cleanEmail) {
-      const emailPrefix = cleanEmail.split('@')[0] || '';
-      const cleanPrefix = emailPrefix.replace(/[._0-9]/g, ' ').trim();
-      const formatted = cleanPrefix ? (cleanPrefix.charAt(0).toUpperCase() + cleanPrefix.slice(1)) : 'Athlete';
-      setSignupName(formatted);
+    if (loginContactType === 'mobile') {
+      setSignupContactType('mobile');
+      setSignupMobile(loginMobile.trim());
+      setSignupPassword(password || '');
+      if (!signupName) setSignupName('Athlete');
+    } else {
+      setSignupContactType('email');
+      const cleanEmail = (email || '').trim();
+      setSignupEmail(cleanEmail);
+      setSignupPassword(password || '');
+      if (!signupName && cleanEmail) {
+        const emailPrefix = cleanEmail.split('@')[0] || '';
+        const cleanPrefix = emailPrefix.replace(/[._0-9]/g, ' ').trim();
+        const formatted = cleanPrefix ? (cleanPrefix.charAt(0).toUpperCase() + cleanPrefix.slice(1)) : 'Athlete';
+        setSignupName(formatted);
+      }
     }
     setSignupStep(1);
     setError('');
-    showToast(`Carried over ${cleanEmail}. Enter your name and click Send Verification Code!`, 'info');
+    showToast(`Details carried over. Enter your details and proceed to the Authentication Section!`, 'info');
   };
 
   const handleInitiateSignup = async (e) => {
     if (e) e.preventDefault();
     const cleanName = signupName.trim();
-    const cleanEmail = signupEmail.trim();
     if (!cleanName) {
       setError('Please enter your full name.');
       return;
     }
-    if (!cleanEmail || !cleanEmail.includes('@')) {
-      setError('Please provide a valid Gmail or email address.');
-      return;
+    const target = signupContactType === 'mobile' ? signupMobile.trim() : signupEmail.trim();
+    if (signupContactType === 'mobile') {
+      const digitsOnly = target.replace(/\D/g, '');
+      if (digitsOnly.length < 10) {
+        setError('Please enter a valid 10-digit mobile phone number (e.g. +91 98765 43210).');
+        return;
+      }
+    } else {
+      if (!target || !target.includes('@')) {
+        setError('Please provide a valid Gmail or email address.');
+        return;
+      }
     }
     if (!signupPassword || signupPassword.length < 6) {
       setError('Password must be at least 6 characters long.');
@@ -102,14 +124,19 @@ export const LoginPage = ({
     setSignupSendingCode(true);
     setError('');
     try {
-      const res = await api.sendOTP(cleanEmail, 'registration', role);
+      const res = await api.sendOTP(target, 'registration', role);
       setSignupStep(2);
-      setSignupVerificationCode(''); // User enters code from email
-      showToast(res?.message || `6-digit verification code dispatched to ${cleanEmail}`, 'success');
+      if (res?.verificationCode) {
+        setSignupCodeHint(String(res.verificationCode));
+      } else {
+        setSignupCodeHint('');
+      }
+      setSignupVerificationCode(''); // User enters code
+      showToast(res?.message || `6-digit authentication code dispatched to ${target}`, 'success');
     } catch (err) {
       console.warn('Signup OTP dispatch warning:', err.message);
-      setSignupStep(2);
-      showToast(`Verification step ready for ${cleanEmail}`, 'info');
+      setError(err.message || 'Failed to dispatch verification code.');
+      showToast(err.message || 'Verification dispatch failed', 'error');
     } finally {
       setSignupSendingCode(false);
     }
@@ -124,17 +151,21 @@ export const LoginPage = ({
     }
     setSignupVerifying(true);
     setError('');
+    const target = signupContactType === 'mobile' ? signupMobile.trim() : signupEmail.trim();
+    const isMobile = signupContactType === 'mobile';
     try {
       if (cleanCode.length === 6 && /^\d+$/.test(cleanCode)) {
         try {
-          await api.verifyOTP(signupEmail.trim(), cleanCode, 'registration');
+          await api.verifyOTP(target, cleanCode, 'registration');
         } catch (otpErr) {
           console.warn('OTP verify warning:', otpErr.message);
         }
       }
       await register({
         name: signupName.trim(),
-        email: signupEmail.trim(),
+        email: isMobile ? `${target.replace(/\D/g, '')}@mobile.fithealth.io` : target,
+        phone: isMobile ? target : '',
+        identifier: target,
         password: signupPassword,
         role: role,
         code: cleanCode,
@@ -165,17 +196,31 @@ export const LoginPage = ({
   };
 
   const handleSendLoginOTP = async () => {
-    if (!email || !email.includes('@')) {
-      setError('Please provide a valid email address.');
-      return;
+    const target = loginContactType === 'mobile' ? loginMobile.trim() : email.trim();
+    if (loginContactType === 'mobile') {
+      const digitsOnly = target.replace(/\D/g, '');
+      if (digitsOnly.length < 10) {
+        setError('Please provide a valid 10-digit mobile number.');
+        return;
+      }
+    } else {
+      if (!target || !target.includes('@')) {
+        setError('Please provide a valid email address.');
+        return;
+      }
     }
     setSendingOtp(true);
     setError('');
     try {
-      const res = await api.sendOTP(email, 'login');
+      const res = await api.sendOTP(target, 'login', role);
       setOtpSent(true);
-      setOtpCode(''); // Clean input, user enters code from their email
-      showToast(res.message || '6-digit OTP code dispatched to your email!', 'success');
+      if (res?.verificationCode) {
+        setLoginCodeHint(String(res.verificationCode));
+      } else {
+        setLoginCodeHint('');
+      }
+      setOtpCode(''); // Clean input, user enters code
+      showToast(res.message || `6-digit authentication code dispatched to ${target}!`, 'success');
     } catch (err) {
       setError(err.message || 'Failed to dispatch login OTP.');
     } finally {
@@ -185,24 +230,28 @@ export const LoginPage = ({
 
   const handleOTPLogin = async (e) => {
     if (e) e.preventDefault();
-    if (!email || !otpCode || otpCode.trim().length !== 6) {
-      setError('Please provide your email and the 6-digit OTP code.');
+    const target = loginContactType === 'mobile' ? loginMobile.trim() : email.trim();
+    if (!target || !otpCode || otpCode.trim().length !== 6) {
+      setError(`Please provide your ${loginContactType === 'mobile' ? 'mobile number' : 'email'} and the 6-digit verification code.`);
       return;
     }
     setLoading(true);
     setError('');
     try {
-      const res = await loginWithOTP(email, otpCode.trim());
-      setLoggedInUser(res?.user || { email });
-      const isAdmin = res?.user?.role === 'admin' || email.includes('admin') || role === 'admin';
+      const res = await loginWithOTP(target, otpCode.trim(), role);
+      if (role === 'admin' && res?.user?.role !== 'admin') {
+        throw new Error('Security Alert: Access denied. Member credentials cannot be used to log in to the Admin Portal. Please switch to the Member Login tab.');
+      }
+      setLoggedInUser(res?.user || { email: target });
+      const isAdmin = res?.user?.role === 'admin';
       if (isAdmin) {
         setActiveTab('admin');
-        showToast('Administrator authenticated via Email OTP!', 'success');
+        showToast('Administrator authenticated via Verification Code!', 'success');
       } else {
         setStep(2);
       }
     } catch (err) {
-      setError(err.message || 'OTP authentication failed.');
+      setError(err.message || 'Verification authentication failed.');
     } finally {
       setLoading(false);
     }
@@ -220,16 +269,20 @@ export const LoginPage = ({
      ────────────────────────────────────────────────────────── */
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!email || !password) {
-      setError('Please provide both email and password.');
+    const target = loginContactType === 'mobile' ? loginMobile.trim() : email.trim();
+    if (!target || !password) {
+      setError(`Please provide both ${loginContactType === 'mobile' ? 'mobile phone number' : 'email'} and password.`);
       return;
     }
     setLoading(true);
     setError('');
     try {
-      const res = await login(email, password);
-      setLoggedInUser(res?.user || { email });
-      const isAdmin = res?.user?.role === 'admin' || email.includes('admin') || role === 'admin';
+      const res = await login(target, password, role);
+      if (role === 'admin' && res?.user?.role !== 'admin') {
+        throw new Error('Security Alert: Access denied. Member credentials cannot be used to log in to the Admin Portal. Please switch to the Member Login tab.');
+      }
+      setLoggedInUser(res?.user || { email: target });
+      const isAdmin = res?.user?.role === 'admin';
       if (isAdmin) {
         // Admins skip the connect step and go straight in
         setActiveTab('admin');
@@ -246,17 +299,21 @@ export const LoginPage = ({
   };
 
   const handleLoginDirectToFeature = async (featureId, featureName) => {
-    if (!email || !password) {
-      setError('Please enter your email and password to sign in.');
+    const target = loginContactType === 'mobile' ? loginMobile.trim() : email.trim();
+    if (!target || !password) {
+      setError(`Please enter your ${loginContactType === 'mobile' ? 'mobile number' : 'email'} and password to sign in.`);
       return;
     }
     setLoading(true);
     setError('');
     setDestinationTab(featureId);
     try {
-      const res = await login(email, password);
-      setLoggedInUser(res?.user || { email });
-      const isAdmin = res?.user?.role === 'admin' || email.includes('admin') || role === 'admin';
+      const res = await login(target, password, role);
+      if (role === 'admin' && res?.user?.role !== 'admin') {
+        throw new Error('Security Alert: Access denied. Member credentials cannot be used to log in to the Admin Portal. Please switch to the Member Login tab.');
+      }
+      setLoggedInUser(res?.user || { email: target });
+      const isAdmin = res?.user?.role === 'admin';
       if (isAdmin) {
         setActiveTab('admin');
         showToast('Admin access granted.', 'success');
@@ -806,7 +863,7 @@ export const LoginPage = ({
         </div>
 
         {authMode === 'signup' ? (
-          /* ─── Universal Fit Health Sign Up Flow (Details: Name, Gmail, Password -> 6-Digit Email Verification Code) ─── */
+          /* ─── Universal Fit Health Sign Up Flow (Mobile Number OR Email -> Authentication Section) ─── */
           <div>
             <div style={{
               background: role === 'admin'
@@ -821,16 +878,16 @@ export const LoginPage = ({
                 {role === 'admin' ? <ShieldCheck size={16} color="var(--amber)" /> : <UserCheck size={16} color="var(--primary)" />}
                 <span style={{ fontSize: '13px', fontWeight: 800, color: role === 'admin' ? 'var(--amber)' : 'var(--primary)' }}>
                   {signupStep === 1
-                    ? (role === 'admin' ? 'Step 1: Admin Account Details' : 'Step 1: Create Member Account')
-                    : 'Step 2: Enter Verification Code'}
+                    ? (role === 'admin' ? 'Step 1: Admin Account Details' : 'Step 1: Member Account Details')
+                    : 'Step 2: Authentication Section'}
                 </span>
               </div>
               <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.4 }}>
                 {signupStep === 1
                   ? (role === 'admin'
-                      ? 'Enter your name, administrator email & password to sign up an official gym manager profile.'
-                      : 'Enter your name, Gmail and password to register your Fit Health membership account.')
-                  : `A 6-digit verification code was dispatched to ${signupEmail}. Enter it below to activate your account.`}
+                      ? 'Sign up with your mobile number or email and create your admin password.'
+                      : 'Sign up with your mobile number or email and create your member password.')
+                  : `Enter the 6-digit authentication code sent to ${signupContactType === 'mobile' ? (signupMobile || 'your mobile') : (signupEmail || 'your email')}.`}
               </p>
             </div>
 
@@ -841,7 +898,7 @@ export const LoginPage = ({
             )}
 
             {signupStep === 1 ? (
-              /* Step 1: Details (Name, Email, Password) */
+              /* Step 1: Details (Name, Mobile or Email, Password) */
               <form onSubmit={handleInitiateSignup}>
                 <div className="form-group">
                   <label className="form-label">Full Name *</label>
@@ -859,20 +916,76 @@ export const LoginPage = ({
                   </div>
                 </div>
 
+                {/* Contact Type Toggle: Mobile Number vs Email */}
                 <div className="form-group">
-                  <label className="form-label">Gmail / Email Address *</label>
-                  <div style={{ position: 'relative' }}>
-                    <input
-                      type="email"
-                      className="form-input"
-                      placeholder="Enter your email address"
-                      value={signupEmail}
-                      onChange={(e) => setSignupEmail(e.target.value)}
-                      style={{ paddingLeft: '40px' }}
-                      required
-                    />
-                    <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                  <label className="form-label" style={{ marginBottom: '6px' }}>Sign Up With *</label>
+                  <div style={{
+                    display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px',
+                    background: 'var(--bg-primary)', padding: '3px',
+                    borderRadius: '10px', marginBottom: '10px', border: '1px solid var(--border-color)'
+                  }}>
+                    <button
+                      type="button"
+                      onClick={() => { setSignupContactType('mobile'); setError(''); }}
+                      style={{
+                        padding: '8px', borderRadius: '7px', border: 'none',
+                        background: signupContactType === 'mobile' ? 'var(--bg-surface)' : 'transparent',
+                        color: signupContactType === 'mobile' ? (role === 'admin' ? 'var(--amber)' : 'var(--primary)') : 'var(--text-muted)',
+                        fontWeight: 700, fontSize: '12px', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
+                      }}
+                    >
+                      <Smartphone size={13} />
+                      <span>Mobile Number</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setSignupContactType('email'); setError(''); }}
+                      style={{
+                        padding: '8px', borderRadius: '7px', border: 'none',
+                        background: signupContactType === 'email' ? 'var(--bg-surface)' : 'transparent',
+                        color: signupContactType === 'email' ? (role === 'admin' ? 'var(--amber)' : 'var(--primary)') : 'var(--text-muted)',
+                        fontWeight: 700, fontSize: '12px', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
+                      }}
+                    >
+                      <Mail size={13} />
+                      <span>Email Address</span>
+                    </button>
                   </div>
+
+                  {signupContactType === 'mobile' ? (
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        type="tel"
+                        className="form-input"
+                        placeholder="e.g. +91 98765 43210 or 9876543210"
+                        value={signupMobile}
+                        onChange={(e) => setSignupMobile(e.target.value)}
+                        style={{ paddingLeft: '40px' }}
+                        required
+                      />
+                      <Smartphone size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                    </div>
+                  ) : (
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        type="email"
+                        className="form-input"
+                        placeholder="e.g. athlete@fithealth.io or athlete@gmail.com"
+                        value={signupEmail}
+                        onChange={(e) => setSignupEmail(e.target.value)}
+                        style={{ paddingLeft: '40px' }}
+                        required
+                      />
+                      <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                    </div>
+                  )}
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                    {signupContactType === 'mobile'
+                      ? 'A 6-digit SMS verification code will be sent to this mobile number.'
+                      : 'A 6-digit verification code will be dispatched to this email address.'}
+                  </span>
                 </div>
 
                 <div className="form-group">
@@ -890,9 +1003,6 @@ export const LoginPage = ({
                     />
                     <Lock size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
                   </div>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
-                    A 6-digit verification code will be sent to this email to verify and activate your account.
-                  </span>
                 </div>
 
                 <button
@@ -916,12 +1026,12 @@ export const LoginPage = ({
                 </button>
               </form>
             ) : (
-              /* Step 2: Verification Code */
+              /* Step 2: Authentication Section (Enter 6-Digit Code) */
               <form onSubmit={handleVerifyAndSignup}>
                 <div className="form-group" style={{ marginBottom: '16px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <label className="form-label" style={{ margin: 0 }}>
-                      Enter 6-Digit Verification Code *
+                    <label className="form-label" style={{ margin: 0, fontWeight: 800, color: role === 'admin' ? 'var(--amber)' : 'var(--primary)' }}>
+                      🔐 Authentication Section: Enter 6-Digit Code *
                     </label>
                     <button
                       type="button"
@@ -936,6 +1046,29 @@ export const LoginPage = ({
                     </button>
                   </div>
 
+                  {signupCodeHint && (
+                    <div
+                      onClick={() => setSignupVerificationCode(signupCodeHint)}
+                      style={{
+                        padding: '8px 12px',
+                        borderRadius: '8px',
+                        background: role === 'admin' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+                        border: role === 'admin' ? '1px dashed var(--amber)' : '1px dashed var(--primary)',
+                        color: role === 'admin' ? 'var(--amber)' : 'var(--primary)',
+                        fontSize: '12px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginBottom: '10px'
+                      }}
+                    >
+                      <span>💡 Code sent: <strong>{signupCodeHint}</strong></span>
+                      <span style={{ fontSize: '10px', textDecoration: 'underline' }}>Tap to Autofill</span>
+                    </div>
+                  )}
+
                   <OtpPinInput
                     value={signupVerificationCode}
                     onChange={setSignupVerificationCode}
@@ -946,7 +1079,7 @@ export const LoginPage = ({
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', padding: '0 4px' }}>
                     <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                      Dispatched to <strong>{signupEmail}</strong>
+                      Dispatched to <strong>{signupContactType === 'mobile' ? signupMobile : signupEmail}</strong>
                     </span>
                     <button
                       type="button"
@@ -1007,7 +1140,7 @@ export const LoginPage = ({
               </span>
             </div>
 
-            {/* Auth Method Toggle: Password vs Email OTP */}
+            {/* Auth Method Toggle: Password vs Verification Code */}
             <div style={{
               display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px',
               background: 'var(--bg-primary)', padding: '3px',
@@ -1038,8 +1171,44 @@ export const LoginPage = ({
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
                 }}
               >
+                <ShieldCheck size={13} />
+                <span>Code / OTP Login</span>
+              </button>
+            </div>
+
+            {/* Contact Type Toggle: Mobile Number vs Email */}
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px',
+              background: 'var(--bg-primary)', padding: '3px',
+              borderRadius: '10px', marginBottom: '16px', border: '1px solid var(--border-color)'
+            }}>
+              <button
+                type="button"
+                onClick={() => { setLoginContactType('mobile'); setError(''); }}
+                style={{
+                  padding: '8px', borderRadius: '7px', border: 'none',
+                  background: loginContactType === 'mobile' ? 'var(--bg-surface)' : 'transparent',
+                  color: loginContactType === 'mobile' ? (role === 'admin' ? 'var(--amber)' : 'var(--primary)') : 'var(--text-muted)',
+                  fontWeight: 700, fontSize: '12px', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
+                }}
+              >
+                <Smartphone size={13} />
+                <span>Mobile Number</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => { setLoginContactType('email'); setError(''); }}
+                style={{
+                  padding: '8px', borderRadius: '7px', border: 'none',
+                  background: loginContactType === 'email' ? 'var(--bg-surface)' : 'transparent',
+                  color: loginContactType === 'email' ? (role === 'admin' ? 'var(--amber)' : 'var(--primary)') : 'var(--text-muted)',
+                  fontWeight: 700, fontSize: '12px', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
+                }}
+              >
                 <Mail size={13} />
-                <span>Email OTP Login</span>
+                <span>Email Address</span>
               </button>
             </div>
 
@@ -1055,7 +1224,7 @@ export const LoginPage = ({
                   <AlertCircle size={15} />
                   <span>{error}</span>
                 </div>
-                {email && (
+                {(email || loginMobile) && (
                   <div style={{
                     marginTop: '10px',
                     paddingTop: '10px',
@@ -1067,7 +1236,7 @@ export const LoginPage = ({
                     gap: '8px'
                   }}>
                     <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
-                      Don't have an account with <strong>{email}</strong> yet?
+                      Don't have an account with <strong>{loginContactType === 'mobile' ? loginMobile : email}</strong> yet?
                     </span>
                     <button
                       type="button"
@@ -1085,7 +1254,7 @@ export const LoginPage = ({
                         boxShadow: '0 2px 6px rgba(0,0,0,0.3)'
                       }}
                     >
-                      ✨ Sign Up with this Gmail & Password →
+                      ✨ Sign Up with this {loginContactType === 'mobile' ? 'Mobile' : 'Email'} →
                     </button>
                   </div>
                 )}
@@ -1093,190 +1262,279 @@ export const LoginPage = ({
             )}
 
             {authMethod === 'password' ? (
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="form-label">Email Address</label>
-              <div style={{ position: 'relative' }}>
-                <input
-                  id="login-email"
-                  type="email"
-                  className="form-input"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{ paddingLeft: '40px' }}
-                  required
-                />
-                <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
-              </div>
-            </div>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label className="form-label">
+                    {loginContactType === 'mobile' ? 'Mobile Phone Number' : 'Email Address'} *
+                  </label>
+                  <div style={{ position: 'relative' }}>
+                    {loginContactType === 'mobile' ? (
+                      <input
+                        id="login-mobile"
+                        type="tel"
+                        className="form-input"
+                        placeholder="e.g. +91 98765 43210 or 9876543210"
+                        value={loginMobile}
+                        onChange={(e) => setLoginMobile(e.target.value)}
+                        style={{ paddingLeft: '40px' }}
+                        required
+                      />
+                    ) : (
+                      <input
+                        id="login-email"
+                        type="email"
+                        className="form-input"
+                        placeholder="e.g. athlete@fithealth.io or athlete@gmail.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        style={{ paddingLeft: '40px' }}
+                        required
+                      />
+                    )}
+                    {loginContactType === 'mobile' ? (
+                      <Smartphone size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                    ) : (
+                      <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                    )}
+                  </div>
+                </div>
 
-            <div className="form-group">
-              <div className="flex-between" style={{ marginBottom: '6px' }}>
-                <label className="form-label" style={{ margin: 0 }}>Password</label>
-                <button
-                  type="button"
-                  onClick={() => onSwitchToForgot(email, role)}
-                  style={{ fontSize: '12px', color: role === 'admin' ? '#f59e0b' : 'var(--cyan)', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer' }}
-                >
-                  Forgot?
-                </button>
-              </div>
-              <div style={{ position: 'relative' }}>
-                <input
-                  id="login-password"
-                  type="password"
-                  className="form-input"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  style={{ paddingLeft: '40px' }}
-                  required
-                />
-                <Lock size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
-              </div>
-            </div>
-
-            {/* Quick feature destination buttons */}
-            <div style={{ marginTop: '14px', marginBottom: '8px' }}>
-              <label style={{ fontSize: '11px', color: 'var(--text-secondary)', display: 'block', marginBottom: '6px' }}>
-                Or use any of the 3 buttons to log in directly:
-              </label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
-                <button
-                  type="button"
-                  onClick={() => handleLoginDirectToFeature('workout', '6-Day Split Workout Planner')}
-                  style={{
-                    padding: '8px 4px', borderRadius: '10px',
-                    border: destinationTab === 'workout' ? '1px solid var(--primary)' : '1px solid var(--border-color)',
-                    background: destinationTab === 'workout' ? 'rgba(16,185,129,0.2)' : 'var(--bg-surface)',
-                    color: destinationTab === 'workout' ? 'var(--primary)' : 'var(--text-secondary)',
-                    fontSize: '11px', fontWeight: 700, cursor: 'pointer',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px'
-                  }}
-                >
-                  <Dumbbell size={15} color="var(--primary)" />
-                  <span style={{ fontSize: '10px' }}>Workout</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleLoginDirectToFeature('nutrition', 'Nutrition & Vitals Sync')}
-                  style={{
-                    padding: '8px 4px', borderRadius: '10px',
-                    border: destinationTab === 'nutrition' ? '1px solid var(--cyan)' : '1px solid var(--border-color)',
-                    background: destinationTab === 'nutrition' ? 'rgba(6,182,212,0.2)' : 'var(--bg-surface)',
-                    color: destinationTab === 'nutrition' ? 'var(--cyan)' : 'var(--text-secondary)',
-                    fontSize: '11px', fontWeight: 700, cursor: 'pointer',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px'
-                  }}
-                >
-                  <Activity size={15} color="var(--cyan)" />
-                  <span style={{ fontSize: '10px' }}>Nutrition</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleLoginDirectToFeature('gyms', 'GPS Gym Locator')}
-                  style={{
-                    padding: '8px 4px', borderRadius: '10px',
-                    border: destinationTab === 'gyms' ? '1px solid var(--amber)' : '1px solid var(--border-color)',
-                    background: destinationTab === 'gyms' ? 'rgba(245,158,11,0.2)' : 'var(--bg-surface)',
-                    color: destinationTab === 'gyms' ? 'var(--amber)' : 'var(--text-secondary)',
-                    fontSize: '11px', fontWeight: 700, cursor: 'pointer',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px'
-                  }}
-                >
-                  <ShieldCheck size={15} color="var(--amber)" />
-                  <span style={{ fontSize: '10px' }}>Gyms</span>
-                </button>
-              </div>
-            </div>
-
-            <button
-              id="btn-login-submit"
-              type="submit"
-              className="btn btn-primary btn-full"
-              style={{
-                height: '48px', fontSize: '15px', marginTop: '12px',
-                background: role === 'admin' ? 'linear-gradient(135deg, var(--amber), #d97706)' : undefined
-              }}
-              disabled={loading}
-            >
-              <span>{loading ? 'Authenticating...' : role === 'admin' ? 'Sign In to Gym Admin Portal' : 'Sign In as Gym Member'}</span>
-              <ArrowRight size={18} />
-            </button>
-          </form>
-        ) : (
-          /* Email OTP Form */
-          <form onSubmit={handleOTPLogin}>
-            <div className="form-group">
-              <label className="form-label">Account Email Address</label>
-              <div style={{ position: 'relative' }}>
-                <input
-                  type="email"
-                  className="form-input"
-                  placeholder="athlete@fithealth.io"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{ paddingLeft: '40px' }}
-                  required
-                />
-                <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
-              </div>
-            </div>
-
-            {!otpSent ? (
-              <button
-                type="button"
-                onClick={handleSendLoginOTP}
-                className="btn btn-primary btn-full"
-                style={{ height: '46px', fontSize: '14px', marginTop: '8px' }}
-                disabled={sendingOtp}
-              >
-                <span>{sendingOtp ? 'Dispatching OTP Code...' : 'Send 6-Digit Login Code'}</span>
-                <Mail size={16} />
-              </button>
-            ) : (
-              <div>
-                <div className="form-group" style={{ marginTop: '14px', marginBottom: '16px' }}>
-                  <label className="form-label">Enter 6-Digit Verification Code</label>
-                  
-                  <OtpPinInput
-                    value={otpCode}
-                    onChange={setOtpCode}
-                    role="member"
-                    error={Boolean(error)}
-                    autoFocus={true}
-                  />
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', padding: '0 4px' }}>
-                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Valid for 10 minutes</span>
+                <div className="form-group">
+                  <div className="flex-between" style={{ marginBottom: '6px' }}>
+                    <label className="form-label" style={{ margin: 0 }}>Password *</label>
                     <button
                       type="button"
-                      onClick={handleSendLoginOTP}
-                      style={{ background: 'none', border: 'none', color: 'var(--primary)', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
-                      disabled={sendingOtp}
+                      onClick={() => onSwitchToForgot(loginContactType === 'mobile' ? loginMobile : email, role)}
+                      style={{ fontSize: '12px', color: role === 'admin' ? '#f59e0b' : 'var(--cyan)', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer' }}
                     >
-                      Resend Code
+                      Forgot?
+                    </button>
+                  </div>
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      id="login-password"
+                      type="password"
+                      className="form-input"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      style={{ paddingLeft: '40px' }}
+                      required
+                    />
+                    <Lock size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                  </div>
+                </div>
+
+                {/* Quick feature destination buttons */}
+                <div style={{ marginTop: '14px', marginBottom: '8px' }}>
+                  <label style={{ fontSize: '11px', color: 'var(--text-secondary)', display: 'block', marginBottom: '6px' }}>
+                    Or use any of the 3 buttons to log in directly:
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+                    <button
+                      type="button"
+                      onClick={() => handleLoginDirectToFeature('workout', '6-Day Split Workout Planner')}
+                      style={{
+                        padding: '8px 4px', borderRadius: '10px',
+                        border: destinationTab === 'workout' ? '1px solid var(--primary)' : '1px solid var(--border-color)',
+                        background: destinationTab === 'workout' ? 'rgba(16,185,129,0.2)' : 'var(--bg-surface)',
+                        color: destinationTab === 'workout' ? 'var(--primary)' : 'var(--text-secondary)',
+                        fontSize: '11px', fontWeight: 700, cursor: 'pointer',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px'
+                      }}
+                    >
+                      <Dumbbell size={15} color="var(--primary)" />
+                      <span style={{ fontSize: '10px' }}>Workout</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleLoginDirectToFeature('nutrition', 'Nutrition & Vitals Sync')}
+                      style={{
+                        padding: '8px 4px', borderRadius: '10px',
+                        border: destinationTab === 'nutrition' ? '1px solid var(--cyan)' : '1px solid var(--border-color)',
+                        background: destinationTab === 'nutrition' ? 'rgba(6,182,212,0.2)' : 'var(--bg-surface)',
+                        color: destinationTab === 'nutrition' ? 'var(--cyan)' : 'var(--text-secondary)',
+                        fontSize: '11px', fontWeight: 700, cursor: 'pointer',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px'
+                      }}
+                    >
+                      <Activity size={15} color="var(--cyan)" />
+                      <span style={{ fontSize: '10px' }}>Nutrition</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleLoginDirectToFeature('gyms', 'GPS Gym Locator')}
+                      style={{
+                        padding: '8px 4px', borderRadius: '10px',
+                        border: destinationTab === 'gyms' ? '1px solid var(--amber)' : '1px solid var(--border-color)',
+                        background: destinationTab === 'gyms' ? 'rgba(245,158,11,0.2)' : 'var(--bg-surface)',
+                        color: destinationTab === 'gyms' ? 'var(--amber)' : 'var(--text-secondary)',
+                        fontSize: '11px', fontWeight: 700, cursor: 'pointer',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px'
+                      }}
+                    >
+                      <ShieldCheck size={15} color="var(--amber)" />
+                      <span style={{ fontSize: '10px' }}>Gyms</span>
                     </button>
                   </div>
                 </div>
 
                 <button
+                  id="btn-login-submit"
                   type="submit"
                   className="btn btn-primary btn-full"
-                  style={{ height: '48px', fontSize: '15px', marginTop: '16px' }}
+                  style={{
+                    height: '48px', fontSize: '15px', marginTop: '12px',
+                    background: role === 'admin' ? 'linear-gradient(135deg, var(--amber), #d97706)' : undefined
+                  }}
                   disabled={loading}
                 >
-                  <span>{loading ? 'Verifying...' : 'Verify Code & Sign In'}</span>
+                  <span>{loading ? 'Authenticating...' : role === 'admin' ? 'Sign In to Gym Admin Portal' : 'Sign In as Gym Member'}</span>
                   <ArrowRight size={18} />
                 </button>
-              </div>
+              </form>
+            ) : (
+              /* Code / OTP Authentication Section */
+              <form onSubmit={handleOTPLogin}>
+                {!otpSent ? (
+                  <div>
+                    <div className="form-group">
+                      <label className="form-label">
+                        {loginContactType === 'mobile' ? 'Mobile Phone Number' : 'Email Address'} *
+                      </label>
+                      <div style={{ position: 'relative' }}>
+                        {loginContactType === 'mobile' ? (
+                          <input
+                            type="tel"
+                            className="form-input"
+                            placeholder="e.g. +91 98765 43210 or 9876543210"
+                            value={loginMobile}
+                            onChange={(e) => setLoginMobile(e.target.value)}
+                            style={{ paddingLeft: '40px' }}
+                            required
+                          />
+                        ) : (
+                          <input
+                            type="email"
+                            className="form-input"
+                            placeholder="athlete@fithealth.io"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            style={{ paddingLeft: '40px' }}
+                            required
+                          />
+                        )}
+                        {loginContactType === 'mobile' ? (
+                          <Smartphone size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                        ) : (
+                          <Mail size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '14px' }} />
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleSendLoginOTP}
+                      className="btn btn-primary btn-full"
+                      style={{
+                        height: '46px', fontSize: '14px', marginTop: '8px',
+                        background: role === 'admin' ? 'linear-gradient(135deg, var(--amber), #d97706)' : undefined
+                      }}
+                      disabled={sendingOtp}
+                    >
+                      <span>{sendingOtp ? 'Dispatching Verification Code...' : 'Send 6-Digit Authentication Code'}</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="form-group" style={{ marginBottom: '16px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                        <label className="form-label" style={{ margin: 0, fontWeight: 800, color: role === 'admin' ? 'var(--amber)' : 'var(--primary)' }}>
+                          🔐 Authentication Section: Enter 6-Digit Code *
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setOtpSent(false)}
+                          style={{
+                            background: 'none', border: 'none',
+                            color: role === 'admin' ? 'var(--amber)' : 'var(--primary)',
+                            fontSize: '11px', fontWeight: 700, cursor: 'pointer'
+                          }}
+                        >
+                          ← Change {loginContactType === 'mobile' ? 'Number' : 'Email'}
+                        </button>
+                      </div>
+
+                      {loginCodeHint && (
+                        <div
+                          onClick={() => setOtpCode(loginCodeHint)}
+                          style={{
+                            padding: '8px 12px',
+                            borderRadius: '8px',
+                            background: role === 'admin' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+                            border: role === 'admin' ? '1px dashed var(--amber)' : '1px dashed var(--primary)',
+                            color: role === 'admin' ? 'var(--amber)' : 'var(--primary)',
+                            fontSize: '12px',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            marginBottom: '10px'
+                          }}
+                        >
+                          <span>💡 Code sent: <strong>{loginCodeHint}</strong></span>
+                          <span style={{ fontSize: '10px', textDecoration: 'underline' }}>Tap to Autofill</span>
+                        </div>
+                      )}
+                      
+                      <OtpPinInput
+                        value={otpCode}
+                        onChange={setOtpCode}
+                        role={role}
+                        error={Boolean(error)}
+                        autoFocus={true}
+                      />
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', padding: '0 4px' }}>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                          Sent to <strong>{loginContactType === 'mobile' ? loginMobile : email}</strong>
+                        </span>
+                        <button
+                          type="button"
+                          onClick={handleSendLoginOTP}
+                          style={{
+                            background: 'none', border: 'none',
+                            color: role === 'admin' ? 'var(--amber)' : 'var(--primary)',
+                            fontSize: '12px', fontWeight: 700, cursor: 'pointer'
+                          }}
+                          disabled={sendingOtp}
+                        >
+                          {sendingOtp ? 'Resending...' : 'Resend Code'}
+                        </button>
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-full"
+                      style={{
+                        height: '48px', fontSize: '15px', marginTop: '16px',
+                        background: role === 'admin' ? 'linear-gradient(135deg, var(--amber), #d97706)' : undefined
+                      }}
+                      disabled={loading}
+                    >
+                      <CheckCircle2 size={18} />
+                      <span>{loading ? 'Authenticating...' : 'Verify Code & Sign In'}</span>
+                    </button>
+                  </div>
+                )}
+              </form>
             )}
-          </form>
+          </>
         )}
-      </>
-    )}
-  </div>
+      </div>
 
       <div style={{ textAlign: 'center', marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
@@ -1311,6 +1569,11 @@ export const LoginPage = ({
                     setSignupPassword(password || '');
                     const prefix = email.split('@')[0].replace(/[._0-9]/g, ' ').trim();
                     setSignupName(prefix ? prefix.charAt(0).toUpperCase() + prefix.slice(1) : 'Athlete');
+                  } else if (loginMobile && !signupMobile) {
+                    setSignupMobile(loginMobile.trim());
+                    setSignupContactType('mobile');
+                    setSignupPassword(password || '');
+                    if (!signupName) setSignupName('Athlete');
                   }
                 }}
                 style={{
@@ -1322,7 +1585,7 @@ export const LoginPage = ({
                   textDecoration: 'underline'
                 }}
               >
-                Create Account with Gmail & Password →
+                Create Account with Mobile Number or Email →
               </button>
             </>
           )}

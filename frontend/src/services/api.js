@@ -62,11 +62,11 @@ export const api = {
     return handleResponse(res);
   },
 
-  login: async (email, password) => {
+  login: async (email, password, role = 'member') => {
     const res = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password, role })
     });
     return handleResponse(res);
   },
@@ -114,11 +114,11 @@ export const api = {
     return handleResponse(res);
   },
 
-  loginWithOTP: async (email, otp) => {
+  loginWithOTP: async (email, otp, role = 'member') => {
     const res = await fetch(`${BASE_URL}/auth/login-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, otp })
+      body: JSON.stringify({ email, otp, role })
     });
     return handleResponse(res);
   },

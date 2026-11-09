@@ -61,9 +61,9 @@ const authMiddleware = async (req, res, next) => {
 
     let user = null;
     let stored = await findUserById(decoded.id);
-    if (!stored && decoded.email) {
-      const { findUserByEmail } = require('../services/userService');
-      stored = await findUserByEmail(decoded.email);
+    if (!stored && (decoded.email || decoded.phone)) {
+      const { findUserByIdentifier } = require('../services/userService');
+      stored = await findUserByIdentifier(decoded.email || decoded.phone);
     }
 
     if (stored) {
@@ -72,18 +72,19 @@ const authMiddleware = async (req, res, next) => {
     }
 
     // Auto-heal legitimate verified session if user record was from an ephemeral instance
-    if (!user && (decoded.id || decoded.email)) {
+    if (!user && (decoded.id || decoded.email || decoded.phone)) {
       try {
         const { saveUser } = require('../services/userService');
-        const resolvedEmail = (decoded.email || 'athlete@fithealth.io').toLowerCase().trim();
+        const resolvedEmail = (decoded.email || (decoded.phone ? `${decoded.phone.replace(/[^0-9]/g, '')}@mobile.fithealth.io` : 'athlete@fithealth.io')).toLowerCase().trim();
         const resolvedId = decoded.id || `user_${Date.now()}`;
-        const defaultName = resolvedEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        const role = resolvedEmail.includes('admin') ? 'admin' : 'member';
+        const defaultName = decoded.name || (decoded.phone ? `Athlete ${decoded.phone.slice(-4)}` : resolvedEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
+        const role = decoded.role || (resolvedEmail.includes('admin') ? 'admin' : 'member');
 
         const restoredUser = {
           id: resolvedId,
           name: defaultName,
           email: resolvedEmail,
+          phone: decoded.phone || '',
           role: role,
           primaryGoal: 'General fitness',
           goal: 'General fitness',

@@ -81,17 +81,17 @@ const checkRateLimit = (identifier, maxRequests = 10, windowMs = 10 * 60 * 1000)
  * Plaintext OTP is returned ONLY for immediate SMTP email transmission.
  * The database receives exclusively the cryptographic hash.
  */
-const createAndStoreOTP = async (email, purpose = 'registration', clientIp = null) => {
-  if (!email || !email.includes('@')) {
-    throw new Error('A valid email address is required for OTP generation.');
+const createAndStoreOTP = async (identifier, purpose = 'registration', clientIp = null) => {
+  if (!identifier || typeof identifier !== 'string' || !identifier.trim()) {
+    throw new Error('A valid email address or mobile number is required for OTP generation.');
   }
 
-  const normalizedEmail = email.toLowerCase().trim();
+  const normalizedEmail = identifier.toLowerCase().trim();
   const config = getOtpConfig();
 
-  // Enforce IP and email sliding-window rate limits
+  // Enforce IP and identifier sliding-window rate limits
   if (clientIp) checkRateLimit(`ip:${clientIp}`);
-  checkRateLimit(`email:${normalizedEmail}`);
+  checkRateLimit(`id:${normalizedEmail}`);
 
   const storeKey = `${normalizedEmail}:${purpose}`;
   const now = Date.now();

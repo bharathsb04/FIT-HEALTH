@@ -183,8 +183,84 @@ async function updateUser(userId, updates) {
   return updatedRecord;
 }
 
+/**
+ * Finds a user by mobile phone number, checking in-memory cache first, then Cloud Firestore.
+ * Supports exact match and digits-only normalization.
+ * @param {string} phone
+ * @returns {Promise<object|null>}
+ */
+async function findUserByPhone(phone) {
+  if (!phone || typeof phone !== 'string') return null;
+  const digits = phone.replace(/\D/g, '');
+  if (!digits || digits.length < 6) return null;
+
+  // 1. Check local in-memory DB
+  const localUser = db.findOne('users', u => {
+    if (!u.phone) return false;
+    const uDigits = u.phone.replace(/\D/g, '');
+    return uDigits === digits || (digits.length >= 10 && uDigits.endsWith(digits.slice(-10))) || (uDigits.length >= 10 && digits.endsWith(uDigits.slice(-10)));
+  });
+  if (localUser) {
+    return localUser;
+  }
+
+  // 2. Query Cloud Firestore
+  try {
+    const firestore = getFirestore();
+    if (firestore) {
+      const snap = await firestore.collection('users')
+        .where('phone', '==', phone.trim())
+        .limit(1)
+        .get();
+
+      if (!snap.empty) {
+        const doc = snap.docs[0];
+        const user = { id: doc.id, ...doc.data() };
+        try {
+          db.create('users', user);
+        } catch (_) {}
+        return user;
+      }
+    }
+  } catch (err) {
+    console.warn('[User Service] Firestore lookup by phone warning:', err.message);
+  }
+
+  return null;
+}
+
+/**
+ * Finds a user by email OR mobile phone number seamlessly.
+ * @param {string} identifier
+ * @returns {Promise<object|null>}
+ */
+async function findUserByIdentifier(identifier) {
+  if (!identifier || typeof identifier !== 'string') return null;
+  const clean = identifier.trim();
+
+  // If email address (contains @)
+  if (clean.includes('@')) {
+    return await findUserByEmail(clean);
+  }
+
+  // Otherwise, lookup by mobile phone number
+  const byPhone = await findUserByPhone(clean);
+  if (byPhone) return byPhone;
+
+  // Check if registered under mobile synthetic email
+  const digits = clean.replace(/\D/g, '');
+  if (digits) {
+    const bySynthetic = await findUserByEmail(`${digits}@mobile.fithealth.io`);
+    if (bySynthetic) return bySynthetic;
+  }
+
+  return await findUserByEmail(clean);
+}
+
 module.exports = {
   findUserByEmail,
+  findUserByPhone,
+  findUserByIdentifier,
   findUserById,
   saveUser,
   updateUser

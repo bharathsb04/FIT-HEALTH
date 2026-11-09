@@ -1,5 +1,7 @@
 const db = require('../data/dbStorage');
 const { defaultGymFeePlans } = require('../data/seedData');
+const bcrypt = require('bcryptjs');
+const { findUserByEmail, saveUser, updateUser } = require('../services/userService');
 
 function syncRegisteredUsersToGymMembers() {
   const users = db.getCollection('users') || [];
@@ -202,6 +204,7 @@ exports.addMember = async (req, res) => {
       phone = '',
       plan = 'Monthly Essential Flex',
       planId,
+      password,
       assignedTrainer = 'None',
       notes = '',
       amountPaid,
@@ -213,6 +216,11 @@ exports.addMember = async (req, res) => {
     if (!name || !email) {
       return res.status(400).json({ success: false, message: 'Name and email are required.' });
     }
+
+    const cleanEmail = email.toLowerCase().trim();
+    // Use admin-specified password or auto-generate a memorable, secure password for the member
+    const assignedPassword = (password && password.trim()) || `Fit@${Math.floor(1000 + Math.random() * 9000)}`;
+    const hashedPassword = bcrypt.hashSync(assignedPassword, 10);
 
     const allPlans = db.getCollection('gymFeePlans') || defaultGymFeePlans;
     const selectedPlan = allPlans.find(p => (planId && p.id === planId) || (plan && p.name.toLowerCase() === plan.toLowerCase()));
@@ -230,12 +238,60 @@ exports.addMember = async (req, res) => {
     const newMemberId = `FH-MEM-${Math.floor(1000 + Math.random() * 9000)}`;
     const receiptNo = `REC-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
+    // 1. Create or synchronize member login account in users collection & Firestore
+    // Member can take the email and password later to log into their account
+    let existingUser = await findUserByEmail(cleanEmail);
+    let userId;
+
+    if (existingUser) {
+      userId = existingUser.id;
+      await updateUser(existingUser.id, {
+        password: hashedPassword,
+        gymStatus: 'Active',
+        gymMembership: 'Active',
+        membershipStatus: 'Active',
+        membershipId: newMemberId,
+        membershipPlan: selectedPlan ? selectedPlan.name : plan,
+        gymName: 'rsv gym and sports club',
+        membershipExpiry: expiry,
+        isEmailVerified: true
+      });
+    } else {
+      userId = `usr_${Date.now()}`;
+      const newUser = {
+        id: userId,
+        name: name.trim(),
+        email: cleanEmail,
+        phone: phone.trim(),
+        password: hashedPassword,
+        role: 'member', // Strictly 'member' role - security concern prevents admin login
+        gymStatus: 'Active',
+        gymMembership: 'Active',
+        membershipStatus: 'Active',
+        membershipId: newMemberId,
+        membershipPlan: selectedPlan ? selectedPlan.name : plan,
+        gymName: 'rsv gym and sports club',
+        gymLocation: '442 Fitness Boulevard, Downtown Metro',
+        membershipExpiry: expiry,
+        joinedDate: now.toISOString().split('T')[0],
+        primaryGoal: 'General fitness',
+        fitnessLevel: 'Intermediate',
+        isEmailVerified: true,
+        createdAt: now.toISOString()
+      };
+      await saveUser(newUser);
+    }
+
     const newMember = {
       id: `mem_${Date.now()}`,
+      userId,
       name: name.trim(),
-      email: email.trim(),
+      email: cleanEmail,
       phone: phone.trim(),
       membershipId: newMemberId,
+      checkInPin: newMemberId.replace(/\D/g, '').slice(-4) || '7829',
+      temporaryPassword: assignedPassword,
+      initialPassword: assignedPassword,
       plan: selectedPlan ? selectedPlan.name : plan,
       planId: selectedPlan ? selectedPlan.id : 'custom',
       durationDays,
@@ -278,8 +334,17 @@ exports.addMember = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: `Member ${name} added successfully with ID ${newMemberId} (Receipt: ${receiptNo})`,
+      message: `Member ${name} added successfully with ID ${newMemberId}!`,
       member: newMember,
+      credentials: {
+        name: name.trim(),
+        email: cleanEmail,
+        password: assignedPassword,
+        membershipId: newMemberId,
+        plan: newMember.plan,
+        expiryDate: expiry,
+        gymName: 'rsv gym and sports club'
+      },
       receipt: txn
     });
   } catch (error) {
@@ -1446,13 +1511,57 @@ exports.verifyMemberCode = async (req, res) => {
     const receiptNo = `REC-${now.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
     const adminUser = req.userId ? db.findById('users', req.userId) : null;
     const adminName = adminUser?.name || 'Gym Admin Desk';
+    const cleanAppEmail = (app.email || '').toLowerCase().trim();
+    const assignedPassword = app.temporaryPassword || `Fit@${newMemberId.replace(/\D/g, '').slice(-4) || '7829'}`;
+
+    // Provision or sync member user login account
+    let targetUser = await findUserByEmail(cleanAppEmail);
+    if (!targetUser) {
+      const newUser = {
+        id: `usr_${Date.now()}`,
+        name: app.name,
+        email: cleanAppEmail,
+        phone: app.phone || '',
+        password: bcrypt.hashSync(assignedPassword, 10),
+        role: 'member',
+        gymStatus: 'Active',
+        gymMembership: 'Active',
+        membershipStatus: 'Active',
+        membershipId: newMemberId,
+        membershipPlan: app.plan || 'Monthly Pro Fitness',
+        gymName: app.gymName || 'rsv gym and sports club',
+        gymLocation: app.gymLocation || '',
+        membershipExpiry: expiry,
+        joinedDate: now.toISOString().split('T')[0],
+        primaryGoal: 'General fitness',
+        fitnessLevel: 'Intermediate',
+        isEmailVerified: true,
+        createdAt: now.toISOString()
+      };
+      await saveUser(newUser);
+    } else {
+      await updateUser(targetUser.id, {
+        gymStatus: 'Active',
+        gymMembership: 'Active',
+        gymName: app.gymName || 'rsv gym and sports club',
+        gymLocation: app.gymLocation || '',
+        isCustomGym: Boolean(app.isCustomGym),
+        gymPlan: app.plan || 'Monthly Pro Fitness',
+        membershipId: newMemberId,
+        membershipExpiry: expiry
+      });
+    }
 
     const newMember = {
       id: `mem_${Date.now()}`,
+      userId: targetUser?.id || `usr_${Date.now()}`,
       name: app.name,
-      email: app.email,
+      email: cleanAppEmail,
       phone: app.phone || '',
       membershipId: newMemberId,
+      checkInPin: newMemberId.replace(/\D/g, '').slice(-4) || '7829',
+      temporaryPassword: assignedPassword,
+      initialPassword: assignedPassword,
       plan: app.plan || 'Monthly Pro Fitness',
       planId: app.planId || 'plan_monthly',
       durationDays,
@@ -1487,26 +1596,6 @@ exports.verifyMemberCode = async (req, res) => {
       membershipId: newMemberId,
       verifiedBy: adminName
     });
-
-    // Update matching user profile if user registered with this email
-    const users = db.find('users') || [];
-    const targetUser = users.find(u =>
-      (app.userId && u.id === app.userId) ||
-      (app.email && u.email && u.email.toLowerCase() === app.email.toLowerCase())
-    );
-
-    if (targetUser) {
-      db.update('users', u => u.id === targetUser.id, {
-        gymStatus: 'Active',
-        gymMembership: 'Active',
-        gymName: app.gymName || 'rsv gym and sports club',
-        gymLocation: app.gymLocation || '',
-        isCustomGym: Boolean(app.isCustomGym),
-        gymPlan: app.plan || 'Monthly Pro Fitness',
-        membershipId: newMemberId,
-        membershipExpiry: expiry
-      });
-    }
 
     // Record receipt transaction
     db.create('membershipTransactions', {
@@ -1552,6 +1641,15 @@ exports.verifyMemberCode = async (req, res) => {
       success: true,
       message: `Member ${newMember.name} successfully verified and enrolled! Member ID: ${newMember.membershipId}`,
       member: newMember,
+      credentials: {
+        name: newMember.name,
+        email: newMember.email,
+        password: newMember.temporaryPassword || assignedPassword,
+        membershipId: newMember.membershipId,
+        plan: newMember.plan,
+        expiryDate: expiry,
+        gymName: newMember.gymName || 'rsv gym and sports club'
+      },
       application: app
     });
   } catch (error) {

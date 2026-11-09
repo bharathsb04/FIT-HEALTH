@@ -44,8 +44,8 @@ export const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
-  const login = async (email, password) => {
-    const res = await api.login(email, password);
+  const login = async (email, password, role = 'member') => {
+    const res = await api.login(email, password, role);
     if (res.success && res.token) {
       localStorage.setItem('fit_health_token', res.token);
       setToken(res.token);
@@ -55,8 +55,8 @@ export const AuthProvider = ({ children }) => {
     throw new Error(res.message || 'Login failed');
   };
 
-  const loginWithOTP = async (email, otp) => {
-    const res = await api.loginWithOTP(email, otp);
+  const loginWithOTP = async (email, otp, role = 'member') => {
+    const res = await api.loginWithOTP(email, otp, role);
     if (res.success && res.token) {
       localStorage.setItem('fit_health_token', res.token);
       setToken(res.token);

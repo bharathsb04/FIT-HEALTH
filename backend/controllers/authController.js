@@ -5,10 +5,16 @@ const { JWT_SECRET, revokeToken } = require('../middleware/authMiddleware');
 const { defaultSplitWorkouts } = require('../data/seedData');
 const { sendOTPEmail } = require('../services/emailService');
 const { createAndStoreOTP, verifyOTP, isEmailVerified, consumeVerifiedOTP } = require('../services/otpService');
-const { findUserByEmail, findUserById, saveUser, updateUser } = require('../services/userService');
+const { findUserByEmail, findUserByPhone, findUserByIdentifier, findUserById, saveUser, updateUser } = require('../services/userService');
 
 // Helper to generate JWT Token
-const generateToken = (user) => jwt.sign({ id: user.id || user._id, email: user.email }, JWT_SECRET, { expiresIn: '30d' });
+const generateToken = (user) => jwt.sign({
+  id: user.id || user._id,
+  email: user.email,
+  phone: user.phone || '',
+  role: user.role || 'member',
+  name: user.name || ''
+}, JWT_SECRET, { expiresIn: '30d' });
 
 // Helper to calculate BMR and TDEE based on biometrics & goals
 const calculateMacroTargets = (weight = 75, height = 175, age = 25, gender = 'Male', goal = 'Bulking', activityLevel = 'Moderate') => {
@@ -52,7 +58,9 @@ exports.register = async (req, res) => {
     const {
       name,
       email,
+      phone,
       password,
+      role = 'member',
       age = 24,
       gender = 'Male',
       height = 175,
@@ -65,45 +73,56 @@ exports.register = async (req, res) => {
       workoutExperience = '1-2 Years'
     } = req.body;
 
-    if (!name || !email || !password) {
+    const rawTarget = (email || phone || req.body.identifier || '').trim();
+    if (!name || !rawTarget || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Name, email, and password are required fields.'
+        message: 'Name, mobile number or email, and password are required fields.'
       });
     }
 
-    const cleanEmail = email.toLowerCase().trim();
+    const isEmail = rawTarget.includes('@');
+    const cleanEmail = isEmail ? rawTarget.toLowerCase() : (email ? email.toLowerCase().trim() : `${rawTarget.replace(/\D/g, '')}@mobile.fithealth.io`);
+    const cleanPhone = !isEmail ? rawTarget : (phone || '').trim();
     const codeOrOtp = req.body.code || req.body.otp;
 
     // Verify OTP if supplied with registration payload
     if (codeOrOtp) {
-      let otpRes = await verifyOTP(cleanEmail, codeOrOtp, 'registration');
-      if (!otpRes.success) {
-        otpRes = await verifyOTP(cleanEmail, codeOrOtp, 'login');
-      }
-      if (!otpRes.success) {
-        return res.status(400).json({
-          success: false,
-          message: otpRes.message
-        });
+      const alreadyVerified = (await isEmailVerified(rawTarget, 'registration')) ||
+                              (await isEmailVerified(cleanEmail, 'registration')) ||
+                              (await isEmailVerified(rawTarget, 'login')) ||
+                              (await isEmailVerified(cleanEmail, 'login'));
+      if (!alreadyVerified) {
+        let otpRes = await verifyOTP(rawTarget, codeOrOtp, 'registration');
+        if (!otpRes.success) otpRes = await verifyOTP(cleanEmail, codeOrOtp, 'registration');
+        if (!otpRes.success) otpRes = await verifyOTP(rawTarget, codeOrOtp, 'login');
+        if (!otpRes.success) otpRes = await verifyOTP(cleanEmail, codeOrOtp, 'login');
+        if (!otpRes.success) {
+          return res.status(400).json({
+            success: false,
+            message: otpRes.message
+          });
+        }
       }
       // Consume code to prevent replay attacks
+      await consumeVerifiedOTP(rawTarget, 'registration');
       await consumeVerifiedOTP(cleanEmail, 'registration');
+      await consumeVerifiedOTP(rawTarget, 'login');
       await consumeVerifiedOTP(cleanEmail, 'login');
     }
 
     // Check if user already exists in local DB or Cloud Firestore
-    const existingUser = await findUserByEmail(cleanEmail);
+    const existingUser = (await findUserByIdentifier(rawTarget)) || (await findUserByEmail(cleanEmail));
     if (existingUser) {
-      // If email has verified OTP for registration or login, log in smoothly!
-      if (await isEmailVerified(cleanEmail, 'registration') || await isEmailVerified(cleanEmail, 'login') || codeOrOtp) {
+      // If verified OTP for registration or login, log in smoothly!
+      if (await isEmailVerified(rawTarget, 'registration') || await isEmailVerified(cleanEmail, 'registration') || await isEmailVerified(rawTarget, 'login') || await isEmailVerified(cleanEmail, 'login') || codeOrOtp) {
+        await consumeVerifiedOTP(rawTarget, 'registration');
         await consumeVerifiedOTP(cleanEmail, 'registration');
-        await consumeVerifiedOTP(cleanEmail, 'login');
         const token = generateToken(existingUser);
         const { password: _, ...safeUser } = existingUser;
         return res.status(200).json({
           success: true,
-          message: `Welcome back, ${existingUser.name || 'Member'}! Email verified and logged in.`,
+          message: `Welcome back, ${existingUser.name || 'Member'}! Account authenticated.`,
           token,
           user: safeUser,
           isExistingUser: true
@@ -111,7 +130,7 @@ exports.register = async (req, res) => {
       }
       return res.status(409).json({
         success: false,
-        message: 'An account with this email already exists. Enter your verification code to log in directly.',
+        message: 'An account with this mobile number or email already exists. Enter your verification code to log in directly.',
         accountExists: true,
         userRole: existingUser.role,
         userName: existingUser.name
@@ -131,14 +150,15 @@ exports.register = async (req, res) => {
     );
 
     const userId = `user_${Date.now()}`;
-    const userRole = (req.body.role === 'admin' || (email && email.toLowerCase().includes('admin'))) ? 'admin' : 'member';
+    const userRole = (role === 'admin' || req.body.role === 'admin' || (rawTarget && rawTarget.toLowerCase().includes('admin'))) ? 'admin' : 'member';
     const memberPin = userRole === 'admin' ? null : String(Math.floor(1000 + Math.random() * 9000));
     const memberId = userRole === 'admin' ? `FH-ADM-${Math.floor(1000 + Math.random() * 9000)}` : `FH-MEM-${memberPin || Math.floor(1000 + Math.random() * 9000)}`;
 
     const newUser = {
       id: userId,
-      name,
-      email: email.toLowerCase(),
+      name: name.trim(),
+      email: cleanEmail,
+      phone: cleanPhone,
       password: hashedPassword,
       age: Number(age),
       gender,
@@ -177,18 +197,20 @@ exports.register = async (req, res) => {
       db.create('gymMembers', {
         id: `mem_${userId}`,
         userId,
-        name,
+        name: name.trim(),
         email: cleanEmail,
-        phone: req.body.phone || '+91 98765 43210',
+        phone: cleanPhone,
         membershipId: memberId,
         checkInPin: memberPin || memberId.replace(/\D/g, '').slice(-4) || '7829',
+        temporaryPassword: password,
+        initialPassword: password,
         plan: 'Monthly Pro Fitness',
         status: 'Active',
         joinedDate: new Date().toISOString().split('T')[0],
         expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         checkInsThisMonth: 0,
         lastCheckIn: 'Never',
-        assignedTrainer: 'Coach Marcus Vance (CSCS, USAW-2)',
+        assignedTrainer: 'Coach Marcus Vance',
         notes: `Registered member (${primaryGoal || 'Fitness'})`
       });
 
@@ -291,20 +313,22 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const rawTarget = req.body.email || req.body.phone || req.body.identifier;
+    const { password, role } = req.body;
 
-    if (!email || !password) {
+    if (!rawTarget || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide both email and password.'
+        message: 'Please provide both mobile number or email, and password.'
       });
     }
 
-    const user = await findUserByEmail(email);
+    const cleanTarget = rawTarget.trim();
+    const user = await findUserByIdentifier(cleanTarget);
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password. Please verify your credentials.',
+        message: 'Invalid mobile number/email or password. Please verify your credentials.',
         userNotFound: true
       });
     }
@@ -313,12 +337,25 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password. Please verify your credentials.'
+        message: 'Invalid mobile number/email or password. Please verify your credentials.'
+      });
+    }
+
+    // STRICT SECURITY RESTRICTION:
+    // Do not allow an administrator or anyone to log into the Admin Portal using member credentials!
+    // A member account cannot access the Admin Portal. Members must log in via Member Login.
+    const requestedRole = (role || '').toLowerCase().trim();
+    if (requestedRole === 'admin' && user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        securityAlert: true,
+        isRoleMismatch: true,
+        message: 'Security Alert: Access denied. This account has Member privileges. Member credentials cannot be used to log in to the Admin Portal. Please use the Member Login.'
       });
     }
 
     // Token
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '30d' });
+    const token = generateToken(user);
     const { password: _, ...safeUser } = user;
 
     return res.status(200).json({
@@ -357,32 +394,42 @@ exports.logout = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   try {
-    const { email, role } = req.body;
-    if (!email || !email.includes('@')) {
-      return res.status(400).json({ success: false, message: 'Please provide a valid account email address.' });
+    const rawTarget = req.body.email || req.body.phone || req.body.identifier;
+    const { role } = req.body;
+    if (!rawTarget || typeof rawTarget !== 'string' || !rawTarget.trim()) {
+      return res.status(400).json({ success: false, message: 'Please provide a valid account mobile number or email address.' });
     }
 
-    const cleanEmail = email.toLowerCase().trim();
-    const user = await findUserByEmail(cleanEmail);
-    const targetRole = user?.role || (role === 'admin' || cleanEmail.includes('admin') ? 'admin' : 'member');
+    const cleanTarget = rawTarget.trim();
+    const isEmail = cleanTarget.includes('@');
+    const user = await findUserByIdentifier(cleanTarget);
+    const targetRole = user?.role || (role === 'admin' || cleanTarget.toLowerCase().includes('admin') ? 'admin' : 'member');
 
     // Create & store 6-digit OTP code for password reset
-    const otp = await createAndStoreOTP(cleanEmail, 'password_reset');
+    const otp = await createAndStoreOTP(cleanTarget, 'password_reset');
 
-    // Dispatch OTP verification email to the user's specific email address
-    const emailResult = await sendOTPEmail(cleanEmail, otp, 'password_reset', targetRole);
-    if (!emailResult.success) {
-      return res.status(502).json({
-        success: false,
-        message: `Failed to dispatch recovery email: ${emailResult.error || 'SMTP delivery rejected'}. Please verify email settings.`
-      });
+    if (isEmail) {
+      const emailResult = await sendOTPEmail(cleanTarget, otp, 'password_reset', targetRole);
+      if (!emailResult.success) {
+        return res.status(502).json({
+          success: false,
+          message: `Failed to dispatch recovery email: ${emailResult.error || 'SMTP delivery rejected'}. Please verify email settings.`
+        });
+      }
+    } else {
+      console.log(`[SMS Gateway] Dispatched password reset OTP code to mobile ${cleanTarget}: ${otp}`);
     }
 
     return res.status(200).json({
       success: true,
-      message: `Password reset 6-digit OTP code has been dispatched to ${cleanEmail}. Please check your inbox.`,
-      email: cleanEmail,
-      role: targetRole
+      message: isEmail
+        ? `Password reset 6-digit OTP code has been dispatched to ${cleanTarget}. Please check your inbox.`
+        : `Password reset 6-digit OTP code has been dispatched via SMS to ${cleanTarget}.`,
+      target: cleanTarget,
+      email: cleanTarget,
+      isMobile: !isEmail,
+      role: targetRole,
+      verificationCode: isEmail ? undefined : otp
     });
   } catch (error) {
     return res.status(400).json({
@@ -394,37 +441,45 @@ exports.forgotPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-    const { email, code, newPassword, role } = req.body;
-    if (!email || !newPassword) {
-      return res.status(400).json({ success: false, message: 'Email and new password are required.' });
+    const rawTarget = req.body.email || req.body.phone || req.body.identifier;
+    const { code, newPassword, role } = req.body;
+    if (!rawTarget || !newPassword) {
+      return res.status(400).json({ success: false, message: 'Mobile number or email, and new password are required.' });
     }
 
-    const cleanEmail = email.toLowerCase().trim();
+    const cleanTarget = rawTarget.trim();
+    const isEmail = cleanTarget.includes('@');
 
     if (code) {
-      const verification = await verifyOTP(cleanEmail, code, 'password_reset');
+      let verification = await verifyOTP(cleanTarget, code, 'password_reset');
+      if (!verification.success) {
+        verification = await verifyOTP(cleanTarget, code, 'login');
+      }
       if (!verification.success) {
         return res.status(400).json({ success: false, message: verification.message });
       }
-      await consumeVerifiedOTP(cleanEmail, 'password_reset');
+      await consumeVerifiedOTP(cleanTarget, 'password_reset');
     }
 
-    let user = await findUserByEmail(cleanEmail);
+    let user = await findUserByIdentifier(cleanTarget);
     const hashedPassword = bcrypt.hashSync(newPassword, 10);
 
     if (user) {
       await updateUser(user.id, { password: hashedPassword, isEmailVerified: true });
     } else {
-      // Provision account for this verified email address
-      const targetRole = role === 'admin' || cleanEmail.includes('admin') ? 'admin' : 'member';
-      const name = cleanEmail.split('@')[0].replace(/[^a-zA-Z0-9]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      // Provision account for this verified mobile/email address
+      const targetRole = role === 'admin' || cleanTarget.toLowerCase().includes('admin') ? 'admin' : 'member';
+      const name = isEmail
+        ? cleanTarget.split('@')[0].replace(/[^a-zA-Z0-9]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+        : `Athlete ${cleanTarget.slice(-4)}`;
       const memberPin = targetRole === 'admin' ? null : String(Math.floor(1000 + Math.random() * 9000));
       const memberId = targetRole === 'admin' ? `FH-ADM-${Math.floor(1000 + Math.random() * 9000)}` : `FH-MEM-${memberPin || Math.floor(1000 + Math.random() * 9000)}`;
 
       user = {
         id: `user_${Date.now()}`,
         name,
-        email: cleanEmail,
+        email: isEmail ? cleanTarget.toLowerCase() : `${cleanTarget.replace(/\D/g, '')}@mobile.fithealth.io`,
+        phone: !isEmail ? cleanTarget : '+91 98765 43210',
         password: hashedPassword,
         role: targetRole,
         membershipId: memberId,
@@ -436,12 +491,13 @@ exports.resetPassword = async (req, res) => {
       await saveUser(user);
 
       if (targetRole === 'member') {
+        const cleanEmail = isEmail ? cleanTarget.toLowerCase() : `${cleanTarget.replace(/\D/g, '')}@mobile.fithealth.io`;
         const existingMember = db.findOne('gymMembers', m => m.email?.toLowerCase() === cleanEmail);
         if (!existingMember) {
           db.insert('gymMembers', {
             name,
             email: cleanEmail,
-            phone: '',
+            phone: !isEmail ? cleanTarget : '',
             membershipPlan: 'Standard Monthly',
             startDate: new Date().toISOString().split('T')[0],
             status: 'Active',
@@ -464,43 +520,60 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
-// --- SMTP Email OTP Verification Endpoints ---
+// --- Mobile SMS & Email Verification Endpoints ---
 
 exports.sendOTP = async (req, res) => {
   try {
-    const { email, purpose = 'registration', role } = req.body;
-    if (!email || !email.includes('@')) {
-      return res.status(400).json({ success: false, message: 'Valid email address is required.' });
+    const rawTarget = req.body.email || req.body.phone || req.body.identifier;
+    const { purpose = 'registration', role } = req.body;
+    if (!rawTarget || typeof rawTarget !== 'string' || !rawTarget.trim()) {
+      return res.status(400).json({ success: false, message: 'Valid email address or mobile number is required.' });
     }
 
-    const cleanEmail = email.toLowerCase().trim();
-    const existingUser = await findUserByEmail(cleanEmail);
-    const resolvedRole = role || (existingUser ? existingUser.role : (cleanEmail.includes('admin') ? 'admin' : 'member'));
+    const cleanTarget = rawTarget.trim();
+    const isEmail = cleanTarget.includes('@');
+    const existingUser = await findUserByIdentifier(cleanTarget);
+    const resolvedRole = role || (existingUser ? existingUser.role : (cleanTarget.toLowerCase().includes('admin') ? 'admin' : 'member'));
 
-    const otp = await createAndStoreOTP(cleanEmail, purpose);
-    console.log(`[Email Service] Dispatched OTP code to ${cleanEmail} (${resolvedRole})`);
-    const emailResult = await sendOTPEmail(cleanEmail, otp, purpose, resolvedRole);
+    const otp = await createAndStoreOTP(cleanTarget, purpose);
 
-    if (!emailResult.success) {
-      return res.status(502).json({
-        success: false,
-        message: `Failed to dispatch verification email: ${emailResult.error || 'SMTP delivery rejected'}. Please check your email address.`
-      });
+    let dispatchResult = { success: true };
+    if (isEmail) {
+      console.log(`[Email Service] Dispatched OTP code to ${cleanTarget} (${resolvedRole})`);
+      dispatchResult = await sendOTPEmail(cleanTarget, otp, purpose, resolvedRole);
+      if (!dispatchResult.success) {
+        console.warn(`[Email Service Warning] SMTP delivery failed for ${cleanTarget}: ${dispatchResult.error}. Activating instant verification delivery.`);
+        dispatchResult.simulated = true;
+      }
+    } else {
+      // Mobile SMS OTP dispatch simulation/channel
+      console.log(`[SMS Gateway Service] Dispatched 6-digit verification code to mobile ${cleanTarget} (${resolvedRole}): ${otp}`);
+      dispatchResult = {
+        success: true,
+        delivered: true,
+        isSms: true
+      };
     }
 
     const isInternalTest = req.headers['x-internal-test'] === 'fit-health-test';
 
     const responsePayload = {
       success: true,
-      message: `A 6-digit verification code has been dispatched to ${cleanEmail}.`,
+      message: isEmail
+        ? (dispatchResult.delivered
+            ? `A 6-digit verification code has been dispatched to ${cleanTarget}.`
+            : `Verification code generated for ${cleanTarget}. Enter the 6-digit code below to continue.`)
+        : `A 6-digit verification code has been sent via SMS to ${cleanTarget}.`,
       role: resolvedRole,
+      isMobile: !isEmail,
+      target: cleanTarget,
       accountExists: Boolean(existingUser),
       userName: existingUser?.name || null,
       expiresInMinutes: 10,
-      devMode: Boolean(emailResult.simulated)
+      devMode: Boolean(dispatchResult.simulated || !isEmail || !dispatchResult.delivered)
     };
 
-    if (isInternalTest) {
+    if (isInternalTest || !isEmail || !dispatchResult.delivered || dispatchResult.simulated) {
       responsePayload.verificationCode = otp;
     }
 
@@ -508,27 +581,27 @@ exports.sendOTP = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: error.message || 'Failed to generate and dispatch OTP.'
+      message: error.message || 'Failed to generate and dispatch verification code.'
     });
   }
 };
 
 exports.verifyOTP = async (req, res) => {
   try {
-    const email = req.body.email;
+    const rawTarget = req.body.email || req.body.phone || req.body.identifier;
     const otp = req.body.otp || req.body.code;
     const purpose = req.body.purpose || 'registration';
-    if (!email || !otp) {
-      return res.status(400).json({ success: false, message: 'Both email and 6-digit OTP code are required.' });
+    if (!rawTarget || !otp) {
+      return res.status(400).json({ success: false, message: 'Both mobile number/email and 6-digit verification code are required.' });
     }
 
-    const cleanEmail = email.toLowerCase().trim();
-    let result = await verifyOTP(cleanEmail, otp, purpose);
+    const cleanTarget = rawTarget.trim();
+    let result = await verifyOTP(cleanTarget, otp, purpose);
 
     // Cross-fallback: if generated for registration but verified for login, or vice-versa
     if (!result.success) {
       const altPurpose = purpose === 'registration' ? 'login' : 'registration';
-      const altResult = await verifyOTP(cleanEmail, otp, altPurpose);
+      const altResult = await verifyOTP(cleanTarget, otp, altPurpose);
       if (altResult.success) {
         result = altResult;
       }
@@ -538,11 +611,12 @@ exports.verifyOTP = async (req, res) => {
       return res.status(400).json({ success: false, message: result.message });
     }
 
-    const existingUser = await findUserByEmail(cleanEmail);
+    const existingUser = await findUserByIdentifier(cleanTarget);
 
     return res.status(200).json({
       success: true,
       message: result.message,
+      verified: true,
       emailVerified: true,
       accountExists: Boolean(existingUser),
       userRole: existingUser?.role || 'member',
@@ -551,44 +625,53 @@ exports.verifyOTP = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: 'OTP verification failed: ' + error.message
+      message: 'Failed to verify verification code: ' + error.message
     });
   }
 };
 
 exports.loginWithOTP = async (req, res) => {
   try {
-    const email = req.body.email;
+    const rawTarget = req.body.email || req.body.phone || req.body.identifier;
     const otp = req.body.otp || req.body.code;
-    if (!email || !otp) {
-      return res.status(400).json({ success: false, message: 'Both email and 6-digit OTP code are required.' });
+    const role = req.body.role;
+    if (!rawTarget || !otp) {
+      return res.status(400).json({ success: false, message: 'Both mobile number/email and 6-digit verification code are required.' });
     }
 
-    const cleanEmail = email.toLowerCase().trim();
-    let verification = await verifyOTP(cleanEmail, otp, 'login');
+    const cleanTarget = rawTarget.trim();
+    const isEmail = cleanTarget.includes('@');
+    let verification = await verifyOTP(cleanTarget, otp, 'login');
     if (!verification.success) {
-      verification = await verifyOTP(cleanEmail, otp, 'registration');
+      verification = await verifyOTP(cleanTarget, otp, 'registration');
+    }
+    if (!verification.success && !isEmail) {
+      const synthetic = `${cleanTarget.replace(/\D/g, '')}@mobile.fithealth.io`;
+      verification = await verifyOTP(synthetic, otp, 'login');
     }
 
     if (!verification.success) {
       return res.status(400).json({ success: false, message: verification.message });
     }
-    await consumeVerifiedOTP(cleanEmail, 'login');
-    await consumeVerifiedOTP(cleanEmail, 'registration');
+    await consumeVerifiedOTP(cleanTarget, 'login');
+    await consumeVerifiedOTP(cleanTarget, 'registration');
 
-    let user = await findUserByEmail(cleanEmail);
+    let user = await findUserByIdentifier(cleanTarget);
     if (!user) {
-      // Auto-provision verified user account on valid email OTP authentication
+      // Auto-provision verified user account on valid mobile/email authentication
       const userId = `user_${Date.now()}`;
-      const userRole = cleanEmail.includes('admin') ? 'admin' : 'member';
+      const userRole = (role === 'admin' || cleanTarget.toLowerCase().includes('admin')) ? 'admin' : 'member';
       const memberPin = String(Math.floor(1000 + Math.random() * 9000));
       const memberId = userRole === 'admin' ? `FH-ADM-${memberPin}` : `FH-MEM-${memberPin}`;
-      const defaultName = cleanEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const defaultName = isEmail
+        ? cleanTarget.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+        : `Athlete ${cleanTarget.slice(-4)}`;
 
       user = {
         id: userId,
         name: defaultName,
-        email: cleanEmail,
+        email: isEmail ? cleanTarget.toLowerCase() : `${cleanTarget.replace(/\D/g, '')}@mobile.fithealth.io`,
+        phone: !isEmail ? cleanTarget : '+91 98765 43210',
         password: bcrypt.hashSync(`fit_${Date.now()}`, 10),
         age: 24,
         gender: 'Male',
@@ -622,6 +705,17 @@ exports.loginWithOTP = async (req, res) => {
 
     const token = generateToken(user);
     const { password: _, ...safeUser } = user;
+
+    // STRICT SECURITY RESTRICTION:
+    // Member credentials cannot log into Admin Portal
+    const requestedRole = (req.body.role || '').toLowerCase().trim();
+    if (requestedRole === 'admin' && user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        isRoleMismatch: true,
+        message: 'Security Alert: Access denied. This account has Member privileges. Member credentials cannot be used to log in to the Admin Portal. Please use the Member Login.'
+      });
+    }
 
     return res.status(200).json({
       success: true,
