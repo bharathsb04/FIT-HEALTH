@@ -785,8 +785,8 @@ export const DashboardPage = () => {
                   className="btn btn-outline"
                   style={{ height: '44px', fontSize: '13px', fontWeight: 700, gap: '6px' }}
                 >
-                  <Eye size={15} color="var(--cyan)" />
-                  <span>Fullscreen Video</span>
+                  <Camera size={15} color="var(--cyan)" />
+                  <span>Demonstration Image</span>
                 </button>
                 <button
                   id="btn-start-workout-dash"

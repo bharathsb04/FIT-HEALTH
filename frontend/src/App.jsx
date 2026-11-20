@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './sentinel.css';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import { FitnessProvider, useFitness } from './contexts/FitnessContext';
@@ -38,7 +39,17 @@ const AppNavigator = () => {
   const { isAuthenticated, loading, user } = useAuth();
   const { isLaptop, isMobile } = useTheme();
   const { activeTab, setActiveTab, isFeatureSelected, toggleFeatureSelection } = useFitness();
-  const [authView, setAuthView] = useState('landing'); // 'landing' | 'splash' | 'onboarding' | 'login' | 'forgot'
+  const [authView, setAuthView] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const p = window.location.pathname.toLowerCase();
+      const h = window.location.hash.toLowerCase();
+      const s = window.location.search.toLowerCase();
+      if (p.includes('sentinel') || h.includes('sentinel') || s.includes('sentinel')) {
+        return 'sentinel';
+      }
+    }
+    return 'landing';
+  }); // 'landing' | 'splash' | 'onboarding' | 'login' | 'forgot' | 'sentinel'
   const [authRole, setAuthRole] = useState('member'); // 'member' | 'admin'
   const [forgotEmail, setForgotEmail] = useState('');
 
@@ -66,6 +77,15 @@ const AppNavigator = () => {
     );
   }
 
+  // Direct SentinelOps View (accessible seamlessly unauthenticated or authenticated)
+  if (authView === 'sentinel') {
+    return (
+      <div style={{ width: '100vw', height: '100vh', background: '#070b13', overflow: 'hidden' }}>
+        <SentinelOpsPage onBack={() => setAuthView('landing')} />
+      </div>
+    );
+  }
+
   // Unauthenticated views
   if (!isAuthenticated) {
     if (authView === 'landing') {
@@ -83,6 +103,7 @@ const AppNavigator = () => {
               setAuthRole('admin');
               setAuthView('login');
             }}
+            onOpenSentinel={() => setAuthView('sentinel')}
           />
         </div>
       );

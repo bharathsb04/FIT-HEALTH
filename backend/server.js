@@ -81,49 +81,21 @@ const handleHealthCheck = (req, res) => {
 app.get('/api/health', handleHealthCheck);
 app.get('/health', handleHealthCheck);
 
-// API Routes mounted on both '/api/*' and '/*' to guarantee match in all serverless rewrite modes
+// API Routes mounted on '/api/*' (standard RESTful API prefix)
 app.use('/api/auth', authRoutes);
-app.use('/auth', authRoutes);
-
 app.use('/api/users', userRoutes);
-app.use('/users', userRoutes);
-
 app.use('/api/gyms', gymRoutes);
-app.use('/gyms', gymRoutes);
-
 app.use('/api/workouts', workoutRoutes);
-app.use('/workouts', workoutRoutes);
-
 app.use('/api/nutrition', nutritionRoutes);
-app.use('/nutrition', nutritionRoutes);
-
 app.use('/api/vitals', vitalsRoutes);
-app.use('/vitals', vitalsRoutes);
-
 app.use('/api/hydration', hydrationRoutes);
-app.use('/hydration', hydrationRoutes);
-
 app.use('/api/progress', progressRoutes);
-app.use('/progress', progressRoutes);
-
 app.use('/api/supplements', supplementRoutes);
-app.use('/supplements', supplementRoutes);
-
 app.use('/api/recovery', recoveryRoutes);
-app.use('/recovery', recoveryRoutes);
-
 app.use('/api/ai', aiRoutes);
-app.use('/ai', aiRoutes);
-
 app.use('/api/admin', adminRoutes);
-app.use('/admin', adminRoutes);
-
 app.use('/api/biometrics', biometricsRoutes);
-app.use('/biometrics', biometricsRoutes);
-
 app.use('/api/sentinel', sentinelRoutes);
-app.use('/sentinel', sentinelRoutes);
-
 app.use('/api/health', healthRoutes);
 
 // Serve Frontend Static Files (Same Unified Host & Port)

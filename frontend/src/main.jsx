@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './sentinel.css'
 import App from './App.jsx'
 
 // Register PWA Service Worker for home-screen installation and offline capabilities
