@@ -73,8 +73,8 @@ function collectFiles(dir, baseDir = dir) {
   const list = fs.readdirSync(dir);
   for (const item of list) {
     if (['_backup_pre_migration', 'node_modules', '.git', '.gemini', 'dist', 'logs', '_staging', '.vscode', '.idea', 'scratch'].includes(item)) continue;
-    if (item.endsWith('.zip') || item.endsWith('.tmp') || item.endsWith('.log')) continue;
-    if (item === '.env' || item === 'backend/.env' || item === 'frontend/.env' || item.endsWith('.env.local') || item.includes('adminsdk')) continue;
+    if (item.endsWith('.zip') || item.endsWith('.tmp') || item.endsWith('.log') || item.endsWith('.store.json')) continue;
+    if (item === '.env' || item === 'backend/.env' || item === 'frontend/.env' || item.endsWith('.env.local') || item.includes('adminsdk') || item.includes('sentinel_mongodb_store')) continue;
 
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
@@ -128,18 +128,23 @@ async function main() {
     const chunk = files.slice(i, i + batchSize);
     await Promise.all(
       chunk.map(async (file) => {
-        const content = fs.readFileSync(file.fullPath);
-        const base64 = content.toString('base64');
-        const blob = await githubRequest(token, 'POST', `/repos/${OWNER}/${REPO}/git/blobs`, {
-          content: base64,
-          encoding: 'base64'
-        });
-        treeItems.push({
-          path: file.relPath,
-          mode: '100644',
-          type: 'blob',
-          sha: blob.sha
-        });
+        try {
+          const content = fs.readFileSync(file.fullPath);
+          const base64 = content.toString('base64');
+          const blob = await githubRequest(token, 'POST', `/repos/${OWNER}/${REPO}/git/blobs`, {
+            content: base64,
+            encoding: 'base64'
+          });
+          treeItems.push({
+            path: file.relPath,
+            mode: '100644',
+            type: 'blob',
+            sha: blob.sha
+          });
+        } catch (uploadErr) {
+          console.error(`\nFailed uploading file: ${file.relPath} -> ${uploadErr.message}`);
+          throw uploadErr;
+        }
       })
     );
     await new Promise((r) => setTimeout(r, 100));

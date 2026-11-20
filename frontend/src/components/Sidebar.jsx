@@ -16,6 +16,7 @@ import {
   Flame,
   Sparkles,
   ShieldCheck,
+  Shield,
   LogOut,
   Banknote,
   Wrench,
@@ -70,7 +71,8 @@ export const Sidebar = () => {
     { key: 'supplements', label: 'Supplement Guide', icon: Pill, interface: 'nutrition' },
     { key: 'progress', label: 'Progress & Photos', icon: Flame, interface: 'core' },
     { key: 'profile', label: 'Profile & Membership', icon: User, interface: 'core' },
-    { key: 'ai', label: 'AI Fitness Coach', icon: Sparkles, badge: 'AI', interface: 'core' }
+    { key: 'ai', label: 'AI Fitness Coach', icon: Sparkles, badge: 'AI', interface: 'core' },
+    { key: 'sentinel', label: 'SentinelOps AIOps', icon: Shield, badge: 'PHASE 2', interface: 'core' }
   ];
 
   const isAdminSection = isAdmin || [

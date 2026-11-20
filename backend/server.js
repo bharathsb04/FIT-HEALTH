@@ -25,6 +25,7 @@ const aiRoutes = require('./routes/aiRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const biometricsRoutes = require('./routes/biometricsRoutes');
 const healthRoutes = require('./routes/healthRoutes');
+const sentinelRoutes = require('./routes/sentinelRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -119,6 +120,9 @@ app.use('/admin', adminRoutes);
 
 app.use('/api/biometrics', biometricsRoutes);
 app.use('/biometrics', biometricsRoutes);
+
+app.use('/api/sentinel', sentinelRoutes);
+app.use('/sentinel', sentinelRoutes);
 
 app.use('/api/health', healthRoutes);
 

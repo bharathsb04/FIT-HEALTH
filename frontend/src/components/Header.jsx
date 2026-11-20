@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useFitness } from '../contexts/FitnessContext';
 import { useTheme } from '../contexts/ThemeContext';
-import { Flame, Sparkles, User as UserIcon, Laptop, Smartphone, Sun, Moon } from 'lucide-react';
+import { Flame, Sparkles, User as UserIcon, Laptop, Smartphone, Sun, Moon, Shield } from 'lucide-react';
 
 export const Header = ({ title, subtitle }) => {
   const { user } = useAuth();
@@ -101,6 +101,16 @@ export const Header = ({ title, subtitle }) => {
           style={{ display: 'inline-flex' }}
         >
           {theme === 'dark' ? <Sun size={17} color="#f59e0b" /> : <Moon size={17} color="#6366f1" />}
+        </button>
+
+        {/* SentinelOps AIOps Button */}
+        <button
+          className="icon-btn"
+          onClick={() => setActiveTab('sentinel')}
+          title="SentinelOps Secure AIOps (Phase 2 Architecture)"
+          style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)' }}
+        >
+          <Shield size={17} color="#10b981" />
         </button>
 
         {/* AI Assistant Button */}

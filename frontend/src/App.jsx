@@ -32,6 +32,7 @@ import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { GymFeesPage } from './pages/GymFeesPage';
 import { AddGymMemberPage } from './pages/AddGymMemberPage';
 import { GymMembersPage } from './pages/GymMembersPage';
+import { SentinelOpsPage } from './pages/SentinelOpsPage';
 
 const AppNavigator = () => {
   const { isAuthenticated, loading, user } = useAuth();
@@ -271,6 +272,9 @@ const AppNavigator = () => {
         return <ProfilePage />;
       case 'ai':
         return <AIAssistantPage />;
+      case 'sentinel':
+      case 'sentinelops':
+        return <SentinelOpsPage />;
       default:
         return <DashboardPage />;
     }
